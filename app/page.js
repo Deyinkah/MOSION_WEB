@@ -37,7 +37,7 @@ const bannerFiles = [
   "WhatsApp Image 2026-02-26 at 11.51.29 PM.jpeg"
 ];
 
-const rowDirections = [1, -1, -1, 1];
+const rowDirections = [1, -1, 1, -1];
 const rowMeta = [
   { id: "row-1", label: "Movie row 1" },
   { id: "row-2", label: "Movie row 2" },
@@ -100,26 +100,42 @@ export default function HomePage() {
       const direction = rowDirections[index] ?? 1;
 
       let rafId = 0;
-      let initId = 0;
       let pauseUntil = 0;
       let lastFrameTime = performance.now();
       let position = 0;
       let singleTrackWidth = 0;
+      let startAttempts = 0;
 
       const pauseAuto = () => {
         pauseUntil = performance.now() + 2200;
       };
 
+      const measureTrack = () => {
+        singleTrackWidth = row.scrollWidth / 2;
+        return singleTrackWidth > 0;
+      };
+
+      const normalizePosition = () => {
+        if (!singleTrackWidth) {
+          return;
+        }
+        if (position >= singleTrackWidth) {
+          position -= singleTrackWidth;
+        } else if (position < 0) {
+          position += singleTrackWidth;
+        }
+      };
+
       const tick = (now) => {
         if (now >= pauseUntil) {
+          if (!measureTrack()) {
+            rafId = requestAnimationFrame(tick);
+            return;
+          }
+
           const dt = (now - lastFrameTime) / 1000;
           position += direction * 72 * dt;
-
-          if (position >= singleTrackWidth) {
-            position -= singleTrackWidth;
-          } else if (position < 0) {
-            position += singleTrackWidth;
-          }
+          normalizePosition();
 
           row.scrollLeft = position;
         }
@@ -129,8 +145,11 @@ export default function HomePage() {
       };
 
       const start = () => {
-        singleTrackWidth = row.scrollWidth / 2;
-        if (!singleTrackWidth) {
+        if (!measureTrack()) {
+          startAttempts += 1;
+          if (startAttempts <= 30) {
+            rafId = requestAnimationFrame(start);
+          }
           return;
         }
 
@@ -145,14 +164,28 @@ export default function HomePage() {
         rafId = requestAnimationFrame(tick);
       };
 
-      initId = requestAnimationFrame(start);
+      const onResize = () => {
+        const previousTrackWidth = singleTrackWidth;
+        if (!measureTrack()) {
+          return;
+        }
+        if (previousTrackWidth > 0 && previousTrackWidth !== singleTrackWidth) {
+          position = (position / previousTrackWidth) * singleTrackWidth;
+          normalizePosition();
+          row.scrollLeft = position;
+        }
+      };
+
+      window.addEventListener("resize", onResize);
+
+      rafId = requestAnimationFrame(start);
 
       cleanups.push(() => {
-        cancelAnimationFrame(initId);
         cancelAnimationFrame(rafId);
         row.removeEventListener("wheel", pauseAuto);
         row.removeEventListener("touchstart", pauseAuto);
         row.removeEventListener("pointerdown", pauseAuto);
+        window.removeEventListener("resize", onResize);
       });
     });
 
@@ -188,6 +221,26 @@ export default function HomePage() {
     }
   };
 
+  const renderBannerImage = (banner, decorative = false) => {
+    const baseName = banner.fileName.replace(/\.[^.]+$/, "");
+    const encodedBaseSrc = `${basePath}${encodeURIComponent(baseName)}`;
+    const encodedJpegSrc = `${basePath}${encodeURIComponent(banner.fileName)}`;
+
+    return (
+      <picture>
+        <source srcSet={`${encodedBaseSrc}.avif`} type="image/avif" />
+        <source srcSet={`${encodedBaseSrc}.webp`} type="image/webp" />
+        <img
+          src={encodedJpegSrc}
+          alt={decorative ? "" : `Movie banner ${banner.bannerNumber}`}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+      </picture>
+    );
+  };
+
   return (
     <>
       <div className="logo-overlay" aria-label="Mosion logo">
@@ -220,13 +273,7 @@ export default function HomePage() {
             >
               {allRows[rowIndex].map((banner) => (
                 <figure className="banner-card" key={`${row.id}-${banner.fileName}`}>
-                  <img
-                    src={`${basePath}${banner.fileName}`}
-                    alt={`Movie banner ${banner.bannerNumber}`}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                  />
+                  {renderBannerImage(banner)}
                 </figure>
               ))}
               {allRows[rowIndex].map((banner, duplicateIndex) => (
@@ -235,13 +282,7 @@ export default function HomePage() {
                   key={`${row.id}-${banner.fileName}-copy-${duplicateIndex}`}
                   aria-hidden="true"
                 >
-                  <img
-                    src={`${basePath}${banner.fileName}`}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                  />
+                  {renderBannerImage(banner, true)}
                 </figure>
               ))}
             </div>
@@ -265,13 +306,7 @@ export default function HomePage() {
               >
                 {allRows[rowIndex].map((banner) => (
                   <figure className="banner-card" key={`${row.id}-${banner.fileName}`}>
-                    <img
-                      src={`${basePath}${banner.fileName}`}
-                      alt={`Movie banner ${banner.bannerNumber}`}
-                      loading="lazy"
-                      decoding="async"
-                      draggable={false}
-                    />
+                    {renderBannerImage(banner)}
                   </figure>
                 ))}
                 {allRows[rowIndex].map((banner, duplicateIndex) => (
@@ -280,13 +315,7 @@ export default function HomePage() {
                     key={`${row.id}-${banner.fileName}-copy-${duplicateIndex}`}
                     aria-hidden="true"
                   >
-                    <img
-                      src={`${basePath}${banner.fileName}`}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      draggable={false}
-                    />
+                    {renderBannerImage(banner, true)}
                   </figure>
                 ))}
               </div>
@@ -296,7 +325,18 @@ export default function HomePage() {
 
         <section className="download-section" aria-label="Download apps">
           <div className="download-inner">
-            <p className="download-kicker">Stay in Motion on the Mosion App</p>
+            <p className="download-kicker">
+              <span className="download-kicker-text">
+                <span>Stay in motion</span>
+                <span>with</span>
+              </span>
+              <img
+                className="download-kicker-logo"
+                src="/mosion.png"
+                alt="Mosion"
+                draggable={false}
+              />
+            </p>
             <div className="store-badges">
               <a className="store-link" href="#" aria-label="Download on the App Store">
                 <img
