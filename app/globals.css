@@ -1,5 +1,5 @@
 :root {
-  --bg: #050505;
+  --bg: #0D0E0F;
   --card-bg: #111111;
   --text: #f3f4f6;
   --muted: #a3a3a3;
@@ -15,7 +15,6 @@ html {
   height: 100%;
   overflow: hidden;
   background-color: var(--bg);
-  background: radial-gradient(circle at top, #1c1c1c, var(--bg) 48%);
 }
 
 * {
@@ -34,11 +33,35 @@ body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg);
-  background: radial-gradient(circle at top, #1c1c1c, var(--bg) 48%);
+  background: radial-gradient(circle at 50% 22dvh, #1c1c1c, var(--bg) 48%);
   color: var(--text);
   min-height: 100dvh;
   height: 100dvh;
   overflow: hidden;
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  html::before,
+  html::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  html::before {
+    top: 0;
+    background: var(--bg);
+    height: env(safe-area-inset-top);
+  }
+
+  html::after {
+    bottom: 0;
+    height: constant(safe-area-inset-bottom);
+    height: env(safe-area-inset-bottom);
+  }
 }
 
 .page {
@@ -323,7 +346,7 @@ h1 {
 .store-link {
   display: inline-flex;
   border-radius: 14px;
-  transi9tion: transform 0.2s ease;
+  transition: transform 0.2s ease;
   pointer-events: auto;
 }
 
@@ -333,7 +356,7 @@ h1 {
 
 .store-link img {
   width: auto;
-  height: clamp(46px, 8vw, 62px);
+  height: clamp(52px, 8vw, 62px);
   display: block;
 }
 

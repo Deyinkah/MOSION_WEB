@@ -13,14 +13,37 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#050505"
+  themeColor: "#0D0E0F"
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#050505" />
+        <meta name="theme-color" content="#0D0E0F" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D0E0F" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0E0F" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (!isIOS) return;
+  var iOSThemeColor = "#00C2FF";
+  var metas = document.querySelectorAll('meta[name="theme-color"]');
+  if (!metas.length) {
+    var createdMeta = document.createElement("meta");
+    createdMeta.name = "theme-color";
+    document.head.appendChild(createdMeta);
+    metas = [createdMeta];
+  }
+  metas.forEach(function (meta) {
+    meta.setAttribute("content", iOSThemeColor);
+  });
+})();`
+          }}
+        />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

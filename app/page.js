@@ -46,6 +46,7 @@ const rowMeta = [
 ];
 
 const basePath = "/assets/img/";
+const apkDownloadUrl = process.env.NEXT_PUBLIC_APK_CDN_URL || "/mosion.apk";
 
 export default function HomePage() {
   const rowRefs = useRef([]);
@@ -194,33 +195,6 @@ export default function HomePage() {
     };
   }, [allRows]);
 
-  const handleApkDownload = async (event) => {
-    event.preventDefault();
-
-    const source = event.currentTarget.getAttribute("href") || "/mosion.apk";
-    const fileName = event.currentTarget.getAttribute("download") || "Mosion.apk";
-
-    try {
-      const response = await fetch(source, { cache: "no-store" });
-      if (!response.ok) {
-        throw new Error(`APK not found at ${source}`);
-      }
-
-      const apkBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(apkBlob);
-      const tempLink = document.createElement("a");
-      tempLink.href = objectUrl;
-      tempLink.download = fileName;
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      tempLink.remove();
-      URL.revokeObjectURL(objectUrl);
-    } catch (error) {
-      console.error(error);
-      alert("APK file is not available yet. Add mosition.apk to the project root.");
-    }
-  };
-
   const renderBannerImage = (banner, decorative = false) => {
     const baseName = banner.fileName.replace(/\.[^.]+$/, "");
     const encodedBaseSrc = `${basePath}${encodeURIComponent(baseName)}`;
@@ -251,9 +225,7 @@ export default function HomePage() {
             <br />
             anywhere from the
             <br />
-            comfort of your
-            <br />
-            home.
+            comfort of your home.
           </h2>
         </div>
       </div>
@@ -351,10 +323,8 @@ export default function HomePage() {
             </div>
             <a
               className="apk-button"
-              href="/mosion.apk"
-              download="Mosion.apk"
+              href={apkDownloadUrl}
               aria-label="Download APK"
-              onClick={handleApkDownload}
             >
               Download APK
             </a>
