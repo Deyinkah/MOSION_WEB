@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mosion | Watch cinema movies on your mobile device.</title>
+    <meta name="description" content="Watch cinema movies on your mobile device." />
+
+    <meta name="theme-color" content="#0D0E0F" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D0E0F" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0E0F" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mosion" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script>
+      (function () {
+        var ua = navigator.userAgent || "";
+        var isIOS =
+          /iPad|iPhone|iPod/.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        if (!isIOS) return;
+        var iOSThemeColor = "#00C2FF";
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        if (!metas.length) {
+          var createdMeta = document.createElement("meta");
+          createdMeta.name = "theme-color";
+          document.head.appendChild(createdMeta);
+          metas = [createdMeta];
+        }
+        metas.forEach(function (meta) {
+          meta.setAttribute("content", iOSThemeColor);
+        });
+      })();
+    </script>
+  </head>
+  <body data-apk-url="/mosion.apk">
+    <p class="dev-notice">Website still in development.</p>
+
+    <div class="logo-overlay" aria-label="Mosion logo">
+      <div class="logo-container">
+        <img class="logo-image" src="/logo.png" alt="Mosion logo" draggable="false" />
+        <h2 class="logo-caption">
+          Watch cinema movies
+          <br />
+          anywhere from the
+          <br />
+          comfort of your home.
+        </h2>
+      </div>
+    </div>
+
+    <main class="page">
+      <section class="movie-grid" aria-label="Movie banners">
+        <div class="banner-overlay-box" aria-hidden="true"></div>
+        <div class="movie-row" id="row-1" aria-label="Movie row 1"></div>
+        <div class="movie-row" id="row-2" aria-label="Movie row 2"></div>
+      </section>
+    </main>
+
+    <section class="extra-movie-section" aria-label="More movie banners">
+      <div class="extra-movie-grid">
+        <div class="movie-row" id="row-4" aria-label="Movie row 4"></div>
+        <div class="movie-row" id="row-5" aria-label="Movie row 5"></div>
+      </div>
+
+      <section class="download-section" aria-label="Download apps">
+        <div class="download-inner">
+          <p class="download-kicker">
+            <span class="download-kicker-text">
+              <span>Stay in motion</span>
+              <span>with</span>
+            </span>
+            <img class="download-kicker-logo" src="/public/mosion.png" alt="Mosion" draggable="false" />
+          </p>
+          <div class="store-badges">
+            <a class="store-link" href="#" aria-label="Download on the App Store">
+              <img src="/appstore-badge.svg" alt="Download on the App Store" draggable="false" />
+            </a>
+            <a class="store-link" href="#" aria-label="Get it on Google Play">
+              <img src="/playstore-badge.svg" alt="Get it on Google Play" draggable="false" />
+            </a>
+          </div>
+          <a class="apk-button" id="apk-download" href="/mosion.apk" aria-label="Download APK">
+            Download APK
+          </a>
+        </div>
+      </section>
+    </section>
+
+    <p class="copyright-text">&copy; 2026 Mosion. All rights reserved.</p>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>
