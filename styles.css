@@ -19,6 +19,8 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  width: 100%;
+  overflow-x: hidden;
 }
 
 * {
@@ -28,6 +30,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
   font-family: "Outfit", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--text);
@@ -35,34 +38,6 @@ body {
     radial-gradient(circle at 12% 10%, rgba(0, 194, 255, 0.18), transparent 24%),
     radial-gradient(circle at 88% 16%, var(--warm-soft), transparent 26%),
     linear-gradient(180deg, #050608 0%, #090c10 40%, #050608 100%);
-}
-
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: auto;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::before {
-  top: -18rem;
-  right: -14rem;
-  width: 32rem;
-  height: 32rem;
-  border-radius: 50%;
-  filter: blur(18px);
-}
-
-body::after {
-  bottom: -16rem;
-  left: -10rem;
-  width: 28rem;
-  height: 28rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 163, 72, 0.14), transparent 72%);
-  filter: blur(18px);
 }
 
 a {
@@ -80,7 +55,7 @@ img {
 }
 
 .container {
-  /* width: min(calc(100% - 8rem), var(--max-width)); */
+  width: min(calc(100% - 8rem), var(--max-width));
   margin: 0 auto;
 }
 
@@ -120,11 +95,7 @@ img {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-.brand-lockup {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
+
 
 .brand-lockup strong {
   font-size: 0.98rem;
@@ -350,12 +321,13 @@ img {
 .hero,
 .page-hero {
   padding: clamp(5.5rem, 9vw, 7.5rem) 0 clamp(4rem, 6vw, 5rem);
-  overflow: clip;
+  overflow: hidden;
 }
 
 .hero {
   height: calc(100svh - var(--header-offset));
   height: calc(100dvh - var(--header-offset));
+  border: 1px solid var(--line);
 }
 
 .page-hero {
@@ -635,10 +607,7 @@ img {
   align-items: end;
 }
 
-.section-heading--compact {
-  grid-template-columns: 1fr;
-  margin-bottom: 1rem;
-}
+
 
 .section-heading--compact > * {
   max-width: 40rem;
@@ -1248,7 +1217,7 @@ img {
   }
 
   .menu-panel {
-    right: -0.1rem;
+    right: 0;
     width: min(300px, calc(100vw - 1rem));
     padding: 0.9rem;
   }
