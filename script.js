@@ -35,24 +35,39 @@ const bannerFiles = [
   "WhatsApp Image 2026-02-26 at 11.51.29 PM.jpeg"
 ];
 
-const rowDirections = [1, -1, 1, -1];
-const rowMeta = [
-  { id: "row-1", label: "Movie row 1" },
-  { id: "row-2", label: "Movie row 2" },
-  { id: "row-4", label: "Movie row 4" },
-  { id: "row-5", label: "Movie row 5" }
-];
-
 const basePath = "/public/assets/img/";
 const apkDownloadUrl = document.body?.dataset?.apkUrl || "/mosion.apk";
 
-const distributedRows = [[], [], [], []];
-bannerFiles.forEach((fileName, index) => {
-  distributedRows[index % 4].push({
-    fileName,
-    bannerNumber: index + 1
+function getEventElementTarget(event) {
+  if (event.target instanceof Element) {
+    return event.target;
+  }
+
+  if (event.target && event.target.parentElement instanceof Element) {
+    return event.target.parentElement;
+  }
+
+  return null;
+}
+
+function getBannerRows() {
+  return Array.from(document.querySelectorAll(".movie-row[data-banner-row]"));
+}
+
+function distributeBanners(rowCount) {
+  if (!rowCount) {
+    return [];
+  }
+
+  const rows = Array.from({ length: rowCount }, () => []);
+  bannerFiles.forEach((fileName, index) => {
+    rows[index % rowCount].push({
+      fileName,
+      bannerNumber: index + 1
+    });
   });
-});
+  return rows;
+}
 
 function createBannerPicture(banner, decorative) {
   const baseName = banner.fileName.replace(/\.[^.]+$/, "");
@@ -83,22 +98,25 @@ function createBannerPicture(banner, decorative) {
 }
 
 function renderRows() {
-  rowMeta.forEach((row, index) => {
-    const rowElement = document.getElementById(row.id);
-    if (!rowElement) {
+  const rowElements = getBannerRows();
+  const distributedRows = distributeBanners(rowElements.length);
+
+  rowElements.forEach((rowElement, index) => {
+    rowElement.innerHTML = "";
+    const rowBanners = distributedRows[index] || [];
+    if (!rowBanners.length) {
       return;
     }
 
-    rowElement.innerHTML = "";
-    const rowBanners = distributedRows[index] || [];
     const duplicated = [...rowBanners, ...rowBanners];
-
     duplicated.forEach((banner, duplicateIndex) => {
       const figure = document.createElement("figure");
       figure.className = "banner-card";
+
       if (duplicateIndex >= rowBanners.length) {
         figure.setAttribute("aria-hidden", "true");
       }
+
       figure.appendChild(createBannerPicture(banner, duplicateIndex >= rowBanners.length));
       rowElement.appendChild(figure);
     });
@@ -107,13 +125,15 @@ function renderRows() {
 
 function disableImageContextActions() {
   const onContextMenu = (event) => {
-    if (event.target.closest("img")) {
+    const target = getEventElementTarget(event);
+    if (target && target.closest("img")) {
       event.preventDefault();
     }
   };
 
   const onDragStart = (event) => {
-    if (event.target.closest("img")) {
+    const target = getEventElementTarget(event);
+    if (target && target.closest("img")) {
       event.preventDefault();
     }
   };
@@ -123,19 +143,17 @@ function disableImageContextActions() {
 }
 
 function enableAutoScroll() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const rowElements = getBannerRows();
+  if (!rowElements.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     return;
   }
 
-  rowMeta.forEach((row, index) => {
-    const rowElement = document.getElementById(row.id);
-    if (!rowElement) {
+  rowElements.forEach((rowElement, index) => {
+    if (!rowElement.children.length) {
       return;
     }
 
-    rowElement.style.scrollSnapType = "none";
-    const direction = rowDirections[index] ?? 1;
-    let rafId = 0;
+    const direction = index % 2 === 0 ? 1 : -1;
     let pauseUntil = 0;
     let lastFrameTime = performance.now();
     let position = 0;
@@ -155,6 +173,7 @@ function enableAutoScroll() {
       if (!singleTrackWidth) {
         return;
       }
+
       if (position >= singleTrackWidth) {
         position -= singleTrackWidth;
       } else if (position < 0) {
@@ -165,25 +184,25 @@ function enableAutoScroll() {
     const tick = (now) => {
       if (now >= pauseUntil) {
         if (!measureTrack()) {
-          rafId = requestAnimationFrame(tick);
+          requestAnimationFrame(tick);
           return;
         }
 
-        const dt = (now - lastFrameTime) / 1000;
-        position += direction * 72 * dt;
+        const deltaSeconds = (now - lastFrameTime) / 1000;
+        position += direction * 64 * deltaSeconds;
         normalizePosition();
         rowElement.scrollLeft = position;
       }
 
       lastFrameTime = now;
-      rafId = requestAnimationFrame(tick);
+      requestAnimationFrame(tick);
     };
 
     const start = () => {
       if (!measureTrack()) {
         startAttempts += 1;
         if (startAttempts <= 60) {
-          rafId = requestAnimationFrame(start);
+          requestAnimationFrame(start);
         }
         return;
       }
@@ -195,8 +214,9 @@ function enableAutoScroll() {
       rowElement.addEventListener("wheel", pauseAuto, { passive: true });
       rowElement.addEventListener("touchstart", pauseAuto, { passive: true });
       rowElement.addEventListener("pointerdown", pauseAuto, { passive: true });
+      rowElement.addEventListener("focusin", pauseAuto);
 
-      rafId = requestAnimationFrame(tick);
+      requestAnimationFrame(tick);
     };
 
     const onResize = () => {
@@ -204,6 +224,7 @@ function enableAutoScroll() {
       if (!measureTrack()) {
         return;
       }
+
       if (previousTrackWidth > 0 && previousTrackWidth !== singleTrackWidth) {
         position = (position / previousTrackWidth) * singleTrackWidth;
         normalizePosition();
@@ -212,22 +233,81 @@ function enableAutoScroll() {
     };
 
     window.addEventListener("resize", onResize);
-    rafId = requestAnimationFrame(start);
+    requestAnimationFrame(start);
   });
 }
 
-function applyApkLink() {
-  const apkButton = document.getElementById("apk-download");
-  if (!apkButton) {
+function applyApkLinks() {
+  document.querySelectorAll("[data-apk-link]").forEach((link) => {
+    link.setAttribute("href", apkDownloadUrl);
+  });
+}
+
+function initSiteMenu() {
+  const menuRoots = Array.from(document.querySelectorAll("[data-site-menu]"));
+  if (!menuRoots.length) {
     return;
   }
-  apkButton.setAttribute("href", apkDownloadUrl);
+
+  menuRoots.forEach((menuRoot) => {
+    const toggle = menuRoot.querySelector("[data-menu-toggle]");
+    const panel = menuRoot.querySelector("[data-menu-panel]");
+
+    if (!toggle || !panel) {
+      return;
+    }
+
+    const closeMenu = () => {
+      menuRoot.dataset.open = "false";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation menu");
+    };
+
+    const openMenu = () => {
+      menuRoot.dataset.open = "true";
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close navigation menu");
+    };
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (toggle.getAttribute("aria-expanded") === "true") {
+        closeMenu();
+        return;
+      }
+      openMenu();
+    });
+
+    panel.addEventListener("click", (event) => {
+      const target = getEventElementTarget(event);
+      if (target && target.closest("a")) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = getEventElementTarget(event);
+      if (!target || !menuRoot.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener("resize", closeMenu);
+    closeMenu();
+  });
 }
 
 function init() {
   renderRows();
   disableImageContextActions();
-  applyApkLink();
+  applyApkLinks();
+  initSiteMenu();
   enableAutoScroll();
 }
 

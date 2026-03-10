@@ -4,104 +4,216 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Mosion | Watch cinema movies on your mobile device.</title>
-  <meta name="description" content="Watch cinema movies on your mobile device." />
+  <title>MOSION | The mobile cinema platform.</title>
+  <meta
+    name="description"
+    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+  />
   <link rel="canonical" href="https://mosion.app/" />
-  <meta property="og:site_name" content="Mosion" />
+  <meta property="og:site_name" content="MOSION" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mosion.app/" />
-  <meta property="og:title" content="Mosion | Watch cinema movies on your mobile device." />
-  <meta property="og:description" content="Watch cinema movies on your mobile device." />
+  <meta property="og:title" content="MOSION | The mobile cinema platform." />
+  <meta
+    property="og:description"
+    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+  />
   <meta property="og:image" content="https://mosion.app/android-chrome-512x512.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
-  <meta property="og:image:alt" content="Mosion logo" />
+  <meta property="og:image:alt" content="MOSION logo" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mosion | Watch cinema movies on your mobile device." />
-  <meta name="twitter:description" content="Watch cinema movies on your mobile device." />
+  <meta name="twitter:title" content="MOSION | The mobile cinema platform." />
+  <meta
+    name="twitter:description"
+    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+  />
   <meta name="twitter:image" content="https://mosion.app/android-chrome-512x512.png" />
-  <meta name="twitter:image:alt" content="Mosion logo" />
-
-  <meta name="theme-color" content="#0D0E0F" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D0E0F" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0E0F" />
+  <meta name="twitter:image:alt" content="MOSION logo" />
+  <meta name="theme-color" content="#07090B" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#07090B" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#07090B" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Mosion" />
+  <meta name="apple-mobile-web-app-title" content="MOSION" />
   <link rel="icon" href="/logo.png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <script>
-    (function () {
-      var ua = navigator.userAgent || "";
-      var isIOS =
-        /iPad|iPhone|iPod/.test(ua) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-      if (!isIOS) return;
-      var iOSThemeColor = "#00C2FF";
-      var metas = document.querySelectorAll('meta[name="theme-color"]');
-      if (!metas.length) {
-        var createdMeta = document.createElement("meta");
-        createdMeta.name = "theme-color";
-        document.head.appendChild(createdMeta);
-        metas = [createdMeta];
-      }
-      metas.forEach(function (meta) {
-        meta.setAttribute("content", iOSThemeColor);
-      });
-    })();
-  </script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 </head>
 
 <body data-apk-url="/mosion.apk">
-  <p class="dev-notice">Website in development.</p>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="MOSION home">
+        <img class="brand-logo" src="/logo.png" alt="MOSION logo" draggable="false" />
+        <span class="brand-lockup">
+          <strong>MOSION</strong>
+        </span>
+      </a>
 
-  <div class="logo-overlay" aria-label="Mosion logo">
-    <div class="logo-container">
-      <img class="logo-image" src="/logo.png" alt="Mosion logo" draggable="false" />
-      <h2 class="logo-caption">
-        Watch cinema movies
-        <br />
-        anywhere from the
-        <br />
-        comfort of your home.
-      </h2>
+      <div class="site-menu" data-site-menu>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu-home"
+          aria-label="Open navigation menu"
+          data-menu-toggle
+        >
+          <span class="menu-toggle-label">Menu</span>
+          <span class="menu-toggle-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        <div class="menu-panel" id="site-menu-panel-home" data-menu-panel>
+          <nav class="site-nav" aria-label="Primary navigation">
+            <a href="#home">Home</a>
+            <a href="#watch">Watch Movies</a>
+            <a href="/partners.html">For Filmmakers</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div class="header-actions">
+            <a class="nav-button nav-button--ghost" href="#download">Download App</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <main class="page">
-    <section class="movie-grid" aria-label="Movie banners">
-      <div class="banner-overlay-box" aria-hidden="true"></div>
-      <div class="movie-row" id="row-1" aria-label="Movie row 1"></div>
-      <div class="movie-row" id="row-2" aria-label="Movie row 2"></div>
+  <main class="site-shell">
+    <section class="hero" id="home">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="movie-grid movie-grid--hero">
+          <div class="movie-row" data-banner-row="1"></div>
+          <div class="movie-row" data-banner-row="2"></div>
+        </div>
+      </div>
+
+      <div class="container hero-layout">
+          <h1 class="hero-title">Cinema anyday,<br/>anytime, anywhere.</h1>
+          <p class="hero-descriotion">
+            Watch Cinema movies on your mobile device. At your own convenience.
+          </p>
+
+          <div class="hero-actions">
+            <p>Unlike traditional cinema, we don't make the rules. You DO.</p>
+            <a class="primary-button" href="#download">Watch Movies</a>
+          </div>
+      </div>
     </section>
-  </main>
 
-  <section class="extra-movie-section" aria-label="More movie banners">
-    <div class="extra-movie-grid">
-      <div class="movie-row" id="row-4" aria-label="Movie row 4"></div>
-      <div class="movie-row" id="row-5" aria-label="Movie row 5"></div>
-    </div>
+
+    
+
+    <section class="section" id="watch">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Now showing on MOSION</p>
+            <h2 class="section-kicker-text">Exclusive cinema movies available on the mosion app</h2>
+          </div>
+        </div>
+        
+        
+        <div class="showcase-shell">
+          <div class="showcase-grid">
+            <div class="movie-row" data-banner-row="4"></div>
+          </div>
+        </div>
+    </section>
+
+
+
+    <section class="section section--compact" id="how-it-works">
+      <div class="container">
+        <div class="section-heading section-heading--compact">
+          <div>
+            <p class="section-kicker">How MOSION works</p>
+          </div>
+        </div>
+
+        <div class="workflow-grid workflow-grid--single">
+          <article class="workflow-card">
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-number">1</span>
+                <div>
+                  <h4>Download MOSION</h4>
+                  <p>Install the app and browse newly released titles from your phone.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-number">2</span>
+                <div>
+                  <h4>Choose a movie</h4>
+                  <p>Explore featured releases, select a title, and confirm your purchase.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-number">3</span>
+                <div>
+                  <h4>Pay and watch instantly</h4>
+                  <p>Start streaming right away with a premium mobile cinema experience.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section">
+      <div class="container">
+         <div class="section-heading">
+          <div>
+            <p class="section-kicker">Why Choose Us?</p>
+          </div>
+          <div class="showcase-note">
+            <article class="metric-card">
+              <strong>Instant access</strong>
+              <span>Pay for a movie and start watching right away.</span>
+            </article>
+            <article class="metric-card">
+              <strong>No schedules</strong>
+              <span>Movie nights happen on your time, not the theater timetable.</span>
+            </article>
+            <article class="metric-card">
+              <strong>Mobile-first</strong>
+              <span>A cinema-quality experience designed around the smartphone.</span>
+            </article>
+            <article class="metric-card">
+              <strong>Download option</strong>
+              <span>You can choose to download for offline viewing.</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
 
     <section class="download-section" aria-label="Download apps">
       <div class="download-inner">
         <p class="download-kicker">
           <span class="download-kicker-text">
-            <span>Stay in motion</span>
-            <span>with</span>
+            <span>Stay in mosion</span>
           </span>
-          <img class="download-kicker-logo" src="/public/mosion.png" alt="Mosion" draggable="false" />
         </p>
         <div class="store-badges">
           <a class="store-link" href="#" aria-label="Download on the App Store">
@@ -117,8 +229,36 @@
       </div>
     </section>
   </section>
+  </main>
 
-  <p class="copyright-text">&copy; 2026 Mosion. All rights reserved.</p>
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand--footer" href="#home" aria-label="MOSION home">
+          <img class="brand-logo" src="/logo.png" alt="MOSION logo" draggable="false" />
+          <span class="brand-lockup">
+            <strong>MOSION</strong>
+          </span>
+        </a>
+        <p>
+          .
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#watch">Watch Movies</a>
+        <a href="/partners.html">For Filmmakers</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About MOSION</a>
+        <a href="mailto:partners@mosion.app">Partners</a>
+        <a href="mailto:partners@mosion.app">Contact</a>
+      </nav>
+    </div>
+
+    <div class="footer-meta">
+      <p>&copy; 2026 MOSION. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="/script.js" defer></script>
 </body>
