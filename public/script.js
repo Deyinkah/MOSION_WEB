@@ -35,8 +35,8 @@ const bannerFiles = [
   "banner-32.jpeg"
 ];
 
-const basePath = "/assets/img/";
-const apkDownloadUrl = document.body?.dataset?.apkUrl || "/mosion.apk";
+const basePath = "./assets/img/";
+const apkDownloadUrl = document.body?.dataset?.apkUrl || "./mosion.apk";
 
 function getEventElementTarget(event) {
   if (event.target instanceof Element) {
