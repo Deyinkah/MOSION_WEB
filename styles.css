@@ -209,6 +209,58 @@ img {
   pointer-events: auto;
 }
 
+@media (min-width: 961px) {
+  .site-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-layout {
+    padding-bottom: var(--header-offset);
+  }
+
+  .site-menu .menu-toggle {
+    display: none;
+  }
+
+  .site-menu .menu-panel {
+    position: static;
+    top: auto;
+    right: auto;
+    width: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .site-menu .menu-panel::before {
+    display: none;
+  }
+
+  .site-menu .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .site-menu .site-nav a {
+    white-space: nowrap;
+  }
+
+  .site-menu .menu-panel .header-actions {
+    display: none;
+  }
+}
+
 .site-nav {
   position: relative;
   z-index: 1;
@@ -318,16 +370,15 @@ img {
   position: relative;
 }
 
-.hero,
 .page-hero {
   padding: clamp(5.5rem, 9vw, 7.5rem) 0 clamp(4rem, 6vw, 5rem);
-  overflow: hidden;
 }
 
 .hero {
   height: calc(100svh - var(--header-offset));
   height: calc(100dvh - var(--header-offset));
   border: 1px solid var(--line);
+  overflow: hidden;
 }
 
 .page-hero {
@@ -340,6 +391,14 @@ img {
   z-index: 2;
   text-align: center;
   padding: 0 0rem 0;
+}
+
+.hero-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
 }
 
 .hero-backdrop {
@@ -473,8 +532,19 @@ img {
   line-height: 1.7;
 }
 
+.hero-descriotion,
 .hero-actions {
-  margin-top: 1.8rem;
+  margin-top: 0;
+}
+
+.hero-actions {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.hero-actions p {
+  margin: 0;
 }
 
 .hero-signals {
@@ -1139,8 +1209,16 @@ img {
   }
 
   .menu-toggle {
-    min-height: 48px;
-    padding: 0.68rem 0.95rem;
+    min-height: auto;
+    padding: 0.75rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .menu-toggle:hover {
+    transform: none;
+    border-color: transparent;
+    background: transparent;
   }
 
   .menu-toggle-label {
