@@ -478,6 +478,10 @@ img {
   height: 100%;
 }
 
+.banner-card picture {
+  display: block;
+}
+
 .banner-card img {
   object-fit: cover;
 }
