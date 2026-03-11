@@ -35,7 +35,7 @@ const bannerFiles = [
   "WhatsApp Image 2026-02-26 at 11.51.29 PM.jpeg"
 ];
 
-const basePath = "/public/assets/img/";
+const basePath = "/assets/img/";
 const apkDownloadUrl = document.body?.dataset?.apkUrl || "/mosion.apk";
 
 function getEventElementTarget(event) {
