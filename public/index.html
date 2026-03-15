@@ -1,22 +1,21 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>MOSION | The mobile cinema platform.</title>
+  <title>MOSION | Cinema, reimagined for your phone.</title>
   <meta
     name="description"
-    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+    content="Watch cinema instantly from anywhere with MOSION. No schedules, no subscriptions, just the movies you want on the phone you already use."
   />
   <link rel="canonical" href="https://mosion.app/" />
   <meta property="og:site_name" content="MOSION" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mosion.app/" />
-  <meta property="og:title" content="MOSION | The mobile cinema platform." />
+  <meta property="og:title" content="MOSION | Cinema, reimagined for your phone." />
   <meta
     property="og:description"
-    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+    content="Pay per movie, watch instantly, and take cinema offline with MOSION."
   />
   <meta property="og:image" content="https://mosion.app/android-chrome-512x512.png" />
   <meta property="og:image:type" content="image/png" />
@@ -24,249 +23,476 @@
   <meta property="og:image:height" content="512" />
   <meta property="og:image:alt" content="MOSION logo" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MOSION | The mobile cinema platform." />
+  <meta name="twitter:title" content="MOSION | Cinema, reimagined for your phone." />
   <meta
     name="twitter:description"
-    content="Watch cinema movies anywhere and launch films directly to audiences with MOSION, the mobile cinema platform."
+    content="Pay per movie, watch instantly, and take cinema offline with MOSION."
   />
   <meta name="twitter:image" content="https://mosion.app/android-chrome-512x512.png" />
   <meta name="twitter:image:alt" content="MOSION logo" />
-  <meta name="theme-color" content="#07090B" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#07090B" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#07090B" />
+  <meta name="theme-color" content="#070B14" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#070B14" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070B14" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="MOSION" />
   <link rel="icon" href="./logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
   <link rel="manifest" href="./site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./browse-movies.css" />
 </head>
-
-<body data-apk-url="./mosion.apk">
+<body class="landing-page">
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="MOSION home">
-        <img class="brand-logo" src="./logo.png" alt="MOSION logo" draggable="false" />
-        <span class="brand-lockup">
-          <strong>MOSION</strong>
-        </span>
+      <a class="brand brand--header" href="#home" aria-label="MOSION home">
+        <img class="brand__logo" src="./logo.png" alt="MOSION" />
       </a>
 
-      <div class="site-menu" data-site-menu>
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="site-menu-home"
-          aria-label="Open navigation menu"
-          data-menu-toggle
-        >
-          <span class="menu-toggle-label">Menu</span>
-          <span class="menu-toggle-icon" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#how">How it Works</a>
+        <a href="#features">Why Mosion</a>
+        <a href="#trending">Trending</a>
+        <a href="#mobile">Mobile</a>
+        <a href="#cta">Get Started</a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary class="menu-toggle">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="menu-icon menu-icon--open" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <path d="M4 4h16M4 12h16M4 20h16"></path>
+            </svg>
           </span>
-        </button>
+          <span class="menu-icon menu-icon--close" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <path d="M6 6l12 12M18 6 6 18"></path>
+            </svg>
+          </span>
+        </summary>
 
-        <div class="menu-panel" id="site-menu-panel-home" data-menu-panel>
-          <nav class="site-nav" aria-label="Primary navigation">
-            <a href="#home">Home</a>
-            <a href="#watch">Watch Movies</a>
-            <a href="./partners">For Filmmakers</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
-
-          <div class="header-actions">
-            <a class="nav-button nav-button--ghost" href="#download">Download App</a>
-          </div>
-        </div>
-      </div>
+        <nav class="mobile-menu" aria-label="Mobile navigation">
+          <a href="#how">How it Works</a>
+          <a href="#features">Why Mosion</a>
+          <a href="#trending">Trending</a>
+          <a href="#mobile">Mobile</a>
+          <a href="#cta">Get Started</a>
+        </nav>
+      </details>
     </div>
   </header>
 
-  <main class="site-shell">
+  <main>
+    <div class="landing-content" id="landing-content">
     <section class="hero" id="home">
-      <div class="hero-backdrop" aria-hidden="true">
-        <div class="movie-grid movie-grid--hero">
-          <div class="movie-row" data-banner-row="1"></div>
-          <div class="movie-row" data-banner-row="2"></div>
-          <div class="movie-row" data-banner-row="3"></div>
+      <div class="hero-inner">
+        <h1 class="hero-title reveal">MOSION</h1>
+        <p class="hero-tagline reveal reveal-delay-1">Cinema, reimagined for your phone.</p>
+        <p class="hero-description reveal reveal-delay-2">
+          Watch cinema movies instantly from anywhere. No schedules. No theaters. Just press play.
+        </p>
+
+        <div class="button-row reveal reveal-delay-3">
+          <a class="btn btn-secondary" href="#browse-movies">Browse Movies</a>
         </div>
-      </div>
 
-      <div class="container hero-layout">
-          <h1 class="hero-title">Cinema anyday,<br/>anytime, anywhere.</h1>
-          <p class="hero-descriotion">
-            Watch Cinema movies on your mobile device. At your own convenience.
-          </p>
+        <div class="scroll-hint" aria-hidden="true">
+          <span>Scroll</span>
+          <svg viewBox="0 0 24 24" role="presentation">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </div>
 
-          <div class="hero-actions">
-            <p>Unlike traditional cinema, we don't make the rules. You DO.</p>
-            <a class="primary-button" href="#download">Get Started</a>
-          </div>
       </div>
     </section>
 
-
-    
-
-    <section class="section" id="watch">
+    <section class="surface-section" id="how">
       <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Now showing on MOSION</p>
-            <h2 class="section-kicker-text">Exclusive cinema movies available on the mosion app</h2>
-          </div>
-        </div>
-        
-        
-        <div class="showcase-shell">
-          <div class="showcase-grid">
-            <div class="movie-row" data-banner-row="4"></div>
-          </div>
-        </div>
-    </section>
+        <h2 class="section-title reveal">
+          HOW
+          <span>MOSION WORKS</span>
+        </h2>
 
-
-
-    <section class="section section--compact" id="how-it-works">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">How MOSION works</p>
-          </div>
-        </div>
-
-        <div class="workflow-grid">
-          <article class="workflow-card">
-            <div class="step-list">
-              <div class="step-item">
-                <span class="step-number">1</span>
-                <div>
-                  <h4>Download MOSION App</h4>
-                  <p>Install the mosion app from the Google PlayStore and AppStores.</p>
-                </div>
-              </div>
-               <div class="step-item">
-                <span class="step-number">2</span>
-                <div>
-                  <h4>Create an account</h4>
-                  <p>Sign up for a mosion account.</p>
-                </div>
-              </div>
-              <div class="step-item">
-                <span class="step-number">3</span>
-                <div>
-                  <h4>Purchase a movie</h4>
-                  <p>Explore featured releases, select a title, and confirm your purchase.</p>
-                </div>
-              </div>
-              <div class="step-item">
-                <span class="step-number">4</span>
-                <div>
-                  <h4>Watch at your convenience time</h4>
-                  <p>Start streaming right away or you can choose to download.</p>
-                </div>
-              </div>
+        <div class="steps-grid">
+          <article class="step-card reveal reveal-delay-1">
+            <div class="step-number">
+              <img src="./how/1.png" alt="" loading="lazy" />
             </div>
+            <h3>Download</h3>
+            <p>Get the Mosion app from Google Play or the App Store.</p>
+          </article>
+
+          <article class="step-card reveal reveal-delay-2">
+            <div class="step-number">
+              <img src="./how/2.png" alt="" loading="lazy" />
+            </div>
+            <h3>Create Account</h3>
+            <p>Sign up in seconds to start browsing.</p>
+          </article>
+
+          <article class="step-card reveal reveal-delay-3">
+            <div class="step-number">
+              <img src="./how/3.png" alt="" loading="lazy" />
+            </div>
+            <h3>Select &amp; Purchase</h3>
+            <p>Browse titles and buy only the movies you want.</p>
+          </article>
+
+          <article class="step-card reveal reveal-delay-4">
+            <div class="step-number">
+              <img src="./how/4.png" alt="" loading="lazy" />
+            </div>
+            <h3>Watch Instantly</h3>
+            <p>Start streaming immediately or download for offline viewing.</p>
           </article>
         </div>
       </div>
     </section>
 
-
-
-    <section class="section">
+    <section class="base-section" id="features">
       <div class="container">
-         <div class="section-heading">
-          <div>
-            <p class="section-kicker">Why Choose Us?</p>
+        <h2 class="section-title reveal">Why Mosion</h2>
+
+        <div class="features-grid">
+          <article class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon">
+              <img src="./why-mosion/instantly.png" alt="" />
+            </div>
+            <h3>Watch Instantly</h3>
+            <p>Pay once, play immediately. No waiting.</p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon">
+              <img src="./why-mosion/time.png" alt="" />
+            </div>
+            <h3>Your Time</h3>
+            <p>Watch when you want. Theater schedules do not apply.</p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-3">
+            <div class="feature-icon">
+              <img src="./why-mosion/built-for-phones.png" alt="" />
+            </div>
+            <h3>Built for Phones</h3>
+            <p>Cinema-quality viewing on the screen already in your pocket.</p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-4">
+            <div class="feature-icon">
+              <img src="./why-mosion/download.png" alt="" />
+            </div>
+            <h3>Keep It Offline</h3>
+            <p>Download movies for flights, commutes, and anywhere else.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-section" id="trending">
+      <div class="container">
+        <h2 class="section-title reveal">Trending on Mosion</h2>
+
+        <div class="poster-row reveal" aria-label="Trending movies">
+          <article class="poster-card reveal reveal-delay-1" role="img" aria-label="Oversabi Aunty poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oversabi Aunty poster">
+              <defs>
+                <linearGradient id="poster-gradient-1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#1A1A4E"></stop>
+                  <stop offset="100%" stop-color="#00B7FF"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-1)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">ECLIPSE</text>
+              <text x="90" y="145" fill="#8B95A5" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Sci-Fi · 2025</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+
+          <article class="poster-card reveal reveal-delay-2" role="img" aria-label="Scream 7 poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VERTIGO poster">
+              <defs>
+                <linearGradient id="poster-gradient-2" x1="0" y1="0" x2="0.5" y2="1">
+                  <stop offset="0%" stop-color="#4A1942"></stop>
+                  <stop offset="100%" stop-color="#C62368"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-2)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">VERTIGO</text>
+              <text x="90" y="145" fill="#D4A0B9" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Thriller · 2025</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+
+          <article class="poster-card reveal reveal-delay-3" role="img" aria-label="Onobiren poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CANOPY poster">
+              <defs>
+                <linearGradient id="poster-gradient-3" x1="0" y1="0" x2="1" y2="0.8">
+                  <stop offset="0%" stop-color="#0D3B2E"></stop>
+                  <stop offset="100%" stop-color="#2ECC71"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-3)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">CANOPY</text>
+              <text x="90" y="145" fill="#8FCFAD" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Drama · 2024</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+
+          <article class="poster-card reveal reveal-delay-4" role="img" aria-label="A Country Called Ghana poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EMBER poster">
+              <defs>
+                <linearGradient id="poster-gradient-4" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3A1C00"></stop>
+                  <stop offset="100%" stop-color="#E67E22"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-4)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">EMBER</text>
+              <text x="90" y="145" fill="#D4A76A" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Action · 2025</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+
+          <article class="poster-card reveal reveal-delay-5" role="img" aria-label="The Housemaid poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NOVA poster">
+              <defs>
+                <linearGradient id="poster-gradient-5" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#1A1A3E"></stop>
+                  <stop offset="100%" stop-color="#8E44AD"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-5)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">NOVA</text>
+              <text x="90" y="145" fill="#C49ED8" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Fantasy · 2025</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+
+          <article class="poster-card" role="img" aria-label="Everybody Loves Jenifa poster">
+            <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DRIFT poster">
+              <defs>
+                <linearGradient id="poster-gradient-6" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1C1C3A"></stop>
+                  <stop offset="100%" stop-color="#2980B9"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="180" height="270" rx="12" fill="url(#poster-gradient-6)"></rect>
+              <text x="90" y="120" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="22" letter-spacing="2" text-anchor="middle">DRIFT</text>
+              <text x="90" y="145" fill="#8BB8D4" font-family="'DM Sans', sans-serif" font-size="10" text-anchor="middle">Romance · 2024</text>
+              <circle cx="90" cy="200" r="20" fill="rgba(255,255,255,0.12)"></circle>
+              <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
+            </svg>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="base-section" id="mobile">
+      <div class="container mobile-section">
+        <div class="phone-stage reveal">
+          <div class="phone-frame">
+            <div class="phone-notch" aria-hidden="true"></div>
+	            <svg viewBox="0 0 260 520" class="phone-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MOSION mobile app preview">
+	              <defs>
+	                <linearGradient id="phone-background" x1="0" y1="0" x2="0" y2="1">
+	                  <stop offset="0%" stop-color="#0F172A"></stop>
+	                  <stop offset="100%" stop-color="#1E293B"></stop>
+	                </linearGradient>
+	                <clipPath id="now-playing-clip">
+	                  <rect x="16" y="50" width="228" height="130" rx="8"></rect>
+	                </clipPath>
+	                <clipPath id="up-next-1">
+	                  <rect x="24" y="240" width="64" height="96" rx="6"></rect>
+	                </clipPath>
+	                <clipPath id="up-next-2">
+	                  <rect x="96" y="240" width="64" height="96" rx="6"></rect>
+	                </clipPath>
+	                <clipPath id="up-next-3">
+	                  <rect x="168" y="240" width="64" height="96" rx="6"></rect>
+	                </clipPath>
+	              </defs>
+              <rect width="260" height="520" fill="url(#phone-background)"></rect>
+	              <rect x="16" y="50" width="228" height="130" rx="8" fill="#1A2332"></rect>
+	              <image id="phone-now-playing-image" href="./trending/oversabi-aunty.jpeg" x="16" y="50" width="228" height="130" preserveAspectRatio="xMidYMid slice" clip-path="url(#now-playing-clip)"></image>
+	              <rect x="16" y="50" width="228" height="130" rx="8" fill="rgba(7,11,20,0.52)"></rect>
+              <text x="130" y="100" fill="#00B7FF" font-family="'Bebas Neue', sans-serif" font-size="16" letter-spacing="2" text-anchor="middle">NOW PLAYING</text>
+              <text id="phone-now-playing-title" x="130" y="125" fill="#FFFFFF" font-family="'Bebas Neue', sans-serif" font-size="20" letter-spacing="1" text-anchor="middle">OVERSABI AUNTY</text>
+              <text x="130" y="145" fill="#7A8598" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle">Featured right now</text>
+              <circle cx="130" cy="168" r="12" fill="rgba(0,183,255,0.2)"></circle>
+              <polygon points="127,162 127,174 137,168" fill="#00B7FF"></polygon>
+              <rect x="24" y="195" width="212" height="3" rx="1.5" fill="#1F2937"></rect>
+              <rect x="24" y="195" width="130" height="3" rx="1.5" fill="#00B7FF"></rect>
+              <text x="24" y="230" fill="#8B95A5" font-family="'DM Sans', sans-serif" font-size="10" font-weight="600">Up Next</text>
+	              <rect x="24" y="240" width="64" height="96" rx="6" fill="#2D1A4E"></rect>
+	              <image id="phone-up-next-1" href="./trending/scream-7.webp" x="24" y="240" width="64" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#up-next-1)"></image>
+	              <rect x="96" y="240" width="64" height="96" rx="6" fill="#1A3A2E"></rect>
+	              <image id="phone-up-next-2" href="./trending/banner-01.jpeg" x="96" y="240" width="64" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#up-next-2)"></image>
+	              <rect x="168" y="240" width="64" height="96" rx="6" fill="#3A1C1C"></rect>
+	              <image id="phone-up-next-3" href="./trending/banner-03.jpeg" x="168" y="240" width="64" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#up-next-3)"></image>
+              <rect x="0" y="480" width="260" height="40" fill="#0F172A"></rect>
+              <circle cx="50" cy="500" r="3" fill="#4A5568"></circle>
+              <circle cx="130" cy="500" r="3" fill="#00B7FF"></circle>
+              <circle cx="210" cy="500" r="3" fill="#4A5568"></circle>
+            </svg>
           </div>
-          <div class="showcase-note">
-            <article class="metric-card">
-              <strong>Instant access</strong>
-              <span>Pay for a movie and start watching right away.</span>
+        </div>
+
+        <div class="mobile-copy">
+          <h2 class="section-title section-title--left reveal">Cinema in your pocket.</h2>
+          <p class="mobile-description reveal reveal-delay-1">
+            Mosion is built from the ground up for mobile. Browse thousands of titles, tap to play, and enjoy
+            theater-quality video on the screen that is always in your hand.
+          </p>
+
+          <div class="mobile-points">
+            <article class="mobile-point reveal reveal-delay-2">
+              <div class="mobile-point__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M12 18h.01"></path>
+                  <path d="M8.5 14.5a5 5 0 0 1 7 0"></path>
+                  <path d="M5 11a10 10 0 0 1 14 0"></path>
+                  <path d="M2 7.5a15 15 0 0 1 20 0"></path>
+                </svg>
+              </div>
+              <div>
+                <h3>Stream Anywhere</h3>
+                <p>On any network</p>
+              </div>
             </article>
-            <article class="metric-card">
-              <strong>No schedules</strong>
-              <span>Movie nights happen on your time, not the theater timetable.</span>
-            </article>
-            <article class="metric-card">
-              <strong>Mobile-first</strong>
-              <span>A cinema-quality experience designed around the smartphone.</span>
-            </article>
-            <article class="metric-card">
-              <strong>Download option</strong>
-              <span>You can choose to download for offline viewing.</span>
+
+            <article class="mobile-point reveal reveal-delay-3">
+              <div class="mobile-point__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M12 3l7 3v6c0 4.5-2.9 7.9-7 9-4.1-1.1-7-4.5-7-9V6l7-3Z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3>Secure Playback</h3>
+                <p>DRM protected</p>
+              </div>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-    
-
-    <section class="download-section" aria-label="Download apps">
-      <div class="download-inner">
-        <p class="download-kicker">
-          <span class="download-kicker-text">
-            <span>Stay in mosion</span>
-          </span>
+    <section class="surface-section cta-section" id="cta">
+      <div class="container cta-inner">
+        <h2 class="section-title reveal">Ready to press play?</h2>
+        <p class="cta-copy reveal reveal-delay-1">
+          No subscriptions. No commitments. Pay only for the movies you want to watch.
         </p>
-        <div class="store-badges">
-          <a class="store-link" href="#" aria-label="Download on the App Store">
-            <img src="./appstore-badge.svg" alt="Download on the App Store" draggable="false" />
-          </a>
-          <a class="store-link" href="#" aria-label="Get it on Google Play">
-            <img src="./playstore-badge.svg" alt="Get it on Google Play" draggable="false" />
+
+        <div class="button-row reveal reveal-delay-2">
+          <a
+            class="btn btn-primary"
+            href="https://expo.dev/artifacts/eas/n5u311JPwjkvS5D6RCAipe.apk"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Download BETA
           </a>
         </div>
-        <a class="apk-button" id="apk-download" href="./mosion.apk" aria-label="Download APK">
-          Download APK
-        </a>
       </div>
     </section>
-  </section>
+    </div>
+
+    <section class="browse-shell" id="browse-movies" hidden aria-hidden="true">
+      <section class="browse-hero">
+        <div class="container browse-hero__inner">
+          <p class="browse-kicker">Full Catalog</p>
+          <h1 class="browse-title">
+            BROWSE
+            <span>MOVIES</span>
+          </h1>
+          <p class="browse-copy">
+            Discover premium cinema across comedy, thriller, drama, and festival standouts, all curated for the screen in your pocket.
+          </p>
+        </div>
+      </section>
+
+      <section class="browse-library">
+        <div class="container">
+          <div class="filter-bar" aria-label="Movie filters">
+            <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All Movies</button>
+            <button class="filter-btn" type="button" data-filter="comedy" aria-pressed="false">Comedy</button>
+            <button class="filter-btn" type="button" data-filter="thriller" aria-pressed="false">Thriller</button>
+            <button class="filter-btn" type="button" data-filter="drama" aria-pressed="false">Drama</button>
+            <button class="filter-btn" type="button" data-filter="adventure" aria-pressed="false">Adventure</button>
+          </div>
+
+          <div class="movies-grid" id="movies-grid" aria-live="polite"></div>
+        </div>
+      </section>
+    </section>
   </main>
 
-  <footer class="site-footer" id="contact">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand brand--footer" href="#home" aria-label="MOSION home">
-          <img class="brand-logo" src="./logo.png" alt="MOSION logo" draggable="false" />
-            <strong>MOSION</strong>
-        </a>
-        <p>
-          .
-        </p>
-      </div>
+  <div class="waitlist-modal" id="waitlist-modal" hidden aria-hidden="true">
+    <div class="waitlist-modal__backdrop" data-waitlist-close></div>
+    <div class="waitlist-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="waitlist-title" aria-describedby="waitlist-copy">
+      <button class="waitlist-modal__close" type="button" aria-label="Close waitlist form" data-waitlist-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
 
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="#watch">Watch Movies</a>
-        <a href="./partners">For Filmmakers</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#about">About MOSION</a>
-        <a href="mailto:partners@mosion.app">Partners</a>
-        <a href="mailto:partners@mosion.app">Contact</a>
-      </nav>
+      <p class="waitlist-modal__eyebrow">Join the waitlist</p>
+      <h2 class="waitlist-modal__title" id="waitlist-title">Get beta access</h2>
+      <p class="waitlist-modal__copy" id="waitlist-copy">
+        Enter your email address to join the waitlist and be the first to try the Beta App.
+      </p>
+
+      <form class="waitlist-form" id="waitlist-form" novalidate>
+        <label class="waitlist-form__field" for="waitlist-email">
+          <span>Email address</span>
+          <input
+            id="waitlist-email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+
+        <p class="waitlist-form__status" id="waitlist-status" role="status" aria-live="polite"></p>
+
+        <div class="waitlist-form__actions">
+          <button class="btn btn-primary" type="submit" id="waitlist-submit">Join Waitlist</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <div class="footer-meta">
-      <p>&copy; 2026 MOSION. All rights reserved.</p>
+  <footer class="site-footer" id="contact">
+    <div class="container footer-inner">
+      <a class="brand brand--footer" href="#home" aria-label="MOSION home">MOSION</a>
+
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="mailto:partners@mosion.app?subject=Mosion%20Support">Support</a>
+        <a href="mailto:partners@mosion.app?subject=Contact%20Mosion">Contact</a>
+      </nav>
+
+      <p class="footer-copy">© 2026 Mosion. All rights reserved.</p>
     </div>
   </footer>
-
-  <script src="./script.js" defer></script>
+  <script src="./home.js" defer></script>
 </body>
-
 </html>

@@ -1,0 +1,5 @@
+.env
+.chrome-profile/
+.edge-profile/
+node_modules/
+*.log
