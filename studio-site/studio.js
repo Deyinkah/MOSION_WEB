@@ -73,7 +73,7 @@ function renderFilmGrid() {
       <div class="relative poster-media">
         <img src="${film.image}" alt="${film.title} poster" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute top-3 right-3 z-10 rounded-full border border-white/10 bg-black/55 px-2 py-1 text-[10px] font-medium tracking-wider text-white/88 backdrop-blur-sm">${film.year}</div>
-        <div class="absolute top-3 left-3 z-10 rounded-full border border-white/10 bg-black/55 px-2 py-1 text-[10px] font-medium tracking-wider text-mosion-accent/95 backdrop-blur-sm uppercase">${film.genre}</div>
+        <div class="absolute top-3 left-3 z-10 rounded-full border border-white/10 bg-black/55 px-2 py-1 text-[10px] font-medium tracking-wider text-mosion-accent backdrop-blur-sm uppercase">${film.genre}</div>
       </div>
     `;
     grid.appendChild(card);
