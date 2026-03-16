@@ -58,6 +58,202 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
 .poster-card { transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease; }
 .poster-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(0,183,255,0.2), 0 0 0 1px rgba(0,183,255,0.1); }
 
+.theme-video {
+  transition: opacity 0.25s ease;
+}
+
+.theme-video-light {
+  opacity: 0;
+}
+
+.theme-video-dark {
+  opacity: 1;
+}
+
+body.light-theme .theme-video-light {
+  opacity: 1;
+}
+
+body.light-theme .theme-video-dark {
+  opacity: 0;
+}
+
+#film-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  #film-grid {
+    grid-template-columns: repeat(6, minmax(180px, 1fr));
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #film-grid::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#hero-headline {
+  font-size: clamp(56px, 12vw, 120px) !important;
+}
+
+/* Root-site typography alignment */
+section h2.font-display {
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1 !important;
+}
+
+p.text-mosion-accent.text-sm.font-medium.tracking-widest.uppercase {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.24em !important;
+}
+
+#hero-subheadline {
+  font-size: clamp(18px, 3vw, 30px) !important;
+  line-height: 1.25 !important;
+}
+
+#hero-description {
+  font-size: clamp(14px, 1.8vw, 18px) !important;
+  line-height: 1.6 !important;
+}
+
+#vision-text,
+#final-cta-subheadline,
+#why .mt-4.text-mosion-muted.max-w-xl.mx-auto,
+#features .mt-4.text-mosion-muted.max-w-xl.mx-auto {
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+section p.text-sm.text-mosion-muted.leading-relaxed,
+section p.text-sm.text-mosion-muted.leading-relaxed.px-2 {
+  font-size: 0.96rem !important;
+  line-height: 1.7 !important;
+}
+
+.theme-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 80;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  background: rgba(11,15,28,0.88);
+  color: #f5f7fa;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.24);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+body.light-theme {
+  background: #f3f7fb !important;
+  color: #0d1726 !important;
+}
+
+body.light-theme .nav-blur {
+  background: rgba(243,247,251,0.9) !important;
+  border-color: rgba(11,20,32,0.08) !important;
+}
+
+body.light-theme #mobile-menu {
+  background: rgba(255,255,255,0.94) !important;
+  border-top: 1px solid rgba(11,20,32,0.08) !important;
+}
+
+body.light-theme .glow-border,
+body.light-theme .bg-mosion-surface\/50,
+body.light-theme .bg-mosion-surface\/30,
+body.light-theme .bg-mosion-surface {
+  background: rgba(255,255,255,0.82) !important;
+  border-color: rgba(11,20,32,0.08) !important;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+}
+
+body.light-theme .text-mosion-muted {
+  color: #556476 !important;
+}
+
+body.light-theme .text-mosion-muted\/70 {
+  color: rgba(85,100,118,0.82) !important;
+}
+
+body.light-theme .text-mosion-muted\/60 {
+  color: rgba(85,100,118,0.82) !important;
+}
+
+body.light-theme .text-mosion-muted\/50 {
+  color: rgba(85,100,118,0.72) !important;
+}
+
+body.light-theme .text-mosion-muted\/40 {
+  color: rgba(85,100,118,0.62) !important;
+}
+
+body.light-theme .text-mosion-text {
+  color: #0d1726 !important;
+}
+
+body.light-theme .border-white\/10,
+body.light-theme .border-white\/5 {
+  border-color: rgba(11,20,32,0.1) !important;
+}
+
+body.light-theme .poster-shimmer {
+  background: linear-gradient(135deg, #e8eef5 0%, #f8fbff 50%, #e8eef5 100%);
+}
+
+body.light-theme .cine-bar-top,
+body.light-theme .cine-bar-bottom {
+  background: #f3f7fb;
+}
+
+body.light-theme .bg-black\/55 {
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(11,20,32,0.08) !important;
+}
+
+body.light-theme .text-white\/88 {
+  color: #0d1726 !important;
+}
+
+body.light-theme section[style*="linear-gradient(90deg,rgba(0,183,255,0.04)"] {
+  background: linear-gradient(90deg, rgba(0,183,255,0.08) 0%, rgba(255,255,255,0.72) 50%, rgba(0,183,255,0.08) 100%) !important;
+}
+
+body.light-theme footer {
+  background: linear-gradient(180deg,#eef4fb,#e6eef8) !important;
+}
+
+body.light-theme .theme-toggle {
+  background: rgba(255,255,255,0.94);
+  color: #0d1726;
+  border-color: rgba(11,20,32,0.1);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+}
+
 /* Step connector */
 .step-connector { position: relative; }
 .step-connector::after {
@@ -130,11 +326,11 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
       <span id="nav-brand" class="font-display text-xl tracking-wider" style="letter-spacing:0.15em;">MOSION <span class="text-mosion-accent">STUDIO</span></span>
      </div>
      <div class="hidden md:flex items-center gap-8 text-sm text-mosion-muted">
-      <a href="#why" class="hover:text-mosion-accent transition-colors duration-300">Why MOSION</a> <a href="#how" class="hover:text-mosion-accent transition-colors duration-300">How It Works</a> <a href="#films" class="hover:text-mosion-accent transition-colors duration-300">Films</a> <a href="#features" class="hover:text-mosion-accent transition-colors duration-300">Features</a> <button class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg hover:bg-[#33c5ff] transition-colors duration-300" id="nav-submit-btn">Submit Your Film</button>
+      <button class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg hover:bg-[#33c5ff] transition-colors duration-300" id="nav-submit-btn">Submit Your Film</button>
      </div><button id="mobile-menu-btn" class="md:hidden text-mosion-muted hover:text-mosion-accent transition-colors"> <i data-lucide="menu" style="width:24px;height:24px;"></i> </button>
     </div><!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3 text-sm text-mosion-muted">
-     <a href="#why" class="block hover:text-mosion-accent transition-colors">Why MOSION</a> <a href="#how" class="block hover:text-mosion-accent transition-colors">How It Works</a> <a href="#films" class="block hover:text-mosion-accent transition-colors">Films</a> <a href="#features" class="block hover:text-mosion-accent transition-colors">Features</a> <button class="btn-primary w-full bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg mt-2">Submit Your Film</button>
+     <button class="btn-primary w-full bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg mt-2">Submit Your Film</button>
     </div>
    </nav><!-- Hero Section -->
    <section class="relative overflow-hidden film-grain" style="min-height:100%;">
@@ -144,8 +340,7 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
      <div class="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 rounded-full" style="background:radial-gradient(circle,rgba(0,183,255,0.04) 0%,transparent 70%);"></div>
     </div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 md:pt-44 md:pb-32 flex flex-col items-center text-center">
-     <h1 id="hero-headline" class="font-display text-6xl md:text-8xl lg:text-9xl tracking-wide glow-text reveal" style="letter-spacing:0.04em;line-height:0.95;">Release your film<br>
-       to the world.</h1>
+     <h1 id="hero-headline" class="font-display text-6xl md:text-8xl lg:text-9xl tracking-wide glow-text reveal" style="letter-spacing:0.04em;line-height:0.95;">Release your film.</h1>
      <p id="hero-subheadline" class="mt-6 text-lg md:text-xl text-mosion-muted max-w-2xl reveal reveal-delay-1">MOSION Studio helps filmmakers launch cinema premieres directly on mobile.</p>
      <p id="hero-description" class="mt-4 text-sm md:text-base text-mosion-muted/70 max-w-xl reveal reveal-delay-2">Upload, distribute, and monetize your films through MOSION — the mobile cinema platform.</p>
      <div class="mt-10 flex flex-col sm:flex-row gap-4 reveal reveal-delay-3">
@@ -153,17 +348,20 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
      </div><!-- Cinematic film strip decoration -->
      <div class="mt-20 w-full max-w-4xl reveal reveal-delay-4">
       <div class="relative rounded-xl overflow-hidden glow-border" style="aspect-ratio:21/9;">
-       <div class="absolute inset-0 poster-shimmer"></div>
-       <div class="cine-bar-top"></div>
+       <div>
+        <video class="theme-video theme-video-dark absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="MOSION Studio dashboard preview">
+         <source src="./beta-video-black.MP4" type="video/mp4">
+        </video>
+        <video class="theme-video theme-video-light absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="MOSION Studio dashboard preview">
+         <source src="./beta-video.MP4" type="video/mp4">
+        </video>
+        <div class="cine-bar-top"></div>
        <div class="cine-bar-bottom"></div>
        <div class="absolute inset-0 flex items-center justify-center z-10">
-        <div class="text-center">
-         <div class="w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-3" style="background:rgba(0,183,255,0.08);">
+        <div class="w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center" style="background:rgba(0,183,255,0.08);">
           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="#00B7FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
            <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
-         </div>
-         <p class="font-display text-lg tracking-wider text-mosion-muted/60">YOUR FILM. YOUR PREMIERE.</p>
         </div>
        </div>
        <div class="absolute top-2 left-4 flex gap-1.5 z-10">
@@ -173,6 +371,88 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
        </div>
        <div class="absolute bottom-2 right-4 text-xs font-mono text-mosion-accent/20 z-10">
         REC ● 24fps
+       </div>
+      </div>
+       <div class="hidden rounded-2xl border border-white/10 bg-mosion-surface/50 p-4 text-left">
+        <p class="text-[11px] font-medium tracking-[0.28em] text-mosion-accent uppercase">Submission Preview</p>
+        <div class="mt-4 overflow-hidden rounded-xl glow-border">
+         <img src="./trending/oversabi-aunty.jpeg" alt="Submission poster preview" class="h-72 w-full object-cover" loading="lazy">
+        </div>
+        <div class="mt-4 space-y-3">
+         <div class="flex items-center justify-between rounded-xl border border-white/10 bg-black/55 px-3 py-3 backdrop-blur-sm">
+          <div>
+           <p class="text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase">Status</p>
+           <p class="mt-1 text-sm font-semibold text-mosion-text">Draft Submission</p>
+          </div>
+          <span class="rounded-full border border-mosion-accent/20 bg-mosion-accent/10 px-2 py-1 text-[10px] font-semibold tracking-[0.18em] text-mosion-accent uppercase">Pre-Launch</span>
+         </div>
+         <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-xl border border-white/10 bg-black/55 px-3 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">Window</p>
+           <p class="mt-1 text-sm font-semibold text-mosion-text">Q3 2026</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-black/55 px-3 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">Territory</p>
+           <p class="mt-1 text-sm font-semibold text-mosion-text">Global</p>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="hidden flex flex-col gap-4 text-left">
+        <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-5 md:p-6">
+         <p class="text-[11px] font-medium tracking-[0.28em] text-mosion-accent uppercase">Release Setup</p>
+         <h3 class="mt-3 font-display text-[1.8rem] tracking-[0.08em] leading-none">Build your premiere setup before launch.</h3>
+         <p class="mt-3 text-sm text-mosion-muted leading-relaxed">Define your title, release window, territories, and monetization plan, then send the film into review when everything is ready.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+         <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-4">
+          <p class="text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase">Premiere Format</p>
+          <p class="mt-2 font-display text-[1.2rem] tracking-[0.08em]">Mobile Premiere</p>
+          <p class="mt-2 text-sm text-mosion-muted leading-relaxed">Optimized for smartphone-first viewing from day one.</p>
+         </div>
+         <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-4">
+          <p class="text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase">Monetization</p>
+          <p class="mt-2 font-display text-[1.2rem] tracking-[0.08em]">Pay-Per-View</p>
+          <p class="mt-2 text-sm text-mosion-muted leading-relaxed">Launch with a simple purchase model instead of subscriptions.</p>
+         </div>
+         <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-4">
+          <p class="text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase">Delivery</p>
+          <p class="mt-2 font-display text-[1.2rem] tracking-[0.08em]">Secure Playback</p>
+          <p class="mt-2 text-sm text-mosion-muted leading-relaxed">Protected streaming and offline-ready positioning for launch.</p>
+         </div>
+         <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-4">
+          <p class="text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase">Support</p>
+          <p class="mt-2 font-display text-[1.2rem] tracking-[0.08em]">Guided Review</p>
+          <p class="mt-2 text-sm text-mosion-muted leading-relaxed">Work through approval with the MOSION Studio release team.</p>
+         </div>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-mosion-surface/50 p-5 md:p-6">
+         <div class="flex items-center justify-between gap-4">
+          <div>
+           <p class="text-[11px] font-medium tracking-[0.28em] text-mosion-accent uppercase">Submission Workflow</p>
+           <p class="mt-2 text-sm text-mosion-muted leading-relaxed">A clean pre-launch path from delivery to premiere.</p>
+          </div>
+          <span class="hidden rounded-full border border-white/10 bg-black/55 px-3 py-1 text-[10px] font-medium tracking-[0.22em] text-mosion-muted/60 uppercase backdrop-blur-sm md:inline-flex">No live stats yet</span>
+         </div>
+         <div class="mt-5 grid gap-3 md:grid-cols-4">
+          <div class="rounded-xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">01</p>
+           <p class="mt-2 font-display text-[1.05rem] tracking-[0.08em]">Upload</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">02</p>
+           <p class="mt-2 font-display text-[1.05rem] tracking-[0.08em]">Review</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">03</p>
+           <p class="mt-2 font-display text-[1.05rem] tracking-[0.08em]">Setup</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-sm">
+           <p class="text-[10px] font-medium tracking-[0.18em] text-mosion-muted/60 uppercase">04</p>
+           <p class="mt-2 font-display text-[1.05rem] tracking-[0.08em]">Launch</p>
+          </div>
+         </div>
+        </div>
        </div>
       </div>
      </div>
@@ -347,7 +627,7 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
       <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">Our Catalog</p>
       <h2 class="font-display text-5xl md:text-6xl tracking-wide reveal">Films Released Through MOSION</h2>
      </div>
-     <div id="film-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+     <div id="film-grid">
      </div>
     </div>
    </section>
@@ -438,19 +718,31 @@ body { font-family: 'DM Sans', sans-serif; background: #070B14; color: #F5F7FA; 
     </div>
    </footer>
   </div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch theme">
+   <svg id="theme-icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9z"></path>
+   </svg>
+   <svg id="theme-icon-sun" class="hidden" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2.5"></path>
+    <path d="M12 19.5V22"></path>
+    <path d="M4.93 4.93l1.77 1.77"></path>
+    <path d="M17.3 17.3l1.77 1.77"></path>
+    <path d="M2 12h2.5"></path>
+    <path d="M19.5 12H22"></path>
+    <path d="M4.93 19.07l1.77-1.77"></path>
+    <path d="M17.3 6.7l1.77-1.77"></path>
+   </svg>
+  </button>
   <script>
 // Film poster data
 const films = [
-  { title: 'Meridian', genre: 'Sci-Fi', year: '2025', gradient: 'linear-gradient(160deg,#0a1628,#0d2847,#00B7FF22)' },
-  { title: 'Dust & Gold', genre: 'Western', year: '2024', gradient: 'linear-gradient(160deg,#1a1006,#2d1b0e,#c4842022)' },
-  { title: 'Neon Veil', genre: 'Thriller', year: '2025', gradient: 'linear-gradient(160deg,#140a1e,#2a1040,#8b40c022)' },
-  { title: 'Still Water', genre: 'Drama', year: '2024', gradient: 'linear-gradient(160deg,#061210,#0a2420,#10604022)' },
-  { title: 'Echo Chamber', genre: 'Horror', year: '2025', gradient: 'linear-gradient(160deg,#140808,#2a1010,#60101022)' },
-  { title: 'Parallel', genre: 'Sci-Fi', year: '2024', gradient: 'linear-gradient(160deg,#080814,#101030,#4040c022)' },
-  { title: 'Harvest Moon', genre: 'Romance', year: '2025', gradient: 'linear-gradient(160deg,#141008,#2a2010,#c0901022)' },
-  { title: 'Iron Silence', genre: 'War', year: '2024', gradient: 'linear-gradient(160deg,#0a0a0a,#1a1a1a,#40404022)' },
-  { title: 'Prism', genre: 'Fantasy', year: '2025', gradient: 'linear-gradient(160deg,#0a0814,#1a1030,#6030a022)' },
-  { title: 'Last Frame', genre: 'Documentary', year: '2024', gradient: 'linear-gradient(160deg,#080c14,#101828,#20406022)' },
+  { title: 'Oversabi Aunty', genre: 'Comedy', year: '2025', image: './trending/oversabi-aunty.jpeg' },
+  { title: 'Scream 7', genre: 'Thriller', year: '2025', image: './trending/scream-7.webp' },
+  { title: 'Onobiren', genre: 'Drama', year: '2024', image: './trending/banner-01.jpeg' },
+  { title: 'A Country Called Ghana', genre: 'Adventure', year: '2024', image: './trending/banner-03.jpeg' },
+  { title: 'The Housemaid', genre: 'Thriller', year: '2025', image: './trending/banner-06.jpeg' },
+  { title: 'Everybody Loves Jenifa', genre: 'Comedy', year: '2024', image: './trending/banner-31.jpeg' },
 ];
 
 function renderFilmGrid() {
@@ -460,16 +752,10 @@ function renderFilmGrid() {
     const card = document.createElement('div');
     card.className = `poster-card rounded-xl overflow-hidden cursor-pointer reveal reveal-delay-${Math.min(i % 5, 4)}`;
     card.innerHTML = `
-      <div class="relative" style="aspect-ratio:2/3;background:${film.gradient};">
-        <div class="absolute inset-0 flex flex-col justify-end p-4">
-          <div class="absolute top-3 right-3 text-[10px] font-medium text-mosion-accent/60 tracking-wider">${film.year}</div>
-          <div class="absolute top-3 left-3">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,247,250,0.15)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <p class="text-xs text-mosion-accent/70 tracking-widest uppercase mb-1">${film.genre}</p>
-          <h4 class="font-display text-lg tracking-wider leading-tight">${film.title}</h4>
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+      <div class="relative" style="aspect-ratio:2/3;">
+        <img src="${film.image}" alt="${film.title} poster" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+        <div class="absolute top-3 right-3 z-10 rounded-full border border-white/10 bg-black/55 px-2 py-1 text-[10px] font-medium tracking-wider text-white/88 backdrop-blur-sm">${film.year}</div>
+        <div class="absolute top-3 left-3 z-10 rounded-full border border-white/10 bg-black/55 px-2 py-1 text-[10px] font-medium tracking-wider text-mosion-accent/95 backdrop-blur-sm uppercase">${film.genre}</div>
       </div>
     `;
     grid.appendChild(card);
@@ -501,6 +787,32 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     document.getElementById('mobile-menu').classList.add('hidden');
   });
 });
+
+const themeToggle = document.getElementById('theme-toggle');
+const themeIconMoon = document.getElementById('theme-icon-moon');
+const themeIconSun = document.getElementById('theme-icon-sun');
+
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  document.body.classList.toggle('light-theme', isLight);
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-pressed', String(isLight));
+    themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+  }
+  if (themeIconMoon && themeIconSun) {
+    themeIconMoon.classList.toggle('hidden', isLight);
+    themeIconSun.classList.toggle('hidden', !isLight);
+  }
+}
+
+if (themeToggle) {
+  applyTheme('dark');
+
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+    applyTheme(nextTheme);
+  });
+}
 
 // Element SDK
 const defaultConfig = {
@@ -553,7 +865,7 @@ async function onConfigChange(config) {
   if (heroSub) {
     heroSub.textContent = c('hero_subheadline');
     heroSub.style.fontFamily = bodyFont;
-    heroSub.style.fontSize = `${baseSize * 1.25}px`;
+    heroSub.style.fontSize = `${baseSize * 1.125}px`;
   }
 
   const heroDesc = document.getElementById('hero-description');
@@ -607,7 +919,7 @@ async function onConfigChange(config) {
   if (visionEl) {
     visionEl.textContent = c('vision_text');
     visionEl.style.fontFamily = bodyFont;
-    visionEl.style.fontSize = `${baseSize * 1.375}px`;
+    visionEl.style.fontSize = `${baseSize}px`;
   }
 
   const finalH = document.getElementById('final-cta-headline');
@@ -620,7 +932,7 @@ async function onConfigChange(config) {
   if (finalSub) {
     finalSub.textContent = c('final_cta_subheadline');
     finalSub.style.fontFamily = bodyFont;
-    finalSub.style.fontSize = `${baseSize * 1.25}px`;
+    finalSub.style.fontSize = `${baseSize}px`;
   }
 
   const finalPrimary = document.getElementById('final-primary-cta');
