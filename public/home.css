@@ -24,6 +24,8 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 body {
@@ -33,6 +35,13 @@ body {
   font-family: "DM Sans", "Segoe UI", sans-serif;
   color: var(--text);
   background: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body.modal-open {
@@ -66,7 +75,7 @@ footer {
 }
 
 section[id] {
-  scroll-margin-top: 104px;
+  scroll-margin-top: 2rem;
 }
 
 .container {
@@ -97,7 +106,14 @@ section[id] {
   backdrop-filter: blur(16px);
 }
 
+.landing-page:not(.browse-mode) .site-header {
+  background: rgba(7, 11, 20, 0.84);
+  backdrop-filter: blur(16px);
+}
+
 .header-inner {
+  position: relative;
+  z-index: 1;
   min-height: var(--header-height);
   display: flex;
   align-items: center;
@@ -116,8 +132,8 @@ section[id] {
 .brand {
   display: inline-flex;
   align-items: center;
-  font-size: 1.75rem;
-  letter-spacing: 0.22em;
+  font-size: 2.4rem;
+  letter-spacing: 0.1em;
   line-height: 1;
 }
 
@@ -130,11 +146,15 @@ section[id] {
   height: clamp(2.25rem, 4vw, 2.9rem);
 }
 
+.site-header .brand {
+  color: var(--accent);
+}
+
 .desktop-nav {
   display: flex;
   align-items: center;
   gap: 1.75rem;
-  color: var(--muted);
+  color: var(--muted-strong);
   font-size: 0.95rem;
 }
 
@@ -284,7 +304,7 @@ section[id] {
   margin: 1rem 0 0;
   font-family: "DM Sans", "Segoe UI", sans-serif;
   font-size: clamp(18px, 3vw, 30px);
-  font-weight: 300;
+  font-weight: 500;
   color: #e0e6ef;
   line-height: 1.25;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.32);
@@ -337,6 +357,12 @@ section[id] {
 
 .hero .btn {
   min-width: clamp(170px, 32vw, 240px);
+}
+
+.hero .btn-secondary {
+  min-width: clamp(148px, 24vw, 188px);
+  min-height: 52px;
+  padding: 0.72rem 1.45rem;
 }
 
 .btn::after {
@@ -820,7 +846,7 @@ section[id] {
 
 .mobile-point {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.85rem;
 }
 
@@ -828,6 +854,7 @@ section[id] {
   width: 44px;
   height: 44px;
   flex: 0 0 44px;
+  margin-top: 0.1rem;
 }
 
 .mobile-point__icon svg {
@@ -856,9 +883,30 @@ section[id] {
 }
 
 .cta-copy {
-  max-width: 35rem;
-  margin: 0 auto;
+  max-width: 48rem;
+  margin: 0 auto 2.4rem;
   font-size: 1rem;
+}
+
+.store-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.store-link {
+  display: inline-flex;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.store-link img {
+  width: auto;
+  height: clamp(52px, 8vw, 62px);
+  display: block;
 }
 
 .site-footer {
@@ -1092,8 +1140,9 @@ button:focus-visible {
   .mobile-nav[open] .mobile-menu {
     position: fixed;
     top: var(--header-height);
-    left: 0;
+    left: auto;
     right: 0;
+    width: 50%;
     z-index: 45;
     display: flex;
     flex-direction: column;
@@ -1101,9 +1150,10 @@ button:focus-visible {
     gap: 1.4rem;
     padding: 1.4rem 1.5rem 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(7, 11, 20, 0.95);
+    background: #070b14;
     backdrop-filter: blur(16px);
-    color: var(--muted);
+    color: var(--muted-strong);
+    border-bottom-left-radius: 2.5rem;
   }
 
   .hero {
@@ -1168,12 +1218,21 @@ button:focus-visible {
     min-width: 156px;
   }
 
+  .hero .btn-secondary {
+    min-width: 142px;
+    padding: 0.68rem 1.2rem;
+  }
+
   .cta-section .button-row {
     align-items: center;
   }
 
   .cta-section .btn {
     width: auto;
+  }
+
+  .store-link img {
+    height: clamp(52px, 14vw, 60px);
   }
 
   .steps-grid,

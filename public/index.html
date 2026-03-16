@@ -59,10 +59,8 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#how">How it Works</a>
-        <a href="#features">Why Mosion</a>
-        <a href="#trending">Trending</a>
-        <a href="#mobile">Mobile</a>
+        <a href="#trending">Trending Movies</a>
+        <a href="#browse-movies">Browse Movies</a>
         <a href="#cta">Get Started</a>
       </nav>
 
@@ -82,10 +80,8 @@
         </summary>
 
         <nav class="mobile-menu" aria-label="Mobile navigation">
-          <a href="#how">How it Works</a>
-          <a href="#features">Why Mosion</a>
-          <a href="#trending">Trending</a>
-          <a href="#mobile">Mobile</a>
+          <a href="#trending">Trending Movies</a>
+          <a href="#browse-movies">Browse Movies</a>
           <a href="#cta">Get Started</a>
         </nav>
       </details>
@@ -379,12 +375,13 @@
             <article class="mobile-point reveal reveal-delay-3">
               <div class="mobile-point__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" role="presentation">
-                  <path d="M12 3l7 3v6c0 4.5-2.9 7.9-7 9-4.1-1.1-7-4.5-7-9V6l7-3Z"></path>
+                  <circle cx="12" cy="12" r="8"></circle>
+                  <path d="m10 9 5 3-5 3z"></path>
                 </svg>
               </div>
               <div>
-                <h3>Secure Playback</h3>
-                <p>DRM protected</p>
+                <h3>Stream Anyday</h3>
+                <p>Available 24/7</p>
               </div>
             </article>
           </div>
@@ -399,7 +396,16 @@
           No subscriptions. No commitments. Pay only for the movies you want to watch.
         </p>
 
-        <div class="button-row reveal reveal-delay-2">
+        <div class="store-badges reveal reveal-delay-2" aria-label="App store downloads">
+          <span class="store-link" aria-disabled="true">
+            <img src="./playstore-badge.svg" alt="Get it on Google Play" loading="lazy" />
+          </span>
+          <span class="store-link" aria-disabled="true">
+            <img src="./appstore-badge.svg" alt="Download on the App Store" loading="lazy" />
+          </span>
+        </div>
+
+        <div class="button-row reveal reveal-delay-3">
           <a
             class="btn btn-primary"
             href="https://expo.dev/artifacts/eas/n5u311JPwjkvS5D6RCAipe.apk"
