@@ -45,7 +45,7 @@ const defaultConfig = {
   trust_item_2: "Mobile-First Distribution",
   trust_item_3: "Pay-Per-View Monetization",
   trust_item_4: "Submission Review Support",
-  outcomes_headline: "Why Filmmakers Choose MOSION Studio",
+  outcomes_headline: "Why MOSION Studio Is Built for Filmmakers",
   outcome_1: "Reach mobile audiences directly without traditional theater dependence",
   outcome_2: "Retain more release flexibility with independent distribution options",
   outcome_3: "Access performance visibility and viewer engagement metrics instantly",
