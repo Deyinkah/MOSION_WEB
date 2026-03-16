@@ -1,27 +1,66 @@
 body.browse-mode {
-  background:
+  /* background:
     radial-gradient(circle at top right, rgba(0, 183, 255, 0.16), transparent 26%),
     radial-gradient(circle at left 20%, rgba(8, 145, 178, 0.12), transparent 24%),
-    linear-gradient(135deg, #070b14 0%, #101828 46%, #0b0f1c 100%);
+    linear-gradient(135deg, #070b14 0%, #101828 46%, #0b0f1c 100%); */
 }
 
 .browse-shell {
   min-height: 100vh;
-  padding: calc(var(--header-height) + 2.5rem) 0 4rem;
+  padding: calc(var(--header-height) + 1.5rem) 0 4rem;
 }
 
 .browse-hero {
-  padding: 1rem 0 2.5rem;
+  padding: 0.35rem 0 1.5rem;
 }
 
 .browse-hero__inner {
-  max-width: 760px;
+  max-width: 680px;
+  margin-right: auto;
+  text-align: left;
+}
+
+.browse-back {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: start;
+  gap: 0.55rem;
+  margin-bottom: 1.1rem;
+  color: var(--muted-strong);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.browse-back::before {
+  content: "\2190";
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  align-items: center;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.browse-back span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.browse-back:hover,
+.browse-back:focus-visible {
+  color: var(--accent);
+  transform: translateX(-2px);
 }
 
 .browse-kicker {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.65rem;
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.26em;
   text-transform: uppercase;
@@ -30,7 +69,7 @@ body.browse-mode {
 .browse-title {
   margin: 0;
   font-family: "Bebas Neue", Impact, sans-serif;
-  font-size: clamp(3.25rem, 8vw, 5.4rem);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
   letter-spacing: 0.12em;
   line-height: 0.92;
 }
@@ -42,10 +81,10 @@ body.browse-mode {
 
 .browse-copy {
   max-width: 540px;
-  margin: 0.9rem 0 0;
+  margin: 0.7rem 0 0;
   color: var(--muted-strong);
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 0.96rem;
+  line-height: 1.65;
 }
 
 .browse-library {
@@ -190,7 +229,7 @@ body.browse-mode {
 
 @media (max-width: 860px) {
   .browse-shell {
-    padding-top: calc(var(--header-height) + 2rem);
+    padding-top: calc(var(--header-height) + 1.35rem);
   }
 
   .movies-grid {
@@ -204,11 +243,15 @@ body.browse-mode {
   }
 
   .browse-hero {
-    padding-bottom: 2rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .browse-title {
+    font-size: clamp(2.15rem, 11vw, 3rem);
   }
 
   .browse-copy {
-    font-size: 0.96rem;
+    font-size: 0.92rem;
   }
 
   .filter-bar {

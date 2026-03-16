@@ -91,6 +91,7 @@
   <main>
     <div class="landing-content" id="landing-content">
     <section class="hero" id="home">
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-inner">
         <h1 class="hero-title reveal">MOSION</h1>
         <p class="hero-tagline reveal reveal-delay-1">Cinema, reimagined for your phone.</p>
@@ -103,21 +104,16 @@
         </div>
 
         <div class="scroll-hint" aria-hidden="true">
+          <div class="scroll-hint__mouse"></div>
           <span>Scroll</span>
-          <svg viewBox="0 0 24 24" role="presentation">
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
         </div>
 
       </div>
     </section>
 
-    <section class="surface-section" id="how">
+    <section class="surface-section page-section" id="how">
       <div class="container">
-        <h2 class="section-title reveal">
-          HOW
-          <span>MOSION WORKS</span>
-        </h2>
+        <h2 class="section-title section-title--inline reveal">HOW <span>MOSION</span> WORKS</h2>
 
         <div class="steps-grid">
           <article class="step-card reveal reveal-delay-1">
@@ -155,7 +151,7 @@
       </div>
     </section>
 
-    <section class="base-section" id="features">
+    <section class="base-section page-section" id="features">
       <div class="container">
         <h2 class="section-title reveal">Why Mosion</h2>
 
@@ -195,9 +191,9 @@
       </div>
     </section>
 
-    <section class="surface-section" id="trending">
+    <section class="surface-section page-section" id="trending">
       <div class="container">
-        <h2 class="section-title reveal">Trending on Mosion</h2>
+        <h2 class="section-title reveal">Coming to Mosion</h2>
 
         <div class="poster-row reveal" aria-label="Trending movies">
           <article class="poster-card reveal reveal-delay-1" role="img" aria-label="Oversabi Aunty poster">
@@ -280,7 +276,7 @@
             </svg>
           </article>
 
-          <article class="poster-card" role="img" aria-label="Everybody Loves Jenifa poster">
+          <article class="poster-card reveal" role="img" aria-label="Everybody Loves Jenifa poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DRIFT poster">
               <defs>
                 <linearGradient id="poster-gradient-6" x1="0" y1="0" x2="0" y2="1">
@@ -299,7 +295,7 @@
       </div>
     </section>
 
-    <section class="base-section" id="mobile">
+    <section class="base-section page-section" id="mobile">
       <div class="container mobile-section">
         <div class="phone-stage reveal">
           <div class="phone-frame">
@@ -389,14 +385,14 @@
       </div>
     </section>
 
-    <section class="surface-section cta-section" id="cta">
+    <section class="surface-section cta-section page-section" id="cta">
       <div class="container cta-inner">
         <h2 class="section-title reveal">Ready to press play?</h2>
         <p class="cta-copy reveal reveal-delay-1">
           No subscriptions. No commitments. Pay only for the movies you want to watch.
         </p>
 
-        <div class="store-badges reveal reveal-delay-2" aria-label="App store downloads">
+        <div class="store-badges reveal reveal-delay-2" aria-label="App store downloads" hidden>
           <span class="store-link" aria-disabled="true">
             <img src="./playstore-badge.svg" alt="Get it on Google Play" loading="lazy" />
           </span>
@@ -407,12 +403,12 @@
 
         <div class="button-row reveal reveal-delay-3">
           <a
-            class="btn btn-primary"
+            class="btn btn-primary cta-download-btn"
             href="https://expo.dev/artifacts/eas/n5u311JPwjkvS5D6RCAipe.apk"
             target="_blank"
             rel="noreferrer"
           >
-            Download BETA
+            Download BETA App
           </a>
         </div>
       </div>
@@ -421,15 +417,18 @@
 
     <section class="browse-shell" id="browse-movies" hidden aria-hidden="true">
       <section class="browse-hero">
-        <div class="container browse-hero__inner">
-          <p class="browse-kicker">Full Catalog</p>
-          <h1 class="browse-title">
-            BROWSE
-            <span>MOVIES</span>
-          </h1>
-          <p class="browse-copy">
-            Discover premium cinema across comedy, thriller, drama, and festival standouts, all curated for the screen in your pocket.
-          </p>
+        <div class="container">
+          <div class="browse-hero__inner">
+            <a class="browse-back" href="#home"><span>Back</span></a>
+            <p class="browse-kicker">Full Catalog</p>
+            <h1 class="browse-title">
+              BROWSE
+              <span>MOVIES</span>
+            </h1>
+            <p class="browse-copy">
+              Discover premium cinema across comedy, thriller, drama, and festival standouts, all curated for the screen in your pocket.
+            </p>
+          </div>
         </div>
       </section>
 
