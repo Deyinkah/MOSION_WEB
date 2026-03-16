@@ -136,6 +136,18 @@ body.browse-mode {
   animation: fade-up 0.55s ease-out forwards;
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .movie-card__poster {
   position: relative;
   overflow: hidden;
