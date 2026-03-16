@@ -1,13 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        { "type": "host", "value": "studio.mosion.app" }
-      ],
-      "destination": "/studio"
-    }
-  ]
+  "trailingSlash": false
 }
