@@ -40,7 +40,7 @@ const defaultConfig = {
   hero_subheadline: "MOSION Studio helps filmmakers launch cinema premieres directly on mobile.",
   hero_description: "Upload, distribute, and monetize your films through MOSION - the mobile cinema platform.",
   primary_cta_text: "Submit Your Film",
-  secondary_cta_text: "Learn How It Works",
+  secondary_cta_text: "Join Waitlist",
   trust_item_1: "Secure DRM Playback",
   trust_item_2: "Mobile-First Distribution",
   trust_item_3: "Pay-Per-View Monetization",
@@ -77,6 +77,191 @@ function renderFilmGrid() {
       </div>
     `;
     grid.appendChild(card);
+  });
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+async function submitWaitlistSignup(email) {
+  const response = await fetch("/api/waitlist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify({ email, source: "studio" }),
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.error || "We could not complete your waitlist signup.");
+  }
+
+  if (result.confirmationSent === false) {
+    throw new Error("You joined the waitlist, but we couldn't send the confirmation email just now.");
+  }
+
+  return result;
+}
+
+function setWaitlistStatus(statusNode, message, type = "") {
+  if (!statusNode) {
+    return;
+  }
+
+  statusNode.textContent = message;
+  statusNode.classList.remove("is-error", "is-success");
+
+  if (type) {
+    statusNode.classList.add(`is-${type}`);
+  }
+}
+
+function initStudioWaitlist() {
+  const modal = document.getElementById("studio-waitlist-modal");
+  const dialog = modal?.querySelector(".studio-waitlist-modal__dialog");
+  const heroCelebration = document.getElementById("studio-hero-celebration");
+  const form = document.getElementById("studio-waitlist-form");
+  const emailInput = document.getElementById("studio-waitlist-email");
+  const status = document.getElementById("studio-waitlist-status");
+  const submitButton = document.getElementById("studio-waitlist-submit");
+  const formView = document.getElementById("studio-waitlist-form-view");
+  const successView = document.getElementById("studio-waitlist-success");
+  const openButtons = Array.from(document.querySelectorAll("[data-studio-waitlist-open]"));
+  const closeButtons = Array.from(document.querySelectorAll("[data-studio-waitlist-close]"));
+
+  if (
+    !modal ||
+    !dialog ||
+    !form ||
+    !emailInput ||
+    !status ||
+    !submitButton ||
+    !formView ||
+    !successView ||
+    !openButtons.length
+  ) {
+    return;
+  }
+
+  let lastActiveElement = null;
+  const defaultSubmitLabel = submitButton.textContent.trim();
+
+  if (heroCelebration && !heroCelebration.childElementCount) {
+    const fragment = document.createDocumentFragment();
+
+    for (let index = 0; index < 30; index += 1) {
+      const piece = document.createElement("span");
+      piece.className = "studio-hero-celebration__piece";
+      fragment.appendChild(piece);
+    }
+
+    heroCelebration.appendChild(fragment);
+  }
+
+  const playHeroCelebration = () => {
+    if (!heroCelebration) {
+      return;
+    }
+
+    heroCelebration.classList.remove("is-active");
+    void heroCelebration.offsetWidth;
+    heroCelebration.classList.add("is-active");
+  };
+
+  const resetModalState = () => {
+    form.reset();
+    formView.hidden = false;
+    successView.hidden = true;
+    dialog.classList.remove("is-success");
+    heroCelebration?.classList.remove("is-active");
+    submitButton.disabled = false;
+    submitButton.textContent = defaultSubmitLabel;
+    setWaitlistStatus(status, "");
+  };
+
+  const openModal = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    lastActiveElement = document.activeElement;
+    resetModalState();
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    requestAnimationFrame(() => {
+      emailInput.focus();
+    });
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    resetModalState();
+
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", openModal);
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!isValidEmail(email)) {
+      setWaitlistStatus(status, "Enter a valid email address.", "error");
+      emailInput.focus();
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Joining...";
+    setWaitlistStatus(status, "");
+
+    try {
+      await Promise.all([
+        submitWaitlistSignup(email),
+        delay(800),
+      ]);
+
+      formView.hidden = true;
+      successView.hidden = false;
+      dialog.classList.add("is-success");
+      playHeroCelebration();
+      setWaitlistStatus(status, "");
+    } catch (error) {
+      setWaitlistStatus(status, error.message || "We could not complete your waitlist signup.", "error");
+      emailInput.focus();
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = defaultSubmitLabel;
+    }
   });
 }
 
@@ -300,6 +485,9 @@ function mapToEditPanelValues(config) {
 function initStudioPage() {
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
+  const downloadSection = document.getElementById("download");
+  const navSubmit = document.getElementById("nav-submit-btn");
+  const heroPrimary = document.getElementById("hero-primary-cta");
 
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener("click", () => {
@@ -315,6 +503,18 @@ function initStudioPage() {
     });
   });
 
+  const scrollToDownload = (event) => {
+    if (!downloadSection) {
+      return;
+    }
+
+    event?.preventDefault();
+    downloadSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  navSubmit?.addEventListener("click", scrollToDownload);
+  heroPrimary?.addEventListener("click", scrollToDownload);
+
   themeToggle = document.getElementById("theme-toggle");
   themeIconMoon = document.getElementById("theme-icon-moon");
   themeIconSun = document.getElementById("theme-icon-sun");
@@ -329,6 +529,7 @@ function initStudioPage() {
   }
 
   renderFilmGrid();
+  initStudioWaitlist();
 
   if (window.elementSdk) {
     window.elementSdk.init({

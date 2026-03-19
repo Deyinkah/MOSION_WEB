@@ -1,5 +1,8 @@
 .env
+public/.env
 .chrome-profile/
 .edge-profile/
 node_modules/
 *.log
+.tmp-server.*
+data/waitlist-signups.jsonl

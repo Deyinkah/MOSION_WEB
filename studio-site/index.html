@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./studio.css">
  </head>
  <body class="h-full">
@@ -42,7 +42,14 @@
      <p id="hero-description" class="mt-4 text-sm md:text-base text-mosion-muted/70 max-w-xl reveal reveal-delay-2">Upload, distribute, and monetize your films through MOSION - the mobile cinema platform.</p>
      <div class="mt-10 flex flex-col sm:flex-row gap-4 reveal reveal-delay-3">
       <button id="hero-primary-cta" class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-8 py-3.5 rounded-lg text-base hover:bg-[#33c5ff] transition-all duration-300 glow-accent">Get Started</button>
-      <button id="hero-secondary-cta" class="border border-white/10 text-mosion-text font-medium px-8 py-3.5 rounded-lg text-base hover:border-mosion-accent/40 hover:bg-white/5 transition-all duration-300">Learn How It Works</button>
+      <button
+       id="hero-secondary-cta"
+       class="border border-white/10 text-mosion-text font-medium px-8 py-3.5 rounded-lg text-base hover:border-mosion-accent/40 hover:bg-white/5 transition-all duration-300"
+       type="button"
+       data-studio-waitlist-open
+       aria-controls="studio-waitlist-modal"
+       aria-haspopup="dialog"
+      >Join Waitlist</button>
      </div>
      <div class="mt-20 w-full max-w-4xl reveal reveal-delay-4">
       <div class="hero-dashboard relative rounded-xl overflow-hidden glow-border">
@@ -341,18 +348,16 @@
 
    <div class="cine-divider"></div>
 
-   <section class="relative py-24 md:py-32">
+	   <section id="download" class="relative py-24 md:py-32">
     <div class="max-w-4xl mx-auto px-6 text-center">
      <h2 id="final-cta-headline" class="font-display text-5xl md:text-7xl tracking-wide glow-text reveal">Ready to release your film?</h2>
      <p id="final-cta-subheadline" class="mt-6 text-lg md:text-xl text-mosion-muted max-w-xl mx-auto reveal reveal-delay-1">Join MOSION Studio and bring your film to audiences everywhere.</p>
      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-2">
-      <a
+      <span
        id="final-primary-cta"
-       class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-10 py-4 rounded-lg text-base hover:bg-[#33c5ff] transition-all duration-300 glow-accent"
-       href="https://expo.dev/artifacts/eas/6nbbCgN8pyDdhrBbBgULnY.apk"
-       target="_blank"
-       rel="noreferrer"
-      >Download MOSION Studio</a>
+       class="btn-primary download-cta--disabled bg-mosion-accent text-mosion-bg font-semibold px-10 py-4 rounded-lg text-base hover:bg-[#33c5ff] transition-all duration-300 glow-accent"
+       aria-disabled="true"
+      >Download MOSION Studio</span>
       <!-- <button class="border border-white/10 text-mosion-text font-medium px-10 py-4 rounded-lg text-base hover:border-mosion-accent/40 hover:bg-white/5 transition-all duration-300">Contact MOSION Studio</button> -->
      </div>
     </div>
@@ -365,16 +370,89 @@
        <span class="font-display text-base tracking-wider">MOSION <span class="text-mosion-accent">STUDIO</span></span>
       </div>
       <nav class="flex flex-wrap justify-center gap-6 text-sm text-mosion-muted">
-       <a href="#" class="hover:text-mosion-accent transition-colors duration-300">About</a>
-      <a href="#" class="hover:text-mosion-accent transition-colors duration-300">Product</a>
-       <a href="#" class="hover:text-mosion-accent transition-colors duration-300">Support</a>
-       <a href="#" class="hover:text-mosion-accent transition-colors duration-300">Terms</a>
-       <a href="#" class="hover:text-mosion-accent transition-colors duration-300">Privacy</a>
+       <span class="site-footer__item" aria-disabled="true">About</span>
+       <span class="site-footer__item" aria-disabled="true">Product</span>
+       <span class="site-footer__item" aria-disabled="true">Support</span>
+       <span class="site-footer__item" aria-disabled="true">Terms</span>
+       <span class="site-footer__item" aria-disabled="true">Privacy</span>
       </nav>
       <p class="text-xs text-mosion-muted/40">&copy; 2026 MOSION Studio. All rights reserved.</p>
      </div>
     </div>
    </footer>
+  </div>
+
+	  <div class="studio-waitlist-modal" id="studio-waitlist-modal" hidden aria-hidden="true">
+	   <div class="studio-waitlist-modal__backdrop" data-studio-waitlist-close></div>
+	   <div class="studio-hero-celebration" id="studio-hero-celebration" aria-hidden="true"></div>
+	   <div
+	    class="studio-waitlist-modal__dialog"
+	    role="dialog"
+    aria-modal="true"
+    aria-labelledby="studio-waitlist-title"
+    aria-describedby="studio-waitlist-copy"
+   >
+    <button class="studio-waitlist-modal__close" type="button" aria-label="Close waitlist form" data-studio-waitlist-close>
+     <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="studio-waitlist-modal__view" id="studio-waitlist-form-view">
+     <h2 class="studio-waitlist-modal__title" id="studio-waitlist-title">Get early studio access</h2>
+     <p class="studio-waitlist-modal__copy" id="studio-waitlist-copy">
+      Leave your email to hear when MOSION Studio opens early access for filmmakers.
+     </p>
+
+     <form class="studio-waitlist-form" id="studio-waitlist-form" novalidate>
+      <label class="studio-waitlist-form__field" for="studio-waitlist-email">
+       <input
+        id="studio-waitlist-email"
+        name="email"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        aria-label="Email address"
+        placeholder="you@example.com"
+        required
+       >
+      </label>
+
+      <p class="studio-waitlist-form__status" id="studio-waitlist-status" role="status" aria-live="polite"></p>
+
+      <div class="studio-waitlist-form__actions">
+       <button class="btn-primary studio-waitlist-form__submit bg-mosion-accent text-mosion-bg font-semibold px-6 py-3 rounded-lg transition-all duration-300 glow-accent" type="submit" id="studio-waitlist-submit">
+        Join Waitlist
+       </button>
+      </div>
+     </form>
+    </div>
+
+    <div class="studio-waitlist-success" id="studio-waitlist-success" hidden role="status" aria-live="polite">
+     <div class="studio-waitlist-success__celebration" aria-hidden="true">
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+      <span class="studio-waitlist-success__confetti"></span>
+     </div>
+     <div class="studio-waitlist-success__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="presentation">
+       <circle cx="12" cy="12" r="8"></circle>
+       <path d="m8.5 12 2.3 2.3 4.7-4.8"></path>
+      </svg>
+     </div>
+     <h2 class="waitlist-success__title">You're on the <span>list</span>!</h2>
+     <p class="studio-waitlist-success__copy">
+      We will reach out when filmmaker onboarding opens and share the next steps for MOSION Studio access.
+     </p>
+    </div>
+   </div>
   </div>
 
   <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch theme">

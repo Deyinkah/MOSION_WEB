@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>MOSION | Cinema, reimagined for your phone.</title>
+  
   <meta
     name="description"
     content="Watch cinema instantly from anywhere with MOSION. No schedules, no subscriptions, just the movies you want on the phone you already use."
@@ -45,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="./home.css" />
@@ -74,13 +75,114 @@
         </p>
 
         <div class="button-row reveal reveal-delay-3">
-          <a class="btn btn-secondary" href="#browse-movies">Browse Movies</a>
+          <div class="waitlist-cta" id="hero-waitlist">
+            <button
+              class="btn btn-secondary waitlist-cta__toggle"
+              type="button"
+              id="hero-waitlist-toggle"
+              aria-controls="hero-waitlist-form"
+              aria-expanded="false"
+            >
+              Join Waitlist
+            </button>
+
+            <form class="waitlist-form waitlist-form--inline" id="hero-waitlist-form" hidden novalidate>
+              <label class="waitlist-form__field waitlist-form__field--inline" for="hero-waitlist-email">
+                <span class="sr-only">Email address</span>
+                <input
+                  id="hero-waitlist-email"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </label>
+
+              <button
+                class="btn btn-primary waitlist-cta__submit"
+                type="submit"
+                id="hero-waitlist-submit"
+                aria-label="Submit waitlist email"
+              >
+                <span class="waitlist-cta__submit-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+                    <path d="M3 11.5 20.5 4l-4.7 16-4.1-6.2L3 11.5Z"></path>
+                    <path d="M11.7 13.8 20.5 4"></path>
+                  </svg>
+                </span>
+                <span class="waitlist-cta__submit-loading" aria-hidden="true">...</span>
+              </button>
+            </form>
+
+            <div class="waitlist-success" id="hero-waitlist-thanks" hidden role="status" aria-live="polite">
+              <div class="waitlist-success__celebration" aria-hidden="true">
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+                <span class="waitlist-success__confetti"></span>
+              </div>
+              <div class="waitlist-success__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <circle cx="12" cy="12" r="8"></circle>
+                  <path d="m8.5 12 2.3 2.3 4.7-4.8"></path>
+                </svg>
+              </div>
+              <h2 class="waitlist-success__title">You're on the <span>list</span>!</h2>
+              <p class="waitlist-success__copy">
+                Keep an eye on your inbox for early access updates and launch details
+              </p>
+            </div>
+            <p class="waitlist-form__status waitlist-form__status--inline" id="hero-waitlist-status" role="status" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="scroll-hint" aria-hidden="true">
           <div class="scroll-hint__mouse"></div>
         </div>
 
+      </div>
+
+      <div class="hero-celebration" id="hero-celebration" aria-hidden="true">
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
+        <span class="hero-celebration__piece"></span>
       </div>
     </section>
 
@@ -169,7 +271,7 @@
         <h2 class="section-title reveal">Coming to Mosion</h2>
 
         <div class="poster-row reveal" aria-label="Trending movies">
-          <article class="poster-card reveal reveal-delay-1" role="img" aria-label="Oversabi Aunty poster">
+          <article class="poster-card" role="img" aria-label="Oversabi Aunty poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oversabi Aunty poster">
               <defs>
                 <linearGradient id="poster-gradient-1" x1="0" y1="0" x2="1" y2="1">
@@ -185,7 +287,7 @@
             </svg>
           </article>
 
-          <article class="poster-card reveal reveal-delay-2" role="img" aria-label="Scream 7 poster">
+          <article class="poster-card" role="img" aria-label="Scream 7 poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VERTIGO poster">
               <defs>
                 <linearGradient id="poster-gradient-2" x1="0" y1="0" x2="0.5" y2="1">
@@ -201,7 +303,7 @@
             </svg>
           </article>
 
-          <article class="poster-card reveal reveal-delay-3" role="img" aria-label="Onobiren poster">
+          <article class="poster-card" role="img" aria-label="Onobiren poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CANOPY poster">
               <defs>
                 <linearGradient id="poster-gradient-3" x1="0" y1="0" x2="1" y2="0.8">
@@ -217,7 +319,7 @@
             </svg>
           </article>
 
-          <article class="poster-card reveal reveal-delay-4" role="img" aria-label="A Country Called Ghana poster">
+          <article class="poster-card" role="img" aria-label="A Country Called Ghana poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EMBER poster">
               <defs>
                 <linearGradient id="poster-gradient-4" x1="0" y1="0" x2="0" y2="1">
@@ -233,7 +335,7 @@
             </svg>
           </article>
 
-          <article class="poster-card reveal reveal-delay-5" role="img" aria-label="The Housemaid poster">
+          <article class="poster-card" role="img" aria-label="The Housemaid poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NOVA poster">
               <defs>
                 <linearGradient id="poster-gradient-5" x1="0" y1="0" x2="1" y2="1">
@@ -249,7 +351,7 @@
             </svg>
           </article>
 
-          <article class="poster-card reveal" role="img" aria-label="Everybody Loves Jenifa poster">
+          <article class="poster-card" role="img" aria-label="Everybody Loves Jenifa poster">
             <svg viewBox="0 0 180 270" class="poster-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DRIFT poster">
               <defs>
                 <linearGradient id="poster-gradient-6" x1="0" y1="0" x2="0" y2="1">
@@ -264,6 +366,7 @@
               <polygon points="84,192 84,208 100,200" fill="#FFFFFF"></polygon>
             </svg>
           </article>
+
         </div>
       </div>
     </section>
@@ -375,14 +478,12 @@
         </div>
 
         <div class="button-row reveal reveal-delay-3">
-          <a
-            class="btn btn-primary cta-download-btn"
-            href="https://expo.dev/artifacts/eas/nLh9pGNijRJ8zJ84TAqS72.apk"
-            target="_blank"
-            rel="noreferrer"
+          <span
+            class="btn btn-primary cta-download-btn download-cta--disabled"
+            aria-disabled="true"
           >
             Download BETA App
-          </a>
+          </span>
         </div>
       </div>
     </section>
@@ -407,7 +508,7 @@
 
       <section class="browse-library">
         <div class="container">
-          <div class="filter-bar" aria-label="Movie filters">
+          <div class="filter-bar" aria-label="Movie filters" hidden>
             <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All Movies</button>
             <button class="filter-btn" type="button" data-filter="comedy" aria-pressed="false">Comedy</button>
             <button class="filter-btn" type="button" data-filter="thriller" aria-pressed="false">Thriller</button>
@@ -462,10 +563,10 @@
       <a class="brand brand--footer" href="#home" aria-label="MOSION home">MOSION</a>
 
       <nav class="footer-nav" aria-label="Footer links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="mailto:partners@mosion.app?subject=Mosion%20Support">Support</a>
-        <a href="mailto:partners@mosion.app?subject=Contact%20Mosion">Contact</a>
+        <span class="footer-nav__item" aria-disabled="true">Terms</span>
+        <span class="footer-nav__item" aria-disabled="true">Privacy</span>
+        <span class="footer-nav__item" aria-disabled="true">Support</span>
+        <span class="footer-nav__item" aria-disabled="true">Contact</span>
       </nav>
 
       <p class="footer-copy">© 2026 Mosion. All rights reserved.</p>

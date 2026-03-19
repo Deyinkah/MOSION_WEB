@@ -1,5 +1,7 @@
 document.documentElement.classList.add("has-reveal");
 
+const TRENDING_ROTATION_DELAY = 5000;
+
 const browseMovies = [
   {
     title: "Oversabi Aunty",
@@ -102,6 +104,76 @@ function syncTrendingToPhonePreview() {
   });
 }
 
+function getTrendingOffset(index, activeIndex, total) {
+  let offset = index - activeIndex;
+
+  if (offset > total / 2) {
+    offset -= total;
+  } else if (offset < -total / 2) {
+    offset += total;
+  }
+
+  return offset;
+}
+
+function initTrendingCarousel() {
+  const row = document.querySelector("#trending .poster-row");
+  const cards = Array.from(document.querySelectorAll("#trending .poster-card"));
+
+  if (!row || !cards.length) {
+    return;
+  }
+
+  let activeIndex = 0;
+  let rotationTimer = null;
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const applyState = () => {
+    cards.forEach((card, index) => {
+      const offset = getTrendingOffset(index, activeIndex, cards.length);
+      const distance = Math.abs(offset);
+
+      card.style.setProperty("--offset", String(offset));
+      card.style.setProperty("--distance", String(distance));
+      card.style.zIndex = String(cards.length - distance);
+      card.classList.toggle("is-active", offset === 0);
+    });
+
+  };
+
+  const stopRotation = () => {
+    if (rotationTimer) {
+      window.clearInterval(rotationTimer);
+      rotationTimer = null;
+    }
+  };
+
+  const startRotation = () => {
+    stopRotation();
+
+    if (cards.length < 2 || reducedMotionQuery.matches) {
+      return;
+    }
+
+    rotationTimer = window.setInterval(() => {
+      activeIndex = (activeIndex + 1) % cards.length;
+      applyState();
+    }, TRENDING_ROTATION_DELAY);
+  };
+
+  applyState();
+  startRotation();
+
+  row.addEventListener("mouseenter", stopRotation);
+  row.addEventListener("mouseleave", startRotation);
+
+  if (typeof reducedMotionQuery.addEventListener === "function") {
+    reducedMotionQuery.addEventListener("change", startRotation);
+  } else if (typeof reducedMotionQuery.addListener === "function") {
+    reducedMotionQuery.addListener(startRotation);
+  }
+}
+
 function createMovieCard(movie, index) {
   const card = document.createElement("article");
   card.className = "movie-card";
@@ -162,19 +234,18 @@ function setActiveBrowseFilter(button) {
 function initBrowseMovies() {
   const buttons = Array.from(document.querySelectorAll(".filter-btn"));
 
-  if (!buttons.length) {
-    return;
+  if (buttons.length) {
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter || "all";
+        setActiveBrowseFilter(button);
+        renderBrowseMovies(filter);
+      });
+    });
   }
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filter = button.dataset.filter || "all";
-      setActiveBrowseFilter(button);
-      renderBrowseMovies(filter);
-    });
-  });
-
-  renderBrowseMovies("all");
+  const activeFilter = buttons.find((button) => button.classList.contains("is-active"))?.dataset.filter || "all";
+  renderBrowseMovies(activeFilter);
 }
 
 function closeMobileMenu() {
@@ -254,6 +325,123 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function setWaitlistStatus(statusNode, message, type = "") {
+  if (!statusNode) {
+    return;
+  }
+
+  statusNode.textContent = message;
+  statusNode.classList.remove("is-error", "is-success");
+
+  if (type) {
+    statusNode.classList.add(`is-${type}`);
+  }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+async function submitWaitlistSignup(email) {
+  const response = await fetch("/api/waitlist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({ email, source: "website" })
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.error || "We could not complete your waitlist signup.");
+  }
+
+  if (result.confirmationSent === false) {
+    throw new Error("You joined the waitlist, but we couldn't send the confirmation email just now.");
+  }
+
+  return result;
+}
+
+function initHeroWaitlist() {
+  const toggle = document.getElementById("hero-waitlist-toggle");
+  const form = document.getElementById("hero-waitlist-form");
+  const emailInput = document.getElementById("hero-waitlist-email");
+  const status = document.getElementById("hero-waitlist-status");
+  const thanks = document.getElementById("hero-waitlist-thanks");
+  const celebration = document.getElementById("hero-celebration");
+
+  if (!toggle || !form || !emailInput || !status || !thanks) {
+    return;
+  }
+
+  const setStatus = (message, type = "") => {
+    setWaitlistStatus(status, message, type);
+  };
+
+  const playCelebration = () => {
+    if (!celebration) {
+      return;
+    }
+
+    celebration.classList.remove("is-active");
+    void celebration.offsetWidth;
+    celebration.classList.add("is-active");
+  };
+
+  const showForm = () => {
+    toggle.hidden = true;
+    toggle.setAttribute("aria-expanded", "true");
+    form.hidden = false;
+    thanks.hidden = true;
+    celebration?.classList.remove("is-active");
+    form.classList.remove("is-submitting");
+    setStatus("");
+    requestAnimationFrame(() => {
+      emailInput.focus();
+    });
+  };
+
+  toggle.addEventListener("click", showForm);
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!isValidEmail(email)) {
+      setStatus("Enter a valid email address.", "error");
+      emailInput.focus();
+      return;
+    }
+
+    form.classList.add("is-submitting");
+    setStatus("");
+
+    try {
+      await Promise.all([
+        submitWaitlistSignup(email),
+        delay(1000)
+      ]);
+
+      form.reset();
+      form.hidden = true;
+      thanks.hidden = false;
+      playCelebration();
+      setStatus("");
+    } catch (error) {
+      setStatus(error.message || "We could not complete your waitlist signup.", "error");
+      emailInput.focus();
+    } finally {
+      form.classList.remove("is-submitting");
+    }
+  });
+}
+
 function initWaitlistModal() {
   const modal = document.getElementById("waitlist-modal");
   const form = document.getElementById("waitlist-form");
@@ -269,12 +457,7 @@ function initWaitlistModal() {
   let lastActiveElement = null;
 
   const setStatus = (message, type = "") => {
-    status.textContent = message;
-    status.classList.remove("is-error", "is-success");
-
-    if (type) {
-      status.classList.add(`is-${type}`);
-    }
+    setWaitlistStatus(status, message, type);
   };
 
   const openModal = () => {
@@ -334,23 +517,9 @@ function initWaitlistModal() {
     setStatus("Joining the waitlist...");
 
     try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ email })
-      });
-
-      const result = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(result.error || "We could not complete your waitlist signup.");
-      }
-
+      await submitWaitlistSignup(email);
       form.reset();
-      setStatus("You're on the waitlist. Check your inbox for the beta app email.", "success");
+      setStatus("Thank you for joining the waitlist.", "success");
     } catch (error) {
       setStatus(error.message || "We could not complete your waitlist signup.", "error");
     } finally {
@@ -395,8 +564,10 @@ function initScrollReveal() {
 function initHomePage() {
   initBrowseMovies();
   syncTrendingToPhonePreview();
+  initTrendingCarousel();
   initViewToggles();
   initScrollReveal();
+  initHeroWaitlist();
   initWaitlistModal();
 }
 
