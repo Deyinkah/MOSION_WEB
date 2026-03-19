@@ -90,8 +90,18 @@ function delay(ms) {
   });
 }
 
+function getWaitlistEndpoint() {
+  const host = window.location.hostname.toLowerCase();
+
+  if (host === "localhost" || host === "127.0.0.1" || host.endsWith(".localhost")) {
+    return "/api/waitlist";
+  }
+
+  return "https://api.mosion.app/api/waitlist";
+}
+
 async function submitWaitlistSignup(email) {
-  const response = await fetch("/api/waitlist", {
+  const response = await fetch(getWaitlistEndpoint(), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

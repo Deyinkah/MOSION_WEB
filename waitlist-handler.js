@@ -58,6 +58,45 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+function getCorsOrigin(origin) {
+  const value = typeof origin === "string" ? origin.trim() : "";
+
+  if (!value) {
+    return "";
+  }
+
+  const exactOrigins = new Set([
+    "https://mosion.app",
+    "https://www.mosion.app",
+    "https://studio.mosion.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+  ]);
+
+  if (exactOrigins.has(value)) {
+    return value;
+  }
+
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(value)) {
+    return value;
+  }
+
+  return "";
+}
+
+function applyWaitlistCors(req, res) {
+  const allowedOrigin = getCorsOrigin(req.headers.origin);
+
+  if (allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Vary", "Origin");
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+  res.setHeader("Access-Control-Max-Age", "86400");
+}
+
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -413,6 +452,14 @@ async function sendWaitlistConfirmation(email, source = "website") {
 }
 
 async function handleWaitlistSignup(req, res) {
+  applyWaitlistCors(req, res);
+
+  if (req.method === "OPTIONS") {
+    res.statusCode = 204;
+    res.end();
+    return;
+  }
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     sendJson(res, 405, { error: "Method not allowed." });
