@@ -127,6 +127,7 @@ function initTrendingCarousel() {
   let activeIndex = 0;
   let rotationTimer = null;
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const hoverPauseQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   const applyState = () => {
     cards.forEach((card, index) => {
@@ -164,8 +165,19 @@ function initTrendingCarousel() {
   applyState();
   startRotation();
 
-  row.addEventListener("mouseenter", stopRotation);
-  row.addEventListener("mouseleave", startRotation);
+  if (hoverPauseQuery.matches) {
+    row.addEventListener("mouseenter", stopRotation);
+    row.addEventListener("mouseleave", startRotation);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopRotation();
+      return;
+    }
+
+    startRotation();
+  });
 
   if (typeof reducedMotionQuery.addEventListener === "function") {
     reducedMotionQuery.addEventListener("change", startRotation);

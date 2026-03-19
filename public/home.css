@@ -1538,7 +1538,7 @@ section[id] {
   left: 50%;
   bottom: 0;
   width: min(92%, 860px);
-  height: clamp(126px, 24vw, 182px);
+  height: clamp(126px, 240vw, 182px);
   transform: translateX(-50%);
   overflow: visible;
   background: transparent;
@@ -1609,6 +1609,9 @@ section[id] {
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.36) 44%, transparent 100%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.36) 44%, transparent 100%);
   pointer-events: none;
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .poster-card::after {

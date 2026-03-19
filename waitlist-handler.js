@@ -62,6 +62,17 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function maskEmailForLogs(email) {
+  if (!isValidEmail(email)) {
+    return "[invalid-email]";
+  }
+
+  const [localPart, domain = ""] = email.split("@");
+  const visibleLocal = localPart.slice(0, 2);
+  const maskedLocal = `${visibleLocal}${"*".repeat(Math.max(localPart.length - 2, 1))}`;
+  return `${maskedLocal}@${domain}`;
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -412,26 +423,34 @@ async function handleWaitlistSignup(req, res) {
     const body = await readJsonBody(req);
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
     const source = normalizeWaitlistSource(body.source);
+    const requestId = `wl_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 
     if (!isValidEmail(email)) {
+      console.warn(`[waitlist:${requestId}] invalid email submitted source=${source}`);
       throw createHttpError(400, "Enter a valid email address.");
     }
+
+    const maskedEmail = maskEmailForLogs(email);
+    console.log(`[waitlist:${requestId}] signup received email=${maskedEmail} source=${source}`);
 
     await saveWaitlistSignup({
       email,
       createdAt: new Date().toISOString(),
       source
     });
+    console.log(`[waitlist:${requestId}] signup stored email=${maskedEmail} source=${source}`);
 
     let confirmationSent = false;
 
     try {
       await sendWaitlistConfirmation(email, source);
       confirmationSent = true;
+      console.log(`[waitlist:${requestId}] confirmation sent email=${maskedEmail} source=${source}`);
     } catch (error) {
-      console.error("Waitlist confirmation email failed:", error.message);
+      console.error(`[waitlist:${requestId}] confirmation failed email=${maskedEmail} source=${source}:`, error.message);
     }
 
+    console.log(`[waitlist:${requestId}] response sent confirmationSent=${confirmationSent} source=${source}`);
     sendJson(res, 200, { ok: true, confirmationSent, source });
   } catch (error) {
     console.error("Waitlist signup failed:", error.message);
