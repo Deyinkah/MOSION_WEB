@@ -227,7 +227,7 @@ function getWaitlistVariant(source) {
     preheader: "Your MOSION waitlist registration is confirmed.",
     subject: "You're on the MOSION waitlist",
     bodyCopy:
-      "Your MOSION waitlist registration is confirmed. You'll be one of the early users to try out the MOSION appp before the wider rollout.",
+      "Your MOSION waitlist registration is confirmed. You're now one of the early users to have access to the MOSION app before the wider rollout.",
     ctaLabel: "Download the Beta App",
     textDownloadLead: "Download the Beta App",
     signature: "MOSION",
