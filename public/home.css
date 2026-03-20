@@ -1503,12 +1503,13 @@ section[id] {
   --poster-lift: 12px;
   position: relative;
   width: min(90%, 920px);
-  height: clamp(450px, 62vw, 660px);
+  height: clamp(250px, 32vw, 360px);
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 4rem) clamp(9.5rem, 18vw, 13rem);
   overflow: visible;
   isolation: isolate;
   perspective: 1600px;
+  -webkit-perspective: 1600px;
   background: none;
 }
 
@@ -1564,6 +1565,7 @@ section[id] {
   border-radius: 1rem;
   overflow: visible;
   background-color: rgba(255, 255, 255, 0.04);
+  background-image: var(--poster-image);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1571,6 +1573,7 @@ section[id] {
   isolation: isolate;
   z-index: 2;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transform:
     translate(-50%, -50%)
     translateX(calc(var(--offset, 0) * var(--poster-shift)))
@@ -1585,6 +1588,8 @@ section[id] {
     opacity 0.85s ease,
     filter 0.85s ease,
     box-shadow 0.85s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   will-change: transform, opacity, filter;
 }
 
@@ -1597,21 +1602,27 @@ section[id] {
   height: 128%;
   z-index: 0;
   border-radius: 0.3rem 0.3rem 1rem 1rem;
-  background-image: inherit;
-  background-repeat: inherit;
+  background-image: var(--poster-image);
+  background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
   opacity: calc(0.26 - (var(--distance, 0) * 0.045));
   filter: blur(1.5px) saturate(0.95) brightness(0.62);
   transform-origin: top center;
-  transform: perspective(1600px) rotateX(82deg) scaleY(-1.08);
+  -webkit-transform-origin: top center;
+  transform: translateZ(0) perspective(1600px) rotateX(82deg) scaleY(-1.08);
+  -webkit-transform: translateZ(0) perspective(1600px) rotateX(82deg) scaleY(-1.08);
   clip-path: polygon(4% 0, 96% 0, 80% 100%, 20% 100%);
+  -webkit-clip-path: polygon(4% 0, 96% 0, 80% 100%, 20% 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.36) 44%, transparent 100%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.36) 44%, transparent 100%);
   pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transition:
     opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
 }
 
 .poster-card::after {
@@ -1639,27 +1650,27 @@ section[id] {
 }
 
 .poster-row .poster-card:nth-child(1) {
-  background-image: url("./trending/oversabi-aunty.jpeg");
+  --poster-image: url("./trending/oversabi-aunty.jpeg");
 }
 
 .poster-row .poster-card:nth-child(2) {
-  background-image: url("./trending/scream-7.webp");
+  --poster-image: url("./trending/scream-7.webp");
 }
 
 .poster-row .poster-card:nth-child(3) {
-  background-image: url("./trending/banner-01.jpeg");
+  --poster-image: url("./trending/banner-01.jpeg");
 }
 
 .poster-row .poster-card:nth-child(4) {
-  background-image: url("./trending/banner-03.jpeg");
+  --poster-image: url("./trending/banner-03.jpeg");
 }
 
 .poster-row .poster-card:nth-child(5) {
-  background-image: url("./trending/banner-06.jpeg");
+  --poster-image: url("./trending/banner-06.jpeg");
 }
 
 .poster-row .poster-card:nth-child(6) {
-  background-image: url("./trending/banner-31.jpeg");
+  --poster-image: url("./trending/banner-31.jpeg");
 }
 
 .mobile-section {
@@ -2148,8 +2159,8 @@ button:focus-visible {
     --poster-width: clamp(100px, 24vw, 140px);
     --poster-shift: clamp(48px, 12vw, 74px);
     --poster-lift: 10px;
-    height: clamp(390px, 116vw, 500px);
-    padding: 0 0.5rem 6.8rem;
+    height: clamp(320px, 122vw, 540px);
+    padding: 0 0.5rem 8rem;
   }
 
   .poster-floor {
@@ -2165,10 +2176,10 @@ button:focus-visible {
   }
 
   .poster-card::before {
-    top: calc(100% + 2.45rem);
+    top: calc(100% + 2.9rem);
     left: 4%;
     right: 4%;
-    height: 116%;
+    height: 126%;
   }
 
   .base-section,
@@ -2239,8 +2250,8 @@ button:focus-visible {
   .poster-row {
     --poster-width: clamp(94px, 26vw, 120px);
     --poster-shift: clamp(42px, 11vw, 58px);
-    height: clamp(272px, 104vw, 348px);
-    padding-bottom: 4.2rem;
+    height: clamp(300px, 96vw, 360px);
+    padding-bottom: 7.6rem;
   }
 
   .poster-floor {
@@ -2254,10 +2265,10 @@ button:focus-visible {
   }
 
   .poster-card::before {
-    top: calc(100% + 1.45rem);
-    left: 6%;
-    right: 6%;
-    height: 84%;
+    top: calc(100% + 2.75rem);
+    left: 4%;
+    right: 4%;
+    height: 124%;
   }
 
   .waitlist-success {
@@ -2323,4 +2334,8 @@ button:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.margin-bottom-small {
+  margin-bottom: 4rem !important;
 }
