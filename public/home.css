@@ -26,6 +26,7 @@ body{
   overflow-x:hidden;
   cursor:none;
 }
+#films,#how,#download{scroll-margin-top:110px}
 
 body::after{
   content:'';
@@ -52,13 +53,7 @@ nav{
   display:inline-flex;align-items:center;
   text-transform:uppercase;
 }
-.nav-r{display:flex;align-items:center;gap:28px}
-.nav-r > a{
-  font-family:'Space Mono',monospace;font-size:10px;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;transition:color .2s;
-}
-.nav-r > a:hover{color:var(--cream)}
+.nav-r{display:flex;align-items:center;gap:0}
 .nav-menu{position:relative}
 .nav-btn{
   background:var(--amber)!important;color:var(--ink)!important;
@@ -79,12 +74,14 @@ nav{
 .nav-dropdown{
   position:absolute;top:calc(100% + 12px);right:0;
   min-width:220px;padding:10px;
-  display:grid;gap:6px;
+  display:none;gap:6px;
   background:rgba(12,12,18,.96);
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 24px 70px rgba(0,0,0,.45);
   backdrop-filter:blur(16px);
 }
+.nav-menu.is-open .nav-dropdown{display:grid}
+.nav-dropdown[hidden]{display:none!important}
 .nav-dropdown a{
   display:block;padding:12px 14px;border-radius:2px;
   font-family:'Space Mono',monospace;font-size:10px;
@@ -658,11 +655,11 @@ footer{
   .film-grid{grid-template-columns:repeat(2,1fr)}
   .how-steps{grid-template-columns:1fr}
   .hero-h1{font-size:clamp(52px,14vw,80px)}
-  .nav-r > a{display:none}
   .nav-dropdown{
     min-width:190px;
     right:0;
   }
+  #films,#how,#download{scroll-margin-top:92px}
   .waitlist-box{padding:28px 20px}
   .store-btns{flex-direction:column}
 }
