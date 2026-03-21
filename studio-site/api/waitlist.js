@@ -40,6 +40,10 @@ module.exports = async (req, res) => {
     const body = await readJsonBody(req);
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
     const source = typeof body.source === "string" ? body.source.trim().toLowerCase() : "studio";
+    const firstName = typeof body.firstName === "string" ? body.firstName.trim() : "";
+    const lastName = typeof body.lastName === "string" ? body.lastName.trim() : "";
+    const filmName = typeof body.filmName === "string" ? body.filmName.trim() : "";
+    const origin = typeof body.origin === "string" ? body.origin.trim() : "";
 
     if (!isValidEmail(email)) {
       sendJson(res, 400, { error: "Enter a valid email address." });
@@ -52,7 +56,7 @@ module.exports = async (req, res) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      body: JSON.stringify({ email, source }),
+      body: JSON.stringify({ email, source, firstName, lastName, filmName, origin }),
     });
 
     const result = await response.json().catch(() => ({}));

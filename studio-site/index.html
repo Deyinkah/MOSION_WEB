@@ -1,475 +1,372 @@
-<!doctype html>
-<html lang="en" class="h-full">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOSION STUDIO</title>
-  <script src="./studio.js"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-	  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./studio.css">
- </head>
- <body class="h-full">
-  <div id="app-wrapper" class="w-full h-full overflow-auto">
-   <nav class="site-nav nav-blur fixed top-0 left-0 right-0 z-50 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-     <div class="flex items-center gap-2">
-      <span id="nav-brand" class="nav-brand font-display text-xl tracking-wider">MOSION <span class="text-mosion-accent">STUDIO</span></span>
-     </div>
-     <div class="hidden md:flex items-center gap-8 text-sm text-mosion-muted">
-      <button class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg hover:bg-[#33c5ff] transition-colors duration-300" id="nav-submit-btn">Get Started</button>
-     </div>
-     <button id="mobile-menu-btn" class="md:hidden text-mosion-muted hover:text-mosion-accent transition-colors">
-      <i data-lucide="menu" class="menu-icon"></i>
-     </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3 text-sm text-mosion-muted">
-     <button class="btn-primary w-full bg-mosion-accent text-mosion-bg font-semibold px-5 py-2 rounded-lg mt-2">Submit Your Film</button>
-    </div>
-   </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MOSION STUDIO &mdash; Release Your Film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./studio.css" />
+</head>
+<body>
 
-   <section class="hero-section relative overflow-hidden film-grain">
-    <div class="anamorphic-flare"></div>
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-     <div class="hero-orb-right absolute -top-1/4 -right-1/4 w-3/4 h-3/4 rounded-full"></div>
-     <div class="hero-orb-left absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 rounded-full"></div>
-    </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 md:pt-44 md:pb-32 flex flex-col items-center text-center">
-     <h1 id="hero-headline" class="font-display text-6xl md:text-8xl lg:text-9xl tracking-wide glow-text reveal">Release your film.</h1>
-     <p id="hero-subheadline" class="mt-6 text-lg md:text-xl text-mosion-muted max-w-2xl reveal reveal-delay-1">MOSION Studio helps filmmakers launch cinema premieres directly on mobile.</p>
-     <p id="hero-description" class="mt-4 text-sm md:text-base text-mosion-muted/70 max-w-xl reveal reveal-delay-2">Upload, distribute, and monetize your films through MOSION - the mobile cinema platform.</p>
-     <div class="mt-10 flex flex-col sm:flex-row gap-4 reveal reveal-delay-3">
-      <button id="hero-primary-cta" class="btn-primary bg-mosion-accent text-mosion-bg font-semibold px-8 py-3.5 rounded-lg text-base hover:bg-[#33c5ff] transition-all duration-300 glow-accent">Get Started</button>
-      <button
-       id="hero-secondary-cta"
-       class="border border-white/10 text-mosion-text font-medium px-8 py-3.5 rounded-lg text-base hover:border-mosion-accent/40 hover:bg-white/5 transition-all duration-300"
-       type="button"
-       data-studio-waitlist-open
-       aria-controls="studio-waitlist-modal"
-       aria-haspopup="dialog"
-      >Join Waitlist</button>
-     </div>
-     <div class="mt-20 w-full max-w-4xl reveal reveal-delay-4">
-      <div class="hero-dashboard relative rounded-xl overflow-hidden glow-border">
-       <video class="theme-video theme-video-dark absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="MOSION Studio dashboard preview">
-        <source src="./beta-video-black.MP4" type="video/mp4">
-       </video>
-       <video class="theme-video theme-video-light absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="MOSION Studio dashboard preview">
-        <source src="./beta-video.MP4" type="video/mp4">
-       </video>
-       <div class="cine-bar-top"></div>
-       <div class="cine-bar-bottom"></div>
-       <div class="absolute top-2 left-4 flex gap-1.5 z-10">
-        <div class="w-3 h-3 rounded-sm bg-mosion-accent/10"></div>
-        <div class="w-3 h-3 rounded-sm bg-mosion-accent/10"></div>
-        <div class="w-3 h-3 rounded-sm bg-mosion-accent/10"></div>
-       </div>
-       <div class="absolute bottom-2 right-4 text-xs font-mono text-mosion-accent/20 z-10">REC ● 24fps</div>
-      </div>
-     </div>
-    </div>
-   </section>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-   <div class="cine-divider"></div>
-
-   <section class="trust-strip relative py-10 md:py-14 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-      <div class="flex items-start gap-3 reveal">
-       <i data-lucide="lock" class="icon-accent-sm"></i>
-       <div>
-        <p class="text-xs text-mosion-muted/60 font-medium tracking-wider uppercase mb-1" id="trust-1">Secure DRM Playback</p>
-        <p class="text-xs text-mosion-muted/50 leading-tight">Industry-standard protection</p>
-       </div>
-      </div>
-      <div class="flex items-start gap-3 reveal reveal-delay-1">
-       <i data-lucide="smartphone" class="icon-accent-sm"></i>
-       <div>
-        <p class="text-xs text-mosion-muted/60 font-medium tracking-wider uppercase mb-1" id="trust-2">Mobile-First Distribution</p>
-        <p class="text-xs text-mosion-muted/50 leading-tight">Built for smartphone screens</p>
-       </div>
-      </div>
-      <div class="flex items-start gap-3 reveal reveal-delay-2">
-       <i data-lucide="banknote" class="icon-accent-sm"></i>
-       <div>
-        <p class="text-xs text-mosion-muted/60 font-medium tracking-wider uppercase mb-1" id="trust-3">Pay-Per-View Monetization</p>
-        <p class="text-xs text-mosion-muted/50 leading-tight">Direct revenue per view</p>
-       </div>
-      </div>
-      <div class="flex items-start gap-3 reveal reveal-delay-3">
-       <i data-lucide="check-circle" class="icon-accent-sm"></i>
-       <div>
-        <p class="text-xs text-mosion-muted/60 font-medium tracking-wider uppercase mb-1" id="trust-4">Submission Review Support</p>
-        <p class="text-xs text-mosion-muted/50 leading-tight">Guided release approval</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-   <section id="why" class="relative py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="text-center mb-16">
-      <!-- <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">Why Choose Us</p> -->
-      <h2 class="font-display text-5xl md:text-6xl tracking-wide reveal">Why MOSION STUDIO</h2>
-      <p class="mt-4 text-mosion-muted max-w-xl mx-auto reveal reveal-delay-1">Everything filmmakers need to reach audiences directly.</p>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="group p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal">
-       <div class="w-12 h-12 rounded-lg bg-mosion-accent/10 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="globe" class="icon-accent-lg"></i>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">DIRECT DISTRIBUTION</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed">Release your film directly to audiences without traditional theater limitations.</p>
-      </div>
-      <div class="group p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-1">
-       <div class="w-12 h-12 rounded-lg bg-mosion-accent/10 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="smartphone" class="icon-accent-lg"></i>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">MOBILE CINEMA</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed">Reach viewers on the devices they use most - their smartphones.</p>
-      </div>
-      <div class="group p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-2">
-       <div class="w-12 h-12 rounded-lg bg-mosion-accent/10 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="banknote" class="icon-accent-lg"></i>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">MONETIZE YOUR FILM</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed">Earn revenue from pay-per-view releases on MOSION.</p>
-      </div>
-      <div class="group p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-3">
-       <div class="w-12 h-12 rounded-lg bg-mosion-accent/10 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="clapperboard" class="icon-accent-lg"></i>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">CINEMA-QUALITY</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed">Your films are delivered in high quality with secure DRM playback.</p>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-   <section id="outcomes" class="relative py-24 md:py-32">
-    <div class="max-w-6xl mx-auto px-6">
-     <div class="text-center mb-16">
-      <!-- <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">Filmmaker Results</p> -->
-      <h2 id="outcomes-headline" class="font-display text-5xl md:text-6xl tracking-wide reveal">Why MOSION Studio Is Built for Filmmakers</h2>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="group relative p-8 rounded-xl glow-border bg-mosion-surface/30 hover:bg-mosion-surface/60 transition-all duration-500 overflow-hidden reveal">
-       <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-mosion-accent/5 group-hover:bg-mosion-accent/10 transition-colors duration-500"></div>
-       <div class="relative z-10">
-        <div class="w-12 h-12 rounded-lg bg-mosion-accent/15 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/25 transition-colors duration-500">
-         <i data-lucide="globe-2" class="icon-accent-lg"></i>
-        </div>
-        <h3 class="font-display text-lg tracking-wider mb-3">Direct Audience</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed" id="outcome-1">Reach mobile audiences directly without traditional theater dependence</p>
-       </div>
-      </div>
-      <div class="group relative p-8 rounded-xl glow-border bg-mosion-surface/30 hover:bg-mosion-surface/60 transition-all duration-500 overflow-hidden reveal reveal-delay-1">
-       <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-mosion-accent/5 group-hover:bg-mosion-accent/10 transition-colors duration-500"></div>
-       <div class="relative z-10">
-        <div class="w-12 h-12 rounded-lg bg-mosion-accent/15 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/25 transition-colors duration-500">
-         <i data-lucide="zap" class="icon-accent-lg"></i>
-        </div>
-        <h3 class="font-display text-lg tracking-wider mb-3">Full Control</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed" id="outcome-2">Retain more release flexibility with independent distribution options</p>
-       </div>
-      </div>
-      <div class="group relative p-8 rounded-xl glow-border bg-mosion-surface/30 hover:bg-mosion-surface/60 transition-all duration-500 overflow-hidden reveal reveal-delay-2">
-       <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-mosion-accent/5 group-hover:bg-mosion-accent/10 transition-colors duration-500"></div>
-       <div class="relative z-10">
-        <div class="w-12 h-12 rounded-lg bg-mosion-accent/15 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/25 transition-colors duration-500">
-         <i data-lucide="bar-chart-2" class="icon-accent-lg"></i>
-        </div>
-        <h3 class="font-display text-lg tracking-wider mb-3">Real Data</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed" id="outcome-3">Access performance visibility and viewer engagement metrics instantly</p>
-       </div>
-      </div>
-      <div class="group relative p-8 rounded-xl glow-border bg-mosion-surface/30 hover:bg-mosion-surface/60 transition-all duration-500 overflow-hidden reveal reveal-delay-3">
-       <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-mosion-accent/5 group-hover:bg-mosion-accent/10 transition-colors duration-500"></div>
-       <div class="relative z-10">
-        <div class="w-12 h-12 rounded-lg bg-mosion-accent/15 flex items-center justify-center mb-5 group-hover:bg-mosion-accent/25 transition-colors duration-500">
-         <i data-lucide="trending-up" class="icon-accent-lg"></i>
-        </div>
-        <h3 class="font-display text-lg tracking-wider mb-3">Revenue Growth</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed" id="outcome-4">Earn revenue while building direct relationships with film audiences</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <section id="how" class="relative py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="text-center mb-16">
-      <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">The Process</p>
-      <h2 class="font-display text-5xl md:text-6xl tracking-wide reveal">How MOSION Studio Works</h2>
-     </div>
-     <div class="grid gap-8 md:gap-4 studio-steps-grid">
-      <div class="relative text-center reveal studio-step studio-step--1">
-       <div class="step-connector inline-block">
-        <div class="step-circle w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-5">
-         <span class="font-display text-2xl text-mosion-accent">01</span>
-        </div>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">CREATE AN ACCOUNT</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed px-2">Create an account on the MOSION Studio app to set up your filmmaker profile.</p>
-      </div>
-      <div class="relative text-center reveal reveal-delay-1 studio-step studio-step--2">
-       <div class="step-connector inline-block">
-        <div class="step-circle w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-5">
-         <span class="font-display text-2xl text-mosion-accent">02</span>
-        </div>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">SUBMIT YOUR FILM</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed px-2">Upload your film and provide distribution details for release.</p>
-      </div>
-      <div class="relative text-center reveal reveal-delay-2 studio-step studio-step--3">
-       <div class="step-connector inline-block">
-        <div class="step-circle w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-5">
-         <span class="font-display text-2xl text-mosion-accent">03</span>
-        </div>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">REVIEW &amp; APPROVAL</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed px-2">Our team reviews your submission and prepares it for platform release.</p>
-      </div>
-      <div class="relative text-center reveal reveal-delay-3 studio-step studio-step--4">
-       <div class="step-connector inline-block">
-        <div class="step-circle w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-5">
-         <span class="font-display text-2xl text-mosion-accent">04</span>
-        </div>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">LAUNCH PREMIERE</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed px-2">Once approved, your film goes live on MOSION as a mobile cinema premiere.</p>
-      </div>
-      <div class="relative text-center reveal reveal-delay-4 studio-step studio-step--5">
-       <div class="step-circle w-16 h-16 rounded-full border-2 border-mosion-accent/30 flex items-center justify-center mx-auto mb-5">
-        <span class="font-display text-2xl text-mosion-accent">05</span>
-       </div>
-       <h3 class="font-display text-xl tracking-wider mb-2">REACH YOUR AUDIENCE</h3>
-       <p class="text-sm text-mosion-muted leading-relaxed px-2">Viewers discover, purchase, and watch your film directly from their phones.</p>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-   <section id="films" class="relative py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="text-center mb-16">
-      <!-- <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">Our Catalog</p> -->
-      <h2 class="font-display text-5xl md:text-6xl tracking-wide reveal">Coming Soon</h2>
-     </div>
-     <div id="film-grid"></div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-   <section id="features" class="relative py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="text-center mb-16">
-      <!-- <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-4 reveal">Platform Features</p> -->
-      <h2 class="font-display text-5xl md:text-6xl tracking-wide reveal">Features</h2>
-      <p class="mt-4 text-mosion-muted max-w-xl mx-auto reveal reveal-delay-1">Professional tools and technology designed for cinema distribution.</p>
-     </div>
-     <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      <div class="group flex gap-5 p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal">
-       <div class="w-10 h-10 rounded-lg bg-mosion-accent/10 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="shield-check" class="icon-accent-md"></i>
-       </div>
-       <div>
-        <h3 class="font-display text-lg tracking-wider mb-1">SECURE STREAMING</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed">DRM protection to prevent piracy and keep your content safe.</p>
-       </div>
-      </div>
-      <div class="group flex gap-5 p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-1">
-       <div class="w-10 h-10 rounded-lg bg-mosion-accent/10 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="calendar" class="icon-accent-md"></i>
-       </div>
-       <div>
-        <h3 class="font-display text-lg tracking-wider mb-1">FLEXIBLE RELEASE WINDOWS</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed">Choose premiere timing and distribution options that work for you.</p>
-       </div>
-      </div>
-      <div class="group flex gap-5 p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-2">
-       <div class="w-10 h-10 rounded-lg bg-mosion-accent/10 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="users" class="icon-accent-md"></i>
-       </div>
-       <div>
-        <h3 class="font-display text-lg tracking-wider mb-1">AUDIENCE REACH</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed">Built for mobile-first distribution across global audiences.</p>
-       </div>
-      </div>
-      <div class="group flex gap-5 p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-3">
-       <div class="w-10 h-10 rounded-lg bg-mosion-accent/10 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="bar-chart-3" class="icon-accent-md"></i>
-       </div>
-       <div>
-        <h3 class="font-display text-lg tracking-wider mb-1">PERFORMANCE INSIGHTS</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed">Track film performance and viewer engagement in real time.</p>
-       </div>
-      </div>
-      <div class="group flex gap-5 p-6 rounded-xl glow-border bg-mosion-surface/50 hover:bg-mosion-surface transition-all duration-500 reveal reveal-delay-4 studio-feature-card studio-feature-card--centered">
-       <div class="w-10 h-10 rounded-lg bg-mosion-accent/10 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-mosion-accent/20 transition-colors duration-500">
-        <i data-lucide="ticket" class="icon-accent-md"></i>
-       </div>
-       <div>
-        <h3 class="font-display text-lg tracking-wider mb-1">PRE-ORDER ACCESS</h3>
-        <p class="text-sm text-mosion-muted leading-relaxed">Offer pre-orders before premiere release so audiences can reserve ticket ahead.</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-   <section class="relative py-24 md:py-36 overflow-hidden film-grain">
-    <div class="absolute inset-0 pointer-events-none">
-     <div class="vision-radial absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"></div>
-    </div>
-    <div class="anamorphic-flare vision-flare"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-     <p class="text-mosion-accent text-sm font-medium tracking-widest uppercase mb-6 reveal">Our Vision</p>
-     <h2 class="font-display text-5xl md:text-7xl tracking-wide mb-8 reveal">THE FUTURE OF CINEMA</h2>
-     <p id="vision-text" class="text-lg md:text-2xl text-mosion-muted leading-relaxed max-w-3xl mx-auto reveal reveal-delay-1">MOSION is reshaping cinema distribution - enabling filmmakers to premiere directly to mobile audiences, capturing the moment when smartphones became the primary cinema platform.</p>
-     <div class="mt-12 flex justify-center gap-8 text-mosion-muted/40 reveal reveal-delay-2">
-      <div class="w-px h-16 bg-gradient-to-b from-transparent via-mosion-accent/20 to-transparent"></div>
-     </div>
-    </div>
-   </section>
-
-   <div class="cine-divider"></div>
-
-	   <section id="download" class="relative py-24 md:py-32">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-     <h2 id="final-cta-headline" class="font-display text-5xl md:text-7xl tracking-wide glow-text reveal">Ready to release your film?</h2>
-     <p id="final-cta-subheadline" class="mt-6 text-lg md:text-xl text-mosion-muted max-w-xl mx-auto reveal reveal-delay-1">Join MOSION Studio and bring your film to audiences everywhere.</p>
-     <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-2">
-      <span
-       id="final-primary-cta"
-       class="btn-primary download-cta--disabled bg-mosion-accent text-mosion-bg font-semibold px-10 py-4 rounded-lg text-base hover:bg-[#33c5ff] transition-all duration-300 glow-accent"
-       aria-disabled="true"
-      >Download MOSION Studio</span>
-      <!-- <button class="border border-white/10 text-mosion-text font-medium px-10 py-4 rounded-lg text-base hover:border-mosion-accent/40 hover:bg-white/5 transition-all duration-300">Contact MOSION Studio</button> -->
-     </div>
-    </div>
-   </section>
-
-   <footer class="site-footer relative border-t border-white/5 py-12">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-      <div class="flex items-center gap-2">
-       <span class="font-display text-base tracking-wider">MOSION <span class="text-mosion-accent">STUDIO</span></span>
-      </div>
-      <nav class="flex flex-wrap justify-center gap-6 text-sm text-mosion-muted">
-       <span class="site-footer__item" aria-disabled="true">About</span>
-       <span class="site-footer__item" aria-disabled="true">Product</span>
-       <span class="site-footer__item" aria-disabled="true">Support</span>
-       <span class="site-footer__item" aria-disabled="true">Terms</span>
-       <span class="site-footer__item" aria-disabled="true">Privacy</span>
-      </nav>
-      <p class="text-xs text-mosion-muted/40">&copy; 2026 MOSION Studio. All rights reserved.</p>
-     </div>
-    </div>
-   </footer>
-  </div>
-
-	  <div class="studio-waitlist-modal" id="studio-waitlist-modal" hidden aria-hidden="true">
-	   <div class="studio-waitlist-modal__backdrop" data-studio-waitlist-close></div>
-	   <div class="studio-hero-celebration" id="studio-hero-celebration" aria-hidden="true"></div>
-	   <div
-	    class="studio-waitlist-modal__dialog"
-	    role="dialog"
-    aria-modal="true"
-    aria-labelledby="studio-waitlist-title"
-    aria-describedby="studio-waitlist-copy"
-   >
-    <button class="studio-waitlist-modal__close" type="button" aria-label="Close waitlist form" data-studio-waitlist-close>
-     <span aria-hidden="true">&times;</span>
-    </button>
-
-    <div class="studio-waitlist-modal__view" id="studio-waitlist-form-view">
-     <h2 class="studio-waitlist-modal__title" id="studio-waitlist-title">Get early studio access</h2>
-     <p class="studio-waitlist-modal__copy" id="studio-waitlist-copy">
-      Leave your email to hear when MOSION Studio opens early access for filmmakers.
-     </p>
-
-     <form class="studio-waitlist-form" id="studio-waitlist-form" novalidate>
-      <label class="studio-waitlist-form__field" for="studio-waitlist-email">
-       <input
-        id="studio-waitlist-email"
-        name="email"
-        type="email"
-        inputmode="email"
-        autocomplete="email"
-        aria-label="Email address"
-        placeholder="you@example.com"
-        required
-       >
-      </label>
-
-      <p class="studio-waitlist-form__status" id="studio-waitlist-status" role="status" aria-live="polite"></p>
-
-      <div class="studio-waitlist-form__actions">
-       <button class="btn-primary studio-waitlist-form__submit bg-mosion-accent text-mosion-bg font-semibold px-6 py-3 rounded-lg transition-all duration-300 glow-accent" type="submit" id="studio-waitlist-submit">
-        Join Waitlist
-       </button>
-      </div>
-     </form>
-    </div>
-
-    <div class="studio-waitlist-success" id="studio-waitlist-success" hidden role="status" aria-live="polite">
-     <div class="studio-waitlist-success__celebration" aria-hidden="true">
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-      <span class="studio-waitlist-success__confetti"></span>
-     </div>
-     <div class="studio-waitlist-success__icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" role="presentation">
-       <circle cx="12" cy="12" r="8"></circle>
-       <path d="m8.5 12 2.3 2.3 4.7-4.8"></path>
-      </svg>
-     </div>
-     <h2 class="waitlist-success__title">You're on the <span>list</span>!</h2>
-     <p class="studio-waitlist-success__copy">
-      We will reach out when filmmaker onboarding opens and share the next steps for MOSION Studio access.
-     </p>
-    </div>
-   </div>
-  </div>
-
-  <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch theme">
-   <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9z"></path>
-   </svg>
-   <svg id="theme-icon-sun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="4"></circle>
-    <path d="M12 2v2.5"></path>
-    <path d="M12 19.5V22"></path>
-    <path d="M4.93 4.93l1.77 1.77"></path>
-    <path d="M17.3 17.3l1.77 1.77"></path>
-    <path d="M2 12h2.5"></path>
-    <path d="M19.5 12H22"></path>
-    <path d="M4.93 19.07l1.77-1.77"></path>
-    <path d="M17.3 6.7l1.77-1.77"></path>
-   </svg>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Mosion <span>Studio</span></a>
+  <button
+    class="nav-toggle"
+    id="navToggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="navLinks"
+    aria-label="Toggle navigation"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
   </button>
- </body>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#process">Process</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#waitlist">Submit Film</a></li>
+    <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow" aria-hidden="true"></div>
+    <h1 class="hero-title">
+      Your film.<br/>
+      <em>Every screen.</em>
+    </h1>
+    <p class="hero-sub">
+      MOSION Studio gives African filmmakers a direct line to audiences. Upload, distribute, and earn from your film &mdash; no theaters required.
+    </p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">
+        Join the Waitlist
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M1 7h12M8 2l5 5-5 5"/>
+        </svg>
+      </a>
+      <a href="#process" class="btn-ghost">
+        How it works
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M7 1v12M2 8l5 5 5-5"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-film-frame">
+      <div class="film-strip-v">
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
+      </div>
+      <div class="hero-image-area">
+        <div class="hero-visual-grid">
+          <div class="cell"><img src="./trending/scream-7.webp" alt="" /></div>
+          <div class="cell"><img src="./trending/banner-31.jpeg" alt="" /></div>
+          <div class="cell"><img src="./trending/banner-01.jpeg" alt="" /></div>
+          <div class="cell"><img src="./trending/oversabi-aunty.jpeg" alt="" /></div>
+          <div class="cell"><img src="./trending/banner-03.jpeg" alt="" /></div>
+          <div class="cell"><img src="./trending/banner-06.jpeg" alt="" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-stat">
+        <strong>24fps</strong>
+        Cinema Quality
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span> Nollywood <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Ghallywood <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Mobile Cinema <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> DRM Protected <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Pay-Per-View <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Direct Distribution <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Filmmaker First <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Africa & Beyond <span class="dot"></span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span class="dot"></span> Nollywood <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Ghallywood <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Mobile Cinema <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> DRM Protected <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Pay-Per-View <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Direct Distribution <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Filmmaker First <span class="dot"></span></div>
+    <div class="marquee-item"><span class="dot"></span> Africa & Beyond <span class="dot"></span></div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<div class="manifesto reveal">
+  <div class="manifesto-left">
+    <div class="section-label">The Vision</div>
+    <div class="manifesto-num">01</div>
+  </div>
+  <div class="manifesto-right">
+    <h2>Cinema is <em>moving</em><br/>to the palm.</h2>
+    <p>
+      African cinema is among the most vital storytelling traditions on earth &mdash; yet it has been constrained by theater infrastructure that was never built for its scale. MOSION Studio is the infrastructure that was missing.
+    </p>
+    <p>
+      We believe the next generation of Nollywood and Ghallywood premieres won't open in Lagos theaters or Accra multiplexes &mdash; they'll premiere on the device in your pocket, reaching millions on day one.
+    </p>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="process-header reveal">
+      <div>
+        <div class="section-label">The Process</div>
+        <h2 class="process-title">From upload<br/><em>to premiere.</em></h2>
+      </div>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">01</div>
+        <div class="step-title">Create Account</div>
+        <div class="step-desc">Set up your filmmaker profile on MOSION Studio with your credentials and distribution details.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">02</div>
+        <div class="step-title">Submit Film</div>
+        <div class="step-desc">Upload your film and provide all the distribution metadata needed for a proper release.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">03</div>
+        <div class="step-title">Review & Prep</div>
+        <div class="step-desc">Our team reviews your submission and prepares it for platform release with full quality checks.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-num">04</div>
+        <div class="step-title">Premiere Live</div>
+        <div class="step-desc">Your film goes live on MOSION as a mobile cinema premiere &mdash; with pre-order access available.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-num">05</div>
+        <div class="step-title">Earn Revenue</div>
+        <div class="step-desc">Viewers purchase and watch from their phones. Revenue flows directly to you with full analytics.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header reveal">
+    <div>
+      <div class="section-label">The Platform</div>
+      <h2 class="features-title">Built for<br/><em>filmmakers.</em></h2>
+    </div>
+    <p class="features-intro">Professional-grade tools and technology designed specifically for cinema distribution on mobile &mdash; not adapted from something else.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="16" height="16" rx="2"/>
+          <path d="M7 10l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="feature-name">Secure DRM Streaming</div>
+      <div class="feature-desc">Industry-standard digital rights management prevents piracy and keeps your content protected from day one.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="2" width="10" height="16" rx="2"/>
+          <circle cx="10" cy="15" r="1" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="feature-name">Mobile-First Cinema</div>
+      <div class="feature-desc">Optimized for smartphone viewing &mdash; your film delivered in cinema quality to the device your audience already carries.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 10h14M10 3l7 7-7 7"/>
+        </svg>
+      </div>
+      <div class="feature-name">Pay-Per-View Revenue</div>
+      <div class="feature-desc">Direct monetization per view. No revenue sharing with theaters. Every ticket purchased goes to your film.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="10" cy="10" r="7"/>
+          <path d="M10 6v4l3 3"/>
+        </svg>
+      </div>
+      <div class="feature-name">Flexible Release Windows</div>
+      <div class="feature-desc">Choose your premiere timing and distribution schedule. Run pre-orders before launch to build audience momentum.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 15l4-4 3 3 4-5 3 3"/>
+          <rect x="2" y="2" width="16" height="16" rx="1" stroke-opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="feature-name">Performance Insights</div>
+      <div class="feature-desc">Real-time data on views, engagement, and revenue. Know exactly how your film is performing, always.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="10" cy="6" r="3"/>
+          <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+        </svg>
+      </div>
+      <div class="feature-name">Submission Support</div>
+      <div class="feature-desc">Guided review and approval process so your film is set up for success from upload through premiere.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-left reveal">
+      <div class="section-label">Why MOSION</div>
+      <h2>Distribution<br/>on your <em>terms.</em></h2>
+      <p>Traditional distribution locked African filmmakers into gatekeepers &mdash; distributors, theater chains, broadcasters. MOSION removes those layers entirely.</p>
+      <p>You upload. You set the price. You own the relationship with your audience.</p>
+    </div>
+    <div class="why-pillars">
+      <div class="why-pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-content">
+          <h3>Direct Audience</h3>
+          <p>Reach viewers on mobile without depending on traditional theater infrastructure or broadcaster deals.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-1">
+        <div class="pillar-num">02</div>
+        <div class="pillar-content">
+          <h3>Full Creative Control</h3>
+          <p>Retain release flexibility and independence &mdash; no distributor approval required to get your film in front of audiences.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-2">
+        <div class="pillar-num">03</div>
+        <div class="pillar-content">
+          <h3>Real Revenue Data</h3>
+          <p>Access viewer engagement metrics and earnings data in real time &mdash; not weeks after a theatrical run.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-3">
+        <div class="pillar-num">04</div>
+        <div class="pillar-content">
+          <h3>Global-Ready</h3>
+          <p>Built for African audiences first, with the infrastructure to reach diaspora and international viewers everywhere.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-left reveal">
+    <div class="section-label">Early Access</div>
+    <h2>Be first<br/>to <em>premiere.</em></h2>
+    <p>MOSION Studio is opening filmmaker access in waves. Join the waitlist and be among the first filmmakers to distribute on the platform.</p>
+  </div>
+  <div class="waitlist-form-area reveal reveal-delay-2">
+    <form id="studioWaitlistForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Chidi" id="firstName" name="firstName" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Okafor" id="lastName" name="lastName" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="you@studio.com" id="email" name="email" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Film / Project Name</label>
+        <input type="text" class="form-input" placeholder="Title of your film" id="filmName" name="filmName" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Film Origin</label>
+        <select class="form-select form-input" id="origin" name="origin">
+          <option value="" disabled selected>Select industry</option>
+          <option>Nollywood (Nigeria)</option>
+          <option>Ghallywood (Ghana)</option>
+          <option>East African Cinema</option>
+          <option>South African Cinema</option>
+          <option>African Diaspora</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button class="submit-btn" id="studioSubmitButton" type="submit">
+        Request Early Access
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M1 7h12M8 2l5 5-5 5"/>
+        </svg>
+      </button>
+      <div class="form-note" id="studioFormNote">You'll be notified when filmmaker onboarding opens. No spam, ever.</div>
+    </form>
+    <div class="success-state" id="successState">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 12l5 5L20 7"/>
+        </svg>
+      </div>
+      <div class="success-title">You're on the list.</div>
+      <p class="success-sub">We'll reach out when filmmaker onboarding opens and share the next steps for MOSION Studio access.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo nav-logo">
+    <img class="footer-logo-image" src="./logo.png" alt="Mosion" />
+    <span>Studio</span>
+  </a>
+  <ul class="footer-links">
+    <li><a href="#">About</a></li>
+    <li><a href="#">Product</a></li>
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2026 MOSION Studio. All rights reserved.</div>
+</footer>
+
+<script src="./studio.js" defer></script>
+</body>
 </html>

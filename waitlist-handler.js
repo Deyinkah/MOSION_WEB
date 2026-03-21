@@ -229,6 +229,34 @@ function normalizeWaitlistSource(source) {
   return "website";
 }
 
+function normalizeOptionalText(value, maxLength = 160) {
+  const normalized = typeof value === "string" ? value.trim() : "";
+
+  if (!normalized) {
+    return "";
+  }
+
+  return normalized.slice(0, maxLength);
+}
+
+function getWaitlistDetails(body) {
+  if (!body || typeof body !== "object") {
+    return {};
+  }
+
+  const firstName = normalizeOptionalText(body.firstName, 80);
+  const lastName = normalizeOptionalText(body.lastName, 80);
+  const filmName = normalizeOptionalText(body.filmName, 160);
+  const origin = normalizeOptionalText(body.origin, 120);
+
+  return {
+    ...(firstName ? { firstName } : {}),
+    ...(lastName ? { lastName } : {}),
+    ...(filmName ? { filmName } : {}),
+    ...(origin ? { origin } : {}),
+  };
+}
+
 function getWaitlistVariant(source) {
   const waitlistSource = normalizeWaitlistSource(source);
 
@@ -467,6 +495,7 @@ async function handleWaitlistSignup(req, res) {
     const body = await readJsonBody(req);
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
     const source = normalizeWaitlistSource(body.source);
+    const details = getWaitlistDetails(body);
     const requestId = `wl_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 
     if (!isValidEmail(email)) {
@@ -480,7 +509,8 @@ async function handleWaitlistSignup(req, res) {
     await saveWaitlistSignup({
       email,
       createdAt: new Date().toISOString(),
-      source
+      source,
+      ...details
     });
     console.log(`[waitlist:${requestId}] signup stored email=${maskedEmail} source=${source}`);
 
