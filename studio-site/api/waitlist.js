@@ -1,4 +1,4 @@
-const DEFAULT_WAITLIST_API_URL = process.env.WAITLIST_API_URL || "https://mosion.app/api/waitlist";
+const DEFAULT_WAITLIST_API_URL = process.env.WAITLIST_API_URL || "https://www.mosion.app/api/waitlist";
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
