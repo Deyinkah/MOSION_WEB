@@ -268,7 +268,7 @@ function getWaitlistConfirmationContent({
   source = "website",
   betaUrl,
   replyTo = process.env.WAITLIST_REPLY_TO,
-  fromEmail = process.env.WAITLIST_FROM_EMAIL,
+  fromEmail = process.env.WAITLIST_FROM_EMAIL || process.env.EMAIL_FROM,
   fromName = process.env.WAITLIST_FROM_NAME || "MOSION"
 } = {}) {
   const variant = getWaitlistVariant(source);
@@ -409,7 +409,7 @@ async function sendWaitlistConfirmation(email, source = "website") {
     throw createHttpError(
       500,
       "Waitlist registration is temporarily unavailable.",
-      "Missing one or more required waitlist env vars: WAITLIST_FROM_EMAIL"
+      "Missing one or more required waitlist env vars: WAITLIST_FROM_EMAIL or EMAIL_FROM"
     );
   }
 
