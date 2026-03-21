@@ -16,7 +16,11 @@
   --red: #e03e3e;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
 body {
   background: var(--black);
@@ -24,6 +28,14 @@ body {
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   cursor: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* CUSTOM CURSOR */
@@ -331,33 +343,6 @@ nav.is-open .nav-toggle span:nth-child(3) {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.1;
-}
-
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 40px;
-  left: 64px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted2);
-}
-.scroll-line {
-  width: 48px;
-  height: 1px;
-  background: var(--gold);
-  animation: scroll-line 2s ease-in-out infinite;
-}
-@keyframes scroll-line {
-  0% { transform: scaleX(0); transform-origin: left; }
-  50% { transform: scaleX(1); transform-origin: left; }
-  51% { transform: scaleX(1); transform-origin: right; }
-  100% { transform: scaleX(0); transform-origin: right; }
 }
 
 /* MARQUEE */
@@ -903,10 +888,6 @@ footer {
     justify-content: flex-start;
     padding: 128px 32px 56px;
   }
-  .hero-scroll-hint {
-    position: static;
-    margin-top: 40px;
-  }
   .hero-right { display: none; }
   .manifesto { grid-template-columns: 1fr; padding: 80px 32px; gap: 40px; }
   .manifesto-num { font-size: 80px; }
@@ -965,5 +946,4 @@ footer {
   }
   .waitlist-form-area { padding: 32px 24px; }
   .hero-left { padding: 112px 24px 48px; }
-  .hero-scroll-hint { margin-top: 32px; }
 }

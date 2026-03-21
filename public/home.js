@@ -22,11 +22,10 @@ async function submitWaitlistSignup(payload) {
 }
 
 function initCursor() {
-  const finePointer = window.matchMedia("(pointer: fine)").matches;
   const cur = document.getElementById("cur");
   const curR = document.getElementById("curR");
 
-  if (!finePointer || !cur || !curR) {
+  if (!cur || !curR) {
     return;
   }
 
@@ -35,26 +34,29 @@ function initCursor() {
   let rx = -100;
   let ry = -100;
 
-  document.addEventListener("mousemove", (event) => {
+  const updatePointer = (event) => {
     mx = event.clientX;
     my = event.clientY;
-  });
+  };
+
+  document.addEventListener("pointermove", updatePointer, { passive: true });
+  document.addEventListener("mousemove", updatePointer, { passive: true });
 
   const grow = () => {
-    cur.style.width = "5px";
-    cur.style.height = "5px";
-    curR.style.width = "48px";
-    curR.style.height = "48px";
+    cur.style.width = "6px";
+    cur.style.height = "6px";
+    curR.style.width = "52px";
+    curR.style.height = "52px";
   };
 
   const reset = () => {
-    cur.style.width = "8px";
-    cur.style.height = "8px";
-    curR.style.width = "32px";
-    curR.style.height = "32px";
+    cur.style.width = "10px";
+    cur.style.height = "10px";
+    curR.style.width = "36px";
+    curR.style.height = "36px";
   };
 
-  document.querySelectorAll("a,button,input").forEach((element) => {
+  document.querySelectorAll("a,button,input,select").forEach((element) => {
     element.addEventListener("mouseenter", grow);
     element.addEventListener("mouseleave", reset);
   });
@@ -62,8 +64,8 @@ function initCursor() {
   const loop = () => {
     cur.style.left = `${mx}px`;
     cur.style.top = `${my}px`;
-    rx += (mx - rx) * 0.13;
-    ry += (my - ry) * 0.13;
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
     curR.style.left = `${rx}px`;
     curR.style.top = `${ry}px`;
     requestAnimationFrame(loop);

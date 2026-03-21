@@ -18,14 +18,22 @@
   --blue-dim:rgba(80,120,200,0.08);
 }
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  background:var(--amber);
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
 body{
   background:var(--ink);
   color:var(--cream);
   font-family:'Outfit',sans-serif;
   overflow-x:hidden;
   cursor:none;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 #films,#how,#download{scroll-margin-top:110px}
 
 body::after{
@@ -37,8 +45,27 @@ body::after{
   z-index:9000;
 }
 
-.cur{position:fixed;width:8px;height:8px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s}
-.cur-r{position:fixed;width:32px;height:32px;border:1px solid rgba(212,168,67,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s}
+.cur{
+  position:fixed;
+  width:10px;height:10px;
+  background:var(--amber);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform .1s ease,width .3s ease,height .3s ease,background .3s ease;
+  mix-blend-mode:difference;
+}
+.cur-r{
+  position:fixed;
+  width:36px;height:36px;
+  border:1px solid rgba(212,168,67,.5);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform .18s ease,width .3s ease,height .3s ease,opacity .3s ease;
+}
 
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
