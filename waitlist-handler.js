@@ -1,11 +1,11 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
+const { Resend } = require("resend");
 
 loadEnvFile();
 
-let sesClient = null;
+let resendClient = null;
 
 function loadEnvFile() {
   const envPath = path.join(__dirname, ".env");
@@ -146,28 +146,6 @@ function parseMailbox(input, fallbackName = "") {
   }
 
   return fallbackName ? { email: value, name: fallbackName } : { email: value };
-}
-
-function getSesRegion() {
-  return process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || "";
-}
-
-function getSesClient() {
-  const region = getSesRegion();
-
-  if (!region) {
-    throw createHttpError(
-      500,
-      "Waitlist registration is temporarily unavailable.",
-      "Missing required AWS env var: AWS_REGION"
-    );
-  }
-
-  if (!sesClient) {
-    sesClient = new SESClient({ region });
-  }
-
-  return sesClient;
 }
 
 function formatMailbox(mailbox) {
@@ -402,51 +380,70 @@ function renderWaitlistConfirmationPreviewPage(options = {}) {
 </html>`;
 }
 
-async function sendWaitlistConfirmation(email, source = "website") {
-  const configurationSetName = process.env.WAITLIST_SES_CONFIGURATION_SET;
-  const region = getSesRegion();
-  const { sender, replyToMailbox, betaUrl, subject, text, html } = getWaitlistConfirmationContent({ source });
+function getResendApiKey() {
+  return process.env.WAITLIST_RESEND_API_KEY || process.env.RESEND_API_KEY || "";
+}
 
-  if (!sender || !betaUrl || !region) {
+function getResendClient() {
+  const apiKey = getResendApiKey();
+
+  if (!apiKey) {
     throw createHttpError(
       500,
       "Waitlist registration is temporarily unavailable.",
-      "Missing one or more required waitlist env vars: AWS_REGION, WAITLIST_FROM_EMAIL, WAITLIST_BETA_URL"
+      "Missing required waitlist env var: RESEND_API_KEY"
     );
   }
 
-  const command = new SendEmailCommand({
-    Source: formatMailbox(sender),
-    Destination: {
-      ToAddresses: [email]
-    },
-    ReplyToAddresses: replyToMailbox ? [replyToMailbox.email] : undefined,
-    Message: {
-      Subject: {
-        Charset: "UTF-8",
-        Data: subject
-      },
-      Body: {
-        Html: {
-          Charset: "UTF-8",
-          Data: html
-        },
-        Text: {
-          Charset: "UTF-8",
-          Data: text
-        }
-      }
-    },
-    ConfigurationSetName: configurationSetName || undefined
-  });
+  if (!resendClient) {
+    resendClient = new Resend(apiKey);
+  }
+
+  return resendClient;
+}
+
+async function sendWaitlistConfirmation(email, source = "website") {
+  const { sender, replyToMailbox, subject, text, html } = getWaitlistConfirmationContent({ source });
+
+  if (!sender) {
+    throw createHttpError(
+      500,
+      "Waitlist registration is temporarily unavailable.",
+      "Missing one or more required waitlist env vars: WAITLIST_FROM_EMAIL"
+    );
+  }
 
   try {
-    await getSesClient().send(command);
+    const { error } = await getResendClient().emails.send({
+      from: formatMailbox(sender),
+      to: [email],
+      replyTo: replyToMailbox ? replyToMailbox.email : undefined,
+      subject,
+      text,
+      html
+    });
+
+    if (error) {
+      const detail =
+        (typeof error.message === "string" && error.message.trim()) ||
+        (typeof error.name === "string" && error.name.trim()) ||
+        "Unknown Resend error";
+
+      throw createHttpError(
+        502,
+        "We couldn't send the confirmation email just now. Please try again.",
+        `Resend send failed: ${detail}`
+      );
+    }
   } catch (error) {
+    if (error.statusCode) {
+      throw error;
+    }
+
     throw createHttpError(
       502,
       "We couldn't send the confirmation email just now. Please try again.",
-      `Amazon SES send failed: ${error.name || "Error"}: ${error.message}`
+      `Resend send failed: ${error.name || "Error"}: ${error.message}`
     );
   }
 }
