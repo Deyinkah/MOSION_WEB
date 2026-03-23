@@ -647,6 +647,7 @@ footer{
   color:var(--muted2);text-decoration:none;transition:color .2s;
 }
 .f-links a:hover{color:var(--cream)}
+.f-mission{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--muted2);text-align:center;margin-bottom:8px}
 .f-copy{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--muted2)}
 
 .r{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
