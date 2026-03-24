@@ -31,10 +31,6 @@ function isIosDevice() {
   return isAppleMobile || isIpadDesktopMode;
 }
 
-function isAndroidDevice() {
-  return /Android/i.test(window.navigator.userAgent || "");
-}
-
 function initCursor() {
   const cur = document.getElementById("cur");
   const curR = document.getElementById("curR");
@@ -195,21 +191,6 @@ function initNavMenu() {
     if (window.innerWidth > 640) {
       setOpen(false);
     }
-  });
-}
-
-function initStoreButtons() {
-  const storeButtons = document.querySelectorAll("[data-store-platform]");
-
-  if (!storeButtons.length) {
-    return;
-  }
-
-  const activePlatform = isIosDevice() ? "ios" : isAndroidDevice() ? "android" : "";
-
-  storeButtons.forEach((button) => {
-    const buttonPlatform = button.getAttribute("data-store-platform");
-    button.hidden = Boolean(activePlatform) && buttonPlatform !== activePlatform;
   });
 }
 
@@ -385,7 +366,6 @@ function initWaitlist() {
 function initHomePage() {
   initCursor();
   initNavMenu();
-  initStoreButtons();
   initComingSoonModal();
   initReveal();
   initWaitlist();

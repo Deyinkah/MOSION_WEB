@@ -12,10 +12,6 @@ function isIosDevice() {
   return isAppleMobile || isIpadDesktopMode;
 }
 
-function isAndroidDevice() {
-  return /Android/i.test(window.navigator.userAgent || "");
-}
-
 async function submitWaitlistSignup(payload) {
   const response = await fetch("/api/waitlist", {
     method: "POST",
@@ -160,21 +156,6 @@ function initNav() {
     if (window.innerWidth > 640) {
       setOpen(false);
     }
-  });
-}
-
-function initStoreButtons() {
-  const storeButtons = document.querySelectorAll("[data-store-platform]");
-
-  if (!storeButtons.length) {
-    return;
-  }
-
-  const activePlatform = isIosDevice() ? "ios" : isAndroidDevice() ? "android" : "";
-
-  storeButtons.forEach((button) => {
-    const buttonPlatform = button.getAttribute("data-store-platform");
-    button.hidden = Boolean(activePlatform) && buttonPlatform !== activePlatform;
   });
 }
 
@@ -372,7 +353,6 @@ function initWaitlistForm() {
 function initStudioPage() {
   initCursor();
   initNav();
-  initStoreButtons();
   initComingSoonModal();
   initReveal();
   initWaitlistForm();

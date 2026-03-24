@@ -588,7 +588,6 @@ nav{
   appearance:none;
   transition:border-color .2s,background .2s;
 }
-.store-btn[hidden]{display:none!important}
 .store-btn:hover{border-color:rgba(212,168,67,.4);background:rgba(212,168,67,.04)}
 .store-btn-icon{color:var(--cream)}
 .store-btn-icon svg{width:22px;height:22px}

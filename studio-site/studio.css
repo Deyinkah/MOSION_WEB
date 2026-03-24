@@ -362,7 +362,6 @@ nav.is-open .nav-toggle span:nth-child(3) {
   appearance: none;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-.studio-beta-btn[hidden] { display: none !important; }
 .studio-beta-btn:hover {
   background: rgba(201,168,76,0.2);
   border-color: var(--gold);
