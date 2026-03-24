@@ -5,8 +5,8 @@ const path = require("path");
 loadEnvFile();
 
 const DEFAULT_BETA_APK_OBJECT_URL =
-  "https://Cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/application-2cc0d4ee-63f7-4a24-98fc-ba74d97a48a9.apk";
-const DEFAULT_BETA_APK_FILENAME = "mosion-beta.apk";
+  "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion.apk";
+const DEFAULT_BETA_APK_FILENAME = "mosion.apk";
 const DEFAULT_STUDIO_BETA_APK_OBJECT_URL =
   "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion+studio.apk";
 const DEFAULT_STUDIO_BETA_APK_FILENAME = "mosion-studio.apk";
