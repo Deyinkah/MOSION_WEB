@@ -7,10 +7,44 @@ loadEnvFile();
 const DEFAULT_BETA_APK_OBJECT_URL =
   "https://Cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/application-2cc0d4ee-63f7-4a24-98fc-ba74d97a48a9.apk";
 const DEFAULT_BETA_APK_FILENAME = "mosion-beta.apk";
+const DEFAULT_STUDIO_BETA_APK_OBJECT_URL =
+  "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion+studio.apk";
+const DEFAULT_STUDIO_BETA_APK_FILENAME = "mosion-studio.apk";
 const DEFAULT_BETA_APK_REGION = "eu-central-003";
 const DEFAULT_PRESIGN_TTL_SECONDS = 60;
 const MAX_PRESIGN_TTL_SECONDS = 604800;
 const APK_CONTENT_TYPE = "application/vnd.android.package-archive";
+const DOWNLOAD_VARIANTS = {
+  root: {
+    defaultObjectUrl: DEFAULT_BETA_APK_OBJECT_URL,
+    defaultFilename: DEFAULT_BETA_APK_FILENAME,
+    objectUrlEnvKeys: [
+      "BETA_APK_OBJECT_URL",
+      "B2_DOWNLOAD_OBJECT_URL",
+      "ROOT_BETA_APK_OBJECT_URL"
+    ],
+    bucketEnvKeys: ["B2_DOWNLOAD_BUCKET", "B2_BUCKET_NAME"],
+    objectKeyEnvKeys: ["B2_DOWNLOAD_OBJECT_KEY", "BETA_APK_OBJECT_KEY"],
+    regionEnvKeys: ["B2_DOWNLOAD_REGION", "B2_REGION"],
+    endpointEnvKeys: ["B2_DOWNLOAD_ENDPOINT", "B2_S3_ENDPOINT"],
+    filenameEnvKeys: ["B2_DOWNLOAD_FILENAME", "BETA_APK_FILENAME"],
+    ttlEnvKeys: ["B2_DOWNLOAD_URL_TTL", "BETA_APK_URL_TTL"]
+  },
+  studio: {
+    defaultObjectUrl: DEFAULT_STUDIO_BETA_APK_OBJECT_URL,
+    defaultFilename: DEFAULT_STUDIO_BETA_APK_FILENAME,
+    objectUrlEnvKeys: ["STUDIO_BETA_APK_OBJECT_URL", "STUDIO_BETA_DOWNLOAD_OBJECT_URL"],
+    bucketEnvKeys: ["STUDIO_BETA_APK_BUCKET", "B2_DOWNLOAD_BUCKET", "B2_BUCKET_NAME"],
+    objectKeyEnvKeys: [
+      "STUDIO_BETA_APK_OBJECT_KEY",
+      "STUDIO_BETA_DOWNLOAD_OBJECT_KEY"
+    ],
+    regionEnvKeys: ["STUDIO_BETA_APK_REGION", "B2_DOWNLOAD_REGION", "B2_REGION"],
+    endpointEnvKeys: ["STUDIO_BETA_APK_ENDPOINT", "B2_DOWNLOAD_ENDPOINT", "B2_S3_ENDPOINT"],
+    filenameEnvKeys: ["STUDIO_BETA_APK_FILENAME", "STUDIO_BETA_DOWNLOAD_FILENAME"],
+    ttlEnvKeys: ["STUDIO_BETA_APK_URL_TTL", "B2_DOWNLOAD_URL_TTL", "BETA_APK_URL_TTL"]
+  }
+};
 
 function loadEnvFile() {
   const envPath = path.join(__dirname, ".env");
@@ -153,45 +187,38 @@ function parseObjectUrl(rawUrl) {
   );
 }
 
-function getDownloadConfig() {
+function getDownloadConfig(variantKey = "root") {
+  const variant = DOWNLOAD_VARIANTS[variantKey] || DOWNLOAD_VARIANTS.root;
   const sourceUrl =
-    getFirstEnvValue([
-      "BETA_APK_OBJECT_URL",
-      "B2_DOWNLOAD_OBJECT_URL",
-      "ROOT_BETA_APK_OBJECT_URL"
-    ]) || DEFAULT_BETA_APK_OBJECT_URL;
+    getFirstEnvValue(variant.objectUrlEnvKeys) || variant.defaultObjectUrl;
 
   const parsedConfig = parseObjectUrl(sourceUrl);
   const keyId = getFirstEnvValue([
+    "STUDIO_BETA_APK_KEY_ID",
+    "STUDIO_BETA_DOWNLOAD_KEY_ID",
     "B2_DOWNLOAD_KEY_ID",
     "B2_APPLICATION_KEY_ID",
     "B2_KEY_ID"
   ]);
   const applicationKey = getFirstEnvValue([
+    "STUDIO_BETA_APK_APPLICATION_KEY",
+    "STUDIO_BETA_DOWNLOAD_APPLICATION_KEY",
     "B2_DOWNLOAD_APPLICATION_KEY",
     "B2_APPLICATION_KEY",
     "B2_SECRET_ACCESS_KEY"
   ]);
-  const bucket =
-    getFirstEnvValue(["B2_DOWNLOAD_BUCKET", "B2_BUCKET_NAME"]) || parsedConfig.bucket;
-  const objectKey =
-    getFirstEnvValue(["B2_DOWNLOAD_OBJECT_KEY", "BETA_APK_OBJECT_KEY"]) ||
-    parsedConfig.objectKey;
+  const bucket = getFirstEnvValue(variant.bucketEnvKeys) || parsedConfig.bucket;
+  const objectKey = getFirstEnvValue(variant.objectKeyEnvKeys) || parsedConfig.objectKey;
   const region =
-    getFirstEnvValue(["B2_DOWNLOAD_REGION", "B2_REGION"]) ||
-    parsedConfig.region ||
-    DEFAULT_BETA_APK_REGION;
+    getFirstEnvValue(variant.regionEnvKeys) || parsedConfig.region || DEFAULT_BETA_APK_REGION;
   const endpoint =
-    getFirstEnvValue(["B2_DOWNLOAD_ENDPOINT", "B2_S3_ENDPOINT"]) ||
+    getFirstEnvValue(variant.endpointEnvKeys) ||
     parsedConfig.endpoint ||
     `https://s3.${region}.backblazeb2.com`;
-  const filename =
-    getFirstEnvValue(["B2_DOWNLOAD_FILENAME", "BETA_APK_FILENAME"]) ||
-    DEFAULT_BETA_APK_FILENAME;
+  const filename = getFirstEnvValue(variant.filenameEnvKeys) || variant.defaultFilename;
   const expiresInSeconds = clampExpiry(
     Number(
-      getFirstEnvValue(["B2_DOWNLOAD_URL_TTL", "BETA_APK_URL_TTL"]) ||
-        DEFAULT_PRESIGN_TTL_SECONDS
+      getFirstEnvValue(variant.ttlEnvKeys) || DEFAULT_PRESIGN_TTL_SECONDS
     )
   );
 
@@ -259,8 +286,8 @@ function buildCanonicalQuery(params) {
     .join("&");
 }
 
-function createBetaApkPresignedUrl(now = new Date()) {
-  const config = getDownloadConfig();
+function createPresignedUrlForVariant(variantKey = "root", now = new Date()) {
+  const config = getDownloadConfig(variantKey);
   const endpointUrl = new URL(config.endpoint);
   const amzDate = formatAmzDate(now);
   const dateStamp = amzDate.slice(0, 8);
@@ -303,6 +330,14 @@ function createBetaApkPresignedUrl(now = new Date()) {
   return `${endpointUrl.origin}${canonicalUri}?${canonicalQueryString}&X-Amz-Signature=${signature}`;
 }
 
+function createBetaApkPresignedUrl(now = new Date()) {
+  return createPresignedUrlForVariant("root", now);
+}
+
+function createStudioBetaApkPresignedUrl(now = new Date()) {
+  return createPresignedUrlForVariant("studio", now);
+}
+
 function sendErrorResponse(res, statusCode, message) {
   res.statusCode = statusCode;
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
@@ -310,7 +345,7 @@ function sendErrorResponse(res, statusCode, message) {
   res.end(message);
 }
 
-async function handleBetaApkDownload(req, res) {
+async function handlePresignedApkDownload(req, res, variantKey) {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.setHeader("Allow", "GET, HEAD");
     sendErrorResponse(res, 405, "Method not allowed.");
@@ -318,7 +353,7 @@ async function handleBetaApkDownload(req, res) {
   }
 
   try {
-    const signedUrl = createBetaApkPresignedUrl();
+    const signedUrl = createPresignedUrlForVariant(variantKey);
 
     res.statusCode = 302;
     res.setHeader("Cache-Control", "no-store");
@@ -334,7 +369,17 @@ async function handleBetaApkDownload(req, res) {
   }
 }
 
+async function handleBetaApkDownload(req, res) {
+  await handlePresignedApkDownload(req, res, "root");
+}
+
+async function handleStudioBetaApkDownload(req, res) {
+  await handlePresignedApkDownload(req, res, "studio");
+}
+
 module.exports = {
   createBetaApkPresignedUrl,
-  handleBetaApkDownload
+  createStudioBetaApkPresignedUrl,
+  handleBetaApkDownload,
+  handleStudioBetaApkDownload
 };

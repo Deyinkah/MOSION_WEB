@@ -185,25 +185,25 @@ function initComingSoonModal() {
   const closeButton = modal ? modal.querySelector(".coming-soon-close") : null;
   const closeTriggers = modal ? modal.querySelectorAll("[data-modal-close]") : [];
   const triggers = document.querySelectorAll("[data-coming-soon-title]");
+  const betaApkLink = document.querySelector("[data-beta-apk-link]");
 
-  if (!modal || !title || !copy || !closeButton || !triggers.length) {
+  if (!modal || !title || !copy || !closeButton || (!triggers.length && !betaApkLink)) {
     return;
   }
 
   let lastTrigger = null;
   let closeTimer = null;
 
-  const openModal = (trigger) => {
+  const openModal = (trigger, heading, body) => {
     if (closeTimer) {
       window.clearTimeout(closeTimer);
       closeTimer = null;
     }
 
     lastTrigger = trigger;
-    title.textContent =
-      trigger.getAttribute("data-coming-soon-title") || "Studio beta coming soon";
+    title.textContent = heading || "Studio beta coming soon";
     copy.textContent =
-      trigger.getAttribute("data-coming-soon-copy") ||
+      body ||
       "We are preparing the beta release. Join the waitlist and we will let you know as soon as access opens.";
 
     modal.hidden = false;
@@ -234,9 +234,28 @@ function initComingSoonModal() {
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
       event.preventDefault();
-      openModal(trigger);
+      openModal(
+        trigger,
+        trigger.getAttribute("data-coming-soon-title"),
+        trigger.getAttribute("data-coming-soon-copy")
+      );
     });
   });
+
+  if (betaApkLink) {
+    betaApkLink.addEventListener("click", (event) => {
+      if (!isIosDevice()) {
+        return;
+      }
+
+      event.preventDefault();
+      openModal(
+        betaApkLink,
+        betaApkLink.getAttribute("data-ios-modal-title"),
+        betaApkLink.getAttribute("data-ios-modal-copy")
+      );
+    });
+  }
 
   closeTriggers.forEach((trigger) => {
     trigger.addEventListener("click", closeModal);

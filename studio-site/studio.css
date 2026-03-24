@@ -405,6 +405,35 @@ nav.is-open .nav-toggle span:nth-child(3) {
   gap: 14px;
   margin-top: 28px;
 }
+.studio-direct-beta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 2px;
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: none;
+  text-decoration: none;
+  appearance: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.studio-direct-beta-btn:hover {
+  background: rgba(201,168,76,0.2);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.studio-direct-beta-btn svg {
+  width: 14px;
+  height: 14px;
+}
 
 .coming-soon-modal {
   position: fixed;
@@ -1154,6 +1183,10 @@ footer {
     flex-direction: column;
   }
   .studio-beta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .studio-direct-beta-btn {
     width: 100%;
     justify-content: center;
   }
