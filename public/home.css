@@ -20,7 +20,7 @@
 
 html{
   scroll-behavior:smooth;
-  background:var(--amber);
+  background:#080808;
   scrollbar-width:none;
   -ms-overflow-style:none;
 }
@@ -33,8 +33,17 @@ body{
   scrollbar-width:none;
   -ms-overflow-style:none;
 }
+body::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;
+  height:env(safe-area-inset-top, 0px);
+  background:var(--amber);
+  pointer-events:none;
+  z-index:150;
+}
 html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
-#films,#how,#download{scroll-margin-top:110px}
+#films,#how,#download{scroll-margin-top:calc(32px + env(safe-area-inset-top, 0px))}
 
 body::after{
   content:'';
@@ -68,9 +77,12 @@ body::after{
 }
 
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
+  position:absolute;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:22px 56px;
+  padding-top:calc(22px + env(safe-area-inset-top, 0px));
+  padding-right:calc(56px + env(safe-area-inset-right, 0px));
+  padding-bottom:22px;
+  padding-left:calc(56px + env(safe-area-inset-left, 0px));
   background:linear-gradient(to bottom,rgba(6,6,10,.98) 0%,transparent 100%);
 }
 .logo{
@@ -565,20 +577,109 @@ nav{
 }
 .cta-h em{font-style:italic;color:var(--amber)}
 .cta-p{font-size:15px;line-height:1.8;color:var(--muted);font-weight:300;margin-bottom:44px;max-width:460px}
+.store-cta-stack{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .store-btns{display:flex;gap:14px;flex-wrap:wrap}
 .store-btn{
   display:inline-flex;align-items:center;gap:12px;
   background:var(--card);border:1px solid var(--border2);
   padding:14px 22px;border-radius:4px;
   text-decoration:none;cursor:none;
+  color:inherit;font:inherit;text-align:left;
+  appearance:none;
   transition:border-color .2s,background .2s;
 }
+.store-btn[hidden]{display:none!important}
 .store-btn:hover{border-color:rgba(212,168,67,.4);background:rgba(212,168,67,.04)}
 .store-btn-icon{color:var(--cream)}
 .store-btn-icon svg{width:22px;height:22px}
 .store-btn-text{display:flex;flex-direction:column}
 .store-btn-sub{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2)}
 .store-btn-name{font-size:15px;font-weight:500;color:var(--cream);line-height:1.2}
+.beta-apk-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;border:1px solid rgba(212,168,67,.32);
+  color:var(--cream);font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:13px 18px;border-radius:4px;cursor:none;
+  text-decoration:none;
+  appearance:none;
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.beta-apk-btn:hover{
+  border-color:var(--amber);
+  background:rgba(212,168,67,.08);
+  transform:translateY(-1px);
+}
+.beta-apk-btn svg{width:14px;height:14px}
+
+.coming-soon-modal{
+  position:fixed;inset:0;z-index:10050;
+  display:grid;place-items:center;
+  padding:24px;opacity:0;
+  transition:opacity .18s ease;
+}
+.coming-soon-modal[hidden]{display:none!important}
+.coming-soon-modal.is-open{opacity:1}
+.coming-soon-backdrop{
+  position:absolute;inset:0;
+  background:rgba(6,6,10,.78);
+  backdrop-filter:blur(18px);
+}
+.coming-soon-dialog{
+  position:relative;z-index:1;
+  width:min(460px,100%);
+  background:linear-gradient(180deg,rgba(16,16,24,.98) 0%,rgba(9,9,14,.98) 100%);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 28px 80px rgba(0,0,0,.45);
+  padding:32px 30px 28px;
+  transform:translateY(16px);
+  transition:transform .18s ease;
+}
+.coming-soon-modal.is-open .coming-soon-dialog{transform:translateY(0)}
+.coming-soon-close{
+  position:absolute;top:16px;right:16px;
+  padding:8px 12px;border-radius:999px;
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,.02);
+  color:var(--muted2);
+  font-family:'Space Mono',monospace;font-size:8px;
+  letter-spacing:.18em;text-transform:uppercase;
+  cursor:none;appearance:none;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.coming-soon-close:hover{
+  border-color:rgba(212,168,67,.35);
+  color:var(--cream);
+  background:rgba(212,168,67,.06);
+}
+.coming-soon-kicker{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:18px;
+}
+.coming-soon-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(34px,4vw,48px);
+  line-height:.95;letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.coming-soon-copy{
+  font-size:14px;line-height:1.8;
+  color:var(--muted);font-weight:300;
+  max-width:34ch;
+}
+
+body.modal-open{
+  overflow:hidden;
+}
+body.modal-open .coming-soon-modal,
+body.modal-open .coming-soon-modal *{
+  cursor:auto!important;
+}
+body.modal-open .cur,
+body.modal-open .cur-r{
+  opacity:0;
+}
 
 .waitlist-box{
   background:var(--card);border:1px solid var(--border2);
@@ -630,36 +731,70 @@ nav{
 footer{
   border-top:1px solid var(--border);
   padding:44px 56px;
-  display:flex;align-items:center;justify-content:space-between;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:28px 48px;
+  align-items:start;
+}
+.f-brand{
+  display:grid;
+  gap:14px;
+  max-width:420px;
 }
 .f-logo{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(24px,1.8vw,32px);
   line-height:1;
   letter-spacing:.07em;
-  text-transform:uppercase;color:var(--muted2);
+  text-transform:uppercase;color:var(--cream);
   display:flex;align-items:center;
 }
-.f-links{display:flex;gap:28px;list-style:none}
+.f-links{
+  display:flex;
+  gap:28px;
+  list-style:none;
+  flex-wrap:wrap;
+  justify-self:end;
+  justify-content:flex-end;
+}
 .f-links a{
   font-family:'Space Mono',monospace;font-size:9px;
   letter-spacing:.18em;text-transform:uppercase;
   color:var(--muted2);text-decoration:none;transition:color .2s;
 }
 .f-links a:hover{color:var(--cream)}
-.f-mission{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--muted2);text-align:center;margin-bottom:8px}
-.f-copy{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--muted2)}
+.f-mission{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:.08em;
+  color:var(--muted2);
+  line-height:1.8;
+}
+.f-copy{
+  grid-column:1 / -1;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+  font-family:'Space Mono',monospace;
+  font-size:8px;
+  letter-spacing:.15em;
+  color:var(--muted2);
+}
 
 .r{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .r.v{opacity:1;transform:translateY(0)}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
 
 @media(max-width:1100px){
-  nav{padding:20px 28px}
+  nav{
+    padding-top:calc(20px + env(safe-area-inset-top, 0px));
+    padding-right:calc(28px + env(safe-area-inset-right, 0px));
+    padding-bottom:20px;
+    padding-left:calc(28px + env(safe-area-inset-left, 0px));
+  }
   .hero{
     min-height:100svh;
     justify-content:flex-start;
-    padding:118px 28px 72px;
+    padding:calc(118px + env(safe-area-inset-top, 0px)) 28px 72px;
   }
   .hero::before,.hero::after{height:44px}
   .hero-frame{display:none}
@@ -671,13 +806,20 @@ footer{
   .how-top,.cta-inner{grid-template-columns:1fr;gap:36px}
   .how-steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
-  footer{padding:36px 28px;flex-direction:column;gap:20px;text-align:center}
-  .f-links{flex-wrap:wrap;justify-content:center}
+  footer{
+    padding:36px 28px;
+    grid-template-columns:1fr;
+    gap:20px;
+    text-align:center;
+  }
+  .f-brand{max-width:none;justify-items:center}
+  .f-links{justify-self:center;justify-content:center}
+  .f-copy{padding-top:16px}
 }
 @media(max-width:640px){
   .hero{
     min-height:auto;
-    padding:104px 24px 56px;
+    padding:calc(104px + env(safe-area-inset-top, 0px)) 24px 56px;
   }
   .hero::before,.hero::after{height:28px}
   .film-grid{grid-template-columns:repeat(2,1fr)}
@@ -687,7 +829,9 @@ footer{
     min-width:190px;
     right:0;
   }
-  #films,#how,#download{scroll-margin-top:92px}
+  #films,#how,#download{scroll-margin-top:calc(24px + env(safe-area-inset-top, 0px))}
   .waitlist-box{padding:28px 20px}
-  .store-btns{flex-direction:column}
+  .store-cta-stack{width:100%}
+  .store-btns{flex-direction:column;width:100%}
+  .store-btn,.beta-apk-btn{width:100%}
 }

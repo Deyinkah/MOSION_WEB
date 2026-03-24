@@ -21,6 +21,20 @@ async function submitWaitlistSignup(payload) {
   return result;
 }
 
+function isIosDevice() {
+  const platform = window.navigator.platform || "";
+  const userAgent = window.navigator.userAgent || "";
+  const isAppleMobile = /iPad|iPhone|iPod/i.test(userAgent);
+  const isIpadDesktopMode =
+    platform === "MacIntel" && window.navigator.maxTouchPoints > 1;
+
+  return isAppleMobile || isIpadDesktopMode;
+}
+
+function isAndroidDevice() {
+  return /Android/i.test(window.navigator.userAgent || "");
+}
+
 function initCursor() {
   const cur = document.getElementById("cur");
   const curR = document.getElementById("curR");
@@ -184,6 +198,111 @@ function initNavMenu() {
   });
 }
 
+function initStoreButtons() {
+  const storeButtons = document.querySelectorAll("[data-store-platform]");
+
+  if (!storeButtons.length) {
+    return;
+  }
+
+  const activePlatform = isIosDevice() ? "ios" : isAndroidDevice() ? "android" : "";
+
+  storeButtons.forEach((button) => {
+    const buttonPlatform = button.getAttribute("data-store-platform");
+    button.hidden = Boolean(activePlatform) && buttonPlatform !== activePlatform;
+  });
+}
+
+function initComingSoonModal() {
+  const modal = document.getElementById("comingSoonModal");
+  const title = document.getElementById("comingSoonTitle");
+  const copy = document.getElementById("comingSoonCopy");
+  const closeButton = modal ? modal.querySelector(".coming-soon-close") : null;
+  const closeTriggers = modal ? modal.querySelectorAll("[data-modal-close]") : [];
+  const triggers = document.querySelectorAll("[data-coming-soon-title]");
+  const betaApkLink = document.querySelector("[data-beta-apk-link]");
+
+  if (!modal || !title || !copy || !closeButton || (!triggers.length && !betaApkLink)) {
+    return;
+  }
+
+  let lastTrigger = null;
+  let closeTimer = null;
+
+  const openModal = (trigger, heading, body) => {
+    if (closeTimer) {
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
+    lastTrigger = trigger;
+    title.textContent = heading || "Application coming soon";
+    copy.textContent =
+      body ||
+      "We are preparing the release. Join the waitlist and we will let you know as soon as it is ready.";
+
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+
+    window.requestAnimationFrame(() => {
+      modal.classList.add("is-open");
+      closeButton.focus();
+    });
+  };
+
+  const closeModal = () => {
+    if (modal.hidden) {
+      return;
+    }
+
+    modal.classList.remove("is-open");
+    document.body.classList.remove("modal-open");
+
+    closeTimer = window.setTimeout(() => {
+      modal.hidden = true;
+      if (lastTrigger && typeof lastTrigger.focus === "function") {
+        lastTrigger.focus();
+      }
+    }, 180);
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openModal(
+        trigger,
+        trigger.getAttribute("data-coming-soon-title"),
+        trigger.getAttribute("data-coming-soon-copy")
+      );
+    });
+  });
+
+  if (betaApkLink) {
+    betaApkLink.addEventListener("click", (event) => {
+      if (!isIosDevice()) {
+        return;
+      }
+
+      event.preventDefault();
+      openModal(
+        betaApkLink,
+        betaApkLink.getAttribute("data-ios-modal-title"),
+        betaApkLink.getAttribute("data-ios-modal-copy")
+      );
+    });
+  }
+
+  closeTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+}
+
 function initWaitlist() {
   const form = document.getElementById("wlForm");
   const input = document.getElementById("wlEmail");
@@ -266,6 +385,8 @@ function initWaitlist() {
 function initHomePage() {
   initCursor();
   initNavMenu();
+  initStoreButtons();
+  initComingSoonModal();
   initReveal();
   initWaitlist();
 }

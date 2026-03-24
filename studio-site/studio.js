@@ -2,6 +2,20 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isIosDevice() {
+  const platform = window.navigator.platform || "";
+  const userAgent = window.navigator.userAgent || "";
+  const isAppleMobile = /iPad|iPhone|iPod/i.test(userAgent);
+  const isIpadDesktopMode =
+    platform === "MacIntel" && window.navigator.maxTouchPoints > 1;
+
+  return isAppleMobile || isIpadDesktopMode;
+}
+
+function isAndroidDevice() {
+  return /Android/i.test(window.navigator.userAgent || "");
+}
+
 async function submitWaitlistSignup(payload) {
   const response = await fetch("/api/waitlist", {
     method: "POST",
@@ -149,6 +163,92 @@ function initNav() {
   });
 }
 
+function initStoreButtons() {
+  const storeButtons = document.querySelectorAll("[data-store-platform]");
+
+  if (!storeButtons.length) {
+    return;
+  }
+
+  const activePlatform = isIosDevice() ? "ios" : isAndroidDevice() ? "android" : "";
+
+  storeButtons.forEach((button) => {
+    const buttonPlatform = button.getAttribute("data-store-platform");
+    button.hidden = Boolean(activePlatform) && buttonPlatform !== activePlatform;
+  });
+}
+
+function initComingSoonModal() {
+  const modal = document.getElementById("comingSoonModal");
+  const title = document.getElementById("comingSoonTitle");
+  const copy = document.getElementById("comingSoonCopy");
+  const closeButton = modal ? modal.querySelector(".coming-soon-close") : null;
+  const closeTriggers = modal ? modal.querySelectorAll("[data-modal-close]") : [];
+  const triggers = document.querySelectorAll("[data-coming-soon-title]");
+
+  if (!modal || !title || !copy || !closeButton || !triggers.length) {
+    return;
+  }
+
+  let lastTrigger = null;
+  let closeTimer = null;
+
+  const openModal = (trigger) => {
+    if (closeTimer) {
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
+    lastTrigger = trigger;
+    title.textContent =
+      trigger.getAttribute("data-coming-soon-title") || "Studio beta coming soon";
+    copy.textContent =
+      trigger.getAttribute("data-coming-soon-copy") ||
+      "We are preparing the beta release. Join the waitlist and we will let you know as soon as access opens.";
+
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+
+    window.requestAnimationFrame(() => {
+      modal.classList.add("is-open");
+      closeButton.focus();
+    });
+  };
+
+  const closeModal = () => {
+    if (modal.hidden) {
+      return;
+    }
+
+    modal.classList.remove("is-open");
+    document.body.classList.remove("modal-open");
+
+    closeTimer = window.setTimeout(() => {
+      modal.hidden = true;
+      if (lastTrigger && typeof lastTrigger.focus === "function") {
+        lastTrigger.focus();
+      }
+    }, 180);
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openModal(trigger);
+    });
+  });
+
+  closeTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+}
+
 function flashInvalidInputs(inputs) {
   inputs.forEach((input) => {
     input.style.borderColor = "#e03e3e";
@@ -253,6 +353,8 @@ function initWaitlistForm() {
 function initStudioPage() {
   initCursor();
   initNav();
+  initStoreButtons();
+  initComingSoonModal();
   initReveal();
   initWaitlistForm();
 }
