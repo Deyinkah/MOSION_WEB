@@ -484,7 +484,7 @@ nav{
 }
 .how-h em{font-style:italic;color:var(--amber)}
 .how-p{font-size:15px;line-height:1.8;color:var(--muted);font-weight:300}
-.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.how-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border)}
 .how-step{
   background:var(--panel);padding:44px 36px;
   transition:background .3s;position:relative;overflow:hidden;
