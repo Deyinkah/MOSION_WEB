@@ -4,13 +4,117 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MOSION STUDIO - Release Your Film</title>
+<!-- SEO -->
+<meta name="description" content="MOSION Studio is the distribution platform for African filmmakers. Submit your film, set your price, track earnings in real time, withdraw directly. Free to list." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://studio.mosion.app/" />
+<!-- PWA -->
+<meta name="theme-color" content="#080808" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="MOSION Studio" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="MOSION Studio" />
+<meta property="og:url" content="https://studio.mosion.app/" />
+<meta property="og:title" content="MOSION Studio — Release Your Film" />
+<meta property="og:description" content="The distribution platform built for African filmmakers. Submit your film, set your price, track earnings live, withdraw directly. Free to list. No gatekeepers." />
+<meta property="og:image" content="https://studio.mosion.app/og-studio-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="MOSION Studio — Film Distribution Platform for African Cinema" />
+<meta property="og:locale" content="en_NG" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MOSION Studio — Release Your Film" />
+<meta name="twitter:description" content="Distribution for African filmmakers. Submit your film, set your price, track earnings live, withdraw directly. Free to list." />
+<meta name="twitter:image" content="https://studio.mosion.app/og-studio-image.jpg" />
+<meta name="twitter:image:alt" content="MOSION Studio — Film Distribution Platform" />
 <link rel="icon" type="image/png" href="./logo.png?v=20260324" />
 <link rel="shortcut icon" href="./logo.png?v=20260324" />
 <link rel="apple-touch-icon" href="./logo.png?v=20260324" />
+<link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./studio.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://studio.mosion.app/#organization",
+      "name": "MOSION Studio",
+      "description": "Film distribution platform for African filmmakers and distributors.",
+      "url": "https://studio.mosion.app/",
+      "logo": { "@type": "ImageObject", "url": "https://studio.mosion.app/logo.png" },
+      "parentOrganization": {
+        "@type": "Organization",
+        "@id": "https://mosion.app/#organization",
+        "name": "MOSION",
+        "url": "https://mosion.app/"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Nigeria" },
+        { "@type": "Country", "name": "Ghana" }
+      ],
+      "sameAs": []
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://studio.mosion.app/#platform",
+      "name": "MOSION Studio Platform",
+      "applicationCategory": "BusinessApplication",
+      "description": "Film distribution platform for African filmmakers. DRM streaming, real-time earnings, direct withdrawal, cinema-split revenue model.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free to list. Revenue sharing starts only when people watch."
+      },
+      "featureList": [
+        "Secure DRM streaming",
+        "Real-time earnings dashboard",
+        "Direct revenue withdrawal",
+        "Cinema-split revenue model (60/40 or 70/30)",
+        "Flexible release windows and pre-orders",
+        "Mobile-first cinema distribution"
+      ],
+      "provider": { "@id": "https://studio.mosion.app/#organization" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://studio.mosion.app/#website",
+      "name": "MOSION Studio",
+      "url": "https://studio.mosion.app/",
+      "publisher": { "@id": "https://studio.mosion.app/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://studio.mosion.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does MOSION Studio distribution work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Create your studio account, submit your film, go through review and prep, then premiere live with optional pre-orders. Track revenue in real time and withdraw directly." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the revenue split on MOSION Studio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "MOSION Studio uses a cinema-style revenue split — typically 60/40 or 70/30 in favour of the filmmaker — with full transparency from first purchase to final payout." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it free to list a film on MOSION Studio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is no upfront cost to list your film. Revenue sharing only begins when viewers purchase access." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

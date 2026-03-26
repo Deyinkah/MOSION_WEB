@@ -9,6 +9,27 @@
 <meta name="apple-mobile-web-app-title" content="MOSION" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>MOSION | Cinema in Your Pocket</title>
+<!-- SEO -->
+<meta name="description" content="MOSION is mobile cinema for African film. Watch Nollywood and Ghallywood premieres on your phone. Pay-per-view — stream or download with a 7-day access window." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://mosion.app/" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="MOSION" />
+<meta property="og:url" content="https://mosion.app/" />
+<meta property="og:title" content="MOSION | Cinema in Your Pocket" />
+<meta property="og:description" content="Watch Nollywood and Ghallywood premieres on your phone. Pay only for what you watch — stream or download with a 7-day access window. No subscription." />
+<meta property="og:image" content="https://mosion.app/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="MOSION — Cinema in Your Pocket" />
+<meta property="og:locale" content="en_NG" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MOSION | Cinema in Your Pocket" />
+<meta name="twitter:description" content="Watch Nollywood and Ghallywood premieres on your phone. Pay only for what you watch — stream or download with a 7-day access window." />
+<meta name="twitter:image" content="https://mosion.app/og-image.jpg" />
+<meta name="twitter:image:alt" content="MOSION — Cinema in Your Pocket" />
 <link rel="icon" type="image/png" href="/logo.png?v=20260324" />
 <link rel="shortcut icon" href="/logo.png?v=20260324" />
 <link rel="manifest" href="/site.webmanifest" />
@@ -20,37 +41,84 @@
   rel="stylesheet"
 />
 <link rel="stylesheet" href="./home.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MobileApplication",
+      "@id": "https://mosion.app/#app",
+      "name": "MOSION",
+      "description": "Mobile cinema for African film. Watch Nollywood and Ghallywood premieres on your phone. Pay-per-view with stream or download access. No subscription required.",
+      "url": "https://mosion.app/",
+      "applicationCategory": "EntertainmentApplication",
+      "operatingSystem": "Android, iOS",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free to download. Pay per film."
+      },
+      "featureList": [
+        "Pay-per-view cinema model",
+        "Stream or offline download access",
+        "7-day viewing window",
+        "DRM-protected content",
+        "No subscription required",
+        "Nollywood and Ghallywood films"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://mosion.app/#organization",
+        "name": "MOSION",
+        "url": "https://mosion.app/",
+        "logo": { "@type": "ImageObject", "url": "https://mosion.app/logo.png" },
+        "sameAs": []
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mosion.app/#website",
+      "name": "MOSION",
+      "url": "https://mosion.app/",
+      "publisher": { "@id": "https://mosion.app/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://mosion.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does MOSION work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Download the MOSION app, create a free account, choose a film, purchase stream or download access, and watch within the 7-day window. No subscription required." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MOSION a subscription service?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. MOSION uses a pay-per-view model. You pay only for the individual film you want to watch, with no recurring subscription." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download films to watch offline?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. When purchasing a title you can choose download access, which lets you watch the film offline within the 7-day access window." }
+        },
+        {
+          "@type": "Question",
+          "name": "What films are on MOSION?",
+          "acceptedAnswer": { "@type": "Answer", "text": "MOSION focuses on African cinema including Nollywood (Nigerian) and Ghallywood (Ghanaian) films — dramas, comedies, thrillers, and more." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <div class="cur" id="cur" aria-hidden="true"></div>
 <div class="cur-r" id="curR" aria-hidden="true"></div>
 
-<nav>
-  <a href="#" class="logo">MOSION</a>
-  <div class="nav-r">
-    <div class="nav-menu" id="navMenu">
-      <button
-        class="nav-btn nav-menu-toggle"
-        id="navMenuToggle"
-        type="button"
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-controls="navDropdown"
-      >
-        Menu
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M2 5l5 5 5-5" />
-        </svg>
-      </button>
-      <div class="nav-dropdown" id="navDropdown" hidden>
-        <a href="#how">How it Works</a>
-        <a href="https://studio.mosion.app" data-studio-link data-local-href="/studio">Studio Platform</a>
-        <a href="#download">Get the App</a>
-      </div>
-    </div>
-  </div>
-</nav>
+<div id="site-nav"></div>
 
 <section class="hero">
   <div class="hero-bg"></div>
@@ -138,7 +206,7 @@
 
   <div class="featured-film r">
     <div class="ff-visual">
-      <img class="ff-visual-image" src="./banners/oversabi-aunty.jpeg" alt="Oversabi Aunty banner" />
+      <img class="ff-visual-image" src="./banners/oversabi-aunty.jpeg" alt="Oversabi Aunty — Nigerian comedy film, 2025" />
       <div class="ff-badge">Featured - Coming Soon</div>
     </div>
     <div class="ff-info">
@@ -156,7 +224,7 @@
 
   <div class="film-grid">
     <div class="film-card r">
-      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-01.jpeg" alt="Onobiren banner" /></div>
+      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-01.jpeg" alt="Onobiren — Nigerian drama film, 2024" /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
         <div class="fc-genre">Drama</div>
@@ -166,7 +234,7 @@
       <div class="film-card-hover"><div class="play-btn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z" /></svg></div></div>
     </div>
     <div class="film-card r rd1">
-      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-03.jpeg" alt="A Country Called Ghana banner" /></div>
+      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-03.jpeg" alt="A Country Called Ghana — Ghanaian adventure film, 2024" /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
         <div class="fc-genre">Adventure</div>
@@ -176,7 +244,7 @@
       <div class="film-card-hover"><div class="play-btn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z" /></svg></div></div>
     </div>
     <div class="film-card r rd2">
-      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-06.jpeg" alt="The Housemaid banner" /></div>
+      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-06.jpeg" alt="The Housemaid — African thriller film, 2025" /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
         <div class="fc-genre">Thriller</div>
@@ -186,7 +254,7 @@
       <div class="film-card-hover"><div class="play-btn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z" /></svg></div></div>
     </div>
     <div class="film-card r rd3">
-      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-23.jpeg" alt="Silence banner" /></div>
+      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-23.jpeg" alt="Silence — African drama film, 2024" /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
         <div class="fc-genre">Drama</div>
@@ -196,7 +264,7 @@
       <div class="film-card-hover"><div class="play-btn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z" /></svg></div></div>
     </div>
     <div class="film-card r rd4">
-      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-31.jpeg" alt="Everybody Loves Jenifa banner" /></div>
+      <div class="film-card-bg"><img class="film-card-image" src="./trending/banner-31.jpeg" alt="Everybody Loves Jenifa — Nigerian comedy film, 2024" /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
         <div class="fc-genre">Comedy</div>
@@ -384,35 +452,9 @@
   </div>
 </section>
 
-		<footer>
-		  <div class="f-brand">
-		    <div class="f-logo">MOSION</div>
-		    <div class="f-mission">MOSION is building the infrastructure for African cinema distribution, starting in your pocket.</div>
-		  </div>
-		  <ul class="f-links">
-	    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-	    <li><a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a></li>
-	    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
-	    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
-	  </ul>
-		  <div class="f-copy">&copy; 2026 Mosion. All rights reserved.</div>
-		</footer>
+	<div id="site-footer"></div>
 
-	<div class="coming-soon-modal" id="comingSoonModal" hidden>
-	  <div class="coming-soon-backdrop" data-modal-close></div>
-	  <div
-	    class="coming-soon-dialog"
-	    role="dialog"
-	    aria-modal="true"
-	    aria-labelledby="comingSoonTitle"
-	    aria-describedby="comingSoonCopy"
-	  >
-	    <button type="button" class="coming-soon-close" data-modal-close>Close</button>
-	    <h3 class="coming-soon-title" id="comingSoonTitle">Application coming soon</h3>
-	    <p class="coming-soon-copy" id="comingSoonCopy">We are preparing the release. Join the waitlist and we will let you know as soon as it is ready.</p>
-	  </div>
-	</div>
-	
+	<script src="./layout.js" defer></script>
 	<script src="./home.js" defer></script>
 	</body>
 	</html>

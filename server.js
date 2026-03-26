@@ -28,13 +28,17 @@ const MIME_TYPES = {
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".avif": "image/avif",
   ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
+  ".ico": "image/x-icon",
+  ".mp4": "video/mp4",
+  ".MP4": "video/mp4"
 };
 
 function loadEnvFile() {
@@ -183,6 +187,14 @@ const server = http.createServer((req, res) => {
 
   if (requestUrl.pathname === "/api/download-studio-apk") {
     handleStudioBetaApkDownload(req, res);
+    return;
+  }
+
+  // Redirect /studio → /studio/ so relative asset paths resolve correctly
+  if (requestUrl.pathname === STUDIO_PATH_PREFIX && !isStudioHost(host)) {
+    const location = STUDIO_PATH_PREFIX + "/" + (requestUrl.search || "");
+    res.writeHead(301, { Location: location });
+    res.end();
     return;
   }
 

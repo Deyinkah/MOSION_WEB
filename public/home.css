@@ -92,6 +92,14 @@ nav{
   display:inline-flex;align-items:center;
   text-transform:uppercase;
 }
+.logo-wordmark{
+  height:clamp(16px,1.2vw,22px);
+  width:auto;
+  display:block;
+}
+.f-logo .logo-wordmark{
+  height:clamp(14px,1vw,18px);
+}
 .nav-r{display:flex;align-items:center;gap:0}
 .nav-menu{position:relative}
 .nav-btn{
