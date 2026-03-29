@@ -96,10 +96,10 @@
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding-top:calc(22px + env(safe-area-inset-top,0px));
-  padding-right:calc(56px + env(safe-area-inset-right,0px));
-  padding-bottom:22px;
-  padding-left:calc(56px + env(safe-area-inset-left,0px));
+  padding-top:calc(20px + env(safe-area-inset-top,0px));
+  padding-right:calc(48px + env(safe-area-inset-right,0px));
+  padding-bottom:20px;
+  padding-left:calc(48px + env(safe-area-inset-left,0px));
   background:linear-gradient(to bottom,rgba(6,6,10,.98) 0%,transparent 100%);
 }
 .logo{
@@ -119,14 +119,14 @@ nav{
 .nav-menu{position:relative}
 .nav-btn{
   background:var(--layout-amber)!important;color:var(--layout-ink)!important;
-  padding:10px 22px;border-radius:2px;
+  padding:8px 16px;border-radius:2px;
   font-weight:700!important;transition:background .2s!important;
 }
 .nav-btn:hover{background:var(--layout-amber2)!important}
 .nav-menu-toggle{
   display:inline-flex;align-items:center;gap:10px;
   border:0;cursor:pointer;
-  font-family:'Space Mono',monospace;font-size:10px;
+  font-family:'Space Mono',monospace;font-size:14px;
   letter-spacing:.2em;text-transform:uppercase;
 }
 .nav-menu-toggle svg{width:12px;height:12px;transition:transform .2s ease}
@@ -293,7 +293,13 @@ footer{
 }
 body.modal-open{overflow:hidden}
 @media(max-width:640px){
-  nav{padding-left:1.5rem;padding-right:1.5rem}
+  nav{
+    padding-top:calc(18px + env(safe-area-inset-top,0px));
+    padding-right:calc(1.25rem + env(safe-area-inset-right,0px));
+    padding-bottom:18px;
+    padding-left:calc(1.25rem + env(safe-area-inset-left,0px));
+  }
+  .logo-wordmark{height:17px}
   footer{padding:32px 24px;grid-template-columns:1fr}
   .f-links{justify-self:start;justify-content:flex-start}
   .prototype-notice{

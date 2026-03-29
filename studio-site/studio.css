@@ -115,7 +115,7 @@ nav {
   background: linear-gradient(180deg, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0.06) 100%);
   color: var(--gold);
   font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1;
@@ -1300,13 +1300,16 @@ footer {
   nav {
     padding: 18px 24px;
   }
+  .nav-logo-image {
+    height: 18px;
+  }
   .nav-logo {
     gap: 8px;
   }
   .nav-logo-tag {
     min-height: 24px;
     padding: 0 9px;
-    font-size: 8px;
+    font-size: 12px;
   }
   .nav-toggle {
     display: inline-flex;
