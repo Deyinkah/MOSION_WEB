@@ -23,7 +23,7 @@
       </button>
       <div class="nav-dropdown" id="navDropdown" hidden>
         <a href="/#how">How it Works</a>
-        <a href="https://studio.mosion.app" data-studio-link data-local-href="/studio">Studio Platform</a>
+        <a href="https://studio.mosion.app" data-studio-link data-local-href="/studio" target="_blank" rel="noopener noreferrer">Studio Platform</a>
         <a href="/#download">Get the App</a>
       </div>
     </div>
