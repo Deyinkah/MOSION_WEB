@@ -31,10 +31,11 @@
 <meta name="twitter:description" content="Distribution for African filmmakers. Submit your film, set your price, track earnings live, withdraw directly. Free to list." />
 <meta name="twitter:image" content="https://studio.mosion.app/og-studio-image.jpg" />
 <meta name="twitter:image:alt" content="MOSION Studio — Film Distribution Platform" />
-<link rel="icon" type="image/png" href="./logo.png?v=20260324" />
-<link rel="shortcut icon" href="./logo.png?v=20260324" />
-<link rel="apple-touch-icon" href="./logo.png?v=20260324" />
-<link rel="manifest" href="/site.webmanifest" />
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20260329h" />
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=20260329h" />
+<link rel="shortcut icon" href="./favicon.ico?v=20260329h" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260329h" />
+<link rel="manifest" href="./site.webmanifest?v=20260329h" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -49,7 +50,7 @@
       "name": "MOSION Studio",
       "description": "Film distribution platform for African filmmakers and distributors.",
       "url": "https://studio.mosion.app/",
-      "logo": { "@type": "ImageObject", "url": "https://studio.mosion.app/logo.png" },
+      "logo": { "@type": "ImageObject", "url": "https://studio.mosion.app/logo.jpeg" },
       "parentOrganization": {
         "@type": "Organization",
         "@id": "https://mosion.app/#organization",
@@ -123,7 +124,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Mosion <span>Studio</span></a>
+  <a href="#" class="nav-logo" aria-label="MOSION Studio">
+    <img class="nav-logo-image" src="./logo-wordmark.png" alt="MOSION" />
+    <span class="nav-logo-tag">Studio</span>
+  </a>
   <button
     class="nav-toggle"
     id="navToggle"
@@ -182,19 +186,19 @@
         <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
         <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
       </div>
-      <div class="hero-image-area">
-        <div class="hero-visual-grid">
-          <div class="cell"><img src="./trending/oversabi-aunty.jpeg" alt="" /></div>
-          <div class="cell"><img src="./trending/banner-31.jpeg" alt="" /></div>
-          <div class="cell"><img src="./trending/banner-01.jpeg" alt="" /></div>
-          <div class="cell"><img src="./trending/banner-23.jpeg" alt="" /></div>
-          <div class="cell"><img src="./trending/banner-03.jpeg" alt="" /></div>
-          <div class="cell"><img src="./trending/banner-06.jpeg" alt="" /></div>
-        </div>
-      </div>
-	    </div>
-	    <div class="hero-meta">
-	      <div class="hero-meta-stat">
+	      <div class="hero-image-area">
+	        <div class="hero-visual-grid">
+	          <div class="cell"><img src="./trending/oversabi-aunty.jpeg" alt="" /></div>
+	          <div class="cell"><img src="./trending/banner-31.jpeg" alt="" /></div>
+	          <div class="cell"><img src="./trending/banner-01.jpeg" alt="" /></div>
+	          <div class="cell"><img src="./trending/banner-23.jpeg" alt="" /></div>
+	          <div class="cell"><img src="./trending/banner-03.jpeg" alt="" /></div>
+	          <div class="cell"><img src="./trending/banner-06.jpeg" alt="" /></div>
+	        </div>
+	      </div>
+		    </div>
+		    <div class="hero-meta">
+		      <div class="hero-meta-stat">
 	        <strong>24fps</strong>
 	        Cinema Quality
 	      </div>
@@ -566,8 +570,8 @@
 		<footer>
 		  <div class="footer-brand">
 		    <a href="#" class="footer-logo nav-logo">
-		      <img class="footer-logo-image" src="./logo.png" alt="Mosion" />
-	    <span>Studio</span>
+		      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" />
+	    <span class="nav-logo-tag">Studio</span>
 	  </a>
 		    <div class="footer-mission">MOSION Studio is the distribution infrastructure African cinema has always deserved.</div>
 		  </div>
@@ -588,13 +592,33 @@
 	    aria-modal="true"
 	    aria-labelledby="comingSoonTitle"
 	    aria-describedby="comingSoonCopy"
-	  >
-	    <button type="button" class="coming-soon-close" data-modal-close>Close</button>
-	    <h3 class="coming-soon-title" id="comingSoonTitle">Studio beta coming soon</h3>
-	    <p class="coming-soon-copy" id="comingSoonCopy">We are preparing the beta release. Join the waitlist and we will let you know as soon as access opens.</p>
-	  </div>
-	</div>
-	
+		  >
+		    <button type="button" class="coming-soon-close" data-modal-close>Close</button>
+		    <h3 class="coming-soon-title" id="comingSoonTitle">Studio beta coming soon</h3>
+		    <p class="coming-soon-copy" id="comingSoonCopy">We are preparing the beta release. Join the waitlist and we will let you know as soon as access opens.</p>
+		  </div>
+		</div>
+
+		<aside
+		  class="prototype-notice"
+		  id="prototypeNotice"
+		  hidden
+		  aria-live="polite"
+		  aria-labelledby="prototypeNoticeTitle"
+		  aria-describedby="prototypeNoticeCopy"
+		>
+		  <button type="button" class="prototype-notice-close" id="prototypeNoticeClose" aria-label="Dismiss prototype notice">
+		    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+		      <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
+		    </svg>
+		  </button>
+		  <div class="prototype-notice-kicker">Prototype Notice</div>
+		  <h3 class="prototype-notice-title" id="prototypeNoticeTitle">Sample interface only</h3>
+		  <p class="prototype-notice-copy" id="prototypeNoticeCopy">
+		    Titles, artwork, earnings, and other figures shown across this site are demo content. The live MOSION catalog will be built through licensed studio partnerships.
+		  </p>
+		</aside>
+
 	<script src="./studio.js" defer></script>
 	</body>
 	</html>

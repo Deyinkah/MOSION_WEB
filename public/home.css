@@ -93,12 +93,13 @@ nav{
   text-transform:uppercase;
 }
 .logo-wordmark{
-  height:clamp(16px,1.2vw,22px);
+  height:clamp(24px,2vw,34px);
   width:auto;
   display:block;
+  object-fit:contain;
 }
 .f-logo .logo-wordmark{
-  height:clamp(14px,1vw,18px);
+  height:clamp(22px,1.6vw,30px);
 }
 .nav-r{display:flex;align-items:center;gap:0}
 .nav-menu{position:relative}
@@ -787,6 +788,76 @@ footer{
   color:var(--muted2);
 }
 
+.prototype-notice{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:10020;
+  width:min(420px,calc(100vw - 32px));
+  padding:18px 20px 18px 18px;
+  border:1px solid rgba(212,168,67,.18);
+  background:
+    linear-gradient(160deg,rgba(212,168,67,.11),transparent 40%),
+    linear-gradient(180deg,rgba(15,15,21,.96) 0%,rgba(8,8,12,.94) 100%);
+  box-shadow:0 28px 80px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(22px);
+  transition:opacity .28s ease,transform .28s ease,visibility .28s ease;
+}
+.prototype-notice::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-left:2px solid rgba(212,168,67,.7);
+  pointer-events:none;
+}
+.prototype-notice.is-visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.prototype-notice-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:0;
+  background:none;
+  color:var(--muted2);
+  cursor:none;
+}
+.prototype-notice-close:hover{color:var(--cream)}
+.prototype-notice-close svg{
+  width:14px;
+  height:14px;
+}
+.prototype-notice-kicker{
+  margin:0 0 12px;
+  font-family:'Space Mono',monospace;
+  font-size:8px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(212,168,67,.88);
+}
+.prototype-notice-title{
+  margin:0 0 10px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;
+  line-height:1;
+  color:var(--cream);
+}
+.prototype-notice-copy{
+  max-width:34ch;
+  color:rgba(240,237,230,.68);
+  font-size:13px;
+  line-height:1.7;
+}
+
 .r{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .r.v{opacity:1;transform:translateY(0)}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
@@ -841,4 +912,11 @@ footer{
   .store-cta-stack{width:100%}
   .store-btns{flex-direction:column;width:100%}
   .store-btn,.beta-apk-btn{width:100%}
+  .prototype-notice{
+    right:16px;
+    bottom:16px;
+    width:calc(100vw - 32px);
+    padding:16px 16px 16px 15px;
+  }
+  .prototype-notice-copy{max-width:none}
 }

@@ -249,6 +249,148 @@ function initComingSoonModal() {
   });
 }
 
+function initPrototypeNotice() {
+  const notice = document.getElementById("prototypeNotice");
+  const closeButton = document.getElementById("prototypeNoticeClose");
+  const heroRight = document.querySelector(".hero-right");
+
+  if (!notice || !closeButton || !heroRight) {
+    return;
+  }
+
+  let cycleTimer = null;
+  let hideTimer = null;
+  let isVisible = false;
+  let isHovered = false;
+  const desktopMedia = window.matchMedia("(min-width: 1025px)");
+
+  const nextDelay = () => 21000 + Math.floor(Math.random() * 10001);
+  const canShowNotice = () =>
+    desktopMedia.matches && window.getComputedStyle(heroRight).display !== "none";
+
+  const clearTimers = () => {
+    if (cycleTimer) {
+      window.clearTimeout(cycleTimer);
+      cycleTimer = null;
+    }
+
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  };
+
+  const scheduleNext = (delay = nextDelay()) => {
+    if (document.hidden || !canShowNotice()) {
+      return;
+    }
+
+    cycleTimer = window.setTimeout(showNotice, delay);
+  };
+
+  const hideNotice = (schedule = true) => {
+    if (!isVisible) {
+      if (schedule) {
+        scheduleNext();
+      }
+      return;
+    }
+
+    isVisible = false;
+    notice.classList.remove("is-visible");
+
+    window.setTimeout(() => {
+      if (!isVisible) {
+        notice.hidden = true;
+      }
+    }, 280);
+
+    if (schedule) {
+      scheduleNext();
+    }
+  };
+
+  const showNotice = () => {
+    clearTimers();
+
+    if (document.hidden || document.body.classList.contains("modal-open") || !canShowNotice()) {
+      scheduleNext(8000);
+      return;
+    }
+
+    isVisible = true;
+    notice.hidden = false;
+
+    window.requestAnimationFrame(() => {
+      notice.classList.add("is-visible");
+    });
+
+    hideTimer = window.setTimeout(() => {
+      if (!isHovered) {
+        hideNotice(true);
+      }
+    }, 9000);
+  };
+
+  notice.addEventListener("mouseenter", () => {
+    isHovered = true;
+
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  });
+
+  notice.addEventListener("mouseleave", () => {
+    isHovered = false;
+
+    if (isVisible && !hideTimer) {
+      hideTimer = window.setTimeout(() => hideNotice(true), 3500);
+    }
+  });
+
+  closeButton.addEventListener("click", () => {
+    clearTimers();
+    hideNotice(true);
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearTimers();
+      hideNotice(false);
+      return;
+    }
+
+    clearTimers();
+    scheduleNext(6000);
+  });
+
+  const refreshEligibility = () => {
+    clearTimers();
+
+    if (!canShowNotice()) {
+      hideNotice(false);
+      return;
+    }
+
+    if (!isVisible) {
+      scheduleNext(6000);
+    }
+  };
+
+  if (typeof desktopMedia.addEventListener === "function") {
+    desktopMedia.addEventListener("change", refreshEligibility);
+  } else if (typeof desktopMedia.addListener === "function") {
+    desktopMedia.addListener(refreshEligibility);
+  }
+
+  window.addEventListener("resize", refreshEligibility, { passive: true });
+
+  if (canShowNotice()) {
+    scheduleNext(12000);
+  }
+}
+
 function flashInvalidInputs(inputs) {
   inputs.forEach((input) => {
     input.style.borderColor = "#e03e3e";
@@ -354,6 +496,7 @@ function initStudioPage() {
   initCursor();
   initNav();
   initComingSoonModal();
+  initPrototypeNotice();
   initReveal();
   initWaitlistForm();
 }

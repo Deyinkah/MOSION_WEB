@@ -4,7 +4,7 @@
   const NAV_HTML = `
 <nav>
   <a href="/" class="logo">
-    <img src="/logo-wordmark.png" alt="MOSION" class="logo-wordmark" />
+    <img src="./logo-wordmark.png?v=20260329f" alt="MOSION" class="logo-wordmark" />
   </a>
   <div class="nav-r">
     <div class="nav-menu" id="navMenu">
@@ -33,7 +33,7 @@
   const FOOTER_HTML = `
 <footer>
   <div class="f-brand">
-    <div class="f-logo"><img src="/logo-wordmark.png" alt="MOSION" class="logo-wordmark" /></div>
+    <div class="f-logo"><img src="./logo-wordmark.png?v=20260329f" alt="MOSION" class="logo-wordmark" /></div>
     <div class="f-mission">MOSION is building the infrastructure for African cinema distribution, starting in your pocket.</div>
   </div>
   <ul class="f-links">
@@ -59,7 +59,27 @@
     <h3 class="coming-soon-title" id="comingSoonTitle">Application coming soon</h3>
     <p class="coming-soon-copy" id="comingSoonCopy">We are preparing the release. Join the waitlist and we will let you know as soon as it is ready.</p>
   </div>
-</div>`;
+</div>
+
+<aside
+  class="prototype-notice"
+  id="prototypeNotice"
+  hidden
+  aria-live="polite"
+  aria-labelledby="prototypeNoticeTitle"
+  aria-describedby="prototypeNoticeCopy"
+>
+  <button type="button" class="prototype-notice-close" id="prototypeNoticeClose" aria-label="Dismiss prototype notice">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
+    </svg>
+  </button>
+  <div class="prototype-notice-kicker">Prototype Notice</div>
+  <div class="prototype-notice-title" id="prototypeNoticeTitle">Sample interface only</div>
+  <p class="prototype-notice-copy" id="prototypeNoticeCopy">
+    Titles, artwork, and pricing shown across this site are demo content. The live MOSION catalog will be built through licensed studio partnerships.
+  </p>
+</aside>`;
 
   /* ─── CSS (injected only on pages that don't load home.css) ─────── */
 
@@ -87,12 +107,13 @@ nav{
   display:inline-flex;align-items:center;
 }
 .logo-wordmark{
-  height:clamp(16px,1.2vw,22px);
+  height:clamp(24px,2vw,34px);
   width:auto;
   display:block;
+  object-fit:contain;
 }
 .f-logo .logo-wordmark{
-  height:clamp(14px,1vw,18px);
+  height:clamp(22px,1.6vw,30px);
 }
 .nav-r{display:flex;align-items:center;gap:0}
 .nav-menu{position:relative}
@@ -201,11 +222,87 @@ footer{
   font-size:14px;line-height:1.8;
   color:rgba(240,237,230,0.5);font-weight:300;max-width:34ch;
 }
+.prototype-notice{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:10020;
+  width:min(420px,calc(100vw - 32px));
+  padding:18px 20px 18px 18px;
+  border:1px solid rgba(212,168,67,.18);
+  background:
+    linear-gradient(160deg,rgba(212,168,67,.11),transparent 40%),
+    linear-gradient(180deg,rgba(15,15,21,.96) 0%,rgba(8,8,12,.94) 100%);
+  box-shadow:0 28px 80px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(22px);
+  transition:opacity .28s ease,transform .28s ease,visibility .28s ease;
+}
+.prototype-notice::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-left:2px solid rgba(212,168,67,.7);
+  pointer-events:none;
+}
+.prototype-notice.is-visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.prototype-notice-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:0;
+  background:none;
+  color:var(--layout-muted2);
+  cursor:pointer;
+}
+.prototype-notice-close:hover{color:var(--layout-cream)}
+.prototype-notice-close svg{
+  width:14px;
+  height:14px;
+}
+.prototype-notice-kicker{
+  margin:0 0 12px;
+  font-family:'Space Mono',monospace;
+  font-size:8px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(212,168,67,.88);
+}
+.prototype-notice-title{
+  margin:0 0 10px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;
+  line-height:1;
+  color:var(--layout-cream);
+}
+.prototype-notice-copy{
+  max-width:34ch;
+  color:rgba(240,237,230,.68);
+  font-size:13px;
+  line-height:1.7;
+}
 body.modal-open{overflow:hidden}
 @media(max-width:640px){
   nav{padding-left:1.5rem;padding-right:1.5rem}
   footer{padding:32px 24px;grid-template-columns:1fr}
   .f-links{justify-self:start;justify-content:flex-start}
+  .prototype-notice{
+    right:16px;
+    bottom:16px;
+    width:calc(100vw - 32px);
+    padding:16px 16px 16px 15px;
+  }
+  .prototype-notice-copy{max-width:none}
 }`;
 
   /* ─── JS ──────────────────────────────────────────────────────── */
@@ -329,6 +426,108 @@ body.modal-open{overflow:hidden}
     });
   }
 
+  function initPrototypeNotice() {
+    const notice = document.getElementById("prototypeNotice");
+    const closeButton = document.getElementById("prototypeNoticeClose");
+    const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+    const isAboutPage = pathname === "/about" || pathname === "/about.html";
+    if (!notice || !closeButton || isAboutPage) return;
+
+    let cycleTimer = null;
+    let hideTimer = null;
+    let isVisible = false;
+    let isHovered = false;
+
+    const nextDelay = () => 21000 + Math.floor(Math.random() * 10001);
+
+    const clearTimers = () => {
+      if (cycleTimer) {
+        window.clearTimeout(cycleTimer);
+        cycleTimer = null;
+      }
+      if (hideTimer) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    };
+
+    const scheduleNext = (delay = nextDelay()) => {
+      if (document.hidden) return;
+      cycleTimer = window.setTimeout(showNotice, delay);
+    };
+
+    const hideNotice = (schedule = true) => {
+      if (!isVisible) {
+        if (schedule) scheduleNext();
+        return;
+      }
+
+      isVisible = false;
+      notice.classList.remove("is-visible");
+      document.body.classList.remove("prototype-notice-open");
+      window.setTimeout(() => {
+        if (!isVisible) {
+          notice.hidden = true;
+        }
+      }, 280);
+
+      if (schedule) scheduleNext();
+    };
+
+    const showNotice = () => {
+      clearTimers();
+
+      if (document.hidden || document.body.classList.contains("modal-open")) {
+        scheduleNext(8000);
+        return;
+      }
+
+      isVisible = true;
+      notice.hidden = false;
+      document.body.classList.add("prototype-notice-open");
+      window.requestAnimationFrame(() => {
+        notice.classList.add("is-visible");
+      });
+
+      hideTimer = window.setTimeout(() => {
+        if (!isHovered) hideNotice(true);
+      }, 9000);
+    };
+
+    notice.addEventListener("mouseenter", () => {
+      isHovered = true;
+      if (hideTimer) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    });
+
+    notice.addEventListener("mouseleave", () => {
+      isHovered = false;
+      if (isVisible && !hideTimer) {
+        hideTimer = window.setTimeout(() => hideNotice(true), 3500);
+      }
+    });
+
+    closeButton.addEventListener("click", () => {
+      clearTimers();
+      hideNotice(true);
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearTimers();
+        hideNotice(false);
+        return;
+      }
+
+      clearTimers();
+      scheduleNext(6000);
+    });
+
+    scheduleNext(12000);
+  }
+
   /* ─── Boot ────────────────────────────────────────────────────── */
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -354,5 +553,6 @@ body.modal-open{overflow:hidden}
 
     initNavMenu();
     initComingSoonModal();
+    initPrototypeNotice();
   });
 })();
