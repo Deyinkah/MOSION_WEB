@@ -159,10 +159,7 @@ nav{
 
 .hero-bg{
   position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse at 65% 40%,rgba(212,168,67,.07) 0%,transparent 55%),
-    radial-gradient(ellipse at 20% 80%,rgba(80,60,20,.15) 0%,transparent 50%),
-    linear-gradient(160deg,#0e0c14 0%,#080810 40%,#0a0608 100%);
+  background:linear-gradient(160deg,#0e0c14 0%,#080810 40%,#0a0608 100%);
 }
 
 .hero-frame{
@@ -565,12 +562,6 @@ nav{
   border-top:1px solid var(--border);
   padding:100px 56px;
   position:relative;overflow:hidden;
-}
-.cta-section::before{
-  content:'';position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse at 50% 100%,rgba(212,168,67,.08) 0%,transparent 60%);
-  pointer-events:none;
 }
 .cta-inner{
   max-width:1400px;margin:0 auto;
