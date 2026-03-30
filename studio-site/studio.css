@@ -585,15 +585,7 @@ section { position: relative; }
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.section-label::before {
-  content: '';
-  width: 32px;
-  height: 1px;
-  background: var(--gold);
+  display: block;
 }
 
 /* MANIFESTO */
