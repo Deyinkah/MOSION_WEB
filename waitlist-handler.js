@@ -2,6 +2,10 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { Resend } = require("resend");
+const {
+  buildWaitlistConfirmationTemplate,
+  renderWaitlistConfirmationPreviewDocument
+} = require("./emails/waitlist-confirmation");
 
 loadEnvFile();
 
@@ -9,7 +13,7 @@ let resendClient = null;
 let waitlistLogoAsset = null;
 let hasLoadedWaitlistLogoAsset = false;
 
-const DEFAULT_WAITLIST_LOGO_PATH = path.join(__dirname, "public", "logo.png");
+const DEFAULT_WAITLIST_LOGO_PATH = path.join(__dirname, "public", "logo-wordmark.png");
 const WAITLIST_LOGO_CONTENT_ID = "mosion-logo";
 
 function loadEnvFile() {
@@ -117,15 +121,6 @@ function maskEmailForLogs(email) {
   return `${maskedLocal}@${domain}`;
 }
 
-function escapeHtml(value) {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 function parseMailbox(input, fallbackName = "") {
   const value = typeof input === "string" ? input.trim() : "";
 
@@ -185,12 +180,7 @@ function getWaitlistLogoAsset() {
 
   hasLoadedWaitlistLogoAsset = true;
 
-  const configuredPath = typeof process.env.WAITLIST_LOGO_PATH === "string"
-    ? process.env.WAITLIST_LOGO_PATH.trim()
-    : "";
   const candidatePaths = [
-    configuredPath ? path.resolve(configuredPath) : "",
-    configuredPath ? path.resolve(__dirname, configuredPath) : "",
     DEFAULT_WAITLIST_LOGO_PATH
   ].filter(Boolean);
 
@@ -321,141 +311,48 @@ function getWaitlistDetails(body) {
   };
 }
 
-function getWaitlistVariant(source) {
-  const waitlistSource = normalizeWaitlistSource(source);
-
-  if (waitlistSource === "studio") {
-    return {
-      source: "studio",
-      preheader: "Your MOSION Studio waitlist registration is confirmed.",
-      subject: "You're on the MOSION Studio waitlist",
-      bodyCopy:
-        "Your MOSION Studio waitlist registration is confirmed. You now have early access to explore the filmmaker experience before the wider rollout.",
-      ctaLabel: "Download MOSION Studio",
-      textDownloadLead: "Download MOSION Studio",
-      signature: "MOSION Studio",
-      logoUrl: process.env.WAITLIST_LOGO_URL || "https://mosion.app/mosion.png",
-      betaUrl:
-        process.env.WAITLIST_STUDIO_BETA_URL ||
-        process.env.WAITLIST_BETA_URL ||
-        "https://mosion.app/studio"
-    };
-  }
-
-  return {
-    source: "website",
-    preheader: "Your MOSION waitlist registration is confirmed.",
-    subject: "You're on the MOSION waitlist",
-    bodyCopy:
-      "Your MOSION waitlist registration is confirmed. You're now one of the early users to have access to the MOSION app before the wider rollout.",
-    ctaLabel: "Download the Beta App",
-    textDownloadLead: "Download the Beta App",
-    signature: "MOSION",
-    logoUrl: process.env.WAITLIST_LOGO_URL || "https://mosion.app/mosion.png",
-    betaUrl: process.env.WAITLIST_BETA_URL || "https://mosion.app"
-  };
-}
-
 function getWaitlistConfirmationContent({
   source = "website",
   betaUrl,
   preview = false,
   replyTo = process.env.WAITLIST_REPLY_TO,
   fromEmail = process.env.WAITLIST_FROM_EMAIL || process.env.EMAIL_FROM,
-  fromName = process.env.WAITLIST_FROM_NAME || "MOSION"
+  fromName = process.env.WAITLIST_FROM_NAME || "Mosion"
 } = {}) {
-  const variant = getWaitlistVariant(source);
   const sender = parseMailbox(fromEmail, fromName);
   const replyToMailbox = parseMailbox(replyTo);
   const replyToAddress = replyToMailbox?.email || "";
-  const resolvedBetaUrl = betaUrl || variant.betaUrl;
-  const safeBetaUrl = escapeHtml(resolvedBetaUrl);
   const logoAsset = getWaitlistLogoAsset();
   const logoSrc = logoAsset
     ? preview
       ? logoAsset.previewSrc
       : `cid:${logoAsset.contentId}`
-    : variant.logoUrl;
-  const safeLogoSrc = escapeHtml(logoSrc);
-  const safeReplyToAddress = escapeHtml(replyToAddress);
-  const subject = variant.subject;
+    : undefined;
+  const { source: templateSource, betaUrl: resolvedBetaUrl, subject, text, html } =
+    buildWaitlistConfirmationTemplate({
+      source,
+      betaUrl,
+      logoSrc,
+      replyToAddress
+    });
 
-  const text = [
+  return {
+    source: templateSource,
+    sender,
+    replyToMailbox,
+    betaUrl: resolvedBetaUrl,
     subject,
-    "",
-    variant.bodyCopy,
-    "",
-    `${variant.textDownloadLead}: ${resolvedBetaUrl}`,
-    "",
-    replyToAddress ? `Need help? Reply to ${replyToAddress}` : "Need help? Reply to this email.",
-    "",
-    "See you inside,",
-    variant.signature
-  ].join("\n");
-
-  const supportCopy = replyToAddress
-    ? `Need help or feedback? Reply to <a href="mailto:${safeReplyToAddress}" style="color:#0f172a;text-decoration:none;">${safeReplyToAddress}</a>.`
-    : "Need help or feedback? Reply to this email.";
-
-  const html = `
-    <div style="margin:0;padding:0;background:#ffffff;">
-      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-        ${escapeHtml(variant.preheader)}
-      </div>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;background:#ffffff;">
-        <tr>
-	          <td align="center" style="padding:32px 16px;">
-	            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:460px;border-collapse:separate;border-spacing:0;background:#ffffff;border:1px solid #e5e7eb;border-radius:24px;overflow:hidden;text-align:center;">
-		              <tr>
-		                <td align="center" style="padding:28px 32px 32px;background:#ffffff;">
-			                  <table role="presentation" width="460" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:460px;border-collapse:collapse;">
-			                    <tr>
-			                      <td align="left" style="padding:0 0 10px;text-align:left;">
-			                        <img src="${safeLogoSrc}" alt="${escapeHtml(variant.signature)}" width="46" style="display:block;width:36px;max-width:36px;height:auto;margin:0;" />
-			                      </td>
-			                    </tr>
-		                    <tr>
-		                      <td align="left" style="padding:12px 0 0;text-align:left;">
-		                        <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;letter-spacing:-0.045em;line-height:1.05;color:#0f172a;text-align:left;">
-		                          You're on the list!
-		                        </h1>
-		                        <p style="width:100%;max-width:460px;margin:18px 0 0;color:#475569;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;line-height:1.45;text-align:left;">
-		                          ${escapeHtml(variant.bodyCopy)}
-		                        </p>
-		                      </td>
-		                    </tr>
-		                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:0 32px 28px;color:#64748b;font-family:'DM Sans','Segoe UI',sans-serif;font-size:13px;line-height:1.7;text-align:center;">
-                  ${supportCopy}
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </div>
-  `;
-
-	  return {
-	    source: variant.source,
-	    sender,
-	    replyToMailbox,
-	    betaUrl: resolvedBetaUrl,
-	    subject,
-	    text,
-	    html,
-	    attachments: !preview && logoAsset
-	      ? [{
-	          filename: logoAsset.filename,
-	          content: logoAsset.content,
-	          contentType: logoAsset.contentType,
-	          contentId: logoAsset.contentId
-	        }]
-	      : undefined
-	  };
+    text,
+    html,
+    attachments: !preview && logoAsset
+      ? [{
+          filename: logoAsset.filename,
+          content: logoAsset.content,
+          contentType: logoAsset.contentType,
+          contentId: logoAsset.contentId
+        }]
+      : undefined
+  };
 }
 
 function renderWaitlistConfirmationPreviewPage(options = {}) {
@@ -464,30 +361,7 @@ function renderWaitlistConfirmationPreviewPage(options = {}) {
     preview: true
   });
 
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${escapeHtml(subject)} Preview</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      html, body {
-        margin: 0;
-        min-height: 100%;
-        background: #ffffff;
-      }
-    </style>
-  </head>
-  <body>
-    ${html}
-  </body>
-</html>`;
+  return renderWaitlistConfirmationPreviewDocument({ subject, html });
 }
 
 function getResendApiKey() {

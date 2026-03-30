@@ -104,7 +104,11 @@
     aria-labelledby="comingSoonTitle"
     aria-describedby="comingSoonCopy"
   >
-    <button type="button" class="coming-soon-close" data-modal-close>Close</button>
+    <button type="button" class="coming-soon-close" data-modal-close aria-label="Close popup">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M3.5 3.5 12.5 12.5M12.5 3.5 3.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
     <h3 class="coming-soon-title" id="comingSoonTitle">${COPY.defaultModalTitle}</h3>
     <p class="coming-soon-copy" id="comingSoonCopy">${COPY.defaultModalBody}</p>
   </div>

@@ -2,8 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const {
-  handleWaitlistSignup,
-  renderWaitlistConfirmationPreviewPage
+  handleWaitlistSignup
 } = require("./waitlist-handler");
 const {
   handleBetaApkDownload,
@@ -16,6 +15,12 @@ const DEFAULT_PORT = Number(process.env.PORT || 3000);
 const ROOT_SITE_DIR = path.join(__dirname, "public");
 const STUDIO_SITE_DIR = path.join(__dirname, "studio-site");
 const STUDIO_PATH_PREFIX = "/studio";
+const WAITLIST_HANDLER_MODULE_PATH = path.join(__dirname, "waitlist-handler.js");
+const WAITLIST_TEMPLATE_MODULE_PATH = path.join(
+  __dirname,
+  "emails",
+  "waitlist-confirmation.js"
+);
 const EXACT_STUDIO_HOSTS = new Set([
   "studio.mosion.app",
   "www.studio.mosion.app",
@@ -107,6 +112,14 @@ function canRenderEmailPreview(host) {
   return host === "localhost" || host === "127.0.0.1" || host.endsWith(".localhost");
 }
 
+function loadFreshWaitlistPreviewPage(options = {}) {
+  delete require.cache[WAITLIST_TEMPLATE_MODULE_PATH];
+  delete require.cache[WAITLIST_HANDLER_MODULE_PATH];
+
+  const { renderWaitlistConfirmationPreviewPage } = require(WAITLIST_HANDLER_MODULE_PATH);
+  return renderWaitlistConfirmationPreviewPage(options);
+}
+
 function getSiteContext(req, requestUrl) {
   const host = getRequestHost(req);
 
@@ -164,13 +177,16 @@ const server = http.createServer((req, res) => {
     const previewSource = requestUrl.searchParams.get("source") || "website";
     const previewBetaUrl = requestUrl.searchParams.get("betaUrl");
     const previewReplyTo = requestUrl.searchParams.get("replyTo") || process.env.WAITLIST_REPLY_TO;
-    const previewHtml = renderWaitlistConfirmationPreviewPage({
+    const previewHtml = loadFreshWaitlistPreviewPage({
       source: previewSource,
       betaUrl: previewBetaUrl || undefined,
       replyTo: previewReplyTo
     });
 
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.writeHead(200, {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store"
+    });
     res.end(previewHtml);
     return;
   }

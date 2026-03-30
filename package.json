@@ -4,7 +4,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js"
+    "check": "node --check server.js",
+    "preview:email": "node render-email-preview.js"
   },
   "dependencies": {
     "resend": "^6.9.4"
