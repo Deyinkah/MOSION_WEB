@@ -4,26 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>MOSION - About</title>
-  <!-- SEO -->
-  <meta name="description" content="MOSION is mobile cinema for African film. Learn the story behind the platform - why it was built, what it solves, and where it's going." />
+  <meta
+    name="description"
+    content="MOSION is mobile cinema for African film. Learn the story behind the platform - why it was built, what it solves, and where it's going."
+  />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://mosion.app/about" />
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="MOSION" />
   <meta property="og:url" content="https://mosion.app/about" />
   <meta property="og:title" content="MOSION - About" />
-  <meta property="og:description" content="A ₦15.6 billion market. 122 cinemas. 230 million people. The infrastructure was always missing - until now." />
+  <meta
+    property="og:description"
+    content="A &#8358;15.6 billion market. 122 cinemas. 230 million people. The infrastructure was always missing - until now."
+  />
   <meta property="og:image" content="https://mosion.app/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_NG" />
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="MOSION - About" />
-  <meta name="twitter:description" content="A ₦15.6 billion market. 122 cinemas. 230 million people. The infrastructure was always missing - until now." />
+  <meta
+    name="twitter:description"
+    content="A &#8358;15.6 billion market. 122 cinemas. 230 million people. The infrastructure was always missing - until now."
+  />
   <meta name="twitter:image" content="https://mosion.app/og-image.jpg" />
-  <!-- PWA -->
   <meta name="theme-color" content="#080808" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -36,537 +41,173 @@
   <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260329h" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --amber: #d4a843;
-      --amber-light: #f0c96a;
-      --amber2: #f0c96a;
-      --amber-glow: rgba(212,168,67,0.08);
-      --amber-rule: rgba(212,168,67,0.18);
-      --bg: #070707;
-      --ink: #06060a;
-      --bg-card: #0d0d0d;
-      --bg-raised: #121212;
-      --text: #ede9e2;
-      --cream: #f0ede6;
-      --text-mid: #9a9088;
-      --text-dim: #4a4440;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* - HERO - */
-    .hero {
-      height: 100vh;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 100% 70% at 50% -10%, rgba(212,168,67,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 50% at 85% 70%, rgba(212,168,67,0.04) 0%, transparent 50%);
-    }
-
-    .hero-grain {
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      background-size: 180px;
-      opacity: 0.028;
-      pointer-events: none;
-    }
-
-    .hero-accent-line {
-      position: absolute;
-      left: 3rem;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent 0%, var(--amber) 30%, var(--amber) 70%, transparent 100%);
-      opacity: 0.3;
-    }
-
-    .hero-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 3rem 0 5.5rem;
-      max-width: 900px;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.6rem;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.3s forwards;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      font-weight: 400;
-      line-height: 1.0;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.45s forwards;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--amber);
-    }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--text-mid);
-      max-width: 480px;
-      line-height: 1.8;
-      font-weight: 300;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
-    }
-
-    .hero-bottom {
-      position: relative;
-      padding: 2rem 3rem 2rem 5.5rem;
-      border-top: 1px solid var(--amber-rule);
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-    }
-
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.75s forwards;
-    }
-
-    .hero-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--amber);
-      line-height: 1;
-    }
-
-    .hero-stat-label {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      margin-top: 0.2rem;
-    }
-
-    .hero-stat-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--amber-rule);
-    }
-
-    /* - STORY SECTION - */
-    .story {
-      padding: 9rem 5.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      border-top: 1px solid var(--amber-rule);
-    }
-
-    .story-label {
-      font-size: 0.67rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.2rem;
-    }
-
-    .story-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-    }
-
-    .story-headline em {
-      font-style: italic;
-      color: var(--amber);
-    }
-
-    .pull-quote {
-      border-left: 2px solid var(--amber);
-      padding: 1.2rem 0 1.2rem 1.8rem;
-      margin: 2.5rem 0;
-      max-width: 640px;
-    }
-
-    .pull-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.5;
-      font-weight: 400;
-    }
-
-    .story-body {
-      font-size: 0.95rem;
-      color: var(--text-mid);
-      line-height: 1.9;
-      margin-bottom: 1.3rem;
-      font-weight: 300;
-      max-width: 680px;
-    }
-
-    .story-body strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    /* - VISION - */
-    .vision {
-      border-top: 1px solid var(--amber-rule);
-      padding: 8rem 5.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .vision-label {
-      font-size: 0.67rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 3rem;
-    }
-
-    .vision-statement {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 400;
-      line-height: 1.2;
-      max-width: 820px;
-      margin-bottom: 5rem;
-    }
-
-    .vision-statement em {
-      font-style: italic;
-      color: var(--amber);
-    }
-
-    .vision-pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
-
-    .pillar {
-      padding: 2.5rem 2.5rem 2.5rem 0;
-      border-right: 1px solid var(--amber-rule);
-    }
-
-    .pillar:last-child {
-      border-right: none;
-      padding-left: 2.5rem;
-      padding-right: 0;
-    }
-
-    .pillar:nth-child(2) {
-      padding-left: 2.5rem;
-    }
-
-    .pillar-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-style: italic;
-      color: var(--amber);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .pillar-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.7rem;
-      letter-spacing: 0.02em;
-    }
-
-    .pillar-body {
-      font-size: 0.85rem;
-      color: var(--text-mid);
-      line-height: 1.75;
-      font-weight: 300;
-    }
-
-    /* - BUILDING / HIRING - */
-    .building {
-      border-top: 1px solid var(--amber-rule);
-      padding: 6rem 5.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .building-left h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 1.4rem;
-    }
-
-    .building-left h2 em {
-      font-style: italic;
-      color: var(--amber);
-    }
-
-    .building-left p {
-      font-size: 0.92rem;
-      color: var(--text-mid);
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-
-    .building-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--amber);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      border-bottom: 1px solid var(--amber-rule);
-      padding-bottom: 0.3rem;
-      transition: border-color 0.2s;
-    }
-
-    .building-cta:hover { border-color: var(--amber); }
-
-    .open-roles {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .role-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 1.4rem;
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: border-color 0.2s;
-    }
-
-    .role-row:hover { border-color: var(--amber-rule); }
-
-    .role-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-    }
-
-    .role-sub {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .role-status {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.65rem;
-      border-radius: 2rem;
-    }
-
-    .status-open {
-      color: var(--amber);
-      background: var(--amber-glow);
-      border: 1px solid var(--amber-rule);
-    }
-
-    .status-progress {
-      color: var(--text-dim);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-
-    /* - FOOTER - */
-
-
-    /* - ANIMATIONS - */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* - RESPONSIVE - */
-    @media (max-width: 900px) {
-      nav { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .hero-content { padding: 0 1.5rem; }
-      .hero-bottom { padding: 1.5rem; gap: 1.5rem; }
-      .story { padding: 5rem 1.5rem; }
-      .vision { padding: 5rem 1.5rem; }
-      .vision-pillars { grid-template-columns: 1fr; }
-      .pillar { border-right: none; border-bottom: 1px solid var(--amber-rule); padding: 2rem 0; }
-      .pillar:last-child { border-bottom: none; padding-left: 0; }
-      .pillar:nth-child(2) { padding-left: 0; }
-      .building { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
-      .hero-accent-line { display: none; }
-    }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./layout.css" />
+  <link rel="stylesheet" href="./about.css" />
 </head>
 <body>
-
   <div id="site-nav"></div>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grain"></div>
     <div class="hero-accent-line"></div>
 
     <div class="hero-content">
-      <h1 class="hero-title">The cinema<br><em>Africa deserves.</em></h1>
-      <p class="hero-desc">A ₦15.6 billion market. 122 cinemas. 230 million people. The infrastructure was always missing - until now.</p>
+      <h1 class="hero-title">
+        The cinema<br />
+        <em>Africa deserves.</em>
+      </h1>
+      <p class="hero-desc">
+        A &#8358;15.6 billion market. 122 cinemas. 230 million people. The
+        infrastructure was always missing - until now.
+      </p>
     </div>
 
     <div class="hero-bottom">
       <div class="hero-stat">
-        <span class="hero-stat-num">₦15.6B</span>
+        <span class="hero-stat-num">&#8358;15.6B</span>
         <span class="hero-stat-label">Box office. 3 cities. 230M people.</span>
       </div>
       <div class="hero-stat-divider"></div>
-      <div class="hero-stat" style="animation-delay:0.85s">
+      <div class="hero-stat" style="animation-delay: 0.85s">
         <span class="hero-stat-num">98.8%</span>
         <span class="hero-stat-label">Of Nigeria with no cinema access.</span>
       </div>
       <div class="hero-stat-divider"></div>
-      <div class="hero-stat" style="animation-delay:0.95s">
+      <div class="hero-stat" style="animation-delay: 0.95s">
         <span class="hero-stat-num">1</span>
         <span class="hero-stat-label">Platform solving it.</span>
       </div>
     </div>
   </div>
 
-  <!-- STORY -->
   <div class="story reveal">
     <p class="story-label">The Story</p>
-    <h2 class="story-headline">Why MOSION<br><em>exists.</em></h2>
+    <h2 class="story-headline">
+      Why MOSION<br />
+      <em>exists.</em>
+    </h2>
 
     <div class="pull-quote">
-      <p>"African cinema is producing world-class content. The infrastructure to distribute it was never built."</p>
+      <p>
+        "African cinema is producing world-class content. The infrastructure to
+        distribute it was never built."
+      </p>
     </div>
 
-    <p class="story-body">Nigeria's box office grossed <strong>₦15.6 billion in 2025</strong> - a record year, with Nollywood claiming more than half the market for the first time in history. The demand for African cinema is real, growing, and impossible to ignore.</p>
+    <p class="story-body">
+      Nigeria's box office grossed <strong>&#8358;15.6 billion in 2025</strong>
+      - a record year, with Nollywood claiming more than half the market for the
+      first time in history. The demand for African cinema is real, growing, and
+      impossible to ignore.
+    </p>
 
-    <p class="story-body">But that entire ₦15.6 billion passed through just <strong>122 cinemas</strong>, almost all in Lagos, Abuja, and Port Harcourt. A filmmaker in Enugu premieres nationally - and reaches 1.2% of the country. A viewer in Ilorin wants to watch opening weekend - and has no option.</p>
+    <p class="story-body">
+      But that entire &#8358;15.6 billion passed through just
+      <strong>122 cinemas</strong>, almost all in Lagos, Abuja, and Port
+      Harcourt. A filmmaker in Enugu premieres nationally - and reaches 1.2% of
+      the country. A viewer in Ilorin wants to watch opening weekend - and has no
+      option.
+    </p>
 
-    <p class="story-body">MOSION is the answer to that gap. Not a streaming service. Not a subscription platform. A <strong>mobile cinema</strong> - pay-per-view, premiere-first, built for the device already in 230 million pockets. The model is cinema's own model. The delivery is the infrastructure cinema never had.</p>
+    <p class="story-body">
+      MOSION is the answer to that gap. Not a streaming service. Not a
+      subscription platform. A <strong>mobile cinema</strong> - pay-per-view,
+      premiere-first, built for the device already in 230 million pockets. The
+      model is cinema's own model. The delivery is the infrastructure cinema
+      never had.
+    </p>
 
-    <p class="story-body">And for filmmakers, MOSION Studio gives them something traditional distribution has always withheld: <strong>full financial visibility</strong>. Real-time earnings. Direct withdrawal. No intermediary between a filmmaker and their money.</p>
+    <p class="story-body">
+      And for filmmakers, MOSION Studio gives them something traditional
+      distribution has always withheld: <strong>full financial visibility</strong>.
+      Real-time earnings. Direct withdrawal. No intermediary between a filmmaker
+      and their money.
+    </p>
   </div>
 
-  <!-- VISION -->
   <div class="vision reveal">
     <p class="vision-label">The Vision</p>
-    <h2 class="vision-statement">"We're building cinema<br>that lives in <em>your pocket.</em>"</h2>
+    <h2 class="vision-statement">
+      "We're building cinema<br />
+      that lives in <em>your pocket.</em>"
+    </h2>
 
     <div class="vision-pillars">
       <div class="pillar">
         <div class="pillar-num">01</div>
         <h3 class="pillar-title">Access Without Infrastructure</h3>
-        <p class="pillar-body">A cinema only works where a building exists. MOSION doesn't need one. Any filmmaker can premiere nationally. Any viewer - regardless of city or commute - can attend opening weekend.</p>
+        <p class="pillar-body">
+          A cinema only works where a building exists. MOSION doesn't need one.
+          Any filmmaker can premiere nationally. Any viewer - regardless of city
+          or commute - can attend opening weekend.
+        </p>
       </div>
       <div class="pillar">
         <div class="pillar-num">02</div>
         <h3 class="pillar-title">Transparency for Creators</h3>
-        <p class="pillar-body">Filmmakers have been the last to know what their own films earned. MOSION Studio gives them a real-time earnings dashboard, direct withdrawal, and the financial clarity the industry has always withheld.</p>
+        <p class="pillar-body">
+          Filmmakers have been the last to know what their own films earned.
+          MOSION Studio gives them a real-time earnings dashboard, direct
+          withdrawal, and the financial clarity the industry has always withheld.
+        </p>
       </div>
       <div class="pillar">
         <div class="pillar-num">03</div>
         <h3 class="pillar-title">The Cinema Model, Extended</h3>
-        <p class="pillar-body">MOSION doesn't reinvent cinema economics. It extends them. The same 60/40 and 70/30 revenue splits. The same premiere window. The same quality standard. Just delivered to where Africa actually watches.</p>
+        <p class="pillar-body">
+          MOSION doesn't reinvent cinema economics. It extends them. The same
+          60/40 and 70/30 revenue splits. The same premiere window. The same
+          quality standard. Just delivered to where Africa actually watches.
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- BUILDING / ROLES -->
   <div class="building reveal">
     <div class="building-left">
       <p class="story-label">Currently Building</p>
-      <h2><em>Founder-led.</em><br>Actively growing.</h2>
-      <p>MOSION is currently built and led by its founder. We are actively looking to bring on a business-focused co-founder or key hire in filmmaker partnerships and sales as part of our seed raise.</p>
-      <p>If you are a filmmaker, distributor, investor, or operator who believes in what we're building - we'd like to talk.</p>
-      <a href="mailto:partners@mosion.app" class="building-cta">Get in touch →</a>
+      <h2>
+        <em>Founder-led.</em><br />
+        Actively growing.
+      </h2>
+      <p>
+        MOSION is currently built and led by its founder. We are actively
+        looking to bring on a business-focused co-founder or key hire in
+        filmmaker partnerships and sales as part of our seed raise.
+      </p>
+      <p>
+        If you are a filmmaker, distributor, investor, or operator who believes
+        in what we're building - we'd like to talk.
+      </p>
+      <a href="mailto:partners@mosion.app" class="building-cta">
+        Get in touch &rarr;
+      </a>
     </div>
 
     <div class="open-roles">
       <div class="role-row">
         <div class="role-info">
           <div class="role-title">Filmmaker Partnerships Lead</div>
-          <div class="role-sub">Business Development · Content Acquisition</div>
+          <div class="role-sub">Business Development &middot; Content Acquisition</div>
         </div>
         <span class="role-status status-open">Open</span>
       </div>
       <div class="role-row">
         <div class="role-info">
           <div class="role-title">Customer Support Lead</div>
-          <div class="role-sub">Support Systems · Automation</div>
+          <div class="role-sub">Support Systems &middot; Automation</div>
         </div>
         <span class="role-status status-progress">In Progress</span>
       </div>
       <div class="role-row">
         <div class="role-info">
           <div class="role-title">Co-Founder (Business)</div>
-          <div class="role-sub">Operations · Partnerships · Growth</div>
+          <div class="role-sub">Operations &middot; Partnerships &middot; Growth</div>
         </div>
         <span class="role-status status-open">Open</span>
       </div>
@@ -575,16 +216,8 @@
 
   <div id="site-footer"></div>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.08 });
-    reveals.forEach(el => io.observe(el));
-  </script>
-  <script src="./layout.js?v=20260329e"></script>
-
+  <script src="./site-core.js" defer></script>
+  <script src="./layout.js" defer></script>
+  <script src="./about.js" defer></script>
 </body>
 </html>
