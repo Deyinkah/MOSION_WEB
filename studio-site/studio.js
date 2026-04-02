@@ -9,8 +9,8 @@
     defaultFormNote:
       "You'll be notified when filmmaker onboarding opens. No spam, ever.",
     iosBetaCopy:
-      "The MOSION Studio beta application is being prepared for release. Join the waitlist and we will reach out as soon as the build is ready.",
-    iosBetaTitle: "Studio beta coming soon",
+      "The MOSION Studio beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon.",
+    iosBetaTitle: "Android beta only",
     waitlistError: "We could not complete your waitlist signup.",
     waitlistSubmitting: "Requesting...",
   };
@@ -81,23 +81,25 @@
       return;
     }
 
-    const betaApkLink = document.querySelector("[data-beta-apk-link]");
+    const betaApkLinks = Array.from(document.querySelectorAll("[data-beta-apk-link]"));
 
-    if (!betaApkLink) {
+    if (!betaApkLinks.length) {
       return;
     }
 
-    betaApkLink.addEventListener("click", (event) => {
-      if (!Site.isIosDevice()) {
-        return;
-      }
+    betaApkLinks.forEach((betaApkLink) => {
+      betaApkLink.addEventListener("click", (event) => {
+        if (!Site.isIosDevice()) {
+          return;
+        }
 
-      event.preventDefault();
-      modalControls.open(
-        betaApkLink,
-        betaApkLink.getAttribute("data-ios-modal-title"),
-        betaApkLink.getAttribute("data-ios-modal-copy")
-      );
+        event.preventDefault();
+        modalControls.open(
+          betaApkLink,
+          betaApkLink.getAttribute("data-ios-modal-title"),
+          betaApkLink.getAttribute("data-ios-modal-copy")
+        );
+      });
     });
   }
 

@@ -510,26 +510,28 @@
 	    <div class="section-label">Early Access</div>
 	    <h2>Your film deserves<br/><em>a real release.</em></h2>
 	    <p>MOSION Studio is opening access in waves - for filmmakers and distributors alike. Submit your details and join the waitlist. We'll reach out with onboarding steps when your slot opens. Free to list. Transparent revenue. Direct withdrawals. No gatekeepers.</p>
-	    <div class="waitlist-beta-actions">
-	      <button
-	        type="button"
-	        class="studio-beta-btn"
-	        data-coming-soon-title="Application coming soon"
-	        data-coming-soon-copy="MOSION Studio for Android is being prepared for Google Play release. We will share the beta as soon as the build is ready."
-	      >
-	        <div class="studio-store-btn-icon" aria-hidden="true">
-	          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.2.97.08l11.65-6.73-2.54-2.54-10.08 9.19zm-1.85-20.5C1.12 3.6 1 4 1 4.5v15c0 .5.12.9.33 1.24L13.6 8.5 1.33 3.26zM20.73 10.3l-2.79-1.61-2.85 2.85 2.85 2.85 2.81-1.63c.8-.46.8-1.99-.02-2.46zM4.15.16L15.8 6.89l-2.54 2.54L3.18.24C3.5.1 3.86.14 4.15.3z" /></svg>
-	        </div>
-	        <div class="studio-store-btn-text">
-	          <span class="studio-store-btn-sub">Get it on</span>
-	          <span class="studio-store-btn-name">Google Play</span>
-	        </div>
-	      </button>
-	      <button
-	        type="button"
-	        class="studio-beta-btn"
-	        data-coming-soon-title="Application coming soon"
-	        data-coming-soon-copy="MOSION Studio for iPhone and iPad is being prepared for the App Store. We will share the beta as soon as the build is ready."
+		    <div class="waitlist-beta-actions">
+		      <a
+		        class="studio-beta-btn"
+		        href="/api/download-studio-apk"
+		        rel="noopener"
+		        data-beta-apk-link
+		        data-ios-modal-title="Android beta only"
+		        data-ios-modal-copy="The MOSION Studio beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon."
+		      >
+		        <div class="studio-store-btn-icon" aria-hidden="true">
+		          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.2.97.08l11.65-6.73-2.54-2.54-10.08 9.19zm-1.85-20.5C1.12 3.6 1 4 1 4.5v15c0 .5.12.9.33 1.24L13.6 8.5 1.33 3.26zM20.73 10.3l-2.79-1.61-2.85 2.85 2.85 2.85 2.81-1.63c.8-.46.8-1.99-.02-2.46zM4.15.16L15.8 6.89l-2.54 2.54L3.18.24C3.5.1 3.86.14 4.15.3z" /></svg>
+		        </div>
+		        <div class="studio-store-btn-text">
+		          <span class="studio-store-btn-sub">Download the</span>
+		          <span class="studio-store-btn-name">Android Beta</span>
+		        </div>
+		      </a>
+		      <button
+		        type="button"
+		        class="studio-beta-btn"
+		        data-coming-soon-title="Application coming soon"
+		        data-coming-soon-copy="MOSION Studio for iPhone and iPad is being prepared for the App Store. We will share the beta as soon as the build is ready."
 	      >
 	        <div class="studio-store-btn-icon" aria-hidden="true">
 	          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" /></svg>
@@ -540,15 +542,17 @@
 	        </div>
 	      </button>
 	    </div>
-	    <button
-	      type="button"
-	      class="studio-direct-beta-btn"
-	      data-coming-soon-title="Studio beta coming soon"
-	      data-coming-soon-copy="The MOSION Studio beta application is being prepared for release. Join the waitlist and we will reach out as soon as the build is ready."
-	    >
-	      Download Studio BETA
-	      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 1v8M3 6l4 4 4-4" /><path d="M2 13h10" /></svg>
-	    </button>
+		    <a
+		      class="studio-direct-beta-btn"
+		      href="/api/download-studio-apk"
+		      rel="noopener"
+		      data-beta-apk-link
+		      data-ios-modal-title="Android beta only"
+		      data-ios-modal-copy="The MOSION Studio beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon."
+		    >
+		      Download Studio BETA
+		      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 1v8M3 6l4 4 4-4" /><path d="M2 13h10" /></svg>
+		    </a>
 	  </div>
 	  <div class="waitlist-form-area reveal reveal-delay-2">
 	    <form id="studioWaitlistForm" novalidate>
