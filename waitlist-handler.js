@@ -110,6 +110,19 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isValidHttpUrl(value) {
+  if (!value) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch (error) {
+    return false;
+  }
+}
+
 function maskEmailForLogs(email) {
   if (!isValidEmail(email)) {
     return "[invalid-email]";
@@ -300,15 +313,67 @@ function getWaitlistDetails(body) {
 
   const firstName = normalizeOptionalText(body.firstName, 80);
   const lastName = normalizeOptionalText(body.lastName, 80);
+  const companyWebsite = normalizeOptionalText(body.companyWebsite, 240);
   const filmName = normalizeOptionalText(body.filmName, 160);
   const origin = normalizeOptionalText(body.origin, 120);
+  const rightsStatus = normalizeOptionalText(body.rightsStatus, 120);
+  const releaseStage = normalizeOptionalText(body.releaseStage, 120);
+  const territoryFocus = normalizeOptionalText(body.territoryFocus, 160);
+  const screenerUrl = normalizeOptionalText(body.screenerUrl, 240);
+  const submissionSummary = normalizeOptionalText(body.submissionSummary, 1200);
 
   return {
     ...(firstName ? { firstName } : {}),
     ...(lastName ? { lastName } : {}),
+    ...(companyWebsite ? { companyWebsite } : {}),
     ...(filmName ? { filmName } : {}),
     ...(origin ? { origin } : {}),
+    ...(rightsStatus ? { rightsStatus } : {}),
+    ...(releaseStage ? { releaseStage } : {}),
+    ...(territoryFocus ? { territoryFocus } : {}),
+    ...(screenerUrl ? { screenerUrl } : {}),
+    ...(submissionSummary ? { submissionSummary } : {}),
   };
+}
+
+function validateStudioApplication(details) {
+  if (!details.firstName) {
+    return "Enter your first name.";
+  }
+
+  if (!details.filmName) {
+    return "Enter your company, slate, or lead title.";
+  }
+
+  if (!details.origin) {
+    return "Select your applicant type.";
+  }
+
+  if (!details.rightsStatus) {
+    return "Select your rights status.";
+  }
+
+  if (!details.releaseStage) {
+    return "Select your release stage.";
+  }
+
+  if (!details.territoryFocus) {
+    return "Enter your primary territories or audience focus.";
+  }
+
+  if (!details.submissionSummary) {
+    return "Share a short submission summary so we can assess fit.";
+  }
+
+  if (!isValidHttpUrl(details.companyWebsite || "")) {
+    return "Enter a valid website or portfolio URL.";
+  }
+
+  if (!isValidHttpUrl(details.screenerUrl || "")) {
+    return "Enter a valid trailer or screener URL.";
+  }
+
+  return "";
 }
 
 function getWaitlistConfirmationContent({
@@ -458,6 +523,15 @@ async function handleWaitlistSignup(req, res) {
     if (!isValidEmail(email)) {
       console.warn(`[waitlist:${requestId}] invalid email submitted source=${source}`);
       throw createHttpError(400, "Enter a valid email address.");
+    }
+
+    if (source === "studio") {
+      const studioValidationError = validateStudioApplication(details);
+
+      if (studioValidationError) {
+        console.warn(`[waitlist:${requestId}] invalid studio application source=${source}`);
+        throw createHttpError(400, studioValidationError);
+      }
     }
 
     const maskedEmail = maskEmailForLogs(email);

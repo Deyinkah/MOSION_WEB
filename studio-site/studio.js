@@ -7,12 +7,12 @@
 
   const COPY = {
     defaultFormNote:
-      "You'll be notified when filmmaker onboarding opens. No spam, ever.",
+      "Applications are reviewed manually. Access is granted only to approved partners.",
     iosBetaCopy:
-      "The MOSION Studio beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon.",
-    iosBetaTitle: "Android beta only",
-    waitlistError: "We could not complete your waitlist signup.",
-    waitlistSubmitting: "Requesting...",
+      "Additional partner resources are being prepared and will be available soon.",
+    iosBetaTitle: "More information coming soon",
+    waitlistError: "We could not submit your application.",
+    waitlistSubmitting: "Submitting...",
   };
 
   function initNav() {
@@ -113,12 +113,15 @@
     const desktopMedia = window.matchMedia("(min-width: 1025px)");
     const canShowNotice = () =>
       desktopMedia.matches && window.getComputedStyle(heroRight).display !== "none";
+    const hasBlockingOverlay = () =>
+      document.body.classList.contains("modal-open") ||
+      document.body.classList.contains("studio-form-modal-open");
 
     const noticeControls = Site.initTimedNotice({
       noticeId: "prototypeNotice",
       closeButtonId: "prototypeNoticeClose",
       isEligible: canShowNotice,
-      shouldPause: () => document.body.classList.contains("modal-open"),
+      shouldPause: hasBlockingOverlay,
     });
 
     if (!noticeControls) {
@@ -138,6 +141,108 @@
     window.addEventListener("resize", refreshEligibility, { passive: true });
   }
 
+  function initDesktopPartnerApplicationFocus() {
+    const applySection = document.getElementById("apply");
+    const formArea = applySection
+      ? applySection.querySelector(".waitlist-form-area")
+      : null;
+    const closeButton = document.getElementById("studioFormCancel");
+    const firstNameInput = document.getElementById("firstName");
+    const applyLinks = Array.from(
+      document.querySelectorAll("a[href='#studioWaitlistForm']")
+    );
+
+    if (!applySection || !formArea || !closeButton || !firstNameInput || !applyLinks.length) {
+      return;
+    }
+
+    const mobileMedia = window.matchMedia("(max-width: 640px)");
+    const desktopMedia = window.matchMedia("(min-width: 1025px)");
+    let focusTimer = null;
+    let mobileFormOpen = false;
+
+    const focusFirstName = () => {
+      if (focusTimer) {
+        window.clearTimeout(focusTimer);
+      }
+
+      // Let the smooth scroll settle before moving keyboard focus into the form.
+      focusTimer = window.setTimeout(() => {
+        firstNameInput.focus();
+      }, 420);
+    };
+
+    const syncMobileState = () => {
+      const isOpen = mobileMedia.matches && mobileFormOpen;
+
+      applySection.classList.toggle("is-mobile-form-open", isOpen);
+      document.body.classList.toggle("studio-form-modal-open", isOpen);
+      formArea.setAttribute("aria-hidden", String(mobileMedia.matches ? !isOpen : false));
+    };
+
+    const openMobileForm = () => {
+      if (!mobileMedia.matches) {
+        return;
+      }
+
+      mobileFormOpen = true;
+      syncMobileState();
+    };
+
+    const closeMobileForm = () => {
+      if (!mobileMedia.matches) {
+        return;
+      }
+
+      mobileFormOpen = false;
+      syncMobileState();
+
+      if (document.activeElement && formArea.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+    };
+
+    applyLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (mobileMedia.matches) {
+          event.preventDefault();
+          openMobileForm();
+          return;
+        }
+
+        if (!desktopMedia.matches) {
+          return;
+        }
+
+        event.preventDefault();
+        Site.scrollToHash("#studioWaitlistForm");
+        focusFirstName();
+      });
+    });
+
+    closeButton.addEventListener("click", closeMobileForm);
+
+    const handleMobileMediaChange = () => {
+      mobileFormOpen = false;
+      syncMobileState();
+    };
+
+    if (typeof mobileMedia.addEventListener === "function") {
+      mobileMedia.addEventListener("change", handleMobileMediaChange);
+    } else if (typeof mobileMedia.addListener === "function") {
+      mobileMedia.addListener(handleMobileMediaChange);
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mobileMedia.matches && mobileFormOpen) {
+        closeMobileForm();
+      }
+    });
+
+    window.addEventListener("resize", syncMobileState, { passive: true });
+    syncMobileState();
+  }
+
   function flashInvalidInputs(inputs) {
     inputs.forEach((input) => {
       input.style.borderColor = "#e03e3e";
@@ -150,13 +255,32 @@
     }, 2000);
   }
 
+  function isValidUrl(value) {
+    if (!value) {
+      return true;
+    }
+
+    try {
+      const parsed = new URL(value);
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch (error) {
+      return false;
+    }
+  }
+
   function initWaitlistForm() {
     const form = document.getElementById("studioWaitlistForm");
     const firstNameInput = document.getElementById("firstName");
     const lastNameInput = document.getElementById("lastName");
     const emailInput = document.getElementById("email");
+    const companyWebsiteInput = document.getElementById("companyWebsite");
     const filmNameInput = document.getElementById("filmName");
     const originInput = document.getElementById("origin");
+    const rightsStatusInput = document.getElementById("rightsStatus");
+    const releaseStageInput = document.getElementById("releaseStage");
+    const territoryFocusInput = document.getElementById("territoryFocus");
+    const screenerUrlInput = document.getElementById("screenerUrl");
+    const submissionSummaryInput = document.getElementById("submissionSummary");
     const successState = document.getElementById("successState");
     const successSub = successState
       ? successState.querySelector(".success-sub")
@@ -169,8 +293,14 @@
       !firstNameInput ||
       !lastNameInput ||
       !emailInput ||
+      !companyWebsiteInput ||
       !filmNameInput ||
       !originInput ||
+      !rightsStatusInput ||
+      !releaseStageInput ||
+      !territoryFocusInput ||
+      !screenerUrlInput ||
+      !submissionSummaryInput ||
       !successState ||
       !note ||
       !submitButton
@@ -189,8 +319,14 @@
       const firstName = firstNameInput.value.trim();
       const lastName = lastNameInput.value.trim();
       const email = emailInput.value.trim().toLowerCase();
+      const companyWebsite = companyWebsiteInput.value.trim();
       const filmName = filmNameInput.value.trim();
       const origin = originInput.value.trim();
+      const rightsStatus = rightsStatusInput.value.trim();
+      const releaseStage = releaseStageInput.value.trim();
+      const territoryFocus = territoryFocusInput.value.trim();
+      const screenerUrl = screenerUrlInput.value.trim();
+      const submissionSummary = submissionSummaryInput.value.trim();
 
       const invalidInputs = [];
 
@@ -202,8 +338,41 @@
         invalidInputs.push(emailInput);
       }
 
+      if (!filmName) {
+        invalidInputs.push(filmNameInput);
+      }
+
+      if (!origin) {
+        invalidInputs.push(originInput);
+      }
+
+      if (!rightsStatus) {
+        invalidInputs.push(rightsStatusInput);
+      }
+
+      if (!releaseStage) {
+        invalidInputs.push(releaseStageInput);
+      }
+
+      if (!territoryFocus) {
+        invalidInputs.push(territoryFocusInput);
+      }
+
+      if (!submissionSummary) {
+        invalidInputs.push(submissionSummaryInput);
+      }
+
+      if (!isValidUrl(companyWebsite)) {
+        invalidInputs.push(companyWebsiteInput);
+      }
+
+      if (!isValidUrl(screenerUrl)) {
+        invalidInputs.push(screenerUrlInput);
+      }
+
       if (invalidInputs.length) {
         flashInvalidInputs(invalidInputs);
+        invalidInputs[0].focus();
         return;
       }
 
@@ -214,11 +383,17 @@
         const result = await Site.submitWaitlistSignup(
           {
             email,
+            companyWebsite,
             filmName,
             firstName,
             lastName,
             origin,
+            releaseStage,
+            rightsStatus,
+            screenerUrl,
             source: "studio",
+            submissionSummary,
+            territoryFocus,
           },
           { fallbackError: COPY.waitlistError }
         );
@@ -228,7 +403,7 @@
 
         if (result.confirmationSent === false && successSub) {
           successSub.textContent =
-            "Your access request is saved. We could not send the confirmation email yet, but your details are on the list.";
+            "Your application was received. We could not send the confirmation email yet, but your details are in review.";
         }
       } catch (error) {
         note.textContent = error.message || COPY.waitlistError;
@@ -256,6 +431,7 @@
     initNav();
     initComingSoonModal();
     initPrototypeNotice();
+    initDesktopPartnerApplicationFocus();
     initWaitlistForm();
   }
 

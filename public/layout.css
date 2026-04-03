@@ -128,7 +128,7 @@ nav {
 
 footer {
   border-top: 1px solid var(--layout-border);
-  padding: 44px 56px;
+  padding: 48px 56px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 28px 48px;
@@ -157,10 +157,10 @@ footer {
 
 .f-links a {
   font-family: "Space Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--layout-muted2);
+  color: var(--layout-muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -171,10 +171,10 @@ footer {
 
 .f-mission {
   font-family: "Space Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: var(--layout-muted2);
-  line-height: 1.8;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--layout-muted);
+  line-height: 1.9;
 }
 
 .f-copy {
@@ -182,9 +182,9 @@ footer {
   padding-top: 18px;
   border-top: 1px solid var(--layout-border);
   font-family: "Space Mono", monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  color: var(--layout-muted2);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--layout-muted);
 }
 
 .coming-soon-modal {
@@ -392,6 +392,7 @@ body.modal-open .cur-r {
   }
 
   .f-links {
+    gap: 18px 20px;
     justify-self: start;
     justify-content: flex-start;
   }

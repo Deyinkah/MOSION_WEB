@@ -1,7 +1,5 @@
 const DEFAULT_LOGO_URL = "https://mosion.app/logo-wordmark.png";
 const DEFAULT_WAITLIST_BETA_URL = "https://www.mosion.app/api/download-apk";
-const DEFAULT_STUDIO_WAITLIST_BETA_URL =
-  "https://studio.mosion.app/api/download-studio-apk";
 
 function escapeHtml(value) {
   return String(value || "")
@@ -29,18 +27,15 @@ function getWaitlistVariant(source, environment = process.env) {
   if (waitlistSource === "studio") {
     return {
       source: "studio",
-      preheader: "Your Mosion Studio waitlist registration is confirmed.",
-      subject: "You're on the Mosion Studio waitlist",
+      preheader: "Your Mosion Studio application has been received.",
+      subject: "We received your Mosion Studio application",
       bodyCopy:
-        "Your Mosion Studio waitlist registration is confirmed. You now have early access to explore the filmmaker experience before the wider rollout.",
-      ctaLabel: "Download the Studio Beta",
-      textDownloadLead: "Download the Studio Beta",
+        "Your Mosion Studio application has been received. Our team will review your partner details, rights position, and release fit before granting access. Studio access does not guarantee title approval or listing.",
+      ctaLabel: "",
+      textDownloadLead: "",
       signature: "Mosion Studio",
       logoUrl,
-      betaUrl:
-        environment.WAITLIST_STUDIO_BETA_URL ||
-        environment.STUDIO_WAITLIST_BETA_URL ||
-        DEFAULT_STUDIO_WAITLIST_BETA_URL,
+      betaUrl: "",
     };
   }
 
