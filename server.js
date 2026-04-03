@@ -5,8 +5,7 @@ const {
   handleWaitlistSignup
 } = require("./waitlist-handler");
 const {
-  handleBetaApkDownload,
-  handleStudioBetaApkDownload
+  handleBetaApkDownload
 } = require("./apk-download-handler");
 
 loadEnvFile();
@@ -198,11 +197,6 @@ const server = http.createServer((req, res) => {
 
   if (requestUrl.pathname === "/api/download-apk") {
     handleBetaApkDownload(req, res);
-    return;
-  }
-
-  if (requestUrl.pathname === "/api/download-studio-apk") {
-    handleStudioBetaApkDownload(req, res);
     return;
   }
 

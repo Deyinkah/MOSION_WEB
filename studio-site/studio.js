@@ -8,9 +8,9 @@
   const COPY = {
     defaultFormNote:
       "Applications are reviewed manually. Access is granted only to approved partners.",
-    iosBetaCopy:
+    comingSoonCopy:
       "Additional partner resources are being prepared and will be available soon.",
-    iosBetaTitle: "More information coming soon",
+    comingSoonTitle: "More information coming soon",
     waitlistError: "We could not submit your application.",
     waitlistSubmitting: "Submitting...",
   };
@@ -69,37 +69,12 @@
   }
 
   function initComingSoonModal() {
-    const modalControls = Site.initModal({
+    Site.initModal({
       modalId: "comingSoonModal",
       titleId: "comingSoonTitle",
       copyId: "comingSoonCopy",
-      defaultTitle: COPY.iosBetaTitle,
-      defaultCopy: COPY.iosBetaCopy,
-    });
-
-    if (!modalControls) {
-      return;
-    }
-
-    const betaApkLinks = Array.from(document.querySelectorAll("[data-beta-apk-link]"));
-
-    if (!betaApkLinks.length) {
-      return;
-    }
-
-    betaApkLinks.forEach((betaApkLink) => {
-      betaApkLink.addEventListener("click", (event) => {
-        if (!Site.isIosDevice()) {
-          return;
-        }
-
-        event.preventDefault();
-        modalControls.open(
-          betaApkLink,
-          betaApkLink.getAttribute("data-ios-modal-title"),
-          betaApkLink.getAttribute("data-ios-modal-copy")
-        );
-      });
+      defaultTitle: COPY.comingSoonTitle,
+      defaultCopy: COPY.comingSoonCopy,
     });
   }
 

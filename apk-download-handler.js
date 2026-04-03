@@ -7,9 +7,6 @@ loadEnvFile();
 const DEFAULT_BETA_APK_OBJECT_URL =
   "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion.apk";
 const DEFAULT_BETA_APK_FILENAME = "mosion.apk";
-const DEFAULT_STUDIO_BETA_APK_OBJECT_URL =
-  "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion+studio.apk";
-const DEFAULT_STUDIO_BETA_APK_FILENAME = "mosion-studio.apk";
 const DEFAULT_BETA_APK_REGION = "eu-central-003";
 const DEFAULT_PRESIGN_TTL_SECONDS = 60;
 const MAX_PRESIGN_TTL_SECONDS = 604800;
@@ -29,20 +26,6 @@ const DOWNLOAD_VARIANTS = {
     endpointEnvKeys: ["B2_DOWNLOAD_ENDPOINT", "B2_S3_ENDPOINT"],
     filenameEnvKeys: ["B2_DOWNLOAD_FILENAME", "BETA_APK_FILENAME"],
     ttlEnvKeys: ["B2_DOWNLOAD_URL_TTL", "BETA_APK_URL_TTL"]
-  },
-  studio: {
-    defaultObjectUrl: DEFAULT_STUDIO_BETA_APK_OBJECT_URL,
-    defaultFilename: DEFAULT_STUDIO_BETA_APK_FILENAME,
-    objectUrlEnvKeys: ["STUDIO_BETA_APK_OBJECT_URL", "STUDIO_BETA_DOWNLOAD_OBJECT_URL"],
-    bucketEnvKeys: ["STUDIO_BETA_APK_BUCKET", "B2_DOWNLOAD_BUCKET", "B2_BUCKET_NAME"],
-    objectKeyEnvKeys: [
-      "STUDIO_BETA_APK_OBJECT_KEY",
-      "STUDIO_BETA_DOWNLOAD_OBJECT_KEY"
-    ],
-    regionEnvKeys: ["STUDIO_BETA_APK_REGION", "B2_DOWNLOAD_REGION", "B2_REGION"],
-    endpointEnvKeys: ["STUDIO_BETA_APK_ENDPOINT", "B2_DOWNLOAD_ENDPOINT", "B2_S3_ENDPOINT"],
-    filenameEnvKeys: ["STUDIO_BETA_APK_FILENAME", "STUDIO_BETA_DOWNLOAD_FILENAME"],
-    ttlEnvKeys: ["STUDIO_BETA_APK_URL_TTL", "B2_DOWNLOAD_URL_TTL", "BETA_APK_URL_TTL"]
   }
 };
 
@@ -194,15 +177,11 @@ function getDownloadConfig(variantKey = "root") {
 
   const parsedConfig = parseObjectUrl(sourceUrl);
   const keyId = getFirstEnvValue([
-    "STUDIO_BETA_APK_KEY_ID",
-    "STUDIO_BETA_DOWNLOAD_KEY_ID",
     "B2_DOWNLOAD_KEY_ID",
     "B2_APPLICATION_KEY_ID",
     "B2_KEY_ID"
   ]);
   const applicationKey = getFirstEnvValue([
-    "STUDIO_BETA_APK_APPLICATION_KEY",
-    "STUDIO_BETA_DOWNLOAD_APPLICATION_KEY",
     "B2_DOWNLOAD_APPLICATION_KEY",
     "B2_APPLICATION_KEY",
     "B2_SECRET_ACCESS_KEY"
@@ -334,10 +313,6 @@ function createBetaApkPresignedUrl(now = new Date()) {
   return createPresignedUrlForVariant("root", now);
 }
 
-function createStudioBetaApkPresignedUrl(now = new Date()) {
-  return createPresignedUrlForVariant("studio", now);
-}
-
 function sendErrorResponse(res, statusCode, message) {
   res.statusCode = statusCode;
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
@@ -373,13 +348,7 @@ async function handleBetaApkDownload(req, res) {
   await handlePresignedApkDownload(req, res, "root");
 }
 
-async function handleStudioBetaApkDownload(req, res) {
-  await handlePresignedApkDownload(req, res, "studio");
-}
-
 module.exports = {
   createBetaApkPresignedUrl,
-  createStudioBetaApkPresignedUrl,
-  handleBetaApkDownload,
-  handleStudioBetaApkDownload
+  handleBetaApkDownload
 };
