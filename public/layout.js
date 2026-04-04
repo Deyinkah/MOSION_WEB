@@ -12,7 +12,9 @@
   const ROUTES = {
     about: "/about",
     home: "/",
-    localStudio: "/studio",
+    localAbout: "/about.html",
+    localHome: "/index.html",
+    localStudio: "/studio/",
     studio: "https://studio.mosion.app",
   };
 
@@ -22,7 +24,7 @@
     footerMission:
       "MOSION is building the infrastructure for African cinema distribution, starting in your pocket.",
     prototypeNotice:
-      "Titles, artwork, and pricing shown across this site are demo content. The live MOSION catalog will be built through licensed studio partnerships.",
+      "Banner artwork and sample film titles shown are for interface demonstration only. Final catalog will reflect licensed partner content.",
   };
 
   function normalizePathname(pathname) {
@@ -31,12 +33,20 @@
 
   function isAboutPage() {
     const pathname = normalizePathname(window.location.pathname);
-    return pathname === "/about" || pathname === "/about.html";
+    return (
+      pathname === "/about" ||
+      pathname === "/about.html" ||
+      pathname.endsWith("/about.html")
+    );
   }
 
   function isHomePage() {
     const pathname = normalizePathname(window.location.pathname);
-    return pathname === "/" || pathname === "/index.html";
+    return (
+      pathname === "/" ||
+      pathname === "/index.html" ||
+      pathname.endsWith("/index.html")
+    );
   }
 
   function isLocalHost(hostname) {
@@ -69,9 +79,9 @@
         </svg>
       </button>
       <div class="nav-dropdown" id="navDropdown" hidden>
-        <a href="/#how">How it Works</a>
+        <a href="/#how" data-home-hash="#how">How it Works</a>
         <a href="${ROUTES.studio}" data-studio-link data-local-href="${ROUTES.localStudio}" target="_blank" rel="noopener noreferrer">Studio Platform</a>
-        <a href="/#download">Get the App</a>
+        <a href="/#download" data-home-hash="#download">Get the App</a>
       </div>
     </div>
   </div>
@@ -80,19 +90,21 @@
 
   function createFooterMarkup() {
     return `
-<footer>
-  <div class="f-brand">
-    <div class="f-logo"><img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" /></div>
-    <div class="f-mission">${COPY.footerMission}</div>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" /></div>
+      <p class="footer-mission">${COPY.footerMission}</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="${ROUTES.about}" data-about-link>About</a>
+      <a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a>
+      <a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a>
+      <a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a>
+      <a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a>
+    </nav>
+    <div class="footer-meta">&copy; 2026 Mosion. All rights reserved.</div>
   </div>
-  <ul class="f-links">
-    <li><a href="${ROUTES.about}">About</a></li>
-    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-    <li><a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a></li>
-    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
-    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
-  </ul>
-  <div class="f-copy">&copy; 2026 Mosion. All rights reserved.</div>
 </footer>
 
 <div class="coming-soon-modal" id="comingSoonModal" hidden>
@@ -122,13 +134,13 @@
   aria-labelledby="prototypeNoticeTitle"
   aria-describedby="prototypeNoticeCopy"
 >
-  <button type="button" class="prototype-notice-close" id="prototypeNoticeClose" aria-label="Dismiss prototype notice">
+  <button type="button" class="prototype-notice-close" id="prototypeNoticeClose" aria-label="Dismiss catalog preview notice">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
       <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
     </svg>
   </button>
-  <div class="prototype-notice-kicker">Prototype Notice</div>
-  <div class="prototype-notice-title" id="prototypeNoticeTitle">Sample interface only</div>
+  <div class="prototype-notice-kicker">Preview Notice</div>
+  <div class="prototype-notice-title" id="prototypeNoticeTitle">Catalog preview shown</div>
   <p class="prototype-notice-copy" id="prototypeNoticeCopy">${COPY.prototypeNotice}</p>
 </aside>`;
   }
@@ -223,6 +235,33 @@
     });
   }
 
+  function applyLocalPreviewRoutes() {
+    if (!isLocalHost(window.location.hostname)) {
+      return;
+    }
+
+    const logo = document.querySelector(".logo");
+    const aboutLink = document.querySelector("[data-about-link]");
+    const studioLink = document.querySelector("[data-studio-link]");
+
+    if (logo) {
+      logo.setAttribute("href", ROUTES.localHome);
+    }
+
+    if (aboutLink) {
+      aboutLink.setAttribute("href", ROUTES.localAbout);
+    }
+
+    if (studioLink) {
+      studioLink.setAttribute("href", ROUTES.localStudio);
+    }
+
+    document.querySelectorAll("[data-home-hash]").forEach((link) => {
+      const hash = link.getAttribute("data-home-hash") || "";
+      link.setAttribute("href", `${ROUTES.localHome}${hash}`);
+    });
+  }
+
   function initPrototypeNotice() {
     Site.initTimedNotice({
       noticeId: "prototypeNotice",
@@ -234,6 +273,7 @@
 
   function boot() {
     injectLayout();
+    applyLocalPreviewRoutes();
 
     initNavMenu();
 

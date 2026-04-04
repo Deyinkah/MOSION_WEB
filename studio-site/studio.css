@@ -11,6 +11,7 @@
   --gold-light: #e8c97a;
   --gold-dim: rgba(201,168,76,0.15);
   --white: #f5f3ee;
+  --footer-text: #ede9e2;
   --muted: rgba(245,243,238,0.45);
   --muted2: rgba(245,243,238,0.25);
   --red: #e03e3e;
@@ -1517,8 +1518,11 @@ footer {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
+  color: var(--footer-text);
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
   transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--white); }
@@ -1526,7 +1530,7 @@ footer {
   font-family: 'DM Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: var(--muted);
+  color: var(--footer-text);
   line-height: 1.9;
 }
 .footer-copy {
@@ -1536,7 +1540,7 @@ footer {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: var(--footer-text);
 }
 
 /* SUCCESS */

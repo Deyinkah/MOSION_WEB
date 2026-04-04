@@ -276,6 +276,13 @@ img {
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
+.footer-nav a {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
 .site-nav a:hover,
 .footer-nav a:hover {
   color: var(--text);

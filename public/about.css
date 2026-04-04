@@ -10,7 +10,6 @@
   --amber2: #f0c96a;
   --amber-glow: rgba(212, 168, 67, 0.08);
   --amber-rule: rgba(212, 168, 67, 0.18);
-  --bg: #070707;
   --ink: #06060a;
   --bg-card: #0d0d0d;
   --bg-raised: #121212;
@@ -22,10 +21,11 @@
 
 html {
   scroll-behavior: smooth;
+  background: #080808;
 }
 
 body {
-  background: var(--bg);
+  background: var(--ink);
   color: var(--text);
   font-family: "Outfit", sans-serif;
   font-weight: 400;
@@ -401,6 +401,16 @@ body {
   color: var(--text-dim);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.about-footer .footer-grid {
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.about-footer .footer-meta {
+  text-align: left;
 }
 
 @keyframes fadeUp {
