@@ -1,5 +1,23 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/onboarding",
+      "destination": "https://mosion-studio-web.vercel.app/onboarding"
+    },
+    {
+      "source": "/signin",
+      "destination": "https://mosion-studio-web.vercel.app/signin"
+    },
+    {
+      "source": "/forgot-password",
+      "destination": "https://mosion-studio-web.vercel.app/forgot-password"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/_next/:path*"
+    }
+  ]
 }
