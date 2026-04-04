@@ -15,16 +15,10 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
-    --black: #080808;
-    --deep: #0d0d0f;
-    --surface: #111114;
     --border: rgba(255,255,255,0.08);
-    --border-strong: rgba(201,168,76,0.28);
     --gold: #c9a84c;
     --gold-light: #e8c97a;
     --white: #f5f3ee;
-    --muted: rgba(245,243,238,0.62);
-    --muted-soft: rgba(245,243,238,0.4);
   }
   html, body { min-height: 100%; margin: 0; }
   body {
@@ -48,8 +42,13 @@
     position: relative;
     min-height: 100vh;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr auto;
     padding: 28px;
+  }
+  .error-top {
+    min-height: 90vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
   .error-brand {
     display: inline-flex;
@@ -93,14 +92,6 @@
       linear-gradient(180deg, rgba(17,17,20,0.98) 0%, rgba(10,10,12,0.98) 100%);
     box-shadow: 0 30px 90px rgba(0,0,0,0.42);
   }
-  .error-kicker {
-    margin: 0 0 20px;
-    color: var(--gold);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-  }
   .error-title {
     margin: 0;
     font-family: 'Playfair Display', serif;
@@ -113,109 +104,122 @@
     font-style: italic;
     color: var(--gold);
   }
-  .error-copy {
-    margin: 22px 0 0;
-    max-width: 34ch;
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  .error-note {
-    margin: 18px 0 0;
-    color: var(--muted-soft);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    line-height: 1.9;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .error-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 30px;
-  }
-  .error-btn-primary,
-  .error-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 52px;
-    padding: 0 24px;
-    text-decoration: none;
-    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-  }
-  .error-btn-primary {
-    background: var(--gold);
-    color: var(--black);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-  .error-btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .error-btn-secondary {
-    border: 1px solid var(--border-strong);
-    background: rgba(255,255,255,0.02);
+  .error-back-link {
+    display: block;
+    width: fit-content;
+    margin: 28px auto 0;
     color: var(--white);
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    transition: color 0.18s ease;
   }
-  .error-btn-secondary:hover {
-    border-color: rgba(201,168,76,0.46);
+  .error-back-link:hover {
     color: var(--gold-light);
-    transform: translateY(-1px);
   }
-  .error-btn-primary svg,
-  .error-btn-secondary svg {
-    width: 14px;
-    height: 14px;
-    flex: 0 0 auto;
+  .error-footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .error-footer-brand {
+    display: grid;
+    gap: 16px;
+    max-width: 500px;
+    grid-column: 1;
+  }
+  .error-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    text-decoration: none;
+    color: var(--white);
+  }
+  .error-footer-logo img {
+    display: block;
+    height: 20px;
+    width: auto;
+  }
+  .error-footer-mission {
+    margin: 0;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    line-height: 1.9;
+  }
+  .error-footer-copy {
+    grid-column: 1 / -1;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
   }
   @media (max-width: 640px) {
     .error-shell { padding: 20px; }
     .error-main { padding: 24px 0; }
-    .error-copy { font-size: 15px; }
-    .error-actions { flex-direction: column; }
-    .error-btn-primary,
-    .error-btn-secondary { width: 100%; }
+    .error-footer {
+      display: block;
+      padding: 40px 0 0;
+      text-align: left;
+    }
+    .error-footer-brand {
+      display: block;
+      max-width: none;
+      margin: 0 0 32px;
+      text-align: center;
+    }
+    .error-footer-logo {
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .error-footer-logo img {
+      height: 14px;
+    }
+    .error-footer-mission,
+    .error-footer-copy {
+      text-align: center;
+    }
   }
 </style>
 </head>
 <body>
   <div class="error-shell">
-    <a href="/" class="error-brand" aria-label="MOSION Studio home">
-      <img src="./logo-wordmark.png" alt="MOSION" />
-      <span class="error-brand-tag">Studio</span>
-    </a>
+    <div class="error-top">
+      <a href="/" class="error-brand" aria-label="MOSION Studio home">
+        <img src="./logo-wordmark.png" alt="MOSION" />
+        <span class="error-brand-tag">Studio</span>
+      </a>
 
-    <main class="error-main">
-      <section class="error-card" aria-labelledby="errorTitle">
-        <p class="error-kicker">Error 404</p>
-        <h1 class="error-title" id="errorTitle">This page is off the <em>release slate.</em></h1>
-        <p class="error-copy">
-          The address you opened does not exist, has moved, or has not been connected to the studio routing yet.
-        </p>
-        <p class="error-note">Unknown studio routes now land here instead of the default host error page.</p>
-        <div class="error-actions">
-          <a href="/" class="error-btn-primary">
-            Back to Studio Site
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M1 7h12M8 2l5 5-5 5" />
-            </svg>
-          </a>
-          <a href="/signin" class="error-btn-secondary">
-            Open Studio Sign In
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M1 7h12M8 2l5 5-5 5" />
-            </svg>
-          </a>
-        </div>
-      </section>
-    </main>
+      <main class="error-main">
+        <section class="error-card" aria-labelledby="errorTitle">
+          <h1 class="error-title" id="errorTitle">The address you opened does <em>not exist.</em></h1>
+          <a href="/" class="error-back-link">Back to Mosion Studio</a>
+        </section>
+      </main>
+    </div>
+
+    <footer class="error-footer">
+      <div class="error-footer-brand">
+        <a href="/" class="error-footer-logo" aria-label="MOSION Studio home">
+          <img src="./logo-wordmark.png" alt="MOSION" />
+          <span class="error-brand-tag">Studio</span>
+        </a>
+        <p class="error-footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</p>
+      </div>
+      <div class="error-footer-copy">&copy; 2026 MOSION Studio. All rights reserved.</div>
+    </footer>
   </div>
 </body>
 </html>
