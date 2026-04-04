@@ -1,5 +1,317 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/onboarding",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/onboarding"
+    },
+    {
+      "source": "/onboarding/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/onboarding/:path*"
+    },
+    {
+      "source": "/signin",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/signin"
+    },
+    {
+      "source": "/signin/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/signin/:path*"
+    },
+    {
+      "source": "/signup",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/signup"
+    },
+    {
+      "source": "/signup/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/signup/:path*"
+    },
+    {
+      "source": "/forgot-password",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/forgot-password"
+    },
+    {
+      "source": "/forgot-password/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/forgot-password/:path*"
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/dashboard"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/dashboard/:path*"
+    },
+    {
+      "source": "/analytics",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/analytics"
+    },
+    {
+      "source": "/analytics/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/analytics/:path*"
+    },
+    {
+      "source": "/chat",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/chat"
+    },
+    {
+      "source": "/chat/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/chat/:path*"
+    },
+    {
+      "source": "/earnings",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/earnings"
+    },
+    {
+      "source": "/earnings/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/earnings/:path*"
+    },
+    {
+      "source": "/films",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/films"
+    },
+    {
+      "source": "/films/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/films/:path*"
+    },
+    {
+      "source": "/notifications",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/notifications"
+    },
+    {
+      "source": "/notifications/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/notifications/:path*"
+    },
+    {
+      "source": "/payout-method",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/payout-method"
+    },
+    {
+      "source": "/payout-method/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/payout-method/:path*"
+    },
+    {
+      "source": "/pipeline",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/pipeline"
+    },
+    {
+      "source": "/pipeline/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/pipeline/:path*"
+    },
+    {
+      "source": "/profile",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/profile"
+    },
+    {
+      "source": "/profile/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/profile/:path*"
+    },
+    {
+      "source": "/transactions",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/transactions"
+    },
+    {
+      "source": "/transactions/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/transactions/:path*"
+    },
+    {
+      "source": "/withdraw",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/withdraw"
+    },
+    {
+      "source": "/withdraw/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/withdraw/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.mosion.app"
+        }
+      ],
+      "destination": "https://mosion-studio-web.vercel.app/_next/:path*"
+    }
+  ]
 }
