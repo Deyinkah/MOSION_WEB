@@ -4,16 +4,64 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/onboarding",
-      "destination": "https://mosion-studio-web.vercel.app/onboarding"
+      "source": "/onboarding/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/onboarding/:path*"
     },
     {
-      "source": "/signin",
-      "destination": "https://mosion-studio-web.vercel.app/signin"
+      "source": "/signin/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/signin/:path*"
     },
     {
-      "source": "/forgot-password",
-      "destination": "https://mosion-studio-web.vercel.app/forgot-password"
+      "source": "/signup/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/signup/:path*"
+    },
+    {
+      "source": "/forgot-password/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/forgot-password/:path*"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/dashboard/:path*"
+    },
+    {
+      "source": "/analytics/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/analytics/:path*"
+    },
+    {
+      "source": "/chat/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/chat/:path*"
+    },
+    {
+      "source": "/earnings/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/earnings/:path*"
+    },
+    {
+      "source": "/films/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/films/:path*"
+    },
+    {
+      "source": "/notifications/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/notifications/:path*"
+    },
+    {
+      "source": "/payout-method/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/payout-method/:path*"
+    },
+    {
+      "source": "/pipeline/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/pipeline/:path*"
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/profile/:path*"
+    },
+    {
+      "source": "/transactions/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/transactions/:path*"
+    },
+    {
+      "source": "/withdraw/:path*",
+      "destination": "https://mosion-studio-web.vercel.app/withdraw/:path*"
     },
     {
       "source": "/_next/:path*",
