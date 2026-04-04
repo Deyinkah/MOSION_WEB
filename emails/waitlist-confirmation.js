@@ -1,5 +1,6 @@
 const DEFAULT_LOGO_URL = "https://mosion.app/logo-wordmark.png";
 const DEFAULT_WAITLIST_BETA_URL = "https://www.mosion.app/api/download-apk";
+const STUDIO_SUPPORT_ADDRESS = "partners@mosion.app";
 
 function escapeHtml(value) {
   return String(value || "")
@@ -53,19 +54,22 @@ function getWaitlistVariant(source, environment = process.env) {
   };
 }
 
-function buildSupportCopy(replyToAddress) {
-  if (!replyToAddress) {
+function buildSupportCopy(replyToAddress, variantSource = "website") {
+  const resolvedReplyToAddress =
+    variantSource === "studio" ? STUDIO_SUPPORT_ADDRESS : replyToAddress;
+
+  if (!resolvedReplyToAddress) {
     return {
       html: "Need help or feedback? Reply to this email.",
       text: "Need help? Reply to this email.",
     };
   }
 
-  const safeReplyToAddress = escapeHtml(replyToAddress);
+  const safeReplyToAddress = escapeHtml(resolvedReplyToAddress);
 
   return {
-    html: `Need help or feedback? Reply to <a href="mailto:${safeReplyToAddress}" style="color:#0f172a;text-decoration:none;">${safeReplyToAddress}</a>.`,
-    text: `Need help? Reply to ${replyToAddress}`,
+    html: `Need help or feedback? Reply to <a href="mailto:${safeReplyToAddress}" style="color:#0f172a;text-decoration:none;">${safeReplyToAddress}</a>`,
+    text: `Need help or feedback? Reply to ${resolvedReplyToAddress}`,
   };
 }
 
@@ -80,8 +84,13 @@ function buildWaitlistConfirmationHtml({
   const safeResolvedBetaUrl = escapeHtml(resolvedBetaUrl);
   const safeSignature = escapeHtml(variant.signature);
   const safeCtaLabel = escapeHtml(variant.ctaLabel);
-  const supportCopy = buildSupportCopy(replyToAddress);
+  const supportCopy = buildSupportCopy(replyToAddress, variant.source);
   const hasCta = Boolean(variant.ctaLabel && resolvedBetaUrl);
+  const signatureHtml =
+    variant.source === "studio"
+      ? safeSignature
+      : `See you inside,<br />
+                  ${safeSignature}`;
 
   return `
     <div style="margin:0;padding:0;background:#f3f4f6;">
@@ -120,8 +129,7 @@ function buildWaitlistConfirmationHtml({
               </tr>
               <tr>
                 <td style="padding:18px 32px 32px;color:#6b7280;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:14px;line-height:1.6;text-align:left;">
-                  See you inside,<br />
-                  ${safeSignature}
+                  ${signatureHtml}
                 </td>
               </tr>
             </table>
@@ -141,8 +149,12 @@ function buildWaitlistConfirmationTemplate({
 } = {}) {
   const variant = getWaitlistVariant(source, environment);
   const resolvedBetaUrl = betaUrl || variant.betaUrl;
-  const supportCopy = buildSupportCopy(replyToAddress);
+  const supportCopy = buildSupportCopy(replyToAddress, variant.source);
   const hasCta = Boolean(variant.textDownloadLead && resolvedBetaUrl);
+  const signOffLines =
+    variant.source === "studio"
+      ? [variant.signature]
+      : ["See you inside,", variant.signature];
 
   const text = [
     variant.subject,
@@ -151,8 +163,7 @@ function buildWaitlistConfirmationTemplate({
     ...(hasCta ? ["", `${variant.textDownloadLead}: ${resolvedBetaUrl}`] : []),
     supportCopy.text,
     "",
-    "See you inside,",
-    variant.signature,
+    ...signOffLines,
   ].join("\n");
 
   return {

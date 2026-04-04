@@ -403,16 +403,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.about-footer .footer-grid {
-  grid-template-columns: 1fr;
-  gap: 18px;
-  align-items: start;
-}
-
-.about-footer .footer-meta {
-  text-align: left;
-}
-
 @keyframes fadeUp {
   from {
     opacity: 0;

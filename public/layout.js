@@ -91,20 +91,20 @@
   function createFooterMarkup() {
     return `
 <footer class="site-footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo"><img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" /></div>
-      <p class="footer-mission">${COPY.footerMission}</p>
-    </div>
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="${ROUTES.about}" data-about-link>About</a>
-      <a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a>
-      <a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a>
-      <a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a>
-      <a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a>
-    </nav>
-    <div class="footer-meta">&copy; 2026 Mosion. All rights reserved.</div>
+  <ul class="footer-links" aria-label="Footer">
+    <li><a href="${ROUTES.about}" data-about-link>About</a></li>
+    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
+    <li><a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a></li>
+    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
+    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
+  </ul>
+  <div class="footer-brand">
+    <a href="${ROUTES.home}" class="footer-logo" data-home-link>
+      <img src="${ASSETS.wordmark}" alt="MOSION" class="footer-logo-image" />
+    </a>
+    <div class="footer-mission">${COPY.footerMission}</div>
   </div>
+  <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
 </footer>
 
 <div class="coming-soon-modal" id="comingSoonModal" hidden>
@@ -241,11 +241,16 @@
     }
 
     const logo = document.querySelector(".logo");
+    const footerHomeLink = document.querySelector("[data-home-link]");
     const aboutLink = document.querySelector("[data-about-link]");
     const studioLink = document.querySelector("[data-studio-link]");
 
     if (logo) {
       logo.setAttribute("href", ROUTES.localHome);
+    }
+
+    if (footerHomeLink) {
+      footerHomeLink.setAttribute("href", ROUTES.localHome);
     }
 
     if (aboutLink) {

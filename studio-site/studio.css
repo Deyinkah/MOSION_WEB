@@ -1417,6 +1417,7 @@ footer {
   display: grid;
   gap: 16px;
   max-width: 500px;
+  grid-column: 1;
 }
 .footer-logo {
   display: inline-flex;
@@ -1427,7 +1428,7 @@ footer {
   text-align: left;
   white-space: nowrap;
 }
-.footer-logo-image {
+.footer-logo .footer-logo-image {
   display: block;
   width: auto;
   height: clamp(20px, 1.5vw, 26px);
@@ -1512,6 +1513,7 @@ footer {
   flex-wrap: wrap;
   justify-self: end;
   justify-content: flex-end;
+  grid-column: 2;
 }
 .footer-links a {
   font-family: 'DM Mono', monospace;
@@ -1663,18 +1665,37 @@ footer {
     justify-content: center;
   }
   footer {
-    padding: 40px 32px;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    padding: 40px 32px 32px;
+    display: block;
+    border-top: 1px solid var(--border);
+    text-align: left;
+  }
+  .footer-logo .footer-logo-image {
+    height: 14px;
+    max-width: min(138px, 44vw);
+  }
+  .footer-logo .nav-logo-tag {
+    min-height: 22px;
+    padding: 0 9px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .footer-brand {
+    display: block;
+    max-width: none;
     text-align: center;
+    margin: 0 0 32px;
   }
-  .footer-brand { max-width: none; justify-items: center; }
   .footer-logo { justify-content: center; text-align: center; }
+  .footer-mission { text-align: center; }
   .footer-links {
-    gap: 18px 20px;
-    justify-self: center;
-    justify-content: center;
+    display: block;
+    text-align: left;
+    margin: 0 0 32px;
   }
+  .footer-links li + li { margin-top: 16px; }
+  .footer-links a { display: block; }
+  .footer-copy { text-align: center; }
   .prototype-notice {
     right: 16px;
     bottom: 16px;
