@@ -730,74 +730,6 @@ body.modal-open .cur-r{
 .wl-success-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:10px}
 .wl-success-sub{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300}
 
-.site-footer{
-  position:relative;
-  z-index:1;
-  margin-top:2rem;
-  padding:0 56px 36px;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  gap:28px 48px;
-  align-items:start;
-  padding:32px 0 18px;
-  border-top:1px solid var(--border);
-}
-.footer-brand{
-  display:grid;
-  gap:14px;
-  max-width:48ch;
-  grid-column:1;
-}
-.footer-logo{
-  display:flex;
-  align-items:center;
-}
-.footer-mission{
-  margin:0;
-  color:var(--footer-text);
-  font-size:.96rem;
-  line-height:1.7;
-  font-weight:300;
-}
-.footer-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-self:end;
-  justify-content:flex-end;
-  gap:.35rem;
-  grid-column:2;
-}
-.footer-nav a{
-  padding:.55rem .75rem;
-  border-radius:999px;
-  font-family:'Space Mono',monospace;
-  font-size:9px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--footer-text);
-  text-decoration-line:underline;
-  text-decoration-color:currentColor;
-  text-underline-offset:.22em;
-  text-decoration-thickness:1px;
-  transition:background-color .2s ease,color .2s ease,transform .2s ease;
-}
-.footer-nav a:hover{
-  color:var(--cream);
-  background:rgba(255,255,255,.05);
-  transform:translateY(-1px);
-}
-.footer-meta{
-  grid-column:1 / -1;
-  padding-top:18px;
-  border-top:1px solid var(--border);
-  font-family:'Space Mono',monospace;
-  font-size:9px;
-  letter-spacing:.12em;
-  color:var(--footer-text);
-}
-
 .prototype-notice{
   position:fixed;
   right:24px;
@@ -894,40 +826,6 @@ body.modal-open .cur-r{
   .how-top,.cta-inner{grid-template-columns:1fr;gap:36px}
   .how-steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
-  .site-footer{
-    padding:0 28px 28px;
-  }
-  /* .footer-grid{
-    display:block;
-    text-align:left;
-  } */
-  .footer-brand{
-    display:block;
-    max-width:none;
-    text-align:left;
-    margin:0 0 24px;
-  }
-  .footer-nav{
-    display:block;
-    text-align:left;
-    margin:0 0 24px;
-  }
-  .footer-nav a{
-    display:block;
-    padding:0;
-    border-radius:0;
-  }
-  .footer-nav a + a{
-    margin-top:12px;
-  }
-  .footer-nav a:hover{
-    background:none;
-    transform:none;
-  }
-  .footer-meta{
-    display:block;
-    text-align:left;
-  }
 }
 @media(max-width:640px){
   .hero{

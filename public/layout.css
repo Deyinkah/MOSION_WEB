@@ -183,6 +183,12 @@ nav {
   grid-column: 2;
 }
 
+.footer-links li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .footer-links a {
   font-family: "Space Mono", monospace;
   font-size: 10px;
@@ -205,7 +211,7 @@ nav {
   padding-top: 18px;
   border-top: 1px solid var(--layout-border);
   font-family: "Space Mono", monospace;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.12em;
   color: var(--layout-footer-text);
 }
@@ -440,6 +446,7 @@ body.modal-open .cur-r {
     display: block;
     text-align: left;
     margin: 0 0 32px;
+    width: 100%;
   }
 
   .footer-links li + li {

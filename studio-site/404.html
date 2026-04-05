@@ -41,12 +41,10 @@
   .error-shell {
     position: relative;
     min-height: 100vh;
-    display: grid;
-    grid-template-rows: 1fr auto;
     padding: 28px;
   }
   .error-top {
-    min-height: 90vh;
+    min-height: calc(100vh - 56px);
     display: grid;
     grid-template-rows: auto 1fr;
   }
@@ -121,105 +119,27 @@
   .error-back-link:hover {
     color: var(--gold-light);
   }
-  .error-footer {
-    border-top: 1px solid var(--border);
-    padding: 40px 0 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-    align-items: start;
-  }
-  .error-footer-brand {
-    display: grid;
-    gap: 16px;
-    max-width: 500px;
-    grid-column: 1;
-  }
-  .error-footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: fit-content;
-    text-decoration: none;
-    color: var(--white);
-  }
-  .error-footer-logo img {
-    display: block;
-    height: 20px;
-    width: auto;
-  }
-  .error-footer-mission {
-    margin: 0;
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    line-height: 1.9;
-  }
-  .error-footer-copy {
-    grid-column: 1 / -1;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-  }
   @media (max-width: 640px) {
     .error-shell { padding: 20px; }
     .error-main { padding: 24px 0; }
-    .error-footer {
-      display: block;
-      padding: 40px 0 0;
-      text-align: left;
-    }
-    .error-footer-brand {
-      display: block;
-      max-width: none;
-      margin: 0 0 32px;
-      text-align: center;
-    }
-    .error-footer-logo {
-      justify-content: center;
-      text-align: center;
-      margin: 0 auto;
-    }
-    .error-footer-logo img {
-      height: 14px;
-    }
-    .error-footer-mission,
-    .error-footer-copy {
-      text-align: center;
-    }
   }
 </style>
 </head>
 <body>
   <div class="error-shell">
     <div class="error-top">
-      <a href="/" class="error-brand" aria-label="MOSION Studio home">
-        <img src="./logo-wordmark.png" alt="MOSION" />
+      <a href="./" class="error-brand" aria-label="MOSION Studio home">
+        <img src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
         <span class="error-brand-tag">Studio</span>
       </a>
 
       <main class="error-main">
         <section class="error-card" aria-labelledby="errorTitle">
           <h1 class="error-title" id="errorTitle">The address you opened does <em>not exist.</em></h1>
-          <a href="/" class="error-back-link">Back to Mosion Studio</a>
+          <a href="./" class="error-back-link">Back to Mosion Studio</a>
         </section>
       </main>
     </div>
-
-    <footer class="error-footer">
-      <div class="error-footer-brand">
-        <a href="/" class="error-footer-logo" aria-label="MOSION Studio home">
-          <img src="./logo-wordmark.png" alt="MOSION" />
-          <span class="error-brand-tag">Studio</span>
-        </a>
-        <p class="error-footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</p>
-      </div>
-      <div class="error-footer-copy">&copy; 2026 MOSION Studio. All rights reserved.</div>
-    </footer>
   </div>
 </body>
 </html>

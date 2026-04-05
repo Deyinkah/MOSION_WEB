@@ -61,7 +61,7 @@
     return `
 <nav>
   <a href="${ROUTES.home}" class="logo">
-    <img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" />
+    <img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" width="168" height="20" />
   </a>
   <div class="nav-r">
     <div class="nav-menu" id="navMenu">
@@ -100,7 +100,7 @@
   </ul>
   <div class="footer-brand">
     <a href="${ROUTES.home}" class="footer-logo" data-home-link>
-      <img src="${ASSETS.wordmark}" alt="MOSION" class="footer-logo-image" />
+      <img src="${ASSETS.wordmark}" alt="MOSION" class="footer-logo-image" width="168" height="20" />
     </a>
     <div class="footer-mission">${COPY.footerMission}</div>
   </div>
@@ -273,6 +273,8 @@
       closeButtonId: "prototypeNoticeClose",
       isEligible: () => !isAboutPage(),
       shouldPause: () => document.body.classList.contains("modal-open"),
+      initialDelay: 300000,
+      persistenceKey: "mosion_prototype_notice_seen_v1",
     });
   }
 

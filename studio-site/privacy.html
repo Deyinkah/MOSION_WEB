@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy & Cookies | MOSION Studio</title>
+<meta
+  name="description"
+  content="How MOSION Studio uses cookies and browser storage on the Studio landing page and Studio web app."
+/>
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20260329h" />
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=20260329h" />
+<link rel="shortcut icon" href="./favicon.ico?v=20260329h" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260329h" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.12);
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --white: #f5f3ee;
+    --muted: rgba(245,243,238,0.72);
+    --muted-soft: rgba(245,243,238,0.54);
+  }
+  html, body { min-height: 100%; margin: 0; }
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(201,168,76,0.12), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(255,255,255,0.04), transparent 24%),
+      linear-gradient(180deg, #0b0b0c 0%, #080808 100%);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+  }
+  a {
+    color: inherit;
+  }
+  .page-shell {
+    position: relative;
+    min-height: 100vh;
+    padding: 28px;
+  }
+  .page-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .brand img {
+    display: block;
+    height: 20px;
+    width: auto;
+  }
+  .brand-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    padding: 0 11px;
+    border: 1px solid rgba(201,168,76,0.24);
+    background: linear-gradient(180deg, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0.06) 100%);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .back-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-soft);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  .back-link:hover {
+    color: var(--white);
+  }
+  .page-main {
+    width: min(100%, 980px);
+    margin: 0 auto;
+    padding: 48px 0 84px;
+  }
+  .hero-card {
+    padding: clamp(28px, 4vw, 46px);
+    border: 1px solid var(--border);
+    background:
+      linear-gradient(180deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 18%, transparent 42%),
+      linear-gradient(180deg, rgba(17,17,20,0.98) 0%, rgba(10,10,12,0.98) 100%);
+    box-shadow: 0 32px 90px rgba(0,0,0,0.38);
+  }
+  .eyebrow {
+    margin: 0 0 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hero-title {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-copy {
+    max-width: 58ch;
+    margin: 24px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .section-grid {
+    display: grid;
+    gap: 22px;
+    margin-top: 32px;
+  }
+  .section-card {
+    padding: 24px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .section-card h2 {
+    margin: 0 0 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1;
+  }
+  .section-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .storage-list {
+    display: grid;
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .storage-item {
+    padding: 18px 18px 16px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+  }
+  .storage-item-title {
+    margin: 0 0 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .storage-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .storage-item p + p {
+    margin-top: 10px;
+  }
+  .inline-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.92em;
+    color: var(--white);
+  }
+  .contact-link {
+    color: var(--gold-light);
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 28px 48px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .footer-links {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 32px;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-self: end;
+    justify-content: flex-end;
+    grid-column: 2;
+  }
+  .footer-links li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--gold-light);
+  }
+  .footer-brand {
+    display: grid;
+    gap: 16px;
+    max-width: 500px;
+    grid-column: 1;
+  }
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    text-decoration: none;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--white);
+  }
+  .footer-logo-image {
+    display: block;
+    width: auto;
+    height: clamp(20px, 1.5vw, 26px);
+    object-fit: contain;
+    object-position: center;
+    flex: 0 0 auto;
+    align-self: center;
+  }
+  .nav-logo-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    padding: 0 11px;
+    border: 1px solid rgba(201,168,76,0.24);
+    background: linear-gradient(180deg, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0.06) 100%);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .footer-mission {
+    margin: 0;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    line-height: 1.9;
+  }
+  .footer-copy {
+    grid-column: 1 / -1;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+  }
+  .cookie-notice {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 10015;
+    width: min(500px, calc(100vw - 32px));
+    padding: 16px 18px;
+    border: 1px solid rgba(201,168,76,0.16);
+    background:
+      linear-gradient(145deg, rgba(201,168,76,0.12), transparent 48%),
+      linear-gradient(180deg, rgba(13,13,17,0.96) 0%, rgba(8,8,12,0.94) 100%);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(18px);
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  }
+  .cookie-notice.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .cookie-notice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-left: 2px solid rgba(201,168,76,0.64);
+    pointer-events: none;
+  }
+  .cookie-notice-kicker {
+    margin: 0 0 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.92);
+  }
+  .cookie-notice-title {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .cookie-notice-copy {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    line-height: 1.75;
+  }
+  .cookie-notice-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 14px;
+  }
+  .cookie-notice-link,
+  .cookie-notice-dismiss {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .cookie-notice-link {
+    color: var(--gold-light);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  .cookie-notice-dismiss {
+    min-height: 36px;
+    padding: 0 14px;
+    border: 1px solid var(--border-strong);
+    background: rgba(255,255,255,0.03);
+    color: var(--white);
+    cursor: pointer;
+  }
+  @media (max-width: 720px) {
+    .page-shell {
+      padding: 20px;
+    }
+    .page-nav {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 24px;
+    }
+    .page-main {
+      padding: 24px 0 72px;
+    }
+    footer {
+      display: block;
+      padding: 40px 0 0;
+      margin-top: 32px;
+    }
+    .footer-brand {
+      display: block;
+      max-width: none;
+      margin: 0 0 32px;
+      text-align: center;
+    }
+    .footer-logo {
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: block;
+      text-align: left;
+      margin: 0 0 32px;
+      width: 100%;
+    }
+    .footer-links li + li {
+      margin-top: 16px;
+    }
+    .footer-links a {
+      display: block;
+    }
+    .footer-copy {
+      text-align: center;
+    }
+    .cookie-notice {
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: auto;
+    }
+    .cookie-notice-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Studio privacy page">
+      <a href="./" class="brand" aria-label="MOSION Studio home">
+        <img src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
+        <span class="brand-tag">Studio</span>
+      </a>
+      <a href="./" class="back-link">Back to Studio Home</a>
+    </nav>
+
+    <main class="page-main">
+      <section class="hero-card" aria-labelledby="privacyTitle">
+        <div class="eyebrow">Privacy & Cookies</div>
+        <h1 class="hero-title" id="privacyTitle">How MOSION Studio uses <em>browser storage.</em></h1>
+        <p class="hero-copy">
+          Studio uses a small amount of first-party browser storage to keep sign-in smoother, avoid repeating the same notices, and remember the current Studio session on this device. We do not use the Studio storage listed below for advertising or third-party cross-site tracking.
+        </p>
+      </section>
+
+      <div class="section-grid">
+        <section class="section-card" aria-labelledby="storageHeading">
+          <h2 id="storageHeading">Storage currently in use</h2>
+          <p>
+            These are the browser-level items currently used by the Studio landing page and Studio web app on the <span class="inline-code">studio.mosion.app</span> experience.
+          </p>
+          <div class="storage-list">
+            <article class="storage-item">
+              <h3 class="storage-item-title">Cookie: studio_known_user</h3>
+              <p>
+                Set after a Studio sign-in has been restored or completed successfully. It tells the Studio landing page that this browser has signed in before, so returning users can be sent straight to the sign-in flow instead of always seeing the landing page first.
+              </p>
+              <p>
+                Type: first-party cookie. Retention: up to 12 months. Purpose: returning-user routing only.
+              </p>
+            </article>
+
+            <article class="storage-item">
+              <h3 class="storage-item-title">Cookie/local storage: mosion_prototype_notice_seen_v1</h3>
+              <p>
+                Used on the Studio landing page to remember that the catalog preview notice has already been shown on this browser, so the same notice is not repeated on every visit.
+              </p>
+              <p>
+                Type: first-party cookie plus local storage fallback. Retention: up to 12 months. Purpose: notice frequency control.
+              </p>
+            </article>
+
+            <article class="storage-item">
+              <h3 class="storage-item-title">Cookie/local storage: mosion_studio_cookie_notice_seen_v1</h3>
+              <p>
+                Used to remember that you dismissed the Studio cookie information banner, so we do not keep showing the same message after you have already seen it.
+              </p>
+              <p>
+                Type: first-party cookie plus local storage fallback. Retention: up to 12 months. Purpose: banner dismissal state.
+              </p>
+            </article>
+
+            <article class="storage-item">
+              <h3 class="storage-item-title">Local storage: mosion_auth_session_v1</h3>
+              <p>
+                Used by the Studio web app after sign-in to keep the current Studio session on this browser. Clearing browser storage or signing out removes this stored session.
+              </p>
+              <p>
+                Type: local storage. Retention: until sign-out or browser storage is cleared. Purpose: session continuity on this device.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-card" aria-labelledby="cookiesOffHeading">
+          <h2 id="cookiesOffHeading">If cookies are blocked</h2>
+          <p>
+            The Studio landing page will still load, but some convenience behavior may stop working. In particular, returning users may stay on the landing page instead of being sent directly to sign in, and informational notices may reappear because the browser cannot remember prior dismissal state.
+          </p>
+        </section>
+
+        <section class="section-card" id="terms" aria-labelledby="termsHeading">
+          <h2 id="termsHeading">Terms</h2>
+          <p>
+            Studio partner terms are shared during onboarding and before Studio access is finalized. If you need them earlier, request them through <a class="contact-link" href="mailto:partners@mosion.app">partners@mosion.app</a>.
+          </p>
+        </section>
+
+        <section class="section-card" aria-labelledby="contactHeading">
+          <h2 id="contactHeading">Questions</h2>
+          <p>
+            For Studio privacy questions, contact <a class="contact-link" href="mailto:partners@mosion.app">partners@mosion.app</a>.
+          </p>
+        </section>
+      </div>
+
+      <footer>
+        <ul class="footer-links">
+          <li><a href="mailto:partners@mosion.app?subject=Studio%20Support">Support</a></li>
+          <li><a href="/privacy#terms">Terms</a></li>
+          <li><a href="/privacy" aria-current="page">Privacy</a></li>
+          <li><a href="mailto:partners@mosion.app">Contact</a></li>
+        </ul>
+
+        <div class="footer-brand">
+          <a href="./" class="footer-logo nav-logo" aria-label="MOSION Studio home">
+            <img class="footer-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
+            <span class="nav-logo-tag">Studio</span>
+          </a>
+          <p class="footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</p>
+        </div>
+
+        <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
+      </footer>
+    </main>
+  </div>
+
+  <aside
+    class="cookie-notice"
+    id="studioCookieNotice"
+    hidden
+    aria-live="polite"
+    aria-labelledby="studioCookieNoticeTitle"
+    aria-describedby="studioCookieNoticeCopy"
+  >
+    <div class="cookie-notice-kicker">Cookies</div>
+    <h2 class="cookie-notice-title" id="studioCookieNoticeTitle">Allow cookies for faster sign-in</h2>
+    <p class="cookie-notice-copy" id="studioCookieNoticeCopy">
+      Mosion Studio uses a first-party cookie to remember this browser and send returning users straight to sign in. If cookies are disabled, the Studio landing page still works, but the shortcut may not.
+    </p>
+    <div class="cookie-notice-actions">
+      <a class="cookie-notice-link" href="/privacy">Learn more</a>
+      <button type="button" class="cookie-notice-dismiss" id="studioCookieNoticeDismiss">Dismiss</button>
+    </div>
+  </aside>
+
+  <script src="./site-core.js?v=20260405-cookie1" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function initPrivacyCookieNotice() {
+      if (!window.MosionSite || typeof window.MosionSite.initPersistentNotice !== "function") {
+        return;
+      }
+
+      window.MosionSite.initPersistentNotice({
+        noticeId: "studioCookieNotice",
+        closeButtonId: "studioCookieNoticeDismiss",
+        persistenceKey: "mosion_studio_cookie_notice_seen_v1",
+        initialDelay: 1200
+      });
+    });
+  </script>
+</body>
+</html>

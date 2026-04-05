@@ -78,6 +78,18 @@
     });
   }
 
+  function initCookieNotice() {
+    Site.initPersistentNotice({
+      noticeId: "studioCookieNotice",
+      closeButtonId: "studioCookieNoticeDismiss",
+      persistenceKey: "mosion_studio_cookie_notice_seen_v1",
+      initialDelay: 1200,
+      isEligible: () =>
+        !document.body.classList.contains("modal-open") &&
+        !document.body.classList.contains("studio-form-modal-open"),
+    });
+  }
+
   function initPrototypeNotice() {
     const heroRight = document.querySelector(".hero-right");
 
@@ -97,6 +109,8 @@
       closeButtonId: "prototypeNoticeClose",
       isEligible: canShowNotice,
       shouldPause: hasBlockingOverlay,
+      initialDelay: 300000,
+      persistenceKey: "mosion_prototype_notice_seen_v1",
     });
 
     if (!noticeControls) {
@@ -104,7 +118,7 @@
     }
 
     const refreshEligibility = () => {
-      noticeControls.refresh(6000);
+      noticeControls.refresh();
     };
 
     if (typeof desktopMedia.addEventListener === "function") {
@@ -405,6 +419,7 @@
 
     initNav();
     initComingSoonModal();
+    initCookieNotice();
     initPrototypeNotice();
     initDesktopPartnerApplicationFocus();
     initWaitlistForm();

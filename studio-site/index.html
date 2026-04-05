@@ -39,7 +39,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./studio.css" />
+<link rel="stylesheet" href="./studio.css?v=20260405-cookie1" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -127,7 +127,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo" aria-label="MOSION Studio">
-    <img class="nav-logo-image" src="./logo-wordmark.png" alt="MOSION" />
+    <img class="nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
     <span class="nav-logo-tag">Studio</span>
   </a>
   <button
@@ -788,17 +788,17 @@
 		  <ul class="footer-links">
 		    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
 		    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-		    <li><a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a></li>
+		    <li><a href="/privacy">Privacy</a></li>
 		    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
 		  </ul>
 			  <div class="footer-brand">
 			    <a href="#" class="footer-logo nav-logo">
-			      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" />
+			      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
 		    <span class="nav-logo-tag">Studio</span>
 		  </a>
 				    <div class="footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</div>
 			  </div>
-			  <div class="footer-copy">&copy; 2026 MOSION Studio. All rights reserved.</div>
+			  <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
 			</footer>
 
 	<div class="coming-soon-modal" id="comingSoonModal" hidden>
@@ -840,7 +840,26 @@
 		  </p>
 		</aside>
 
-		<script src="./site-core.js" defer></script>
-		<script src="./studio.js" defer></script>
-	</body>
-	</html>
+		<aside
+		  class="cookie-notice"
+		  id="studioCookieNotice"
+		  hidden
+		  aria-live="polite"
+		  aria-labelledby="studioCookieNoticeTitle"
+		  aria-describedby="studioCookieNoticeCopy"
+		>
+		  <div class="cookie-notice-kicker">Cookies</div>
+		  <h3 class="cookie-notice-title" id="studioCookieNoticeTitle">Allow cookies for faster sign-in</h3>
+		  <p class="cookie-notice-copy" id="studioCookieNoticeCopy">
+		    Mosion Studio uses a first-party cookie to remember this browser and send returning users straight to sign in. If cookies are disabled, the Studio landing page still works, but the shortcut may not.
+		  </p>
+		  <div class="cookie-notice-actions">
+		    <a class="cookie-notice-link" href="/privacy">Learn more</a>
+		    <button type="button" class="cookie-notice-dismiss" id="studioCookieNoticeDismiss">Dismiss</button>
+		  </div>
+		</aside>
+
+		<script src="./site-core.js?v=20260405-cookie1" defer></script>
+		<script src="./studio.js?v=20260405-cookie1" defer></script>
+		</body>
+		</html>

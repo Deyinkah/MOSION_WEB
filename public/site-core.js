@@ -5,6 +5,7 @@
   const IOS_DEVICE_PATTERN = /iPad|iPhone|iPod/i;
   const DEFAULT_WAITLIST_ERROR = "We could not complete your waitlist signup.";
   const DEFAULT_INTERACTIVE_SELECTOR = "a,button,input,select";
+  const SHARED_COOKIE_DOMAIN = ".mosion.app";
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -296,8 +297,8 @@
       visibleDuration = 9000,
       hoverHideDelay = 3500,
       transitionDuration = 280,
-      minDelay = 21000,
-      maxDelay = 31000,
+      persistenceKey = "",
+      cookieMaxAge = 60 * 60 * 24 * 365,
     } = config;
 
     const notice = document.getElementById(noticeId);
@@ -311,15 +312,89 @@
     let hideTimer = null;
     let isVisible = false;
     let isHovered = false;
+    let remainingDelay = initialDelay;
+    let scheduledAt = null;
+    let scheduledDelay = null;
+    let isReadyToShow = false;
 
-    const nextDelay = () =>
-      minDelay + Math.floor(Math.random() * (maxDelay - minDelay + 1));
+    const getCookieDomain = () => {
+      const host = window.location.hostname.toLowerCase();
 
-    const clearTimers = () => {
+      if (host === "mosion.app" || host.endsWith(".mosion.app")) {
+        return SHARED_COOKIE_DOMAIN;
+      }
+
+      return "";
+    };
+
+    const readCookie = (name) => {
+      const cookiePrefix = `${name}=`;
+      const cookies = String(document.cookie || "").split("; ");
+
+      for (const cookie of cookies) {
+        if (cookie.startsWith(cookiePrefix)) {
+          return cookie.slice(cookiePrefix.length);
+        }
+      }
+
+      return "";
+    };
+
+    const hasSeenNotice = () => {
+      if (!persistenceKey) {
+        return false;
+      }
+
+      const cookieValue = readCookie(persistenceKey);
+
+      if (cookieValue === "1") {
+        return true;
+      }
+
+      try {
+        return window.localStorage.getItem(persistenceKey) === "1";
+      } catch (error) {
+        return false;
+      }
+    };
+
+    const markNoticeSeen = () => {
+      if (!persistenceKey) {
+        return;
+      }
+
+      const expiresAt = new Date(Date.now() + cookieMaxAge * 1000).toUTCString();
+      const domain = getCookieDomain();
+      const domainSegment = domain ? `; domain=${domain}` : "";
+      document.cookie = `${persistenceKey}=1; expires=${expiresAt}; path=/; SameSite=Lax${domainSegment}`;
+
+      try {
+        window.localStorage.setItem(persistenceKey, "1");
+      } catch (error) {
+        return;
+      }
+    };
+
+    const clearTimers = (preserveCountdown = false) => {
       if (cycleTimer) {
+        if (
+          preserveCountdown &&
+          !isReadyToShow &&
+          scheduledAt !== null &&
+          scheduledDelay !== null
+        ) {
+          remainingDelay = Math.max(
+            0,
+            scheduledDelay - (Date.now() - scheduledAt)
+          );
+        }
+
         window.clearTimeout(cycleTimer);
         cycleTimer = null;
       }
+
+      scheduledAt = null;
+      scheduledDelay = null;
 
       if (hideTimer) {
         window.clearTimeout(hideTimer);
@@ -327,18 +402,20 @@
       }
     };
 
-    const scheduleNext = (delay = nextDelay()) => {
-      if (document.hidden || !isEligible()) {
+    const scheduleNext = (delay = isReadyToShow ? 0 : remainingDelay) => {
+      if (hasSeenNotice() || document.hidden || !isEligible()) {
         return;
       }
 
+      scheduledAt = Date.now();
+      scheduledDelay = Math.max(0, delay);
       cycleTimer = window.setTimeout(show, delay);
     };
 
-    const hide = (shouldReschedule = true) => {
+    const hide = (shouldReschedule = false) => {
       if (!isVisible) {
-        if (shouldReschedule && isEligible()) {
-          scheduleNext();
+        if (shouldReschedule && !hasSeenNotice() && isEligible()) {
+          scheduleNext(isReadyToShow ? retryDelay : remainingDelay);
         }
         return;
       }
@@ -352,21 +429,31 @@
         }
       }, transitionDuration);
 
-      if (shouldReschedule && isEligible()) {
-        scheduleNext();
+      if (shouldReschedule && !hasSeenNotice() && isEligible()) {
+        scheduleNext(isReadyToShow ? retryDelay : remainingDelay);
       }
     };
 
     const show = () => {
       clearTimers();
 
+      if (!isReadyToShow) {
+        isReadyToShow = true;
+        remainingDelay = 0;
+      }
+
+      if (hasSeenNotice()) {
+        return;
+      }
+
       if (document.hidden || shouldPause() || !isEligible()) {
-        if (isEligible()) {
+        if (isEligible() && !hasSeenNotice()) {
           scheduleNext(retryDelay);
         }
         return;
       }
 
+      markNoticeSeen();
       isVisible = true;
       notice.hidden = false;
 
@@ -376,7 +463,7 @@
 
       hideTimer = window.setTimeout(() => {
         if (!isHovered) {
-          hide(true);
+          hide(false);
         }
       }, visibleDuration);
     };
@@ -384,13 +471,18 @@
     const refresh = (delay = resumeDelay) => {
       clearTimers();
 
+      if (hasSeenNotice()) {
+        hide(false);
+        return;
+      }
+
       if (!isEligible()) {
         hide(false);
         return;
       }
 
       if (!isVisible) {
-        scheduleNext(delay);
+        scheduleNext(isReadyToShow ? 0 : remainingDelay || delay);
       }
     };
 
@@ -407,18 +499,18 @@
       isHovered = false;
 
       if (isVisible && !hideTimer) {
-        hideTimer = window.setTimeout(() => hide(true), hoverHideDelay);
+        hideTimer = window.setTimeout(() => hide(false), hoverHideDelay);
       }
     });
 
     closeButton.addEventListener("click", () => {
       clearTimers();
-      hide(true);
+      hide(false);
     });
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        clearTimers();
+        clearTimers(true);
         hide(false);
         return;
       }
@@ -426,7 +518,7 @@
       refresh(resumeDelay);
     });
 
-    if (isEligible()) {
+    if (!hasSeenNotice() && isEligible()) {
       scheduleNext(initialDelay);
     }
 
