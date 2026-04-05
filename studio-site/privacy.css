@@ -42,7 +42,7 @@ a {
 .page-shell {
   position: relative;
   min-height: 100vh;
-  padding: 28px 64px 84px;
+  padding: 24px 48px 84px;
 }
 
 .page-nav {
@@ -51,8 +51,7 @@ a {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto 44px;
+  margin: 0 0 44px;
 }
 
 .nav-logo,
@@ -113,6 +112,7 @@ a {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  visibility: hidden;
 }
 
 .back-link {
