@@ -2,40 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "studio.mosion.app"
-        },
-        {
-          "type": "cookie",
-          "key": "studio_known_user",
-          "value": "1"
-        }
-      ],
-      "destination": "/signin",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.studio.mosion.app"
-        },
-        {
-          "type": "cookie",
-          "key": "studio_known_user",
-          "value": "1"
-        }
-      ],
-      "destination": "/signin",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/onboarding",

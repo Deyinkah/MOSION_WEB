@@ -25,7 +25,6 @@ const EXACT_STUDIO_HOSTS = new Set([
   "www.studio.mosion.app",
   "studio.localhost"
 ]);
-const STUDIO_KNOWN_USER_COOKIE = "studio_known_user";
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -89,32 +88,6 @@ function safeResolvePath(rootDir, requestPath) {
   return path.resolve(rootDir, `.${normalized}`);
 }
 
-function parseCookies(cookieHeader) {
-  return String(cookieHeader || "")
-    .split(";")
-    .map((cookie) => cookie.trim())
-    .filter(Boolean)
-    .reduce((cookies, cookie) => {
-      const separatorIndex = cookie.indexOf("=");
-      const key =
-        separatorIndex === -1 ? cookie : cookie.slice(0, separatorIndex).trim();
-      const rawValue =
-        separatorIndex === -1 ? "" : cookie.slice(separatorIndex + 1).trim();
-
-      if (!key) {
-        return cookies;
-      }
-
-      try {
-        cookies[key] = decodeURIComponent(rawValue);
-      } catch (error) {
-        cookies[key] = rawValue;
-      }
-
-      return cookies;
-    }, {});
-}
-
 function getRequestHost(req) {
   return String(req.headers.host || "")
     .split(":")[0]
@@ -136,28 +109,6 @@ function canRenderEmailPreview(host) {
   }
 
   return host === "localhost" || host === "127.0.0.1" || host.endsWith(".localhost");
-}
-
-function shouldRedirectStudioLandingToSignin(req, host, requestUrl) {
-  const cookies = parseCookies(req.headers.cookie);
-
-  if (cookies[STUDIO_KNOWN_USER_COOKIE] !== "1") {
-    return "";
-  }
-
-  if (isStudioHost(host) && requestUrl.pathname === "/") {
-    return `/signin${requestUrl.search || ""}`;
-  }
-
-  if (
-    !isStudioHost(host) &&
-    (requestUrl.pathname === STUDIO_PATH_PREFIX ||
-      requestUrl.pathname === `${STUDIO_PATH_PREFIX}/`)
-  ) {
-    return `${STUDIO_PATH_PREFIX}/signin${requestUrl.search || ""}`;
-  }
-
-  return "";
 }
 
 function loadFreshWaitlistPreviewPage(options = {}) {
