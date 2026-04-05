@@ -28,7 +28,7 @@ function renderPublicPage(content) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./layout.css?v=20260405-footer1" />
-<link rel="stylesheet" href="./privacy.css?v=20260405-privacy1" />
+<link rel="stylesheet" href="./privacy.css?v=20260405-privacy3" />
 </head>
 <body class="policy-page">
   <!-- Generated from shared/privacy-policy-fragment.html via scripts/render-privacy-pages.js -->
@@ -64,7 +64,7 @@ function renderStudioPage(content) {
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./privacy.css?v=20260405-privacy1" />
+<link rel="stylesheet" href="./privacy.css?v=20260405-privacy3" />
 </head>
 <body>
   <!-- Generated from shared/privacy-policy-fragment.html via scripts/render-privacy-pages.js -->

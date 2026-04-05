@@ -20,9 +20,7 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(201, 168, 76, 0.08), transparent 24%),
-    var(--black);
+  background: var(--black);
   color: var(--white);
   font-family: "Syne", sans-serif;
   overflow-x: hidden;
@@ -44,7 +42,7 @@ a {
 .page-shell {
   position: relative;
   min-height: 100vh;
-  padding: 28px;
+  padding: 28px 64px 84px;
 }
 
 .page-nav {
@@ -52,7 +50,9 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 44px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 44px;
 }
 
 .nav-logo,
@@ -133,6 +133,9 @@ a {
 }
 
 .page-main {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 48px 0 84px;
 }
 
@@ -352,7 +355,7 @@ a {
   .page-nav {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 24px;
+    margin: 0 auto 24px;
   }
 
   .page-main {
