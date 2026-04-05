@@ -12,8 +12,10 @@
   const ROUTES = {
     about: "/about",
     home: "/",
+    privacy: "/privacy",
     localAbout: "/about.html",
     localHome: "/index.html",
+    localPrivacy: "/privacy.html",
     localStudio: "/studio/",
     studio: "https://studio.mosion.app",
   };
@@ -46,6 +48,15 @@
       pathname === "/" ||
       pathname === "/index.html" ||
       pathname.endsWith("/index.html")
+    );
+  }
+
+  function isPrivacyPage() {
+    const pathname = normalizePathname(window.location.pathname);
+    return (
+      pathname === "/privacy" ||
+      pathname === "/privacy.html" ||
+      pathname.endsWith("/privacy.html")
     );
   }
 
@@ -94,7 +105,7 @@
   <ul class="footer-links" aria-label="Footer">
     <li><a href="${ROUTES.about}" data-about-link>About</a></li>
     <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-    <li><a href="#" data-coming-soon-title="Privacy Policy" data-coming-soon-copy="The Privacy Policy page is being prepared and will be available soon.">Privacy</a></li>
+    <li><a href="${ROUTES.privacy}" data-privacy-link>Privacy</a></li>
     <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
     <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
   </ul>
@@ -243,6 +254,7 @@
     const logo = document.querySelector(".logo");
     const footerHomeLink = document.querySelector("[data-home-link]");
     const aboutLink = document.querySelector("[data-about-link]");
+    const privacyLink = document.querySelector("[data-privacy-link]");
     const studioLink = document.querySelector("[data-studio-link]");
 
     if (logo) {
@@ -257,6 +269,10 @@
       aboutLink.setAttribute("href", ROUTES.localAbout);
     }
 
+    if (privacyLink) {
+      privacyLink.setAttribute("href", ROUTES.localPrivacy);
+    }
+
     if (studioLink) {
       studioLink.setAttribute("href", ROUTES.localStudio);
     }
@@ -267,11 +283,19 @@
     });
   }
 
+  function applyCurrentPageState() {
+    const privacyLink = document.querySelector("[data-privacy-link]");
+
+    if (privacyLink && isPrivacyPage()) {
+      privacyLink.setAttribute("aria-current", "page");
+    }
+  }
+
   function initPrototypeNotice() {
     Site.initTimedNotice({
       noticeId: "prototypeNotice",
       closeButtonId: "prototypeNoticeClose",
-      isEligible: () => !isAboutPage(),
+      isEligible: () => !isAboutPage() && !isPrivacyPage(),
       shouldPause: () => document.body.classList.contains("modal-open"),
       initialDelay: 300000,
       persistenceKey: "mosion_prototype_notice_seen_v1",
@@ -281,6 +305,7 @@
   function boot() {
     injectLayout();
     applyLocalPreviewRoutes();
+    applyCurrentPageState();
 
     initNavMenu();
 

@@ -1528,7 +1528,7 @@ footer {
   bottom: 24px;
   z-index: 10015;
   width: min(500px, calc(100vw - 32px));
-  padding: 16px 18px;
+  padding: 16px 56px 16px 18px;
   border: 1px solid rgba(201,168,76,0.16);
   background:
     linear-gradient(145deg, rgba(201,168,76,0.12), transparent 48%),
@@ -1579,18 +1579,30 @@ footer {
 .cookie-notice-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 18px;
   margin-top: 14px;
 }
-.cookie-notice-link,
 .cookie-notice-dismiss {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(243,243,243,0.58);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.cookie-notice-link {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-}
-.cookie-notice-link {
   color: var(--gold-light);
   text-decoration: underline;
   text-underline-offset: 0.22em;
@@ -1600,17 +1612,14 @@ footer {
   color: var(--white);
 }
 .cookie-notice-dismiss {
-  min-height: 36px;
-  padding: 0 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.03);
-  color: var(--white);
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  appearance: none;
 }
 .cookie-notice-dismiss:hover {
-  border-color: rgba(201,168,76,0.32);
-  background: rgba(201,168,76,0.08);
+  color: var(--white);
+}
+.cookie-notice-dismiss svg {
+  width: 14px;
+  height: 14px;
 }
 .footer-links {
   display: flex;
@@ -1823,11 +1832,7 @@ footer {
     width: auto;
   }
   .cookie-notice-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .cookie-notice-dismiss {
-    width: 100%;
+    margin-top: 12px;
   }
 }
 @media (max-width: 900px) {
@@ -1903,13 +1908,12 @@ footer {
   }
   .hero-actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 14px;
   }
   .hero-actions .btn-primary,
   .hero-actions .btn-ghost {
-    width: 100%;
-    justify-content: center;
+    width: auto;
   }
   .hero-actions .btn-ghost {
     min-height: 50px;
