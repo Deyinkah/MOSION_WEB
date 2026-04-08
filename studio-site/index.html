@@ -31,6 +31,20 @@
           return false;
         }
 
+        var currentUser = parsedValue.currentUser;
+        var authToken =
+          typeof parsedValue.authToken === "string"
+            ? parsedValue.authToken.trim()
+            : "";
+
+        if (
+          authToken &&
+          currentUser &&
+          String(currentUser.role || "").trim().toLowerCase() === "producer"
+        ) {
+          return true;
+        }
+
         var expiresAt = parsedValue.expires_at || parsedValue.expiresAt;
 
         if (typeof expiresAt === "number" && expiresAt > 0) {
