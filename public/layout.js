@@ -11,13 +11,19 @@
 
   const ROUTES = {
     about: "/about",
+    accessibility: "/accessibility",
+    contact: "mailto:info@mosion.app",
     home: "/",
-    privacy: "/privacy",
+    instagram: "https://www.instagram.com/mosionhq",
     localAbout: "/about.html",
+    localAccessibility: "/accessibility.html",
     localHome: "/index.html",
     localPrivacy: "/privacy.html",
     localStudio: "/studio/",
+    privacy: "/privacy",
     studio: "https://studio.mosion.app",
+    support: "mailto:support@mosion.app?subject=MOSION%20Support",
+    x: "https://x.com/mosionhq",
   };
 
   const COPY = {
@@ -39,6 +45,15 @@
       pathname === "/about" ||
       pathname === "/about.html" ||
       pathname.endsWith("/about.html")
+    );
+  }
+
+  function isAccessibilityPage() {
+    const pathname = normalizePathname(window.location.pathname);
+    return (
+      pathname === "/accessibility" ||
+      pathname === "/accessibility.html" ||
+      pathname.endsWith("/accessibility.html")
     );
   }
 
@@ -70,7 +85,7 @@
 
   function createNavMarkup() {
     return `
-<nav>
+<nav class="site-nav" aria-label="Primary">
   <a href="${ROUTES.home}" class="logo">
     <img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" width="168" height="20" />
   </a>
@@ -102,20 +117,68 @@
   function createFooterMarkup() {
     return `
 <footer class="site-footer">
-  <ul class="footer-links" aria-label="Footer">
-    <li><a href="${ROUTES.about}" data-about-link>About</a></li>
-    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-    <li><a href="${ROUTES.privacy}" data-privacy-link>Privacy</a></li>
-    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
-    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
-  </ul>
   <div class="footer-brand">
     <a href="${ROUTES.home}" class="footer-logo" data-home-link>
       <img src="${ASSETS.wordmark}" alt="MOSION" class="footer-logo-image" width="168" height="20" />
     </a>
     <div class="footer-mission">${COPY.footerMission}</div>
   </div>
-  <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
+  <nav class="footer-nav" aria-label="Footer">
+    <div class="footer-group">
+      <div class="footer-heading">Platform</div>
+      <ul class="footer-list">
+        <li><a href="/#how" data-home-hash="#how">How it works</a></li>
+        <li><a href="/#download" data-home-hash="#download">Get the app</a></li>
+        <li><a href="${ROUTES.studio}" data-footer-studio-link target="_blank" rel="noopener noreferrer">Studio</a></li>
+      </ul>
+    </div>
+    <div class="footer-group">
+      <div class="footer-heading">Company</div>
+      <ul class="footer-list">
+        <li><a href="${ROUTES.about}" data-about-link>About</a></li>
+        <li><a href="${ROUTES.support}">Support</a></li>
+        <li><a href="${ROUTES.contact}">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-group">
+      <div class="footer-heading">Legal</div>
+      <ul class="footer-list">
+        <li><a href="${ROUTES.privacy}" data-privacy-link>Privacy</a></li>
+        <li><a href="${ROUTES.privacy}#storage" data-privacy-storage-link>Cookies</a></li>
+        <li><a href="${ROUTES.privacy}#terms" data-privacy-terms-link>Terms</a></li>
+        <li><a href="${ROUTES.accessibility}" data-accessibility-link>Accessibility</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="footer-meta">
+    <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
+    <div class="footer-social" aria-label="MOSION social links">
+      <a
+        href="${ROUTES.x}"
+        class="footer-social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow MOSION on X"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.126-7.092L4.871 22H1.613l7.608-8.696L1.25 2h6.713l4.633 6.463L18.244 2Zm-1.142 18.067h1.804L6.978 3.838H5.043l12.059 16.229Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a
+        href="${ROUTES.instagram}"
+        class="footer-social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow MOSION on Instagram"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <div class="coming-soon-modal" id="comingSoonModal" hidden>
@@ -254,8 +317,12 @@
     const logo = document.querySelector(".logo");
     const footerHomeLink = document.querySelector("[data-home-link]");
     const aboutLink = document.querySelector("[data-about-link]");
+    const accessibilityLink = document.querySelector("[data-accessibility-link]");
     const privacyLink = document.querySelector("[data-privacy-link]");
+    const privacyStorageLink = document.querySelector("[data-privacy-storage-link]");
+    const privacyTermsLink = document.querySelector("[data-privacy-terms-link]");
     const studioLink = document.querySelector("[data-studio-link]");
+    const footerStudioLink = document.querySelector("[data-footer-studio-link]");
 
     if (logo) {
       logo.setAttribute("href", ROUTES.localHome);
@@ -273,8 +340,26 @@
       privacyLink.setAttribute("href", ROUTES.localPrivacy);
     }
 
+    if (privacyStorageLink) {
+      privacyStorageLink.setAttribute("href", `${ROUTES.localPrivacy}#storage`);
+    }
+
+    if (privacyTermsLink) {
+      privacyTermsLink.setAttribute("href", `${ROUTES.localPrivacy}#terms`);
+    }
+
+    if (accessibilityLink) {
+      accessibilityLink.setAttribute("href", ROUTES.localAccessibility);
+    }
+
     if (studioLink) {
       studioLink.setAttribute("href", ROUTES.localStudio);
+    }
+
+    if (footerStudioLink) {
+      footerStudioLink.setAttribute("href", ROUTES.localStudio);
+      footerStudioLink.removeAttribute("target");
+      footerStudioLink.removeAttribute("rel");
     }
 
     document.querySelectorAll("[data-home-hash]").forEach((link) => {
@@ -284,10 +369,20 @@
   }
 
   function applyCurrentPageState() {
+    const aboutLink = document.querySelector("[data-about-link]");
+    const accessibilityLink = document.querySelector("[data-accessibility-link]");
     const privacyLink = document.querySelector("[data-privacy-link]");
+
+    if (aboutLink && isAboutPage()) {
+      aboutLink.setAttribute("aria-current", "page");
+    }
 
     if (privacyLink && isPrivacyPage()) {
       privacyLink.setAttribute("aria-current", "page");
+    }
+
+    if (accessibilityLink && isAccessibilityPage()) {
+      accessibilityLink.setAttribute("aria-current", "page");
     }
   }
 
@@ -295,7 +390,8 @@
     Site.initTimedNotice({
       noticeId: "prototypeNotice",
       closeButtonId: "prototypeNoticeClose",
-      isEligible: () => !isAboutPage() && !isPrivacyPage(),
+      isEligible: () =>
+        !isAboutPage() && !isPrivacyPage() && !isAccessibilityPage(),
       shouldPause: () => document.body.classList.contains("modal-open"),
       initialDelay: 300000,
       persistenceKey: "mosion_prototype_notice_seen_v1",

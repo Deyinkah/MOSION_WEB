@@ -96,9 +96,8 @@ a {
 .policy-subhead,
 .policy-toc a,
 .storage-item-title,
-.footer-links a,
+.footer-heading,
 .footer-mission,
-.footer-copy,
 .inline-code,
 .eyebrow {
   font-family: "DM Mono", monospace;
@@ -124,7 +123,8 @@ a {
 .back-link:hover,
 .policy-toc a:hover,
 .contact-link:hover,
-.footer-links a:hover {
+.footer-list a:hover,
+.footer-list a[aria-current="page"] {
   color: var(--white);
 }
 
@@ -196,8 +196,7 @@ a {
 
 .policy-summary,
 .policy-toc,
-.storage-list,
-.footer-links {
+.storage-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -233,8 +232,7 @@ a {
   gap: 10px;
 }
 
-.policy-toc a,
-.footer-links a {
+.policy-toc a {
   color: var(--muted);
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -303,31 +301,16 @@ a {
   border-top: 1px solid var(--border);
   padding: 40px 0 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
   gap: 28px 48px;
   align-items: start;
   margin-top: 40px;
 }
 
-.footer-links {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  justify-self: end;
-  justify-content: flex-end;
-  grid-column: 2;
-}
-
-.footer-links li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .footer-brand {
   display: grid;
-  gap: 16px;
-  max-width: 500px;
+  gap: 18px;
+  max-width: 440px;
   grid-column: 1;
 }
 
@@ -338,13 +321,92 @@ a {
   line-height: 1.9;
 }
 
-.footer-copy {
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 24px 32px;
+  width: min(100%, 680px);
+  justify-self: end;
+  grid-column: 2;
+}
+
+.footer-group {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.footer-heading {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.footer-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-list a {
+  color: rgba(245, 243, 238, 0.74);
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   grid-column: 1 / -1;
-  padding-top: 18px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 0;
+}
+
+.footer-social-link:hover {
+  color: var(--gold-light);
+}
+
+.footer-social-link svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.footer-social-link[href*="instagram.com"] svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-copy {
+  margin: 0;
   color: var(--white);
   font-size: 14px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
 }
 
 @media (max-width: 720px) {
@@ -378,31 +440,71 @@ a {
   .footer-brand {
     display: block;
     max-width: none;
-    margin: 0 0 32px;
-    text-align: center;
-  }
-
-  .footer-logo {
-    justify-content: center;
-    margin: 0 auto;
-  }
-
-  .footer-links {
-    display: block;
-    width: 100%;
-    margin: 0 0 32px;
+    margin: 0 0 28px;
     text-align: left;
   }
 
-  .footer-links li + li {
-    margin-top: 16px;
+  .footer-logo {
+    justify-content: flex-start;
+    margin: 0;
   }
 
-  .footer-links a {
-    display: block;
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 26px;
+    text-align: left;
+  }
+
+  .footer-group {
+    gap: 12px;
+    min-height: 100%;
+    padding: 16px 14px 14px;
+  }
+
+  .footer-group:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-heading {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+  }
+
+  .footer-list {
+    gap: 10px;
+  }
+
+  .footer-list a {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .footer-meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 20px;
+  }
+
+  .footer-social {
+    margin-left: auto;
+    justify-content: flex-end;
   }
 
   .footer-copy {
-    text-align: center;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.6;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-group {
+    padding: 15px 13px 13px;
   }
 }

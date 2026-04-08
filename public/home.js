@@ -6,6 +6,59 @@
   const JOINING_LABEL = "Joining...";
   const ERROR_RESET_DELAY = 3200;
 
+  const MOBILE_FILM_CARD_QUERY = "(max-width: 640px)";
+
+  function initFilmCards() {
+    const cards = Array.from(document.querySelectorAll(".film-card"));
+
+    if (!cards.length) {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia(MOBILE_FILM_CARD_QUERY);
+
+    const collapseAll = (exceptCard = null) => {
+      cards.forEach((card) => {
+        if (card !== exceptCard) {
+          card.classList.remove("is-active");
+        }
+      });
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        if (!mobileQuery.matches) {
+          return;
+        }
+
+        event.preventDefault();
+        const nextState = !card.classList.contains("is-active");
+        collapseAll(card);
+        card.classList.toggle("is-active", nextState);
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!mobileQuery.matches || event.target.closest(".film-card")) {
+        return;
+      }
+
+      collapseAll();
+    });
+
+    const resetCards = () => {
+      if (!mobileQuery.matches) {
+        collapseAll();
+      }
+    };
+
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", resetCards);
+    } else if (typeof mobileQuery.addListener === "function") {
+      mobileQuery.addListener(resetCards);
+    }
+  }
+
   function initWaitlist() {
     const form = document.getElementById("wlForm");
     const input = document.getElementById("wlEmail");
@@ -93,17 +146,13 @@
   }
 
   function boot() {
-    Site.initCursor({
-      cursorId: "cur",
-      ringId: "curR",
-    });
-
     Site.initReveal({
       selector: ".r",
       visibleClass: "v",
       threshold: 0.1,
     });
 
+    initFilmCards();
     initWaitlist();
   }
 

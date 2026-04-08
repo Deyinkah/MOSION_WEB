@@ -16,7 +16,7 @@
   };
 
   function initNav() {
-    const nav = document.querySelector("nav");
+    const nav = document.querySelector(".site-nav");
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");
 
@@ -406,11 +406,6 @@
   }
 
   function boot() {
-    Site.initCursor({
-      cursorId: "cursor",
-      ringId: "cursorRing",
-    });
-
     Site.initReveal({
       selector: ".reveal",
       visibleClass: "visible",

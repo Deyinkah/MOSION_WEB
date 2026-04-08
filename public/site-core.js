@@ -4,7 +4,6 @@
   const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const IOS_DEVICE_PATTERN = /iPad|iPhone|iPod/i;
   const DEFAULT_WAITLIST_ERROR = "We could not complete your waitlist signup.";
-  const DEFAULT_INTERACTIVE_SELECTOR = "a,button,input,select";
   const SHARED_COOKIE_DOMAIN = ".mosion.app";
 
   function ready(callback) {
@@ -49,98 +48,10 @@
     return result;
   }
 
-  function initCursor(config = {}) {
-    const {
-      cursorId,
-      ringId,
-      interactiveSelector = DEFAULT_INTERACTIVE_SELECTOR,
-      defaultCursorSize = 10,
-      defaultRingSize = 36,
-      activeCursorSize = 6,
-      activeRingSize = 52,
-      easing = 0.12,
-    } = config;
-
-    const cursor = document.getElementById(cursorId);
-    const ring = document.getElementById(ringId);
-
-    if (!cursor || !ring) {
-      return null;
-    }
-
-    let pointerX = -100;
-    let pointerY = -100;
-    let ringX = -100;
-    let ringY = -100;
-    let animationFrameId = null;
-
-    const setSizes = (cursorSize, ringSize) => {
-      cursor.style.width = `${cursorSize}px`;
-      cursor.style.height = `${cursorSize}px`;
-      ring.style.width = `${ringSize}px`;
-      ring.style.height = `${ringSize}px`;
-    };
-
-    const updatePointer = (event) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-    };
-
-    const grow = () => {
-      setSizes(activeCursorSize, activeRingSize);
-    };
-
-    const reset = () => {
-      setSizes(defaultCursorSize, defaultRingSize);
-    };
-
-    const interactiveElements = Array.from(
-      document.querySelectorAll(interactiveSelector)
-    );
-
-    document.addEventListener("pointermove", updatePointer, { passive: true });
-    document.addEventListener("mousemove", updatePointer, { passive: true });
-
-    interactiveElements.forEach((element) => {
-      element.addEventListener("mouseenter", grow);
-      element.addEventListener("mouseleave", reset);
-    });
-
-    const animate = () => {
-      cursor.style.left = `${pointerX}px`;
-      cursor.style.top = `${pointerY}px`;
-      ringX += (pointerX - ringX) * easing;
-      ringY += (pointerY - ringY) * easing;
-      ring.style.left = `${ringX}px`;
-      ring.style.top = `${ringY}px`;
-      animationFrameId = window.requestAnimationFrame(animate);
-    };
-
-    reset();
-    animate();
-
-    return {
-      destroy() {
-        if (animationFrameId) {
-          window.cancelAnimationFrame(animationFrameId);
-        }
-
-        document.removeEventListener("pointermove", updatePointer);
-        document.removeEventListener("mousemove", updatePointer);
-
-        interactiveElements.forEach((element) => {
-          element.removeEventListener("mouseenter", grow);
-          element.removeEventListener("mouseleave", reset);
-        });
-      },
-    };
-  }
-
   function initReveal(config = {}) {
     const {
       selector,
       visibleClass,
-      threshold = 0.1,
     } = config;
 
     const elements = Array.from(document.querySelectorAll(selector));
@@ -149,27 +60,8 @@
       return null;
     }
 
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add(visibleClass));
-      return null;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add(visibleClass);
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold }
-    );
-
-    elements.forEach((element) => observer.observe(element));
-    return observer;
+    elements.forEach((element) => element.classList.add(visibleClass));
+    return null;
   }
 
   function scrollToHash(hash, options = {}) {
@@ -531,7 +423,6 @@
   }
 
   window.MosionSite = Object.freeze({
-    initCursor,
     initModal,
     initReveal,
     initTimedNotice,

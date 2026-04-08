@@ -3,6 +3,72 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+  (function redirectAuthenticatedStudioUser() {
+    var sessionKey = "mosion_auth_session_v1";
+    var dashboardUrl = new URL("./dashboard", window.location.href);
+
+    function hasUsableSession(rawValue) {
+      if (!rawValue) {
+        return false;
+      }
+
+      var normalizedValue = String(rawValue).trim();
+
+      if (
+        !normalizedValue ||
+        normalizedValue === "null" ||
+        normalizedValue === "undefined" ||
+        normalizedValue === "false"
+      ) {
+        return false;
+      }
+
+      try {
+        var parsedValue = JSON.parse(normalizedValue);
+
+        if (!parsedValue || typeof parsedValue !== "object") {
+          return false;
+        }
+
+        var expiresAt = parsedValue.expires_at || parsedValue.expiresAt;
+
+        if (typeof expiresAt === "number" && expiresAt > 0) {
+          if (expiresAt > 1000000000000) {
+            return expiresAt > Date.now();
+          }
+
+          return expiresAt * 1000 > Date.now();
+        }
+
+        return Boolean(
+          parsedValue.access_token ||
+            parsedValue.accessToken ||
+            parsedValue.refresh_token ||
+            parsedValue.refreshToken ||
+            parsedValue.token ||
+            parsedValue.session ||
+            parsedValue.currentSession ||
+            parsedValue.user
+        );
+      } catch (error) {
+        return (
+          normalizedValue.length > 24 &&
+          (normalizedValue.indexOf(".") !== -1 ||
+            /token|session|refresh|access|auth/i.test(normalizedValue))
+        );
+      }
+    }
+
+    try {
+      if (hasUsableSession(window.localStorage.getItem(sessionKey))) {
+        window.location.replace(dashboardUrl.href);
+      }
+    } catch (error) {
+      /* Ignore storage access issues and continue to the landing page. */
+    }
+  })();
+</script>
 <title>MOSION STUDIO - Apply as a Distribution Partner</title>
 <!-- SEO -->
 <meta name="description" content="MOSION Studio is the partner portal for approved producers, distributors, and rights holders releasing cinema-standard films on MOSION. Access is application-based and every title is reviewed before release." />
@@ -39,7 +105,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./studio.css?v=20260405-cookie2" />
+<link rel="stylesheet" href="./studio.css?v=20260408-socialgap1" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -121,11 +187,8 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- NAV -->
-<nav>
+<nav class="site-nav" aria-label="Primary">
   <a href="#" class="nav-logo" aria-label="MOSION Studio">
     <img class="nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
     <span class="nav-logo-tag">Studio</span>
@@ -207,29 +270,6 @@
 	    </div>
 	  </div>
 	</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item"><span class="dot"></span> Nollywood <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Ghallywood <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Mobile Cinema <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> DRM Protected <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Pay-Per-View <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Direct Distribution <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Filmmaker First <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Africa & Beyond <span class="dot"></span></div>
-    <!-- duplicate for seamless loop -->
-    <div class="marquee-item"><span class="dot"></span> Nollywood <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Ghallywood <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Mobile Cinema <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> DRM Protected <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Pay-Per-View <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Direct Distribution <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Filmmaker First <span class="dot"></span></div>
-    <div class="marquee-item"><span class="dot"></span> Africa & Beyond <span class="dot"></span></div>
-  </div>
-</div>
 
 <!-- MANIFESTO -->
 <div class="manifesto reveal">
@@ -784,22 +824,73 @@
 		</section>
 
 <!-- FOOTER -->
-			<footer>
-		  <ul class="footer-links">
-		    <li><a href="#" data-coming-soon-title="Support" data-coming-soon-copy="The Support page is being prepared and will be available soon.">Support</a></li>
-		    <li><a href="#" data-coming-soon-title="Terms &amp; Conditions" data-coming-soon-copy="The Terms &amp; Conditions page is being prepared and will be available soon.">Terms</a></li>
-		    <li><a href="./privacy">Privacy</a></li>
-		    <li><a href="#" data-coming-soon-title="Contact" data-coming-soon-copy="The Contact page is being prepared and will be available soon.">Contact</a></li>
-		  </ul>
-			  <div class="footer-brand">
-			    <a href="#" class="footer-logo nav-logo">
-			      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
-		    <span class="nav-logo-tag">Studio</span>
-		  </a>
+				<footer class="site-footer">
+				  <div class="footer-brand">
+				    <a href="./" class="footer-logo nav-logo" aria-label="MOSION Studio home">
+				      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
+				      <span class="nav-logo-tag">Studio</span>
+				    </a>
 				    <div class="footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</div>
-			  </div>
-			  <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
-			</footer>
+				  </div>
+
+				  <nav class="footer-nav" aria-label="Footer">
+				    <div class="footer-group">
+				      <div class="footer-heading">Studio</div>
+				      <ul class="footer-list">
+				        <li><a href="./#process">Process</a></li>
+				        <li><a href="./#standards">Standards</a></li>
+				        <li><a href="./#apply">Apply</a></li>
+				      </ul>
+				    </div>
+					    <div class="footer-group">
+					      <div class="footer-heading">Company</div>
+					      <ul class="footer-list">
+					        <li><a href="https://mosion.app/about">About</a></li>
+					        <li><a href="mailto:partners@mosion.app?subject=Studio%20Support">Support</a></li>
+					        <li><a href="mailto:partners@mosion.app">Contact</a></li>
+					      </ul>
+					    </div>
+				    <div class="footer-group">
+				      <div class="footer-heading">Legal</div>
+				      <ul class="footer-list">
+				        <li><a href="./privacy">Privacy</a></li>
+				        <li><a href="./privacy#storage">Cookies</a></li>
+				        <li><a href="./privacy#terms">Terms</a></li>
+				        <li><a href="./accessibility">Accessibility</a></li>
+				      </ul>
+				    </div>
+				  </nav>
+
+				  <div class="footer-meta">
+				    <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
+				    <div class="footer-social" aria-label="MOSION social links">
+				      <a
+				        href="https://x.com/mosionhq"
+				        class="footer-social-link"
+				        target="_blank"
+				        rel="noopener noreferrer"
+				        aria-label="Follow MOSION on X"
+				      >
+				        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+				          <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.126-7.092L4.871 22H1.613l7.608-8.696L1.25 2h6.713l4.633 6.463L18.244 2Zm-1.142 18.067h1.804L6.978 3.838H5.043l12.059 16.229Z" fill="currentColor"/>
+				        </svg>
+				      </a>
+				      <a
+				        href="https://www.instagram.com/mosionhq"
+				        class="footer-social-link"
+				        target="_blank"
+				        rel="noopener noreferrer"
+				        aria-label="Follow MOSION on Instagram"
+				      >
+				        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+				          <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+				          <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.7"/>
+				          <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/>
+				        </svg>
+				      </a>
+				    </div>
+				  </div>
+				</footer>
 
 	<div class="coming-soon-modal" id="comingSoonModal" hidden>
 	  <div class="coming-soon-backdrop" data-modal-close></div>
@@ -864,6 +955,6 @@
 		</aside>
 
 		<script src="./site-core.js?v=20260405-cookie1" defer></script>
-		<script src="./studio.js?v=20260405-cookie1" defer></script>
+		<script src="./studio.js?v=20260408-footer-fix1" defer></script>
 		</body>
 		</html>
