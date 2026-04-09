@@ -9,8 +9,9 @@ Use it as a separate Vercel project while keeping the main website in the same G
 1. Create a new Vercel project from this same GitHub repository.
 2. Set the project's Root Directory to `studio-site`.
 3. Keep the framework preset as `Other`.
-4. Attach the custom domain `studio.mosion.app` to that new project.
-5. Leave `mosion.app` and `www.mosion.app` attached to the main project.
+4. Set `STUDIO_WEB_APP_ORIGIN` in the project's environment variables to the deployed Studio web app origin used for app-route rewrites.
+5. Attach the custom domain `studio.mosion.app` to that new project.
+6. Leave `mosion.app` and `www.mosion.app` attached to the main project.
 
 ### Why this works
 

@@ -4,14 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MOSION About Local Preview</title>
-  <script>
-    (function redirectToPublicAbout() {
-      var target = new URL("./public/about.html", window.location.href);
-      target.search = window.location.search;
-      target.hash = window.location.hash;
-      window.location.replace(target.href);
-    })();
-  </script>
+  <script src="./preview-redirect.js" data-redirect-path="./public/about.html"></script>
 </head>
 <body></body>
 </html>

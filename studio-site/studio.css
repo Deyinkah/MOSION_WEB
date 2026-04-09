@@ -1228,6 +1228,8 @@ section { position: relative; }
 }
 .form-input:focus { border-color: var(--gold); }
 .form-input::placeholder { color: var(--muted2); }
+.form-input.is-invalid,
+.form-select.is-invalid { border-color: var(--red); }
 .form-textarea {
   min-height: 144px;
   resize: vertical;
@@ -1280,6 +1282,7 @@ section { position: relative; }
   color: var(--muted2);
   text-align: center;
 }
+.form-note.is-error { color: var(--red); }
 @media (min-width: 1025px) {
   .waitlist-left {
     position: sticky;

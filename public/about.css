@@ -143,6 +143,14 @@ body {
   animation: fadeUp 0.7s 0.75s forwards;
 }
 
+.hero-stat-delay-2 {
+  animation-delay: 0.85s;
+}
+
+.hero-stat-delay-3 {
+  animation-delay: 0.95s;
+}
+
 .hero-stat-num {
   font-family: "Cormorant Garamond", serif;
   font-size: 1.8rem;

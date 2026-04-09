@@ -270,6 +270,7 @@ body::after{
   display:flex;align-items:center;gap:12px;margin-bottom:20px;
 }
 .films-section .s-label::before{content:'';width:28px;height:1px;background:var(--amber)}
+.section-label-spacer{margin-bottom:20px}
 .films-h{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(40px,4.5vw,68px);font-weight:700;

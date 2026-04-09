@@ -4,14 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MOSION Studio Local Preview</title>
-  <script>
-    (function redirectToStudioSite() {
-      var target = new URL("../studio-site/index.html", window.location.href);
-      target.search = window.location.search;
-      target.hash = window.location.hash;
-      window.location.replace(target.href);
-    })();
-  </script>
+  <script src="../preview-redirect.js" data-redirect-path="../studio-site/index.html"></script>
 </head>
 <body></body>
 </html>

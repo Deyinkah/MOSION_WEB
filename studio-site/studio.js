@@ -234,12 +234,12 @@
 
   function flashInvalidInputs(inputs) {
     inputs.forEach((input) => {
-      input.style.borderColor = "#e03e3e";
+      input.classList.add("is-invalid");
     });
 
     window.setTimeout(() => {
       inputs.forEach((input) => {
-        input.style.borderColor = "";
+        input.classList.remove("is-invalid");
       });
     }, 2000);
   }
@@ -303,7 +303,7 @@
       event.preventDefault();
 
       note.textContent = COPY.defaultFormNote;
-      note.style.color = "";
+      note.classList.remove("is-error");
 
       const firstName = firstNameInput.value.trim();
       const lastName = lastNameInput.value.trim();
@@ -387,7 +387,7 @@
           { fallbackError: COPY.waitlistError }
         );
 
-        form.style.display = "none";
+        form.hidden = true;
         successState.classList.add("show");
 
         if (result.confirmationSent === false && successSub) {
@@ -396,7 +396,7 @@
         }
       } catch (error) {
         note.textContent = error.message || COPY.waitlistError;
-        note.style.color = "#e03e3e";
+        note.classList.add("is-error");
         flashInvalidInputs([emailInput]);
       } finally {
         submitButton.disabled = false;

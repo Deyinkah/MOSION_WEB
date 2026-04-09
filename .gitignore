@@ -1,7 +1,11 @@
 .env
+.env.*
+.env.example
 public/.env
 .chrome-profile/
 .edge-profile/
+.claude/
+preview/
 node_modules/
 *.log
 .tmp-server.*

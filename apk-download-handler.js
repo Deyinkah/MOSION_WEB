@@ -4,8 +4,6 @@ const path = require("path");
 
 loadEnvFile();
 
-const DEFAULT_BETA_APK_OBJECT_URL =
-  "https://cinemaapp.s3.eu-central-003.backblazeb2.com/CDN/APK/mosion.apk";
 const DEFAULT_BETA_APK_FILENAME = "mosion.apk";
 const DEFAULT_BETA_APK_REGION = "eu-central-003";
 const DEFAULT_PRESIGN_TTL_SECONDS = 60;
@@ -13,7 +11,6 @@ const MAX_PRESIGN_TTL_SECONDS = 604800;
 const APK_CONTENT_TYPE = "application/vnd.android.package-archive";
 const DOWNLOAD_VARIANTS = {
   root: {
-    defaultObjectUrl: DEFAULT_BETA_APK_OBJECT_URL,
     defaultFilename: DEFAULT_BETA_APK_FILENAME,
     objectUrlEnvKeys: [
       "BETA_APK_OBJECT_URL",
@@ -172,10 +169,8 @@ function parseObjectUrl(rawUrl) {
 
 function getDownloadConfig(variantKey = "root") {
   const variant = DOWNLOAD_VARIANTS[variantKey] || DOWNLOAD_VARIANTS.root;
-  const sourceUrl =
-    getFirstEnvValue(variant.objectUrlEnvKeys) || variant.defaultObjectUrl;
-
-  const parsedConfig = parseObjectUrl(sourceUrl);
+  const sourceUrl = getFirstEnvValue(variant.objectUrlEnvKeys);
+  const parsedConfig = sourceUrl ? parseObjectUrl(sourceUrl) : null;
   const keyId = getFirstEnvValue([
     "B2_DOWNLOAD_KEY_ID",
     "B2_APPLICATION_KEY_ID",
@@ -186,13 +181,16 @@ function getDownloadConfig(variantKey = "root") {
     "B2_APPLICATION_KEY",
     "B2_SECRET_ACCESS_KEY"
   ]);
-  const bucket = getFirstEnvValue(variant.bucketEnvKeys) || parsedConfig.bucket;
-  const objectKey = getFirstEnvValue(variant.objectKeyEnvKeys) || parsedConfig.objectKey;
+  const bucket = getFirstEnvValue(variant.bucketEnvKeys) || parsedConfig?.bucket || "";
+  const objectKey =
+    getFirstEnvValue(variant.objectKeyEnvKeys) || parsedConfig?.objectKey || "";
   const region =
-    getFirstEnvValue(variant.regionEnvKeys) || parsedConfig.region || DEFAULT_BETA_APK_REGION;
+    getFirstEnvValue(variant.regionEnvKeys) ||
+    parsedConfig?.region ||
+    DEFAULT_BETA_APK_REGION;
   const endpoint =
     getFirstEnvValue(variant.endpointEnvKeys) ||
-    parsedConfig.endpoint ||
+    parsedConfig?.endpoint ||
     `https://s3.${region}.backblazeb2.com`;
   const filename = getFirstEnvValue(variant.filenameEnvKeys) || variant.defaultFilename;
   const expiresInSeconds = clampExpiry(
@@ -227,7 +225,9 @@ function getDownloadConfig(variantKey = "root") {
     throw createHttpError(
       500,
       "Download is temporarily unavailable.",
-      `Missing required beta APK download env vars: ${missingVars.join(", ")}`
+      `Missing required beta APK download env vars: ${missingVars.join(
+        ", "
+      )}. Set BETA_APK_OBJECT_URL or provide the bucket/object key env vars directly.`
     );
   }
 

@@ -128,7 +128,7 @@
           { fallbackError: WAITLIST_ERROR }
         );
 
-        form.style.display = "none";
+        form.hidden = true;
         successState.classList.add("show");
 
         if (result.confirmationSent === false) {
