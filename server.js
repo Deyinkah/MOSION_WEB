@@ -162,6 +162,13 @@ function getCandidatePaths(pathname) {
   return [pathname];
 }
 
+function shouldRedirectStudioLandingToSignin(req, host, requestUrl) {
+  void req;
+  void host;
+  void requestUrl;
+  return null;
+}
+
 const server = http.createServer((req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const host = getRequestHost(req);

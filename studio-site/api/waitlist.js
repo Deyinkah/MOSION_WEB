@@ -2,7 +2,7 @@ const DEFAULT_PARTNER_APPLICATIONS_API_URL =
   process.env.PARTNER_APPLICATIONS_API_URL ||
   process.env.STUDIO_PARTNER_APPLICATIONS_API_URL ||
   process.env.WAITLIST_API_URL ||
-  "https://www.mosion.app/api/partner-applications";
+  "";
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -124,9 +124,16 @@ module.exports = async (req, res) => {
     if (!isValidHttpUrl(screenerUrl)) {
       sendJson(res, 400, { error: "Enter a valid trailer or screener URL." });
       return;
-    }
+	    }
 
-    const response = await fetch(DEFAULT_PARTNER_APPLICATIONS_API_URL, {
+	    if (!DEFAULT_PARTNER_APPLICATIONS_API_URL) {
+	      sendJson(res, 503, {
+	        error: "Partner applications are temporarily unavailable.",
+	      });
+	      return;
+	    }
+
+	    const response = await fetch(DEFAULT_PARTNER_APPLICATIONS_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

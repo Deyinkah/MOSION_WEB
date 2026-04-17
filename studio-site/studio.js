@@ -302,6 +302,40 @@
     }
 
     const defaultButton = submitButton.innerHTML;
+    const shouldPreviewSubmittedState =
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("preview") === "success";
+
+    function revealSubmittedState(options = {}) {
+      const fallbackCopy =
+        "Your application was received. We could not send the confirmation email yet, but your details are in review.";
+      const shouldUseFallbackCopy = options.confirmationSent === false;
+
+      formContent.classList.add("is-hidden");
+      formArea.classList.add("is-success");
+      successState.classList.add("show");
+
+      if (successSub) {
+        successSub.textContent = shouldUseFallbackCopy
+          ? fallbackCopy
+          : "We'll review your details and reach out if there is fit for partner onboarding. Studio access and title listing are both subject to review.";
+      }
+
+      requestAnimationFrame(() => {
+        successState.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (typeof formArea.scrollTo === "function") {
+          formArea.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        if (typeof window.scrollTo === "function") {
+          window.scrollTo({ top: formArea.getBoundingClientRect().top + window.scrollY - 24, behavior: "smooth" });
+        }
+      });
+    }
+
+    if (shouldPreviewSubmittedState) {
+      revealSubmittedState();
+      return;
+    }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -391,23 +425,7 @@
           { fallbackError: COPY.waitlistError }
         );
 
-        formContent.classList.add("is-hidden");
-        successState.classList.add("show");
-
-        if (result.confirmationSent === false && successSub) {
-          successSub.textContent =
-            "Your application was received. We could not send the confirmation email yet, but your details are in review.";
-        }
-
-        requestAnimationFrame(() => {
-          successState.scrollIntoView({ behavior: "smooth", block: "start" });
-          if (typeof formArea.scrollTo === "function") {
-            formArea.scrollTo({ top: 0, behavior: "smooth" });
-          }
-          if (typeof window.scrollTo === "function") {
-            window.scrollTo({ top: formArea.getBoundingClientRect().top + window.scrollY - 24, behavior: "smooth" });
-          }
-        });
+        revealSubmittedState({ confirmationSent: result.confirmationSent });
       } catch (error) {
         note.textContent = error.message || COPY.waitlistError;
         note.classList.add("is-error");
