@@ -63,6 +63,10 @@ a {
   text-decoration: none;
 }
 
+.footer-logo .nav-logo-tag {
+  font-family: inherit;
+}
+
 .nav-logo-image,
 .footer-logo-image {
   display: block;
@@ -305,6 +309,7 @@ a {
   gap: 28px 48px;
   align-items: start;
   margin-top: 40px;
+  font-family: "Syne", sans-serif;
 }
 
 .footer-brand {
@@ -316,7 +321,8 @@ a {
 
 .footer-mission {
   color: var(--muted);
-  font-size: 11px;
+  font-family: inherit;
+  font-size: 14px;
   letter-spacing: 0.04em;
   line-height: 1.9;
 }
@@ -337,6 +343,7 @@ a {
 }
 
 .footer-heading {
+  font-family: inherit;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -405,6 +412,7 @@ a {
 .footer-copy {
   margin: 0;
   color: var(--white);
+  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.04em;
 }

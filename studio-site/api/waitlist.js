@@ -1,4 +1,8 @@
-const DEFAULT_WAITLIST_API_URL = process.env.WAITLIST_API_URL || "https://www.mosion.app/api/waitlist";
+const DEFAULT_PARTNER_APPLICATIONS_API_URL =
+  process.env.PARTNER_APPLICATIONS_API_URL ||
+  process.env.STUDIO_PARTNER_APPLICATIONS_API_URL ||
+  process.env.WAITLIST_API_URL ||
+  "https://www.mosion.app/api/partner-applications";
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -122,7 +126,7 @@ module.exports = async (req, res) => {
       return;
     }
 
-    const response = await fetch(DEFAULT_WAITLIST_API_URL, {
+    const response = await fetch(DEFAULT_PARTNER_APPLICATIONS_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

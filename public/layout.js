@@ -30,7 +30,7 @@
     defaultModalBody: "This page is being prepared and will be available soon.",
     defaultModalTitle: "Coming soon",
     footerMission:
-      "MOSION is building the infrastructure for African cinema distribution, starting in your pocket.",
+      "Mosion is building the infrastructure for African cinema distribution, starting in your pocket.",
     prototypeNotice:
       "Banner artwork and sample film titles shown are for interface demonstration only. Final catalog will reflect licensed partner content.",
   };
@@ -119,7 +119,7 @@
 <footer class="site-footer">
   <div class="footer-brand">
     <a href="${ROUTES.home}" class="footer-logo" data-home-link>
-      <img src="${ASSETS.wordmark}" alt="MOSION" class="footer-logo-image" width="168" height="20" />
+      <img src="${ASSETS.wordmark}" alt="Mosion" class="footer-logo-image" width="168" height="20" />
     </a>
     <div class="footer-mission">${COPY.footerMission}</div>
   </div>
@@ -152,13 +152,13 @@
   </nav>
   <div class="footer-meta">
     <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
-    <div class="footer-social" aria-label="MOSION social links">
+    <div class="footer-social" aria-label="Mosion social links">
       <a
         href="${ROUTES.x}"
         class="footer-social-link"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Follow MOSION on X"
+        aria-label="Follow Mosion on X"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.126-7.092L4.871 22H1.613l7.608-8.696L1.25 2h6.713l4.633 6.463L18.244 2Zm-1.142 18.067h1.804L6.978 3.838H5.043l12.059 16.229Z" fill="currentColor"/>
@@ -169,7 +169,7 @@
         class="footer-social-link"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Follow MOSION on Instagram"
+        aria-label="Follow Mosion on Instagram"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/>

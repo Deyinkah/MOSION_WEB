@@ -651,104 +651,106 @@
 	      </a>
 	    </p>
 	  </div>
-		  <div class="waitlist-form-area reveal reveal-delay-2">
-	      <div class="application-mobile-controls">
-	        <button type="button" class="application-mobile-close" id="studioFormCancel" aria-label="Cancel application form">
-	          Cancel
-	        </button>
-	      </div>
-		      <div class="application-intro">
-		        <div class="application-intro-kicker">Application Materials</div>
-		        <p class="application-intro-copy">This is a partner application, not an instant signup. Share enough context for us to assess rights position, release readiness, and fit for MOSION.</p>
+		  <div class="waitlist-form-area reveal reveal-delay-2" id="waitlistFormArea">
+		      <div class="application-mobile-controls">
+		        <button type="button" class="application-mobile-close" id="studioFormCancel" aria-label="Cancel application form">
+		          Cancel
+		        </button>
 		      </div>
-			    <form id="studioWaitlistForm" novalidate>
-		      <div class="form-row">
+			      <div class="application-form-content" id="applicationFormContent">
+			        <div class="application-intro">
+			          <div class="application-intro-kicker">Application Materials</div>
+			          <p class="application-intro-copy">This is a partner application, not an instant signup. Share enough context for us to assess rights position, release readiness, and fit for MOSION.</p>
+			        </div>
+				      <form id="studioWaitlistForm" novalidate>
+			        <div class="form-row">
+			          <div class="form-group">
+			            <label class="form-label">First Name</label>
+		            <input type="text" class="form-input" placeholder="Chidi" id="firstName" name="firstName" />
+		          </div>
+		          <div class="form-group">
+		            <label class="form-label">Last Name</label>
+		            <input type="text" class="form-input" placeholder="Okafor" id="lastName" name="lastName" />
+		          </div>
+		        </div>
+		        <div class="form-row">
+		          <div class="form-group">
+		            <label class="form-label">Email Address</label>
+		            <input type="email" class="form-input" placeholder="you@studio.com" id="email" name="email" />
+		          </div>
+		          <div class="form-group">
+		            <label class="form-label">Website / Portfolio</label>
+		            <input type="url" class="form-input" placeholder="https://yourstudio.com" id="companyWebsite" name="companyWebsite" />
+		          </div>
+		        </div>
+		        <div class="form-row">
 		        <div class="form-group">
-		          <label class="form-label">First Name</label>
-	          <input type="text" class="form-input" placeholder="Chidi" id="firstName" name="firstName" />
-	        </div>
-	        <div class="form-group">
-	          <label class="form-label">Last Name</label>
-	          <input type="text" class="form-input" placeholder="Okafor" id="lastName" name="lastName" />
-	        </div>
-	      </div>
-	      <div class="form-row">
-	        <div class="form-group">
-	          <label class="form-label">Email Address</label>
-	          <input type="email" class="form-input" placeholder="you@studio.com" id="email" name="email" />
-	        </div>
-	        <div class="form-group">
-	          <label class="form-label">Website / Portfolio</label>
-	          <input type="url" class="form-input" placeholder="https://yourstudio.com" id="companyWebsite" name="companyWebsite" />
-	        </div>
-	      </div>
-	      <div class="form-row">
-	      <div class="form-group">
-		        <label class="form-label">Company / Title Reference</label>
-		        <input type="text" class="form-input" placeholder="Your company, slate, or lead title" id="filmName" name="filmName" />
-		      </div>
-		      <div class="form-group">
-		        <label class="form-label">Applicant Type</label>
-		        <select class="form-select form-input" id="origin" name="origin">
-		          <option value="" disabled selected>Select your applicant type</option>
-		          <option>Producer / Filmmaker</option>
-		          <option>Distributor</option>
-		          <option>Rights Holder / Sales Agent</option>
-		          <option>Studio / Production Company</option>
-		          <option>Executive / Catalog Owner</option>
-		          <option>Other</option>
-		        </select>
-		      </div>
-	      </div>
-	      <div class="form-row">
-	        <div class="form-group">
-	          <label class="form-label">Rights Status</label>
-	          <select class="form-select form-input" id="rightsStatus" name="rightsStatus">
-	            <option value="" disabled selected>Select rights status</option>
-	            <option>Exclusive Rights Holder</option>
-	            <option>Authorized Distributor</option>
-	            <option>Producer / Co-Producer</option>
-	            <option>Sales Agent / Representative</option>
-	            <option>In Rights Negotiation</option>
-	          </select>
-	        </div>
-	        <div class="form-group">
-	          <label class="form-label">Release Stage</label>
-	          <select class="form-select form-input" id="releaseStage" name="releaseStage">
-	            <option value="" disabled selected>Select release stage</option>
-	            <option>Finished & Release Ready</option>
-	            <option>In Final Post-Production</option>
-	            <option>Festival / Market Run</option>
-	            <option>Planning Commercial Release</option>
-	            <option>Early Evaluation</option>
-	          </select>
-	        </div>
-	      </div>
-	      <div class="form-row">
-	        <div class="form-group">
-	          <label class="form-label">Primary Territories / Audience</label>
-	          <input type="text" class="form-input" placeholder="Nigeria, Ghana, diaspora, pan-African audience" id="territoryFocus" name="territoryFocus" />
-	        </div>
-	        <div class="form-group">
-	          <label class="form-label">Trailer / Screener URL</label>
-	          <input type="url" class="form-input" placeholder="https://link-to-trailer-or-screener" id="screenerUrl" name="screenerUrl" />
-	        </div>
-	      </div>
-	      <div class="form-group">
-	        <label class="form-label">Submission Summary</label>
-	        <textarea class="form-input form-textarea" id="submissionSummary" name="submissionSummary" placeholder="Tell us what you want to release, why it fits MOSION, and anything relevant about rights, audience, or release timing."></textarea>
-	      </div>
-		      <button class="submit-btn" id="studioSubmitButton" type="submit">
-		        Apply for Access
-		        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
-		          <path d="M1 7h12M8 2l5 5-5 5"/>
-		        </svg>
-		      </button>
-		      <div class="form-note" id="studioFormNote">Applications are reviewed manually. Access is granted only to approved partners.</div>
-		    </form>
-		    <div class="success-state" id="successState">
-		      <div class="success-icon">
-		        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+			          <label class="form-label">Company / Title Reference</label>
+			          <input type="text" class="form-input" placeholder="Your company, slate, or lead title" id="filmName" name="filmName" />
+			        </div>
+			        <div class="form-group">
+			          <label class="form-label">Applicant Type</label>
+			          <select class="form-select form-input" id="origin" name="origin">
+			            <option value="" disabled selected>Select your applicant type</option>
+			            <option>Producer / Filmmaker</option>
+			            <option>Distributor</option>
+			            <option>Rights Holder / Sales Agent</option>
+			            <option>Studio / Production Company</option>
+			            <option>Executive / Catalog Owner</option>
+			            <option>Other</option>
+			          </select>
+			        </div>
+		        </div>
+		        <div class="form-row">
+		          <div class="form-group">
+		            <label class="form-label">Rights Status</label>
+		            <select class="form-select form-input" id="rightsStatus" name="rightsStatus">
+		              <option value="" disabled selected>Select rights status</option>
+		              <option>Exclusive Rights Holder</option>
+		              <option>Authorized Distributor</option>
+		              <option>Producer / Co-Producer</option>
+		              <option>Sales Agent / Representative</option>
+		              <option>In Rights Negotiation</option>
+		            </select>
+		          </div>
+		          <div class="form-group">
+		            <label class="form-label">Release Stage</label>
+		            <select class="form-select form-input" id="releaseStage" name="releaseStage">
+		              <option value="" disabled selected>Select release stage</option>
+		              <option>Finished & Release Ready</option>
+		              <option>In Final Post-Production</option>
+		              <option>Festival / Market Run</option>
+		              <option>Planning Commercial Release</option>
+		              <option>Early Evaluation</option>
+		            </select>
+		          </div>
+		        </div>
+		        <div class="form-row">
+		          <div class="form-group">
+		            <label class="form-label">Primary Territories / Audience</label>
+		            <input type="text" class="form-input" placeholder="Nigeria, Ghana, diaspora, pan-African audience" id="territoryFocus" name="territoryFocus" />
+		          </div>
+		          <div class="form-group">
+		            <label class="form-label">Trailer / Screener URL</label>
+		            <input type="url" class="form-input" placeholder="https://link-to-trailer-or-screener" id="screenerUrl" name="screenerUrl" />
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <label class="form-label">Submission Summary</label>
+		          <textarea class="form-input form-textarea" id="submissionSummary" name="submissionSummary" placeholder="Tell us what you want to release, why it fits MOSION, and anything relevant about rights, audience, or release timing."></textarea>
+		        </div>
+			        <button class="submit-btn" id="studioSubmitButton" type="submit">
+			          Apply for Access
+			          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+			            <path d="M1 7h12M8 2l5 5-5 5"/>
+			          </svg>
+			        </button>
+			        <div class="form-note" id="studioFormNote">Applications are reviewed manually. Access is granted only to approved partners.</div>
+			      </form>
+			    </div>
+			    <div class="success-state" id="successState">
+			      <div class="success-icon">
+			        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
 	          <path d="M4 12l5 5L20 7"/>
 	        </svg>
 	      </div>
@@ -761,11 +763,11 @@
 <!-- FOOTER -->
 				<footer class="site-footer">
 				  <div class="footer-brand">
-				    <a href="./" class="footer-logo nav-logo" aria-label="MOSION Studio home">
-				      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
+				    <a href="./" class="footer-logo nav-logo" aria-label="Mosion Studio home">
+				      <img class="footer-logo-image nav-logo-image" src="./logo-wordmark.png" alt="Mosion" width="168" height="20" />
 				      <span class="nav-logo-tag">Studio</span>
 				    </a>
-				    <div class="footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</div>
+				    <div class="footer-mission">Mosion Studio is the curated distribution infrastructure African cinema has always deserved.</div>
 				  </div>
 
 				  <nav class="footer-nav" aria-label="Footer">
@@ -798,13 +800,13 @@
 
 				  <div class="footer-meta">
 				    <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
-				    <div class="footer-social" aria-label="MOSION social links">
+				    <div class="footer-social" aria-label="Mosion social links">
 				      <a
 				        href="https://x.com/mosionhq"
 				        class="footer-social-link"
 				        target="_blank"
 				        rel="noopener noreferrer"
-				        aria-label="Follow MOSION on X"
+				        aria-label="Follow Mosion on X"
 				      >
 				        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				          <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.126-7.092L4.871 22H1.613l7.608-8.696L1.25 2h6.713l4.633 6.463L18.244 2Zm-1.142 18.067h1.804L6.978 3.838H5.043l12.059 16.229Z" fill="currentColor"/>
@@ -815,7 +817,7 @@
 				        class="footer-social-link"
 				        target="_blank"
 				        rel="noopener noreferrer"
-				        aria-label="Follow MOSION on Instagram"
+				        aria-label="Follow Mosion on Instagram"
 				      >
 				        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				          <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/>

@@ -93,11 +93,11 @@ function renderStudioPage(content) {
         </ul>
 
         <div class="footer-brand">
-          <a href="./" class="footer-logo" aria-label="MOSION Studio home">
-            <img class="footer-logo-image" src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
+          <a href="./" class="footer-logo" aria-label="Mosion Studio home">
+            <img class="footer-logo-image" src="./logo-wordmark.png" alt="Mosion" width="168" height="20" />
             <span class="nav-logo-tag">Studio</span>
           </a>
-          <p class="footer-mission">MOSION Studio is the curated distribution infrastructure African cinema has always deserved.</p>
+          <p class="footer-mission">Mosion Studio is the curated distribution infrastructure African cinema has always deserved.</p>
         </div>
 
         <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>

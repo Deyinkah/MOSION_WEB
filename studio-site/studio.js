@@ -259,6 +259,8 @@
 
   function initWaitlistForm() {
     const form = document.getElementById("studioWaitlistForm");
+    const formArea = document.getElementById("waitlistFormArea");
+    const formContent = document.getElementById("applicationFormContent");
     const firstNameInput = document.getElementById("firstName");
     const lastNameInput = document.getElementById("lastName");
     const emailInput = document.getElementById("email");
@@ -290,6 +292,8 @@
       !territoryFocusInput ||
       !screenerUrlInput ||
       !submissionSummaryInput ||
+      !formArea ||
+      !formContent ||
       !successState ||
       !note ||
       !submitButton
@@ -387,13 +391,23 @@
           { fallbackError: COPY.waitlistError }
         );
 
-        form.hidden = true;
+        formContent.classList.add("is-hidden");
         successState.classList.add("show");
 
         if (result.confirmationSent === false && successSub) {
           successSub.textContent =
             "Your application was received. We could not send the confirmation email yet, but your details are in review.";
         }
+
+        requestAnimationFrame(() => {
+          successState.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (typeof formArea.scrollTo === "function") {
+            formArea.scrollTo({ top: 0, behavior: "smooth" });
+          }
+          if (typeof window.scrollTo === "function") {
+            window.scrollTo({ top: formArea.getBoundingClientRect().top + window.scrollY - 24, behavior: "smooth" });
+          }
+        });
       } catch (error) {
         note.textContent = error.message || COPY.waitlistError;
         note.classList.add("is-error");

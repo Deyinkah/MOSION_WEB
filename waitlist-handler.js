@@ -12,6 +12,10 @@ loadEnvFile();
 let resendClient = null;
 let waitlistLogoAsset = null;
 let hasLoadedWaitlistLogoAsset = false;
+const DEFAULT_PARTNER_APPLICATIONS_API_URL =
+  process.env.PARTNER_APPLICATIONS_API_URL ||
+  process.env.STUDIO_PARTNER_APPLICATIONS_API_URL ||
+  "";
 
 const DEFAULT_WAITLIST_LOGO_PATH = path.join(__dirname, "public", "logo-wordmark.png");
 const WAITLIST_LOGO_CONTENT_ID = "mosion-logo";
@@ -286,6 +290,47 @@ async function saveWaitlistSignup(entry) {
   await fs.promises.appendFile(waitlistFile, `${JSON.stringify(entry)}\n`, "utf8");
 }
 
+async function submitPartnerApplication(entry) {
+  const endpoint = String(DEFAULT_PARTNER_APPLICATIONS_API_URL || "").trim();
+
+  if (!endpoint) {
+    throw createHttpError(
+      503,
+      "Partner applications are temporarily unavailable.",
+      "Missing PARTNER_APPLICATIONS_API_URL or STUDIO_PARTNER_APPLICATIONS_API_URL"
+    );
+  }
+
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(entry)
+    });
+  } catch (error) {
+    throw createHttpError(
+      502,
+      "Partner applications are temporarily unavailable.",
+      error instanceof Error ? error.message : "Partner applications request failed"
+    );
+  }
+
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw createHttpError(
+      response.status,
+      result.error || "We could not submit your application right now.",
+      result.error || `Partner applications endpoint failed with status ${response.status}`
+    );
+  }
+
+  return result;
+}
+
 function normalizeWaitlistSource(source) {
   const value = typeof source === "string" ? source.trim().toLowerCase() : "";
 
@@ -537,22 +582,33 @@ async function handleWaitlistSignup(req, res) {
     const maskedEmail = maskEmailForLogs(email);
     console.log(`[waitlist:${requestId}] signup received email=${maskedEmail} source=${source}`);
 
-    await saveWaitlistSignup({
-      email,
-      createdAt: new Date().toISOString(),
-      source,
-      ...details
-    });
-    console.log(`[waitlist:${requestId}] signup stored email=${maskedEmail} source=${source}`);
+    if (source === "studio") {
+      await submitPartnerApplication({
+        email,
+        source,
+        ...details
+      });
+      console.log(`[waitlist:${requestId}] partner application forwarded email=${maskedEmail} source=${source}`);
+    } else {
+      await saveWaitlistSignup({
+        email,
+        createdAt: new Date().toISOString(),
+        source,
+        ...details
+      });
+      console.log(`[waitlist:${requestId}] signup stored email=${maskedEmail} source=${source}`);
+    }
 
     let confirmationSent = false;
 
-    try {
-      await sendWaitlistConfirmation(email, source);
-      confirmationSent = true;
-      console.log(`[waitlist:${requestId}] confirmation sent email=${maskedEmail} source=${source}`);
-    } catch (error) {
-      console.error(`[waitlist:${requestId}] confirmation failed email=${maskedEmail} source=${source}:`, error.message);
+    if (source !== "studio") {
+      try {
+        await sendWaitlistConfirmation(email, source);
+        confirmationSent = true;
+        console.log(`[waitlist:${requestId}] confirmation sent email=${maskedEmail} source=${source}`);
+      } catch (error) {
+        console.error(`[waitlist:${requestId}] confirmation failed email=${maskedEmail} source=${source}:`, error.message);
+      }
     }
 
     console.log(`[waitlist:${requestId}] response sent confirmationSent=${confirmationSent} source=${source}`);
