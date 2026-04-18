@@ -79,6 +79,11 @@
   font-size: 14px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: #fff;
+}
+
+.nav-btn.nav-menu-toggle {
+  color: #fff;
 }
 
 .nav-menu-toggle svg {
@@ -208,7 +213,7 @@
 }
 
 .footer-list a {
-  color: rgba(240, 237, 230, 0.74);
+  color: var(--layout-footer-text);
   font-size: 14px;
   line-height: 1.5;
   text-decoration: none;

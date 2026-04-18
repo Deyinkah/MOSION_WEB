@@ -359,7 +359,7 @@ a {
 }
 
 .footer-list a {
-  color: rgba(245, 243, 238, 0.74);
+  color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
   text-decoration: none;

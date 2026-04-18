@@ -93,6 +93,9 @@ body::after{
   border:0;cursor:pointer;
   font-family:'Space Mono',monospace;font-size:14px;
   letter-spacing:.2em;text-transform:uppercase;
+ }
+.nav-btn.nav-menu-toggle{
+  color:var(--cream)!important;
 }
 .nav-menu-toggle svg{
   width:12px;height:12px;transition:transform .2s ease;
