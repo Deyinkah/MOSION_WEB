@@ -18,6 +18,8 @@
   --red:#cc3333;
   --blue-dim:rgba(80,120,200,0.08);
   --section-gutter:56px;
+  --hero-height-netflix:clamp(42rem,100vh,54rem);
+  --hero-height-netflix-dynamic:clamp(42rem,100dvh,54rem);
 }
 
 html{
@@ -171,12 +173,16 @@ section{
 }
 
 .hero{
-  min-height:100vh;
+  min-height:var(--hero-height-netflix);
+  min-height:var(--hero-height-netflix-dynamic);
   display:flex;flex-direction:column;
-  justify-content:flex-end;
+  justify-content:center;
   position:relative;overflow:hidden;
-  padding-top:0;
-  padding-bottom:80px;
+  padding:0 var(--section-gutter) 80px;
+}
+html.force-desktop-mode .hero{
+  min-height:var(--hero-height-netflix)!important;
+  min-height:var(--hero-height-netflix-dynamic)!important;
 }
 
 .hero::before,.hero::after{
@@ -851,7 +857,7 @@ body.modal-open{
 .r.v{opacity:1;transform:none}
 .rd1,.rd2,.rd3,.rd4{transition-delay:0s}
 
-@media(max-width:1100px){
+@media(max-width:900px){
   :root{
     --section-gutter:28px;
   }
@@ -868,10 +874,11 @@ body.modal-open{
   .hero{
     min-height:100svh;
     justify-content:flex-start;
-    padding-top:calc(118px + env(safe-area-inset-top, 0px));
-    padding-bottom:72px;
+    padding:calc(118px + env(safe-area-inset-top, 0px)) var(--section-gutter) 72px;
   }
+  .hero-bg{background:var(--ink)}
   .hero::before,.hero::after{height:44px}
+  .hero::after{display:none}
   .hero-frame{display:none}
   .hero-stats{display:none}
   .films-section,.how,.why,.cta-section{
@@ -932,8 +939,7 @@ body.modal-open{
   .logo-wordmark{height:17px}
   .hero{
     min-height:auto;
-    padding-top:calc(104px + env(safe-area-inset-top, 0px));
-    padding-bottom:56px;
+    padding:calc(104px + env(safe-area-inset-top, 0px)) var(--section-gutter) 56px;
   }
   .hero::before,.hero::after{height:28px}
   .film-grid{
