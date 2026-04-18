@@ -8,10 +8,11 @@
   --layout-border: rgba(255, 255, 255, 0.06);
   --layout-border2: rgba(255, 255, 255, 0.1);
   --layout-nav-logo-height: clamp(24px, 2vw, 34px);
+  --layout-gutter: 56px;
 }
 
 .site-nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -20,10 +21,14 @@
   align-items: center;
   justify-content: space-between;
   padding-top: calc(20px + env(safe-area-inset-top, 0px));
-  padding-right: calc(48px + env(safe-area-inset-right, 0px));
+  padding-right: calc(var(--layout-gutter) + env(safe-area-inset-right, 0px));
   padding-bottom: 20px;
-  padding-left: calc(48px + env(safe-area-inset-left, 0px));
+  padding-left: calc(var(--layout-gutter) + env(safe-area-inset-left, 0px));
   background: linear-gradient(to bottom, rgba(6, 6, 10, 0.98) 0%, transparent 100%);
+}
+
+.site-nav.site-nav-logo-only {
+  justify-content: flex-start;
 }
 
 .logo {
@@ -85,13 +90,14 @@
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: none;
-  color: #fff;
+  color: var(--layout-ink);
 }
 
 .nav-btn.nav-menu-toggle {
-  color: #fff;
+  color: var(--layout-ink) !important;
   font-family: "Syne", sans-serif !important;
   font-size: clamp(13px, 1.05vw, 16px) !important;
+  font-style: normal !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em !important;
   line-height: 1 !important;
@@ -143,7 +149,7 @@
   justify-content: center;
   font-family: "Syne", sans-serif;
   font-size: clamp(13px, 1.05vw, 16px);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;
   color: rgba(240, 237, 230, 0.82);
@@ -171,7 +177,7 @@
 
 .site-footer {
   border-top: 1px solid var(--layout-border);
-  padding: 56px 64px 24px;
+  padding: 56px var(--layout-gutter) 24px;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.55fr);
   gap: 40px 72px;
@@ -486,12 +492,22 @@ body.modal-open {
   overflow: hidden;
 }
 
+@media (max-width: 1100px) {
+  :root {
+    --layout-gutter: 28px;
+  }
+}
+
 @media (max-width: 640px) {
+  :root {
+    --layout-gutter: 24px;
+  }
+
   .site-nav {
     padding-top: calc(18px + env(safe-area-inset-top, 0px));
-    padding-right: calc(1.25rem + env(safe-area-inset-right, 0px));
+    padding-right: calc(var(--layout-gutter) + env(safe-area-inset-right, 0px));
     padding-bottom: 18px;
-    padding-left: calc(1.25rem + env(safe-area-inset-left, 0px));
+    padding-left: calc(var(--layout-gutter) + env(safe-area-inset-left, 0px));
   }
 
   .logo-wordmark {
@@ -505,7 +521,7 @@ body.modal-open {
 
   .site-footer {
     display: block;
-    padding: 40px 32px 32px;
+    padding: 40px var(--layout-gutter) 32px;
     text-align: left;
   }
 
@@ -591,13 +607,7 @@ body.modal-open {
   .prototype-notice-copy {
     max-width: none;
   }
-}
 
-@media (max-width: 480px) {
-  .footer-group {
-    padding: 15px 13px 13px;
-  }
-}
   .nav-menu {
     position: relative;
     display: block;
@@ -635,7 +645,7 @@ body.modal-open {
     border-radius: 2px;
     font-family: "Syne", sans-serif;
     font-size: clamp(13px, 1.05vw, 16px);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: none;
     color: var(--layout-cream);
@@ -654,3 +664,10 @@ body.modal-open {
     background: rgba(212, 168, 67, 0.14);
     color: var(--layout-cream);
   }
+}
+
+@media (max-width: 480px) {
+  .footer-group {
+    padding: 15px 13px 13px;
+  }
+}

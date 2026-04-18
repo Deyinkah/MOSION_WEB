@@ -11,6 +11,7 @@
   --white: #f5f3ee;
   --muted: rgba(245, 243, 238, 0.74);
   --muted-soft: rgba(245, 243, 238, 0.56);
+  --section-gutter: 64px;
 }
 
 html,
@@ -42,7 +43,7 @@ a {
 .page-shell {
   position: relative;
   min-height: 100vh;
-  padding: 24px 48px 84px;
+  padding: 24px var(--section-gutter) 0;
 }
 
 .page-nav {
@@ -56,9 +57,11 @@ a {
 
 .nav-logo,
 .footer-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 4px;
+  width: max-content;
   color: var(--white);
   text-decoration: none;
 }
@@ -71,7 +74,7 @@ a {
 .footer-logo-image {
   display: block;
   width: auto;
-  height: clamp(18px, 1.4vw, 24px);
+  height: clamp(24px, 2vw, 34px);
   object-fit: contain;
   object-position: center;
   flex: 0 0 auto;
@@ -91,6 +94,28 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1;
+}
+
+.nav-logo-tag.nav-logo-tag-spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.nav-logo-tag.nav-logo-tag-spread span {
+  display: inline-block;
 }
 
 .page-crumb,
@@ -140,7 +165,7 @@ a {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 48px 0 84px;
+  padding: 48px 0 0;
 }
 
 .policy-article {
@@ -303,12 +328,12 @@ a {
 
 .site-footer {
   border-top: 1px solid var(--border);
-  padding: 40px 0 0;
+  padding: 52px 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, auto);
   gap: 28px 48px;
   align-items: start;
-  margin-top: 40px;
+  margin-top: 0;
   font-family: "Syne", sans-serif;
 }
 
@@ -417,9 +442,15 @@ a {
   letter-spacing: 0.04em;
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --section-gutter: 32px;
+  }
+}
+
 @media (max-width: 720px) {
   .page-shell {
-    padding: 20px;
+    padding: 20px var(--section-gutter) 0;
   }
 
   .page-nav {
@@ -429,7 +460,7 @@ a {
   }
 
   .page-main {
-    padding: 24px 0 72px;
+    padding: 24px 0 0;
   }
 
   .policy-article {
@@ -442,7 +473,7 @@ a {
 
   .site-footer {
     display: block;
-    margin-top: 32px;
+    margin-top: 0;
   }
 
   .footer-brand {
@@ -455,6 +486,21 @@ a {
   .footer-logo {
     justify-content: flex-start;
     margin: 0;
+    gap: 3px;
+  }
+
+  .nav-logo,
+  .footer-logo {
+    gap: 3px;
+  }
+
+  .nav-logo-image,
+  .footer-logo-image {
+    height: 14px;
+  }
+
+  .nav-logo-tag.nav-logo-tag-spread {
+    font-size: 10px;
   }
 
   .footer-nav {
@@ -511,7 +557,17 @@ a {
   }
 }
 
+@media (max-width: 640px) {
+  :root {
+    --section-gutter: 24px;
+  }
+}
+
 @media (max-width: 480px) {
+  :root {
+    --section-gutter: 20px;
+  }
+
   .footer-group {
     padding: 15px 13px 13px;
   }

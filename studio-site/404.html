@@ -19,6 +19,7 @@
     --gold: #c9a84c;
     --gold-light: #e8c97a;
     --white: #f5f3ee;
+    --section-gutter: 64px;
   }
   html, body { min-height: 100%; margin: 0; }
   body {
@@ -38,27 +39,28 @@
     opacity: 0.028;
     pointer-events: none;
   }
-	  .error-shell {
-	    position: relative;
-	    min-height: 100vh;
-	    padding: 24px 48px;
-	  }
+		  .error-shell {
+		    position: relative;
+		    min-height: 100vh;
+		    padding: 24px var(--section-gutter);
+		  }
 	  .error-top {
 	    min-height: calc(100vh - 48px);
 	    display: grid;
 	    grid-template-rows: auto 1fr;
 	  }
   .error-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 4px;
     width: fit-content;
     text-decoration: none;
     color: var(--white);
   }
 	  .error-brand img {
 	    display: block;
-	    height: clamp(18px, 1.4vw, 24px);
+	    height: clamp(24px, 2vw, 34px);
 	    width: auto;
 	  }
   .error-brand-tag {
@@ -75,6 +77,23 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 1;
+  }
+  .error-brand-tag.error-brand-tag-spread {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  .error-brand-tag.error-brand-tag-spread span {
+    display: inline-block;
   }
   .error-main {
     display: grid;
@@ -119,19 +138,31 @@
   .error-back-link:hover {
     color: var(--gold-light);
   }
-	  @media (max-width: 640px) {
-	    .error-shell { padding: 20px; }
-	    .error-top { min-height: calc(100vh - 40px); }
-	    .error-main { padding: 24px 0; }
-	  }
-</style>
+		  @media (max-width: 1024px) {
+		    :root { --section-gutter: 32px; }
+		  }
+		  @media (max-width: 640px) {
+		    :root { --section-gutter: 24px; }
+		    .error-shell { padding: 20px var(--section-gutter); }
+		    .error-top { min-height: calc(100vh - 40px); }
+		    .error-main { padding: 24px 0; }
+	      .error-brand { gap: 3px; }
+	      .error-brand img { height: 14px; }
+	      .error-brand-tag.error-brand-tag-spread { font-size: 10px; }
+		  }
+		  @media (max-width: 480px) {
+		    :root { --section-gutter: 20px; }
+		  }
+	</style>
 </head>
 <body>
   <div class="error-shell">
     <div class="error-top">
       <a href="./" class="error-brand" aria-label="MOSION Studio home">
         <img src="./logo-wordmark.png" alt="MOSION" width="168" height="20" />
-        <span class="error-brand-tag">Studio</span>
+        <span class="error-brand-tag error-brand-tag-spread" aria-hidden="true">
+          <span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span>
+        </span>
       </a>
 
       <main class="error-main">

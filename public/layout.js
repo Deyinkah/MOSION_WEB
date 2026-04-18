@@ -75,6 +75,10 @@
     );
   }
 
+  function isRootAttachedPage() {
+    return isAboutPage() || isPrivacyPage() || isAccessibilityPage();
+  }
+
   function isLocalHost(hostname) {
     return (
       hostname === "localhost" ||
@@ -84,6 +88,15 @@
   }
 
   function createNavMarkup() {
+    if (isRootAttachedPage()) {
+      return `
+<nav class="site-nav site-nav-logo-only" aria-label="Primary">
+  <a href="${ROUTES.home}" class="logo">
+    <img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" width="168" height="20" />
+  </a>
+</nav>`;
+    }
+
     return `
 <nav class="site-nav" aria-label="Primary">
   <a href="${ROUTES.home}" class="logo">

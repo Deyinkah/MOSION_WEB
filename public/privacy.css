@@ -49,13 +49,9 @@ body.policy-page::after {
   z-index: 9000;
 }
 
-body.policy-page nav {
-  position: absolute;
-}
-
 .policy-page-shell {
   position: relative;
-  width: min(1400px, calc(100% - 96px));
+  width: min(1400px, calc(100% - (var(--layout-gutter, 56px) * 2)));
   margin: 0 auto;
   padding: 152px 0 96px;
 }
@@ -235,7 +231,6 @@ body.policy-page nav {
 
 @media (max-width: 900px) {
   .policy-page-shell {
-    width: calc(100% - 40px);
     padding: 132px 0 72px;
   }
 

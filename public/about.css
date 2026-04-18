@@ -88,7 +88,7 @@ body {
   flex-direction: column;
   justify-content: center;
   max-width: 900px;
-  padding: 0 3rem 0 5.5rem;
+  padding: 0 var(--layout-gutter, 56px);
 }
 
 .hero-eyebrow {
@@ -132,7 +132,7 @@ body {
   display: flex;
   align-items: center;
   gap: 3rem;
-  padding: 2rem 3rem 2rem 5.5rem;
+  padding: 2rem var(--layout-gutter, 56px);
   border-top: 1px solid var(--amber-rule);
 }
 
@@ -173,9 +173,8 @@ body {
 }
 
 .story {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 9rem 5.5rem;
+  width: 100%;
+  padding: 9rem var(--layout-gutter, 56px);
   border-top: 1px solid var(--amber-rule);
 }
 
@@ -233,9 +232,8 @@ body {
 }
 
 .vision {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 8rem 5.5rem;
+  width: 100%;
+  padding: 8rem var(--layout-gutter, 56px);
   border-top: 1px solid var(--amber-rule);
 }
 
@@ -313,9 +311,8 @@ body {
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 6rem 5.5rem;
+  width: 100%;
+  padding: 6rem var(--layout-gutter, 56px);
   border-top: 1px solid var(--amber-rule);
 }
 
@@ -448,20 +445,20 @@ body {
 
 @media (max-width: 900px) {
   .hero-content {
-    padding: 0 1.5rem;
+    padding: 0 var(--layout-gutter, 24px);
   }
 
   .hero-bottom {
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 1.5rem var(--layout-gutter, 24px);
   }
 
   .story {
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--layout-gutter, 24px);
   }
 
   .vision {
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--layout-gutter, 24px);
   }
 
   .vision-pillars {
@@ -486,7 +483,7 @@ body {
   .building {
     grid-template-columns: 1fr;
     gap: 3rem;
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--layout-gutter, 24px);
   }
 
   .hero-accent-line {
