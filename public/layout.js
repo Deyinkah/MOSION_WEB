@@ -98,16 +98,26 @@
         aria-expanded="false"
         aria-haspopup="true"
         aria-controls="navDropdown"
+        aria-label="Open navigation menu"
       >
-        Menu
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M2 5l5 5 5-5" />
+        <svg class="icon-menu" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M1 2h16M1 7h16M1 12h16" />
+        </svg>
+        <svg class="icon-close" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M2 2l14 10M16 2 2 12" />
         </svg>
       </button>
       <div class="nav-dropdown" id="navDropdown" hidden>
         <a href="/#how" data-home-hash="#how">How it Works</a>
         <a href="${ROUTES.studio}" data-studio-link data-local-href="${ROUTES.localStudio}" target="_blank" rel="noopener noreferrer">Studio Platform</a>
-        <a href="/#download" data-home-hash="#download">Get the App</a>
+        <a
+          href="/api/download-apk"
+          rel="noopener"
+          class="nav-link-cta"
+          data-beta-apk-link
+          data-ios-modal-title="Android beta only"
+          data-ios-modal-copy="The MOSION beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon."
+        >Get the App</a>
       </div>
     </div>
   </div>
