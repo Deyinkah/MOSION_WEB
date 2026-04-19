@@ -16,6 +16,8 @@
   --muted2: rgba(245,243,238,0.25);
   --red: #e03e3e;
   --section-gutter: 64px;
+  --hero-height-netflix: clamp(42rem, 100vh, 54rem);
+  --hero-height-netflix-dynamic: clamp(42rem, 100dvh, 54rem);
 }
 
 html {
@@ -224,7 +226,8 @@ body::before {
 
 /* HERO */
 .hero {
-  min-height: 100vh;
+  min-height: var(--hero-height-netflix);
+  min-height: var(--hero-height-netflix-dynamic);
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-left: var(--section-gutter);
@@ -232,11 +235,15 @@ body::before {
   position: relative;
   overflow: hidden;
 }
+html.force-desktop-mode .hero {
+  min-height: var(--hero-height-netflix) !important;
+  min-height: var(--hero-height-netflix-dynamic) !important;
+}
 .hero-left {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 120px 0 100px;
+  justify-content: center;
+  padding: 120px var(--section-gutter) 100px 0;
   max-width: 720px;
   position: relative;
   z-index: 2;
@@ -1832,7 +1839,7 @@ footer {
 .reveal-delay-5 { transition-delay: 0s; }
 
 /* RESPONSIVE */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   :root {
     --section-gutter: 32px;
   }
@@ -1842,7 +1849,7 @@ footer {
     grid-template-columns: 1fr;
   }
   .hero-left {
-    justify-content: flex-start;
+    justify-content: center;
     padding: 128px 0 56px;
     max-width: 760px;
   }

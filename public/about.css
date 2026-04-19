@@ -54,6 +54,10 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+html.force-desktop-mode .hero {
+  height: clamp(740px, 56vw, 820px) !important;
+  min-height: clamp(740px, 56vw, 820px) !important;
+}
 
 .hero-bg {
   position: absolute;
