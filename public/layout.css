@@ -147,7 +147,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Syne", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: clamp(13px, 1.05vw, 16px);
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -643,7 +643,7 @@ body.modal-open {
     display: block;
     padding: 12px 14px;
     border-radius: 2px;
-    font-family: "Syne", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: clamp(13px, 1.05vw, 16px);
     font-weight: 600;
     letter-spacing: 0.04em;
