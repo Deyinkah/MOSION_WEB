@@ -513,10 +513,6 @@ html.force-desktop-mode .hero {
 }
 
 @media (max-width: 640px) {
-  .site-footer .footer-list {
-    gap: 10px;
-  }
-
   .site-footer .footer-list a {
     font-size: 15px;
     line-height: 1.45;

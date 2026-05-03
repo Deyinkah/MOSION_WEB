@@ -130,7 +130,7 @@
           data-beta-apk-link
           data-ios-modal-title="Android beta only"
           data-ios-modal-copy="The MOSION beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon."
-        >Get the App</a>
+        >Test the App</a>
       </div>
     </div>
   </div>
@@ -146,6 +146,7 @@
     </a>
     <div class="footer-mission">${COPY.footerMission}</div>
   </div>
+  <div class="footer-nav-label" aria-hidden="true">Quick Links</div>
   <nav class="footer-nav" aria-label="Footer">
     <div class="footer-group">
       <div class="footer-heading">Platform</div>

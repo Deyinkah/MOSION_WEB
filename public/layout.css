@@ -315,6 +315,10 @@
   color: var(--layout-footer-text);
 }
 
+.footer-nav-label {
+  display: none;
+}
+
 .coming-soon-modal {
   position: fixed;
   inset: 0;
@@ -520,43 +524,55 @@ body.modal-open {
   }
 
   .site-footer {
+    display: flex;
+    flex-direction: column;
+    padding: 56px var(--layout-gutter) 40px;
+  }
+
+  .footer-nav-label {
     display: block;
-    padding: 40px var(--layout-gutter) 32px;
-    text-align: left;
+    order: 1;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--layout-cream);
+    margin-bottom: 24px;
+  }
+
+  .footer-nav {
+    order: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+    width: 100%;
+    margin: 0 0 44px;
   }
 
   .footer-brand {
-    display: block;
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     max-width: none;
-    text-align: left;
-    margin: 0 0 28px;
+    text-align: center;
+    gap: 14px;
+    margin: 0 0 0;
   }
 
   .footer-logo {
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
   }
 
   .footer-logo-image {
-    height: 14px;
+    height: 20px;
     max-width: min(138px, 44vw);
   }
 
   .footer-mission {
-    text-align: left;
-  }
-
-  .footer-nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-    margin: 0 0 26px;
+    text-align: center;
   }
 
   .footer-group {
     gap: 12px;
     min-height: 100%;
-    padding: 16px 14px 14px;
   }
 
   .footer-group:last-child {
@@ -569,7 +585,7 @@ body.modal-open {
   }
 
   .footer-list {
-    gap: 10px;
+    gap: 12px;
   }
 
   .footer-list a {
@@ -578,16 +594,30 @@ body.modal-open {
   }
 
   .footer-meta {
+    order: 4;
+    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     padding-top: 20px;
+    margin-top: 20px;
   }
 
   .footer-social {
     margin-left: auto;
     justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .footer-social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-social-link[href*="instagram.com"] svg {
+    width: 20px;
+    height: 20px;
   }
 
   .footer-copy {

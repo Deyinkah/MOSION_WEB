@@ -1324,7 +1324,7 @@ section { position: relative; }
   border: 1px solid var(--border2);
   color: var(--white);
   font-family: 'Syne', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   padding: 16px 20px;
   border-radius: 2px;
   outline: none;
@@ -1739,6 +1739,10 @@ footer {
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
+}
+
+.footer-nav-label {
+  display: none;
 }
 
 /* SUCCESS */
@@ -2268,6 +2272,104 @@ footer {
     justify-content: flex-start;
   }
   .hero-left { padding: 112px 0 48px; }
+
+  /* Footer mobile layout */
+  footer {
+    display: flex;
+    flex-direction: column;
+    padding: 56px var(--section-gutter) 40px;
+  }
+  .footer-nav-label {
+    display: block;
+    order: 1;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+  .footer-nav {
+    order: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+    width: 100%;
+    margin: 0 0 44px;
+    justify-self: stretch;
+  }
+  .footer-brand {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: none;
+    gap: 14px;
+    margin: 0;
+  }
+  .footer-logo {
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    width: max-content;
+    gap: 4px;
+  }
+  .footer-logo-image {
+    height: 24px;
+    justify-self: start;
+  }
+  .footer-logo .nav-logo-tag.nav-logo-tag-spread {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .footer-mission {
+    width: 100%;
+    text-align: center;
+  }
+  .footer-group {
+    gap: 12px;
+    min-height: 100%;
+    padding: 0;
+  }
+  .footer-group:last-child {
+    grid-column: 1 / -1;
+  }
+  .footer-heading {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+  }
+  .footer-list {
+    gap: 12px;
+  }
+  .footer-list a {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .footer-meta {
+    order: 4;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  .footer-social {
+    margin-left: auto;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+  .footer-social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+  .footer-social-link[href*="instagram.com"] svg {
+    width: 20px;
+    height: 20px;
+  }
+  .footer-copy {
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.6;
+    min-width: 0;
+  }
 }
 @media (max-width: 480px) {
   :root {
