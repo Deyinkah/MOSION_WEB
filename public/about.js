@@ -5,7 +5,6 @@
     Site.initReveal({
       selector: ".reveal",
       visibleClass: "visible",
-      threshold: 0.08,
     });
   }
 

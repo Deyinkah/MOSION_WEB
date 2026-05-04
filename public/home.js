@@ -1,6 +1,10 @@
 (function initHomePage(window, document, Site) {
   "use strict";
 
+  if (!Site) {
+    return;
+  }
+
   const WAITLIST_ERROR = "We could not complete your waitlist signup.";
   const EMAIL_ERROR = "Enter a valid email address.";
   const JOINING_LABEL = "Joining...";
@@ -79,7 +83,7 @@
     }
 
     const defaultNote = note.textContent;
-    const defaultLabel = submitButton.innerHTML;
+    const defaultLabel = submitButton.textContent;
     let errorTimer = null;
 
     const clearErrorState = () => {
@@ -117,7 +121,7 @@
       }
 
       submitButton.disabled = true;
-      submitButton.innerHTML = JOINING_LABEL;
+      submitButton.textContent = JOINING_LABEL;
 
       try {
         const result = await Site.submitWaitlistSignup(
@@ -140,7 +144,7 @@
         input.focus();
       } finally {
         submitButton.disabled = false;
-        submitButton.innerHTML = defaultLabel;
+        submitButton.textContent = defaultLabel;
       }
     });
   }
@@ -149,15 +153,10 @@
     Site.initReveal({
       selector: ".r",
       visibleClass: "v",
-      threshold: 0.1,
     });
 
     initFilmCards();
     initWaitlist();
-  }
-
-  if (!Site) {
-    return;
   }
 
   Site.ready(boot);

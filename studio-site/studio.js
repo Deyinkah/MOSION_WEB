@@ -79,7 +79,7 @@
   }
 
   function initCookieNotice() {
-    Site.initPersistentNotice({
+    Site.initTimedNotice({
       noticeId: "studioCookieNotice",
       closeButtonId: "studioCookieNoticeDismiss",
       persistenceKey: "mosion_studio_cookie_notice_seen_v1",
@@ -441,7 +441,6 @@
     Site.initReveal({
       selector: ".reveal",
       visibleClass: "visible",
-      threshold: 0.12,
     });
 
     initNav();

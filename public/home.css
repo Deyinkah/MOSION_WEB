@@ -953,7 +953,6 @@ body.modal-open{
     padding-bottom:6px;
     scroll-snap-type:x proximity;
     overscroll-behavior-x:contain;
-    -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }
   .film-grid::-webkit-scrollbar{display:none}

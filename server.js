@@ -41,8 +41,7 @@ const MIME_TYPES = {
   ".avif": "image/avif",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
-  ".mp4": "video/mp4",
-  ".MP4": "video/mp4"
+  ".mp4": "video/mp4"
 };
 
 function loadEnvFile() {
@@ -162,13 +161,6 @@ function getCandidatePaths(pathname) {
   return [pathname];
 }
 
-function shouldRedirectStudioLandingToSignin(req, host, requestUrl) {
-  void req;
-  void host;
-  void requestUrl;
-  return null;
-}
-
 const server = http.createServer((req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const host = getRequestHost(req);
@@ -208,18 +200,6 @@ const server = http.createServer((req, res) => {
   }
 
   // Redirect /studio → /studio/ so relative asset paths resolve correctly
-  const studioSigninRedirect = shouldRedirectStudioLandingToSignin(
-    req,
-    host,
-    requestUrl
-  );
-
-  if (studioSigninRedirect) {
-    res.writeHead(307, { Location: studioSigninRedirect });
-    res.end();
-    return;
-  }
-
   if (requestUrl.pathname === STUDIO_PATH_PREFIX && !isStudioHost(host)) {
     const location = STUDIO_PATH_PREFIX + "/" + (requestUrl.search || "");
     res.writeHead(301, { Location: location });
@@ -256,7 +236,11 @@ const server = http.createServer((req, res) => {
       const extension = path.extname(filePath).toLowerCase();
       const contentType = MIME_TYPES[extension] || "application/octet-stream";
       res.writeHead(200, { "Content-Type": contentType });
-      fs.createReadStream(filePath).pipe(res);
+      const stream = fs.createReadStream(filePath);
+      stream.on("error", () => {
+        res.destroy();
+      });
+      stream.pipe(res);
     });
   };
 
