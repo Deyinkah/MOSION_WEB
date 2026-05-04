@@ -123,14 +123,7 @@
       <div class="nav-dropdown" id="navDropdown" hidden>
         <a href="/#how" data-home-hash="#how">How it Works</a>
         <a href="${ROUTES.studio}" data-studio-link data-local-href="${ROUTES.localStudio}" target="_blank" rel="noopener noreferrer">Studio Platform</a>
-        <a
-          href="/api/download-apk"
-          rel="noopener"
-          class="nav-link-cta"
-          data-beta-apk-link
-          data-ios-modal-title="Android beta only"
-          data-ios-modal-copy="The MOSION beta APK can only be installed on Android devices. The iPhone and iPad version is still being prepared and will be available soon."
-        >Test the App</a>
+        <a href="${ROUTES.home}#download" class="nav-link-cta" data-home-hash="#download">Join Waitlist</a>
       </div>
     </div>
   </div>
