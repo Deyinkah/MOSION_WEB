@@ -1426,7 +1426,7 @@ section { position: relative; }
 /* FOOTER */
 footer {
   border-top: 1px solid var(--border);
-  padding: 52px var(--section-gutter);
+  padding: 52px var(--section-gutter) 32px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 28px 48px;

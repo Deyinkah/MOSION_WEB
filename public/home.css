@@ -194,7 +194,7 @@ html.force-desktop-mode .hero{
 
 .hero-bg{
   position:absolute;inset:0;z-index:0;
-  background:linear-gradient(160deg,#0e0c14 0%,#080810 40%,#0a0608 100%);
+  background:var(--ink);
 }
 
 .hero-frame{
@@ -876,7 +876,6 @@ body.modal-open{
     justify-content:flex-start;
     padding:calc(118px + env(safe-area-inset-top, 0px)) var(--section-gutter) 72px;
   }
-  .hero-bg{background:var(--ink)}
   .hero::before,.hero::after{height:44px}
   .hero::after{display:none}
   .hero-frame{display:none}
