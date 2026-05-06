@@ -284,10 +284,28 @@ async function readJsonBody(req) {
   });
 }
 
+async function appendToGoogleSheet(entry) {
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+
+  if (!webhookUrl) {
+    return;
+  }
+
+  await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(entry)
+  });
+}
+
 async function saveWaitlistSignup(entry) {
   const waitlistFile = getWaitlistFilePath();
   await fs.promises.mkdir(path.dirname(waitlistFile), { recursive: true });
   await fs.promises.appendFile(waitlistFile, `${JSON.stringify(entry)}\n`, "utf8");
+
+  appendToGoogleSheet(entry).catch((err) => {
+    console.warn("Google Sheets append failed:", err.message);
+  });
 }
 
 async function submitPartnerApplication(entry) {

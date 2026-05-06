@@ -119,7 +119,7 @@
         aria-label="Open navigation menu"
       >
         <svg class="icon-menu" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-          <path d="M1 2h16M1 12h16" />
+          <path d="M1 2h16M1 7h16M1 12h16" />
         </svg>
         <svg class="icon-close" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <path d="M2 2l14 10M16 2 2 12" />
