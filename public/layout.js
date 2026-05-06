@@ -15,12 +15,17 @@
     contact: "mailto:info@mosion.app",
     home: "/",
     instagram: "https://www.instagram.com/mosionhq",
+    linkedin: "https://www.linkedin.com/company/mosionhq",
     localAbout: "/about.html",
     localAccessibility: "/accessibility.html",
     localHome: "/index.html",
     localPrivacy: "/privacy.html",
     localStudio: "/studio/",
+    cookies: "/cookies",
+    localCookies: "/cookies.html",
+    localTerms: "/terms.html",
     privacy: "/privacy",
+    terms: "/terms",
     studio: "https://studio.mosion.app",
     support: "mailto:support@mosion.app?subject=MOSION%20Support",
     x: "https://x.com/mosionhq",
@@ -114,7 +119,7 @@
         aria-label="Open navigation menu"
       >
         <svg class="icon-menu" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-          <path d="M1 2h16M1 7h16M1 12h16" />
+          <path d="M1 2h16M1 12h16" />
         </svg>
         <svg class="icon-close" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <path d="M2 2l14 10M16 2 2 12" />
@@ -135,41 +140,22 @@
 <footer class="site-footer">
   <div class="footer-brand">
     <a href="${ROUTES.home}" class="footer-logo" data-home-link>
-      <img src="${ASSETS.wordmark}" alt="Mosion" class="footer-logo-image" width="168" height="20" />
+      <img src="${ASSETS.wordmark}" alt="Mosion" class="footer-logo-image footer-logo-wordmark" width="168" height="20" />
+      <img src="./logo-new.jpeg" alt="" aria-hidden="true" class="footer-logo-image footer-logo-new" />
     </a>
     <div class="footer-mission">${COPY.footerMission}</div>
-  </div>
-  <div class="footer-nav-label" aria-hidden="true">Quick Links</div>
-  <nav class="footer-nav" aria-label="Footer">
-    <div class="footer-group">
-      <div class="footer-heading">Platform</div>
-      <ul class="footer-list">
-        <li><a href="/#how" data-home-hash="#how">How it works</a></li>
-        <li><a href="/#download" data-home-hash="#download">Get the app</a></li>
-        <li><a href="${ROUTES.studio}" data-footer-studio-link target="_blank" rel="noopener noreferrer">Studio</a></li>
-      </ul>
-    </div>
-    <div class="footer-group">
-      <div class="footer-heading">Company</div>
-      <ul class="footer-list">
-        <li><a href="${ROUTES.about}" data-about-link>About</a></li>
-        <li><a href="${ROUTES.support}">Support</a></li>
-        <li><a href="${ROUTES.contact}">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-group">
-      <div class="footer-heading">Legal</div>
-      <ul class="footer-list">
-        <li><a href="${ROUTES.privacy}" data-privacy-link>Privacy</a></li>
-        <li><a href="${ROUTES.privacy}#storage" data-privacy-storage-link>Cookies</a></li>
-        <li><a href="${ROUTES.privacy}#terms" data-privacy-terms-link>Terms</a></li>
-        <li><a href="${ROUTES.accessibility}" data-accessibility-link>Accessibility</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="footer-meta">
-    <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
     <div class="footer-social" aria-label="Mosion social links">
+      <a
+        href="${ROUTES.linkedin}"
+        class="footer-social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow Mosion on LinkedIn"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z" fill="currentColor"/>
+        </svg>
+      </a>
       <a
         href="${ROUTES.x}"
         class="footer-social-link"
@@ -195,6 +181,36 @@
         </svg>
       </a>
     </div>
+  </div>
+  <nav class="footer-nav" aria-label="Footer">
+    <div class="footer-group">
+      <div class="footer-heading">Platform</div>
+      <ul class="footer-list">
+        <li><a href="/#how" data-home-hash="#how">How it works</a></li>
+        <li><a href="/#download" data-home-hash="#download">Get the app</a></li>
+        <li><a href="${ROUTES.studio}" data-footer-studio-link target="_blank" rel="noopener noreferrer">Studio</a></li>
+      </ul>
+    </div>
+    <div class="footer-group">
+      <div class="footer-heading">Company</div>
+      <ul class="footer-list">
+        <li><a href="${ROUTES.about}" data-about-link>About</a></li>
+        <li><a href="${ROUTES.support}">Support</a></li>
+        <li><a href="${ROUTES.contact}">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-group">
+      <div class="footer-heading">Legal</div>
+      <ul class="footer-list">
+        <li><a href="${ROUTES.privacy}" data-privacy-link>Privacy</a></li>
+        <li><a href="${ROUTES.cookies}" data-cookies-link>Cookies</a></li>
+        <li><a href="${ROUTES.terms}" data-terms-link>Terms</a></li>
+        <li><a href="${ROUTES.accessibility}" data-accessibility-link>Accessibility</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="footer-meta">
+    <div class="footer-copy">&copy; 2026 Mosion. All rights reserved.</div>
   </div>
 </footer>
 

@@ -96,6 +96,7 @@ body.policy-page::after {
 .hero-title {
   font-size: clamp(42px, 7vw, 76px);
   letter-spacing: -0.03em;
+  text-align: center;
 }
 
 .hero-title em {
@@ -109,6 +110,7 @@ body.policy-page::after {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .hero-copy,
