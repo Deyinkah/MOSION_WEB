@@ -273,6 +273,7 @@
 .footer-meta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   grid-column: 1 / -1;
   padding-top: 20px;
   border-top: 1px solid var(--layout-border);
@@ -328,6 +329,16 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--layout-footer-text);
+}
+
+.footer-rc {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--layout-footer-text);
+}
+
+.footer-rc-inline {
+  display: none;
 }
 
 .footer-nav-label {
@@ -634,6 +645,14 @@ body.modal-open {
     font-size: 12px;
     line-height: 1.6;
     min-width: 0;
+  }
+
+  .footer-rc {
+    display: none;
+  }
+
+  .footer-rc-inline {
+    display: inline;
   }
 
   .prototype-notice {

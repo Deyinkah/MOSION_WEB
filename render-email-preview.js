@@ -30,9 +30,8 @@ function getEmbeddedLogoSrc() {
   return `data:${contentType};base64,${content.toString("base64")}`;
 }
 
-function writePreviewFile(source, filename) {
+function writePreviewFile(filename) {
   const template = buildWaitlistConfirmationTemplate({
-    source,
     logoSrc: getEmbeddedLogoSrc(),
     replyToAddress: process.env.WAITLIST_REPLY_TO || "waitlist@mosion.app",
   });
@@ -47,17 +46,8 @@ function writePreviewFile(source, filename) {
 }
 
 function main() {
-  const websitePreviewPath = writePreviewFile(
-    "website",
-    "waitlist-email-preview.html"
-  );
-  const studioPreviewPath = writePreviewFile(
-    "studio",
-    "waitlist-email-preview-studio.html"
-  );
-
+  const websitePreviewPath = writePreviewFile("waitlist-email-preview.html");
   console.log(`Website preview: ${websitePreviewPath}`);
-  console.log(`Studio preview: ${studioPreviewPath}`);
 }
 
 main();

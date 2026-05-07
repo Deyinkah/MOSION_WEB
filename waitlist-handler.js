@@ -288,14 +288,20 @@ async function appendToGoogleSheet(entry) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 
   if (!webhookUrl) {
+    console.warn("Google Sheets append skipped: GOOGLE_SHEETS_WEBHOOK_URL is not set.");
     return;
   }
 
-  await fetch(webhookUrl, {
+  const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(entry)
   });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Google Sheets webhook responded ${res.status}: ${body.slice(0, 200)}`);
+  }
 }
 
 async function saveWaitlistSignup(entry) {

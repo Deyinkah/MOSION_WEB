@@ -1,6 +1,5 @@
 const DEFAULT_LOGO_URL = "https://mosion.app/logo-wordmark.png";
 const DEFAULT_WAITLIST_BETA_URL = "https://www.mosion.app/api/download-apk";
-const STUDIO_SUPPORT_ADDRESS = "partners@mosion.app";
 
 function escapeHtml(value) {
   return String(value || "")
@@ -11,127 +10,138 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-function normalizeVariantSource(source) {
-  const value = typeof source === "string" ? source.trim().toLowerCase() : "";
-
-  if (value === "studio" || value === "studio-site" || value === "filmmaker") {
-    return "studio";
-  }
-
-  return "website";
-}
-
-function getWaitlistVariant(source, environment = process.env) {
-  const waitlistSource = normalizeVariantSource(source);
-  const logoUrl = DEFAULT_LOGO_URL;
-
-  if (waitlistSource === "studio") {
-    return {
-      source: "studio",
-      preheader: "Your Mosion Studio application has been received.",
-      subject: "We received your Mosion Studio application",
-      bodyCopy:
-        "Your Mosion Studio application has been received. Our team will review your partner details, rights position, and release fit before granting access. Studio access does not guarantee title approval or listing.",
-      ctaLabel: "",
-      textDownloadLead: "",
-      signature: "Mosion Studio",
-      logoUrl,
-      betaUrl: "",
-    };
-  }
-
+function getWaitlistVariant(environment = process.env) {
   return {
     source: "website",
     preheader: "Your Mosion waitlist registration is confirmed.",
     subject: "You're on the Mosion waitlist",
     bodyCopy:
-      "Your Mosion waitlist registration is confirmed. You're now one of the early users to have access to the Mosion app before the wider rollout.",
+      "Your Mosion waitlist registration is confirmed. You're now one of the early users to have access to the <strong>Mosion app</strong> before the wider rollout.",
+    bodyCopy2:
+      "We're excited to have you as one of the first to experience Nollywood and African cinema — on demand, before the world catches on.",
     ctaLabel: "Download the Beta App",
     textDownloadLead: "Download the Beta App",
     signature: "Mosion",
-    logoUrl,
+    logoUrl: DEFAULT_LOGO_URL,
     betaUrl: environment.WAITLIST_BETA_URL || DEFAULT_WAITLIST_BETA_URL,
   };
 }
 
-function buildSupportCopy(replyToAddress, variantSource = "website") {
-  const resolvedReplyToAddress =
-    variantSource === "studio" ? STUDIO_SUPPORT_ADDRESS : replyToAddress;
-
-  if (!resolvedReplyToAddress) {
+function buildSupportCopy(replyToAddress) {
+  if (!replyToAddress) {
     return {
-      html: "Need help or feedback? Reply to this email.",
-      text: "Need help? Reply to this email.",
+      html: "Need help or have feedback? Reply to this email.",
+      text: "Need help or have feedback? Reply to this email.",
     };
   }
 
-  const safeReplyToAddress = escapeHtml(resolvedReplyToAddress);
+  const safeReplyToAddress = escapeHtml(replyToAddress);
 
   return {
-    html: `Need help or feedback? Reply to <a href="mailto:${safeReplyToAddress}" style="color:#0f172a;text-decoration:none;">${safeReplyToAddress}</a>`,
-    text: `Need help or feedback? Reply to ${resolvedReplyToAddress}`,
+    html: `Need help or have feedback? Reply to <a href="mailto:${safeReplyToAddress}" style="color:#d4a843;text-decoration:none;">${safeReplyToAddress}</a>`,
+    text: `Need help or have feedback? Reply to ${replyToAddress}`,
   };
 }
 
-function buildWaitlistConfirmationHtml({
-  variant,
-  logoSrc,
-  replyToAddress = "",
-  resolvedBetaUrl,
-}) {
-  const safeBodyCopy = escapeHtml(variant.bodyCopy);
+function buildWaitlistConfirmationHtml({ variant, logoSrc, replyToAddress = "", resolvedBetaUrl }) {
   const safeLogoSrc = escapeHtml(logoSrc || variant.logoUrl);
   const safeResolvedBetaUrl = escapeHtml(resolvedBetaUrl);
-  const safeSignature = escapeHtml(variant.signature);
   const safeCtaLabel = escapeHtml(variant.ctaLabel);
-  const supportCopy = buildSupportCopy(replyToAddress, variant.source);
+  const supportCopy = buildSupportCopy(replyToAddress);
   const hasCta = Boolean(variant.ctaLabel && resolvedBetaUrl);
-  const signatureHtml =
-    variant.source === "studio"
-      ? safeSignature
-      : `See you inside,<br />
-                  ${safeSignature}`;
+  const privacyUrl = "https://mosion.app/privacy";
 
   return `
-    <div style="margin:0;padding:0;background:#f3f4f6;">
+    <div style="margin:0;padding:0;background:#f0ede8;">
       <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
         ${escapeHtml(variant.preheader)}
       </div>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;background:#f3f4f6;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;background:#f0ede8;">
         <tr>
           <td align="center" style="padding:32px 16px;">
-            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:520px;border-collapse:separate;border-spacing:0;background:#ffffff;border:1px solid #e5e7eb;box-shadow:0 12px 30px rgba(15,23,42,0.08);text-align:left;">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:560px;border-collapse:separate;border-spacing:0;background:#ffffff;border-top:3px solid #d4a843;text-align:left;">
+
+              <!-- Logo header -->
               <tr>
-                <td align="left" style="padding:28px 32px 22px;text-align:left;border-bottom:1px solid #eceff3;">
-                  <img src="${safeLogoSrc}" alt="${safeSignature}" width="154" style="display:block;width:154px;max-width:154px;height:auto;margin:0;" />
+                <td align="left" style="padding:28px 36px 24px;border-bottom:1px solid #e8e3db;">
+                  <img src="${safeLogoSrc}" alt="MOSION" width="120" style="display:block;width:120px;max-width:120px;height:auto;margin:0;" />
                 </td>
               </tr>
+
+              <!-- Greeting -->
               <tr>
-                <td align="left" style="padding:30px 32px 0;text-align:left;">
-                  <p style="margin:0;color:#4b5563;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:17px;font-weight:400;line-height:1.55;">
-                    ${safeBodyCopy}
-                  </p>
+                <td style="padding:32px 36px 0;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;">
+                  <p style="margin:0;color:#1a1a1a;font-size:16px;line-height:1.6;">Hello,</p>
                 </td>
               </tr>
-              ${hasCta
-                ? `<tr>
-                <td align="left" style="padding:26px 32px 0;text-align:left;">
-                  <a href="${safeResolvedBetaUrl}" style="color:#1d4ed8;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:15px;font-weight:400;line-height:1.5;text-decoration:none;">
-                    ${safeCtaLabel}
-                  </a>
-                </td>
-              </tr>`
-                : ""}
+
+              <!-- Body paragraph 1 -->
               <tr>
-                <td style="padding:42px 32px 0;color:#6b7280;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:14px;line-height:1.6;text-align:left;">
+                <td style="padding:16px 36px 0;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;">
+                  <p style="margin:0;color:#3a3a3a;font-size:16px;line-height:1.65;">${variant.bodyCopy}</p>
+                </td>
+              </tr>
+
+              <!-- Body paragraph 2 -->
+              <tr>
+                <td style="padding:16px 36px 0;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;">
+                  <p style="margin:0;color:#3a3a3a;font-size:16px;line-height:1.65;">${escapeHtml(variant.bodyCopy2)}</p>
+                </td>
+              </tr>
+
+              ${hasCta ? `
+              <!-- CTA button -->
+              <tr>
+                <td style="padding:28px 36px 0;">
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td style="background:#d4a843;border-radius:4px;">
+                        <a href="${safeResolvedBetaUrl}" style="display:inline-block;padding:13px 28px;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;letter-spacing:0.01em;">${safeCtaLabel}</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>` : ""}
+
+              <!-- Divider -->
+              <tr>
+                <td style="padding:32px 36px 0;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td style="border-top:1px solid #e8e3db;font-size:0;line-height:0;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- Support copy -->
+              <tr>
+                <td style="padding:24px 36px 0;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:14px;color:#6b6b6b;line-height:1.6;">
                   ${supportCopy.html}
                 </td>
               </tr>
+
+              <!-- Signature -->
               <tr>
-                <td style="padding:18px 32px 32px;color:#6b7280;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:14px;line-height:1.6;text-align:left;">
-                  ${signatureHtml}
+                <td style="padding:20px 36px 36px;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:14px;color:#6b6b6b;line-height:1.8;">
+                  See you inside,<br /><strong style="color:#1a1a1a;">The ${escapeHtml(variant.signature)} Team</strong>
                 </td>
               </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td style="background:#f9f7f4;border-top:1px solid #e8e3db;padding:18px 36px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:12px;color:#9a9a9a;line-height:1.7;">
+                        Mosion Digital Entertainment Ltd.<br />
+                        <a href="${escapeHtml(privacyUrl)}" style="color:#d4a843;text-decoration:none;">Privacy Policy</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
             </table>
           </td>
         </tr>
@@ -141,42 +151,35 @@ function buildWaitlistConfirmationHtml({
 }
 
 function buildWaitlistConfirmationTemplate({
-  source = "website",
   betaUrl,
   logoSrc,
   replyToAddress = "",
   environment = process.env,
 } = {}) {
-  const variant = getWaitlistVariant(source, environment);
+  const variant = getWaitlistVariant(environment);
   const resolvedBetaUrl = betaUrl || variant.betaUrl;
-  const supportCopy = buildSupportCopy(replyToAddress, variant.source);
+  const supportCopy = buildSupportCopy(replyToAddress);
   const hasCta = Boolean(variant.textDownloadLead && resolvedBetaUrl);
-  const signOffLines =
-    variant.source === "studio"
-      ? [variant.signature]
-      : ["See you inside,", variant.signature];
 
   const text = [
     variant.subject,
     "",
-    variant.bodyCopy,
+    variant.bodyCopy.replace(/<[^>]+>/g, ""),
+    variant.bodyCopy2,
     ...(hasCta ? ["", `${variant.textDownloadLead}: ${resolvedBetaUrl}`] : []),
+    "",
     supportCopy.text,
     "",
-    ...signOffLines,
+    "See you inside,",
+    `The ${variant.signature} Team`,
   ].join("\n");
 
   return {
-    source: variant.source,
+    source: "website",
     betaUrl: resolvedBetaUrl,
     subject: variant.subject,
     text,
-    html: buildWaitlistConfirmationHtml({
-      variant,
-      logoSrc,
-      replyToAddress,
-      resolvedBetaUrl,
-    }),
+    html: buildWaitlistConfirmationHtml({ variant, logoSrc, replyToAddress, resolvedBetaUrl }),
   };
 }
 
@@ -191,7 +194,7 @@ function renderWaitlistConfirmationPreviewDocument({ subject, html }) {
       html, body {
         margin: 0;
         min-height: 100%;
-        background: #f3f4f6;
+        background: #f0ede8;
       }
     </style>
   </head>
