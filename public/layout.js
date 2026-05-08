@@ -11,6 +11,7 @@
 
   const ROUTES = {
     about: "/about",
+    blog: "/blog",
     accessibility: "/accessibility",
     contact: "mailto:info@mosion.app",
     home: "/",
@@ -18,6 +19,7 @@
     linkedin: "https://www.linkedin.com/company/mosionhq",
     localAbout: "/about.html",
     localAccessibility: "/accessibility.html",
+    localBlog: "/blog.html",
     localHome: "/index.html",
     localPrivacy: "/privacy.html",
     localStudio: "/studio/",
@@ -71,6 +73,15 @@
     );
   }
 
+  function isBlogPage() {
+    const pathname = normalizePathname(window.location.pathname);
+    return (
+      pathname === "/blog" ||
+      pathname === "/blog.html" ||
+      pathname.endsWith("/blog.html")
+    );
+  }
+
   function isPrivacyPage() {
     const pathname = normalizePathname(window.location.pathname);
     return (
@@ -81,7 +92,7 @@
   }
 
   function isRootAttachedPage() {
-    return isAboutPage() || isPrivacyPage() || isAccessibilityPage();
+    return isAboutPage() || isBlogPage() || isPrivacyPage() || isAccessibilityPage();
   }
 
   function isLocalHost(hostname) {
@@ -195,6 +206,7 @@
       <div class="footer-heading">Company</div>
       <ul class="footer-list">
         <li><a href="${ROUTES.about}" data-about-link>About</a></li>
+        <li><a href="${ROUTES.blog}" data-blog-link>Blog</a></li>
         <li><a href="${ROUTES.support}">Support</a></li>
         <li><a href="${ROUTES.contact}">Contact</a></li>
       </ul>
@@ -351,6 +363,7 @@
     const logo = document.querySelector(".logo");
     const footerHomeLink = document.querySelector("[data-home-link]");
     const aboutLink = document.querySelector("[data-about-link]");
+    const blogLink = document.querySelector("[data-blog-link]");
     const accessibilityLink = document.querySelector("[data-accessibility-link]");
     const privacyLink = document.querySelector("[data-privacy-link]");
     const privacyStorageLink = document.querySelector("[data-privacy-storage-link]");
@@ -368,6 +381,10 @@
 
     if (aboutLink) {
       aboutLink.setAttribute("href", ROUTES.localAbout);
+    }
+
+    if (blogLink) {
+      blogLink.setAttribute("href", ROUTES.localBlog);
     }
 
     if (privacyLink) {
@@ -404,11 +421,16 @@
 
   function applyCurrentPageState() {
     const aboutLink = document.querySelector("[data-about-link]");
+    const blogLink = document.querySelector("[data-blog-link]");
     const accessibilityLink = document.querySelector("[data-accessibility-link]");
     const privacyLink = document.querySelector("[data-privacy-link]");
 
     if (aboutLink && isAboutPage()) {
       aboutLink.setAttribute("aria-current", "page");
+    }
+
+    if (blogLink && isBlogPage()) {
+      blogLink.setAttribute("aria-current", "page");
     }
 
     if (privacyLink && isPrivacyPage()) {
@@ -425,7 +447,7 @@
       noticeId: "prototypeNotice",
       closeButtonId: "prototypeNoticeClose",
       isEligible: () =>
-        !isAboutPage() && !isPrivacyPage() && !isAccessibilityPage(),
+        !isAboutPage() && !isBlogPage() && !isPrivacyPage() && !isAccessibilityPage(),
       shouldPause: () => document.body.classList.contains("modal-open"),
       initialDelay: 300000,
       persistenceKey: "mosion_prototype_notice_seen_v1",
