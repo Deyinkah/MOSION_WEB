@@ -159,11 +159,11 @@ body::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 18px;
+  min-height: 38px;
+  padding: 0 14px;
   border-radius: 2px;
-  border: 1px solid rgba(201, 168, 76, 0.48);
-  background: linear-gradient(180deg, rgba(228, 192, 102, 0.96) 0%, rgba(201, 168, 76, 0.92) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.44);
+  background: var(--gold);
   color: var(--black);
   font-family: 'DM Mono', monospace;
   font-size: 11px;
@@ -173,14 +173,11 @@ body::before {
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 .nav-signin-btn:hover {
-  background: linear-gradient(180deg, rgba(228, 192, 102, 0.96) 0%, rgba(201, 168, 76, 0.92) 100%);
+  background: var(--gold-light);
   color: var(--black);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
-  transform: none;
 }
 .nav-signin-btn:focus-visible {
   outline: 2px solid rgba(232, 201, 122, 0.85);
@@ -2137,7 +2134,7 @@ footer {
     gap: 8px;
   }
   .nav-signin-btn {
-    min-height: 34px;
+    min-height: 28px;
     padding: 0 14px;
     font-size: 10px;
     letter-spacing: 0.1em;
