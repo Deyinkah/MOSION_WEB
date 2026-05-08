@@ -61,18 +61,21 @@
 }
 
 .nav-btn {
-  padding: 8px;
-  border: 0;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(212, 168, 67, 0.44);
   border-radius: 2px;
-  background: var(--layout-amber);
+  background: linear-gradient(180deg, rgba(240, 201, 106, 0.96) 0%, rgba(212, 168, 67, 0.92) 100%);
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  transition: background 0.2s ease;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .nav-btn:hover {
   background: var(--layout-amber2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(212, 168, 67, 0.34);
+  transform: translateY(-1px);
 }
 
 .nav-menu-toggle {
@@ -82,23 +85,24 @@
   gap: 0;
   cursor: pointer;
   position: relative;
-  font-family: "Syne", sans-serif;
-  font-size: clamp(13px, 1.05vw, 16px);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   line-height: 1;
-  text-transform: none;
+  text-transform: uppercase;
   color: var(--layout-ink);
 }
 
 .nav-btn.nav-menu-toggle {
   color: var(--layout-ink) !important;
-  font-family: "Syne", sans-serif !important;
-  font-size: clamp(13px, 1.05vw, 16px) !important;
+  font-family: "DM Mono", monospace !important;
+  font-size: 11px !important;
   font-style: normal !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
   line-height: 1 !important;
+  text-transform: uppercase !important;
 }
 
 .nav-menu-toggle svg {
@@ -127,10 +131,10 @@
 .nav-dropdown {
   position: static;
   min-width: 0;
-  padding: 0;
+  padding: 0 0 0 18px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   background: none;
   border: 0;
   box-shadow: none;
@@ -145,11 +149,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Outfit", sans-serif;
-  font-size: clamp(13px, 1.05vw, 16px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: none;
+  min-height: 38px;
+  padding: 0 2px;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: rgba(240, 237, 230, 0.82);
   text-decoration: none;
   transition: color 0.2s ease, background 0.2s ease;
@@ -161,10 +167,11 @@
 }
 
 .nav-dropdown a.nav-link-cta {
-  min-height: 24px;
-  padding: 8px 12px;
+  min-height: 38px;
+  padding: 0 14px;
   border-radius: 2px;
-  background: var(--layout-amber);
+  border: 1px solid rgba(212, 168, 67, 0.44);
+  background: linear-gradient(180deg, rgba(240, 201, 106, 0.96) 0%, rgba(212, 168, 67, 0.92) 100%);
   color: var(--layout-ink);
 }
 
@@ -545,8 +552,8 @@ body.modal-open {
   }
 
   .nav-btn {
-    min-height: 24px;
-    padding: 8px;
+    min-height: 34px;
+    padding: 0 12px;
   }
 
   .site-footer {
@@ -701,20 +708,21 @@ body.modal-open {
     display: block;
     padding: 12px 14px;
     border-radius: 2px;
-    font-family: "Outfit", sans-serif;
-    font-size: clamp(13px, 1.05vw, 16px);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: none;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--layout-cream);
     transition: background 0.2s ease, color 0.2s ease;
   }
 
   .nav-dropdown a.nav-link-cta {
-    min-height: 24px;
+    min-height: 34px;
     padding: 12px 14px;
     text-align: center;
-    background: var(--layout-amber);
+    border: 1px solid rgba(212, 168, 67, 0.44);
+    background: linear-gradient(180deg, rgba(240, 201, 106, 0.96) 0%, rgba(212, 168, 67, 0.92) 100%);
     color: var(--layout-ink);
   }
 

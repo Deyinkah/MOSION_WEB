@@ -54,7 +54,7 @@ body::before {
 
 /* NAV */
 .site-nav {
-  --nav-logo-height: clamp(36px, 2.8vw, 48px);
+  --nav-logo-height: clamp(30px, 2.2vw, 40px);
   --nav-logo-stack-gap: 4px;
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -159,29 +159,32 @@ body::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: var(--nav-signin-height);
-  min-height: var(--nav-signin-height);
-  padding: 0 clamp(12px, calc(var(--nav-signin-height) * 0.58), 22px);
+  min-height: 40px;
+  padding: 0 18px;
   border-radius: 2px;
-  border: 0;
-  background: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.48);
+  background: linear-gradient(180deg, rgba(228, 192, 102, 0.96) 0%, rgba(201, 168, 76, 0.92) 100%);
   color: var(--black);
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(13px, 1.05vw, 16px);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   line-height: 1;
-  white-space: nowrap;
-  text-transform: none;
+  text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(201, 168, 76, 0.24);
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 .nav-signin-btn:hover {
   background: var(--gold-light);
   color: var(--black);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(201, 168, 76, 0.34);
   transform: translateY(-1px);
+}
+.nav-signin-btn:focus-visible {
+  outline: 2px solid rgba(232, 201, 122, 0.85);
+  outline-offset: 2px;
 }
 
 /* HERO */
@@ -1413,11 +1416,13 @@ footer {
 .footer-logo .footer-logo-image {
   display: block;
   width: auto;
-  height: clamp(36px, 2.8vw, 48px);
   object-fit: contain;
   object-position: center;
   flex: 0 0 auto;
   align-self: center;
+}
+.footer-logo .footer-logo-wordmark {
+  height: clamp(20px, 1.5vw, 26px);
 }
 .footer-logo .footer-logo-new {
   display: none;
@@ -1688,6 +1693,15 @@ footer {
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
+}
+.footer-rc {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--footer-text);
+}
+.footer-rc-inline {
+  display: none;
+  margin-left: 0.35em;
 }
 
 .footer-nav-label {
@@ -2118,10 +2132,15 @@ footer {
   .site-nav {
     --nav-logo-height: 18px;
     --nav-logo-stack-gap: 3px;
-    --nav-signin-height: var(--nav-logo-height);
   }
   .nav-logo {
     gap: 8px;
+  }
+  .nav-signin-btn {
+    min-height: 34px;
+    padding: 0 14px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
   }
   .waitlist {
     padding: 72px var(--section-gutter);
@@ -2223,16 +2242,13 @@ footer {
     gap: 12px;
     width: auto;
   }
-  .footer-logo-wordmark {
+  .footer-logo .footer-logo-wordmark {
     display: none;
   }
-  .footer-logo-new {
+  .footer-logo .footer-logo-new {
     display: block;
-    height: 64px;
-    width: 64px;
+    height: 48px;
     border-radius: 2px;
-    object-fit: cover;
-    flex-shrink: 0;
   }
   .footer-mission {
     width: 100%;
@@ -2280,6 +2296,12 @@ footer {
     font-size: 12px;
     line-height: 1.6;
     min-width: 0;
+  }
+  .footer-rc {
+    display: none;
+  }
+  .footer-rc-inline {
+    display: inline;
   }
 }
 @media (max-width: 480px) {
