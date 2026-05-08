@@ -177,10 +177,10 @@ body::before {
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 .nav-signin-btn:hover {
-  background: var(--gold-light);
+  background: linear-gradient(180deg, rgba(228, 192, 102, 0.96) 0%, rgba(201, 168, 76, 0.92) 100%);
   color: var(--black);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(201, 168, 76, 0.34);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+  transform: none;
 }
 .nav-signin-btn:focus-visible {
   outline: 2px solid rgba(232, 201, 122, 0.85);
