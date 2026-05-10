@@ -136,12 +136,12 @@
       ? applySection.querySelector(".waitlist-form-area")
       : null;
     const closeButton = document.getElementById("studioFormCancel");
-    const firstNameInput = document.getElementById("firstName");
+    const emailInput = document.getElementById("email");
     const applyLinks = Array.from(
       document.querySelectorAll("a[href='#studioWaitlistForm']")
     );
 
-    if (!applySection || !formArea || !closeButton || !firstNameInput || !applyLinks.length) {
+    if (!applySection || !formArea || !closeButton || !emailInput || !applyLinks.length) {
       return;
     }
 
@@ -150,14 +150,14 @@
     let focusTimer = null;
     let mobileFormOpen = false;
 
-    const focusFirstName = () => {
+    const focusEmail = () => {
       if (focusTimer) {
         window.clearTimeout(focusTimer);
       }
 
       // Let the smooth scroll settle before moving keyboard focus into the form.
       focusTimer = window.setTimeout(() => {
-        firstNameInput.focus();
+        emailInput.focus();
       }, 420);
     };
 
@@ -196,6 +196,7 @@
         if (mobileMedia.matches) {
           event.preventDefault();
           openMobileForm();
+          focusEmail();
           return;
         }
 
@@ -205,7 +206,7 @@
 
         event.preventDefault();
         Site.scrollToHash("#studioWaitlistForm");
-        focusFirstName();
+        focusEmail();
       });
     });
 
@@ -230,6 +231,18 @@
 
     window.addEventListener("resize", syncMobileState, { passive: true });
     syncMobileState();
+
+    const shouldAutoFocusWaitlist =
+      String(window.location.hash || "").trim() === "#studioWaitlistForm";
+
+    if (shouldAutoFocusWaitlist) {
+      if (mobileMedia.matches) {
+        openMobileForm();
+      } else {
+        Site.scrollToHash("#studioWaitlistForm");
+      }
+      focusEmail();
+    }
   }
 
   function flashInvalidInputs(inputs) {

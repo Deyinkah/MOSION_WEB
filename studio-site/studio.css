@@ -54,7 +54,7 @@ body::before {
 
 /* NAV */
 .site-nav {
-  --nav-logo-height: clamp(30px, 2.2vw, 40px);
+  --nav-logo-height: clamp(26px, 2vw, 34px);
   --nav-logo-stack-gap: 4px;
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -62,9 +62,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px var(--section-gutter);
-  background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%);
-  backdrop-filter: blur(0px);
+  padding: 18px var(--section-gutter);
+  background: linear-gradient(to bottom, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.54) 62%, transparent 100%);
+  border-bottom: 1px solid rgba(201,168,76,0.14);
+  backdrop-filter: blur(10px);
 }
 #process,
 #features,
@@ -159,25 +160,28 @@ body::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 13px;
   border-radius: 2px;
   border: 1px solid rgba(201, 168, 76, 0.44);
-  background: var(--gold);
+  background: linear-gradient(180deg, rgba(232, 201, 122, 0.96) 0%, rgba(201, 168, 76, 0.92) 100%);
   color: var(--black);
   font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.11em;
   line-height: 1;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
 }
 .nav-signin-btn:hover {
   background: var(--gold-light);
   color: var(--black);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.34);
 }
 .nav-signin-btn:focus-visible {
   outline: 2px solid rgba(232, 201, 122, 0.85);
@@ -1593,8 +1597,9 @@ footer {
   height: 14px;
 }
 .footer-mission {
-  font-family: inherit;
+  font-family: 'Syne', sans-serif;
   font-size: 14px;
+  text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--footer-text);
   line-height: 1.9;
@@ -1613,7 +1618,7 @@ footer {
   gap: 14px;
 }
 .footer-heading {
-  font-family: inherit;
+  font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1627,6 +1632,8 @@ footer {
   list-style: none;
 }
 .footer-list a {
+  font-family: 'Syne', sans-serif;
+  text-transform: uppercase;
   color: var(--footer-text);
   font-size: 14px;
   line-height: 1.5;
@@ -1686,12 +1693,15 @@ footer {
 }
 .footer-copy {
   margin: 0;
-  font-family: inherit;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
 }
 .footer-rc {
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
@@ -1807,7 +1817,7 @@ footer {
   :root {
     --section-gutter: 32px;
   }
-  .site-nav { padding: 20px var(--section-gutter); }
+  .site-nav { padding: 16px var(--section-gutter); }
   .hero {
     min-height: auto;
     grid-template-columns: 1fr;
@@ -2127,17 +2137,17 @@ footer {
     margin-left: 12px;
   }
   .site-nav {
-    --nav-logo-height: 18px;
+    --nav-logo-height: 16px;
     --nav-logo-stack-gap: 3px;
   }
   .nav-logo {
     gap: 8px;
   }
   .nav-signin-btn {
-    min-height: 28px;
-    padding: 0 14px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    min-height: 26px;
+    padding: 0 11px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
   }
   .waitlist {
     padding: 72px var(--section-gutter);
@@ -2299,6 +2309,14 @@ footer {
   }
   .footer-rc-inline {
     display: inline;
+  }
+  .site-footer .footer-mission,
+  .site-footer .footer-heading,
+  .site-footer .footer-list a,
+  .site-footer .footer-copy,
+  .site-footer .footer-rc,
+  .site-footer .footer-rc-inline {
+    text-transform: uppercase !important;
   }
 }
 @media (max-width: 480px) {
