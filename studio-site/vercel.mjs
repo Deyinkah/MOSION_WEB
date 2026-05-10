@@ -1,4 +1,5 @@
 const STUDIO_APP_PATHS = [
+  "/dashboard",
   "/onboarding",
   "/signin",
   "/signup",
@@ -36,27 +37,66 @@ function createRewrite(source, destination) {
 function createStudioRewrites() {
   const origin = getRequiredOrigin("STUDIO_WEB_APP_ORIGIN");
   const partnerBase = `${origin}/partner`;
-  const rewrites = [
+  return [
     createRewrite("/partner", partnerBase),
     createRewrite("/partner/:path*", `${partnerBase}/:path*`),
-    createRewrite("/payments", `${origin}/purchases`),
-    createRewrite("/payments/:path*", `${origin}/purchases/:path*`)
+    createRewrite("/_next/:path*", `${origin}/_next/:path*`)
   ];
+}
+
+function createStudioLegacyRedirects() {
+  const redirects = [];
 
   for (const pathname of STUDIO_APP_PATHS) {
-    rewrites.push(
-      createRewrite(pathname, `${origin}${pathname}`),
-      createRewrite(`${pathname}/:path*`, `${origin}${pathname}/:path*`)
+    if (pathname === "/dashboard") {
+      redirects.push(
+        {
+          source: pathname,
+          destination: "/partner/overview",
+          permanent: false
+        },
+        {
+          source: `${pathname}/:path*`,
+          destination: "/partner/overview",
+          permanent: false
+        }
+      );
+      continue;
+    }
+
+    redirects.push(
+      {
+        source: pathname,
+        destination: `/partner${pathname}`,
+        permanent: false
+      },
+      {
+        source: `${pathname}/:path*`,
+        destination: `/partner${pathname}/:path*`,
+        permanent: false
+      }
     );
   }
 
-  rewrites.push(createRewrite("/_next/:path*", `${origin}/_next/:path*`));
+  redirects.push(
+    {
+      source: "/payments",
+      destination: "/partner/purchases",
+      permanent: false
+    },
+    {
+      source: "/payments/:path*",
+      destination: "/partner/purchases/:path*",
+      permanent: false
+    }
+  );
 
-  return rewrites;
+  return redirects;
 }
 
 export const config = {
   cleanUrls: true,
   trailingSlash: false,
+  redirects: createStudioLegacyRedirects(),
   rewrites: createStudioRewrites()
 };
