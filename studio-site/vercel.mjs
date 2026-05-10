@@ -3,16 +3,16 @@ const STUDIO_APP_PATHS = [
   "/signin",
   "/signup",
   "/forgot-password",
-  "/dashboard",
+  "/overview",
   "/analytics",
   "/chat",
-  "/earnings",
+  "/revenue",
   "/films",
   "/notifications",
   "/payout-method",
   "/pipeline",
-  "/profile",
-  "/transactions",
+  "/account",
+  "/purchases",
   "/withdraw"
 ];
 
@@ -35,7 +35,13 @@ function createRewrite(source, destination) {
 
 function createStudioRewrites() {
   const origin = getRequiredOrigin("STUDIO_WEB_APP_ORIGIN");
-  const rewrites = [];
+  const partnerBase = `${origin}/partner`;
+  const rewrites = [
+    createRewrite("/partner", partnerBase),
+    createRewrite("/partner/:path*", `${partnerBase}/:path*`),
+    createRewrite("/payments", `${origin}/purchases`),
+    createRewrite("/payments/:path*", `${origin}/purchases/:path*`)
+  ];
 
   for (const pathname of STUDIO_APP_PATHS) {
     rewrites.push(
