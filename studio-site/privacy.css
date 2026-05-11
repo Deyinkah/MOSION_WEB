@@ -9,6 +9,7 @@
   --gold: #c9a84c;
   --gold-light: #e8c97a;
   --white: #f5f3ee;
+  --footer-text: #ede9e2;
   --muted: rgba(245, 243, 238, 0.74);
   --muted-soft: rgba(245, 243, 238, 0.56);
   --section-gutter: 64px;
@@ -335,7 +336,7 @@ a {
 }
 
 .footer-mission {
-  color: var(--muted);
+  color: var(--footer-text);
   font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.04em;
@@ -374,7 +375,7 @@ a {
 }
 
 .footer-list a {
-  color: var(--muted);
+  color: var(--footer-text);
   font-size: 14px;
   line-height: 1.5;
   text-decoration: none;
@@ -400,14 +401,14 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
+  color: var(--footer-text);
   text-decoration: none;
   transition: color 0.2s;
   line-height: 0;
 }
 
 .footer-social-link:hover {
-  color: var(--gold-light);
+  color: var(--white);
 }
 
 .footer-social-link svg {
@@ -423,19 +424,19 @@ a {
 
 .footer-social-link[href*="linkedin.com"] {
   background-color: var(--black);
-  color: var(--white);
+  color: var(--footer-text);
   padding: 4px;
   border-radius: 4px;
 }
 
 .footer-social-link[href*="linkedin.com"]:hover {
-  color: var(--white);
+  color: var(--footer-text);
   opacity: 0.8;
 }
 
 .footer-copy {
   margin: 0;
-  color: var(--white);
+  color: var(--footer-text);
   font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.04em;
@@ -443,7 +444,7 @@ a {
 .footer-rc {
   font-size: 14px;
   letter-spacing: 0.04em;
-  color: var(--white);
+  color: var(--footer-text);
 }
 .footer-rc-inline {
   display: none;

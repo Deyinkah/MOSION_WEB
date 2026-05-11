@@ -1593,9 +1593,8 @@ footer {
   height: 14px;
 }
 .footer-mission {
-  font-family: 'Syne', sans-serif;
+  font-family: inherit;
   font-size: 14px;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--footer-text);
   line-height: 1.9;
@@ -1614,7 +1613,7 @@ footer {
   gap: 14px;
 }
 .footer-heading {
-  font-family: 'DM Mono', monospace;
+  font-family: inherit;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1628,8 +1627,6 @@ footer {
   list-style: none;
 }
 .footer-list a {
-  font-family: 'Syne', sans-serif;
-  text-transform: uppercase;
   color: var(--footer-text);
   font-size: 14px;
   line-height: 1.5;
@@ -1689,15 +1686,13 @@ footer {
 }
 .footer-copy {
   margin: 0;
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
+  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
 }
 .footer-rc {
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
+  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--footer-text);
@@ -2305,14 +2300,6 @@ footer {
   }
   .footer-rc-inline {
     display: inline;
-  }
-  .site-footer .footer-mission,
-  .site-footer .footer-heading,
-  .site-footer .footer-list a,
-  .site-footer .footer-copy,
-  .site-footer .footer-rc,
-  .site-footer .footer-rc-inline {
-    text-transform: uppercase !important;
   }
 }
 @media (max-width: 480px) {
