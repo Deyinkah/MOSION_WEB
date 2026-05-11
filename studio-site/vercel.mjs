@@ -15,6 +15,22 @@ function createRewrite(source, destination) {
   };
 }
 
+function createRedirect(source, destination, permanent = false) {
+  return {
+    source,
+    destination,
+    permanent
+  };
+}
+
+function createStudioRedirects() {
+  return [
+    // Sign-in pages in the partner app link here for new users; send them to the public apply form.
+    createRedirect("/partner/onboarding", "/#studioWaitlistForm"),
+    createRedirect("/partner/onboarding/:path*", "/#studioWaitlistForm")
+  ];
+}
+
 function createStudioRewrites() {
   const origin = getRequiredOrigin("STUDIO_WEB_APP_ORIGIN");
   const partnerBase = `${origin}/partner`;
@@ -28,5 +44,6 @@ function createStudioRewrites() {
 export const config = {
   cleanUrls: true,
   trailingSlash: false,
+  redirects: createStudioRedirects(),
   rewrites: createStudioRewrites()
 };
