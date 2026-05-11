@@ -740,6 +740,15 @@ body.modal-open{
   background:var(--card);border:1px solid var(--border2);
   padding:44px;border-radius:4px;position:relative;overflow:hidden;
 }
+.waitlist-joined{
+  margin:14px 0 0;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted2);
+}
 .waitlist-box::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(to right,var(--amber),transparent);
@@ -984,6 +993,7 @@ body.modal-open{
   }
   #films,#how,#download{scroll-margin-top:calc(24px + env(safe-area-inset-top, 0px))}
   .waitlist-box{padding:28px 20px}
+  .waitlist-joined{font-size:9px;letter-spacing:.1em}
   .store-cta-stack{width:100%}
   .store-btns{flex-direction:column;width:100%}
   .store-btn,.beta-apk-btn{width:100%}
