@@ -746,7 +746,7 @@ body.modal-open{
   font-family:'Space Mono',monospace;
   font-size:10px;
   letter-spacing:.12em;
-  text-transform:uppercase;
+  /* text-transform:uppercase; */
   color:var(--muted2);
 }
 .waitlist-box::before{
