@@ -157,6 +157,8 @@ body.blog-page::after {
   width: 236px;
   height: 410px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: linear-gradient(180deg, rgba(16, 16, 24, 0.98) 0%, rgba(9, 9, 14, 0.98) 100%);
   box-shadow: 0 35px 90px rgba(0, 0, 0, 0.52);
@@ -188,17 +190,11 @@ body.blog-page::after {
   font-size: 34px;
   line-height: 1;
   font-weight: 700;
+  margin-bottom: 18px;
 }
 
-.blog-phone-mockup__meta {
-  display: flex;
-  gap: 12px;
-  margin: 14px 0 16px;
-  color: var(--blog-muted-deep);
-  font-family: "Space Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.blog-phone-mockup .blog-primary-button {
+  align-self: flex-start;
 }
 
 .blog-primary-button {
