@@ -605,7 +605,7 @@ a {
   }
   .footer-logo .footer-logo-new {
     display: block;
-    height: 48px;
+    height: 22px;
     border-radius: 2px;
     object-fit: cover;
     flex-shrink: 0;
