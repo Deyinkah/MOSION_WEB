@@ -58,8 +58,12 @@ function createStudioRewrites() {
   return rewrites;
 }
 
+function createBlogRewrites() {
+  return [createRewrite("/blog/:slug", "/blog")];
+}
+
 export const config = {
   cleanUrls: true,
   trailingSlash: false,
-  rewrites: createStudioRewrites()
+  rewrites: [...createBlogRewrites(), ...createStudioRewrites()]
 };

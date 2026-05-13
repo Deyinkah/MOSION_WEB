@@ -9,10 +9,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="MOSION" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Blog</title>
+  <title>Blog | Stories Behind African Cinema</title>
   <meta
     name="description"
-    content="Welcome to the MOSION blog. Product updates, release notes, and stories are coming soon."
+    content="Insights, announcements, creator stories, and product updates from MOSION."
   />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://mosion.app/blog" />
@@ -22,7 +22,7 @@
   <meta property="og:title" content="MOSION Blog" />
   <meta
     property="og:description"
-    content="Welcome to the MOSION blog. We are preparing our first posts. Check back soon."
+    content="Insights, announcements, creator stories, and product updates from MOSION."
   />
   <meta property="og:image" content="https://mosion.app/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -32,7 +32,7 @@
   <meta name="twitter:title" content="MOSION Blog" />
   <meta
     name="twitter:description"
-    content="Welcome to the MOSION blog. We are preparing our first posts. Check back soon."
+    content="Insights, announcements, creator stories, and product updates from MOSION."
   />
   <meta name="twitter:image" content="https://mosion.app/og-image.jpg" />
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20260329h" />
@@ -47,37 +47,24 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="./layout.css?v=20260509-root-nav-refresh1" />
-  <link rel="stylesheet" href="./blog.css?v=20260508-blog-launch1" />
+  <link rel="stylesheet" href="./blog.css?v=20260512-blog-system1" />
 </head>
 <body class="blog-page">
   <div id="site-nav"></div>
 
-  <main class="blog-shell">
-    <section class="blog-hero">
-      <p class="blog-kicker">News</p>
-      <h1 class="blog-title">
-        Welcome to our <em>blog.</em>
-      </h1>
-      <p class="blog-lead">
-        This is where we will publish product updates, launch notes, and stories from African cinema distribution.
-      </p>
-    </section>
-
-    <section class="blog-empty" aria-labelledby="blogEmptyTitle">
-      <div class="blog-empty-inner">
-        <!-- <div class="blog-empty-tag">No posts live yet</div> -->
-        <h2 class="blog-empty-title" id="blogEmptyTitle">Check back later.</h2>
-        <p class="blog-empty-copy">
-          We are preparing our first entries and will publish them here soon.
-        </p>
-        <a class="blog-empty-link" href="/#download">Join the waitlist</a>
-      </div>
-    </section>
+  <main class="blog-shell" id="blogRoot">
+    <noscript>
+      <section class="blog-noscript">
+        <h1>Enable JavaScript to view the MOSION blog.</h1>
+      </section>
+    </noscript>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="./site-core.js?v=20260405-notice1" defer></script>
-  <script src="./layout.js?v=20260508-blog-link1" defer></script>
+  <script src="./layout.js?v=20260512-blog-slug-state2" defer></script>
+  <script src="./blog-data.js?v=20260512-blog-data2" defer></script>
+  <script src="./blog.js?v=20260512-blog-app2" defer></script>
 </body>
 </html>

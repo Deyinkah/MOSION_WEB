@@ -161,6 +161,10 @@ function getCandidatePaths(pathname) {
   return [pathname];
 }
 
+function shouldUseBlogTemplateFallback(pathname) {
+  return /^\/(?:public\/)?blog\/[^/]+\/?$/.test(pathname);
+}
+
 const server = http.createServer((req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const host = getRequestHost(req);
@@ -208,7 +212,16 @@ const server = http.createServer((req, res) => {
   }
 
   const site = getSiteContext(req, requestUrl);
-  const candidatePaths = getCandidatePaths(site.pathname)
+  const requestCandidates = getCandidatePaths(site.pathname);
+
+  if (
+    site.rootDir === ROOT_SITE_DIR &&
+    shouldUseBlogTemplateFallback(site.pathname)
+  ) {
+    requestCandidates.push("/blog.html");
+  }
+
+  const candidatePaths = requestCandidates
     .map((candidate) => safeResolvePath(site.rootDir, candidate))
     .filter((candidate) => candidate.startsWith(site.rootDir));
 

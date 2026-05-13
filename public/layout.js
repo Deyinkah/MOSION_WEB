@@ -78,7 +78,11 @@
     return (
       pathname === "/blog" ||
       pathname === "/blog.html" ||
-      pathname.endsWith("/blog.html")
+      pathname === "/public/blog" ||
+      pathname === "/public/blog.html" ||
+      pathname.endsWith("/blog.html") ||
+      /^\/blog\/[^/]+$/.test(pathname) ||
+      /^\/public\/blog\/[^/]+$/.test(pathname)
     );
   }
 
