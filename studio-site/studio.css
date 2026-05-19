@@ -926,6 +926,95 @@ section { position: relative; }
   opacity: 0.5;
 }
 
+/* STUDIO DEVICE COMPOSITION */
+.studio-device-composition {
+  position: relative;
+  width: min(100%, 980px);
+}
+.studio-iphone-float {
+  position: absolute;
+  bottom: 28px;
+  right: 12px;
+  z-index: 5;
+  zoom: 0.6;
+  filter: drop-shadow(0 28px 52px rgba(0,0,0,0.5));
+}
+
+/* IPHONE MOCKUP */
+.studio-iphone-frame {
+  position: relative;
+  width: 315px;
+  height: 585px;
+  background: linear-gradient(160deg, #d8d8d8 0%, #c2c2c2 40%, #b0b0b0 100%);
+  border-radius: 60px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.18) inset,
+    0 0 0 1px rgba(0,0,0,0.28),
+    0 60px 120px rgba(0,0,0,0.56),
+    0 20px 40px rgba(0,0,0,0.4);
+  padding: 15px;
+}
+.studio-iphone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.8) inset;
+}
+.studio-iphone-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 28%, transparent 55%);
+  pointer-events: none;
+  z-index: 2;
+}
+.studio-iphone-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+.studio-iphone-side-btn {
+  position: absolute;
+  right: -2.5px;
+  top: 172px;
+  width: 3px;
+  height: 94px;
+  background: linear-gradient(to right, #1c1c1c, #3c3c3c);
+  border-radius: 0 2.5px 2.5px 0;
+}
+.studio-iphone-mute {
+  position: absolute;
+  left: -2.5px;
+  top: 133px;
+  width: 3px;
+  height: 44px;
+  background: linear-gradient(to left, #1c1c1c, #3c3c3c);
+  border-radius: 2.5px 0 0 2.5px;
+}
+.studio-iphone-vol-up {
+  position: absolute;
+  left: -2.5px;
+  top: 203px;
+  width: 3px;
+  height: 70px;
+  background: linear-gradient(to left, #1c1c1c, #3c3c3c);
+  border-radius: 2.5px 0 0 2.5px;
+}
+.studio-iphone-vol-down {
+  position: absolute;
+  left: -2.5px;
+  top: 289px;
+  width: 3px;
+  height: 70px;
+  background: linear-gradient(to left, #1c1c1c, #3c3c3c);
+  border-radius: 2.5px 0 0 2.5px;
+}
+
 /* WHY SECTION */
 .why {
   background: var(--deep);
@@ -2008,6 +2097,11 @@ footer {
   .studio-laptop-scene {
     width: min(100%, 760px);
   }
+  .studio-iphone-float {
+    zoom: 0.48;
+    bottom: 20px;
+    right: 8px;
+  }
 }
 @media (max-width: 640px) {
   :root {
@@ -2054,6 +2148,11 @@ footer {
   }
   .studio-laptop-scene {
     width: min(100%, 560px);
+  }
+  .studio-iphone-float {
+    zoom: 0.38;
+    bottom: 16px;
+    right: 6px;
   }
   .studio-laptop-lid {
     padding: 10px 10px 0;
@@ -2318,6 +2417,11 @@ footer {
   }
   .comparison-table {
     min-width: 660px;
+  }
+  .studio-iphone-float {
+    zoom: 0.3;
+    bottom: 12px;
+    right: 4px;
   }
   .footer-group {
     padding: 15px 13px 13px;
