@@ -1,0 +1,71 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "MOSION Studio — Apply as a Distribution Partner",
+  description = "MOSION Studio is the partner portal for approved producers, distributors, and rights holders releasing cinema-standard films on MOSION. Access is application-based and every title is reviewed before release.",
+  canonical = "https://studio.mosion.app/",
+  ogTitle = "MOSION Studio — Apply as a Distribution Partner",
+  ogDescription = "The curated partner platform for approved African filmmakers, distributors, and rights holders. Apply for access, meet MOSION's standards, and submit titles for review.",
+  ogImage = "https://studio.mosion.app/og-studio-image.jpg",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline src="/scripts/studio-desktop-mode.js"></script>
+  <script is:inline src="/scripts/studio-auth-redirect.js"></script>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href={canonical} />
+  <!-- PWA -->
+  <meta name="theme-color" content="#080808" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="MOSION Studio" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MOSION Studio" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_NG" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImage} />
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/studio.css" />
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+  <script is:inline src="/scripts/studio-site-core.js" defer></script>
+  <script is:inline src="/scripts/studio.js" defer></script>
+</body>
+</html>
