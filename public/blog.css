@@ -245,91 +245,92 @@ body.blog-page .site-nav {
 
 .blog-featured-article {
   margin-bottom: 2px;
+  border: 1px solid var(--blog-border);
+  background: var(--blog-panel);
 }
 
 .blog-featured-link {
-  display: block;
-  position: relative;
-  overflow: hidden;
-  height: 560px;
+  display: flex;
+  align-items: stretch;
+  min-height: 420px;
+  color: var(--blog-cream);
 }
 
-.blog-featured-link img {
+.blog-featured-image {
+  width: 44%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.blog-featured-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.blog-featured-link:hover img {
+.blog-featured-link:hover .blog-featured-image img {
   transform: scale(1.04);
 }
 
-.blog-featured-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(6, 6, 10, 0.98) 0%,
-    rgba(6, 6, 10, 0.55) 40%,
-    transparent 100%
-  );
+.blog-featured-body {
+  flex: 1;
+  padding: 48px 52px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 48px 52px;
+  justify-content: center;
+  gap: 20px;
 }
 
-.blog-featured-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
+.blog-featured-date {
   font-family: "Space Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blog-muted);
-}
-
-.blog-featured-category {
-  color: var(--blog-amber-light);
+  color: var(--blog-muted-deep);
 }
 
 .blog-featured-title {
-  margin: 0 0 16px;
+  margin: 0;
   font-family: "Cormorant Garamond", serif;
   font-weight: 700;
-  font-size: clamp(38px, 5.5vw, 72px);
-  line-height: 0.93;
-  letter-spacing: -0.025em;
+  font-size: clamp(32px, 4vw, 58px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
   color: var(--blog-cream);
-  max-width: 820px;
 }
 
 .blog-featured-excerpt {
-  margin: 0 0 24px;
+  margin: 0;
   color: var(--blog-muted);
-  font-size: 14px;
-  line-height: 1.78;
-  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.72;
 }
 
 .blog-featured-readmore {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: "Space Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--blog-amber-light);
-  transition: gap 0.2s ease;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--blog-amber);
+  transition: color 0.18s ease, gap 0.2s ease;
+}
+
+.blog-featured-readmore svg {
+  flex-shrink: 0;
+  position: relative;
+  top: 1px;
 }
 
 .blog-featured-link:hover .blog-featured-readmore {
   gap: 12px;
+}
+
+.blog-featured-link:hover .blog-featured-readmore {
+  color: var(--blog-amber-light);
 }
 
 /* ─── LISTING — Posts grid ───────────────────────────────── */
@@ -822,11 +823,18 @@ body.blog-page .site-nav {
   }
 
   .blog-featured-link {
-    height: 420px;
+    flex-direction: column;
+    min-height: unset;
   }
 
-  .blog-featured-overlay {
+  .blog-featured-image {
+    width: 100%;
+    height: 260px;
+  }
+
+  .blog-featured-body {
     padding: 28px 24px;
+    gap: 14px;
   }
 
   .blog-posts-grid {
@@ -862,16 +870,12 @@ body.blog-page .site-nav {
     font-size: clamp(44px, 13vw, 64px);
   }
 
-  .blog-featured-link {
-    height: 340px;
+  .blog-featured-image {
+    height: 220px;
   }
 
-  .blog-featured-overlay {
+  .blog-featured-body {
     padding: 20px;
-  }
-
-  .blog-featured-excerpt {
-    display: none;
   }
 
   .blog-featured-title {

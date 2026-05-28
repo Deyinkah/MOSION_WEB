@@ -73,18 +73,19 @@ const rest = sorted.slice(1);
       {featured ? (
         <article class="blog-featured-article" data-category={featured.data.category}>
           <a href={`/blog/${featured.id}`} class="blog-featured-link">
-            <img src={featured.data.image} alt="" width="1440" height="810" />
-            <div class="blog-featured-overlay">
-              <div class="blog-featured-meta">
-                <span class="blog-featured-category">{featured.data.category}</span>
-                <span aria-hidden="true">·</span>
-                <span>{featured.data.publishedAt}</span>
-                <span aria-hidden="true">·</span>
-                <span>{featured.data.readingTime}</span>
-              </div>
+            <div class="blog-featured-image">
+              <img src={featured.data.image} alt="" width="800" height="600" />
+            </div>
+            <div class="blog-featured-body">
+              <span class="blog-featured-date">{featured.data.publishedAt}</span>
               <h2 class="blog-featured-title">{featured.data.title}</h2>
               <p class="blog-featured-excerpt">{featured.data.excerpt}</p>
-              <span class="blog-featured-readmore">Read Article →</span>
+              <span class="blog-featured-readmore">
+                Read More
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </div>
           </a>
         </article>
