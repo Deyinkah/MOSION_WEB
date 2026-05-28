@@ -46,7 +46,7 @@ async function readJsonBody(req) {
   return rawBody ? JSON.parse(rawBody) : {};
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     sendJson(res, 405, { error: "Method not allowed." });
