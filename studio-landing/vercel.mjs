@@ -23,8 +23,6 @@ function createStudioRewrites() {
 }
 
 export const config = {
-  cleanUrls: true,
-  trailingSlash: false,
   redirects: createStudioRedirects(),
   rewrites: createStudioRewrites(),
 };
