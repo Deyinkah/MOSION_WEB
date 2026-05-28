@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /preview/
-
-Sitemap: https://mosion.app/sitemap-index.xml

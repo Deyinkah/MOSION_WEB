@@ -10,3 +10,9 @@ node_modules/
 *.log
 .tmp-server.*
 data/waitlist-signups.jsonl
+.vercel/
+dist/
+.astro/
+studio-landing/.vercel/
+studio-landing/dist/
+studio-landing/.astro/

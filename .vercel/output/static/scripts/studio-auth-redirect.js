@@ -1,3 +1,0 @@
-(function keepStudioLandingAtRoot() {
-  "use strict";
-})();
