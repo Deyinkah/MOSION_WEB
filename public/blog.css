@@ -638,16 +638,6 @@ body.blog-page .site-nav {
   margin: 0 0 26px;
 }
 
-.blog-article-body > p:first-child::first-letter {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 4.2em;
-  font-weight: 700;
-  line-height: 0.8;
-  float: left;
-  margin: 0.06em 0.1em 0 0;
-  color: var(--blog-amber-light);
-}
-
 .blog-article-body img {
   max-width: 100%;
   height: auto;
@@ -866,7 +856,7 @@ body.blog-page .site-nav {
   }
 
   .blog-featured-title {
-    font-size: clamp(28px, 7vw, 40px);
+    font-size: clamp(22px, 5.5vw, 30px);
   }
 
   .blog-featured-excerpt {
@@ -931,7 +921,4 @@ body.blog-page .site-nav {
     padding-bottom: 64px;
   }
 
-  .blog-article-body > p:first-child::first-letter {
-    font-size: 3.6em;
-  }
 }
