@@ -1,0 +1,96 @@
+---
+export const prerender = true;
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Film Portal — MOSION"
+  description="MOSION Film Portal is coming soon."
+  canonical="https://www.mosion.app/filmportal"
+  logoOnly={true}
+>
+  <div class="filmportal-coming">
+    <div class="filmportal-icon">
+      <svg width="240" height="140" viewBox="0 0 160 118" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Outer glow ring -->
+        <ellipse cx="80" cy="100" rx="66" ry="18" fill="#d4a843" opacity="0.08"/>
+        <!-- Portal arch outer -->
+        <path d="M20 110 A60 68 0 0 1 140 110" stroke="#d4a843" stroke-width="2" opacity="0.3" fill="none"/>
+        <!-- Portal arch mid -->
+        <path d="M32 110 A48 54 0 0 1 128 110" stroke="#d4a843" stroke-width="2" opacity="0.55" fill="none"/>
+        <!-- Portal arch inner -->
+        <path d="M44 110 A36 40 0 0 1 116 110" stroke="#f0c96a" stroke-width="2" opacity="0.85" fill="none"/>
+        <!-- Portal fill glow -->
+        <path d="M44 110 A36 40 0 0 1 116 110 L116 110 L44 110 Z" fill="url(#portalGlow)" opacity="0.18"/>
+        <!-- Base line -->
+        <line x1="14" y1="110" x2="146" y2="110" stroke="#d4a843" stroke-width="1.5" opacity="0.4"/>
+        <!-- Inner shimmer lines -->
+        <line x1="80" y1="70" x2="80" y2="108" stroke="#f0c96a" stroke-width="1" opacity="0.5" stroke-dasharray="3 4"/>
+        <line x1="62" y1="80" x2="65" y2="108" stroke="#f0c96a" stroke-width="1" opacity="0.3" stroke-dasharray="3 4"/>
+        <line x1="98" y1="80" x2="95" y2="108" stroke="#f0c96a" stroke-width="1" opacity="0.3" stroke-dasharray="3 4"/>
+        <defs>
+          <radialGradient id="portalGlow" cx="50%" cy="100%" r="60%">
+            <stop offset="0%" stop-color="#f0c96a"/>
+            <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <p class="filmportal-text" id="filmportalText"></p>
+  </div>
+</MainLayout>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("filmportalText");
+    if (!el) return;
+    var text = "Film Portal is coming.";
+    var i = 0;
+    function type() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+        setTimeout(type, 60);
+      }
+    }
+    setTimeout(type, 400);
+  })();
+</script>
+
+<style>
+  body {
+    background: #06060a;
+  }
+
+  .filmportal-coming {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 24px;
+    background: #06060a;
+  }
+
+  .filmportal-icon svg {
+    display: block;
+    animation: portalPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes portalPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.06); }
+  }
+
+  .filmportal-text {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 700;
+    color: #f0ede6;
+    text-align: center;
+    margin: 0;
+    letter-spacing: -0.02em;
+    min-height: 1.2em;
+  }
+</style>

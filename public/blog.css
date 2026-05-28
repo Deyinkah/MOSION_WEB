@@ -856,7 +856,7 @@ body.blog-page .site-nav {
   }
 
   .blog-featured-title {
-    font-size: clamp(22px, 5.5vw, 30px);
+    font-size: clamp(24px, 4vw, 30px);
   }
 
   .blog-featured-excerpt {
@@ -873,11 +873,15 @@ body.blog-page .site-nav {
 
   .blog-article-hero__content {
     padding: 40px 0;
+    text-align: center;
+  }
+
+  .blog-article-hero__content .blog-breadcrumb-link {
     text-align: left;
   }
 
   .blog-article-meta {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .breadcrumb-full {
@@ -909,7 +913,7 @@ body.blog-page .site-nav {
   }
 
   .blog-featured-title {
-    font-size: clamp(28px, 8vw, 42px);
+    font-size: clamp(18px, 5vw, 24px);
   }
 
   .blog-post-card-body {
