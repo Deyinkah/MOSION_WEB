@@ -2,7 +2,7 @@
 title: "Nollywood Deserves a Cinema in Every Pocket"
 excerpt: "Nollywood is the second-largest film industry on earth. And yet, the average Nigerian filmmaker has no idea how many people watched their film last night. That contradiction is why I built Mosion."
 image: https://res.cloudinary.com/drubuvjbu/image/upload/v1779904407/Picsart_26-05-27_16-43-17-251_chrfzw.jpg
-category: African Cinema Insights
+category: Industry
 publishedAt: 27 May 2026
 readingTime: 7 min read
 author: Gawat Adebayo
