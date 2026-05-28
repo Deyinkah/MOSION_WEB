@@ -1,0 +1,131 @@
+---
+export const prerender = true;
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const posts = await getCollection("blog");
+const sorted = posts.sort((a, b) => {
+  const months: Record<string, number> = {
+    January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+    July: 6, August: 7, September: 8, October: 9, November: 10, December: 11,
+  };
+  const parse = (s: string) => {
+    const parts = s.split(" ");
+    const month = parts.find(p => p in months) ?? "January";
+    const year = parts.map(p => Number(p)).find(n => n > 1000) ?? 2026;
+    return new Date(year, months[month] ?? 0);
+  };
+  return parse(b.data.publishedAt).getTime() - parse(a.data.publishedAt).getTime();
+});
+
+const usedCategories = [...new Set(sorted.map((p) => p.data.category).filter(Boolean))];
+const categories = usedCategories.length > 1 ? ["All", ...usedCategories] : usedCategories;
+
+const featured = sorted[0];
+const rest = sorted.slice(1);
+---
+
+<MainLayout
+  title="Blog | Stories Behind African Cinema"
+  description="Insights, announcements, creator stories, and product updates from MOSION."
+  canonical="https://mosion.app/blog"
+  logoOnly={true}
+  bodyClass="blog-page"
+  css={["/blog.css"]}
+>
+  <main class="blog-shell" id="blogRoot">
+
+    <section class="blog-hero-section">
+      <div class="blog-hero-inner">
+        <div class="blog-hero-content">
+          <div class="blog-hero-label">MOSION Blog</div>
+          <h1 class="blog-hero-title">Stories behind<br /><em>African cinema.</em></h1>
+          <p class="blog-hero-description">Insights, creator stories, film announcements, and product updates from the team building MOSION.</p>
+        </div>
+        <div class="blog-hero-visual">
+          <div class="blog-phone-mockup">
+            <div class="blog-phone-mockup__topbar">MOSION</div>
+            <div class="blog-phone-mockup__poster">PREMIERE</div>
+            <a href="/" class="blog-primary-button">Join Waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="blog-filter-bar" id="blogCategories" role="tablist" aria-label="Filter posts by category">
+      <div class="blog-filter-inner">
+        {categories.map((cat) => (
+          <button
+            class={`blog-filter-btn${cat === categories[0] ? " is-active" : ""}`}
+            data-category={cat}
+            role="tab"
+            aria-selected={cat === categories[0] ? "true" : "false"}
+            type="button"
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="blog-content-area" id="blogGrid">
+
+      {featured ? (
+        <article class="blog-featured-article" data-category={featured.data.category}>
+          <a href={`/blog/${featured.id}`} class="blog-featured-link">
+            <img src={featured.data.image} alt="" width="1440" height="810" />
+            <div class="blog-featured-overlay">
+              <div class="blog-featured-meta">
+                <span class="blog-featured-category">{featured.data.category}</span>
+                <span aria-hidden="true">·</span>
+                <span>{featured.data.publishedAt}</span>
+                <span aria-hidden="true">·</span>
+                <span>{featured.data.readingTime}</span>
+              </div>
+              <h2 class="blog-featured-title">{featured.data.title}</h2>
+              <p class="blog-featured-excerpt">{featured.data.excerpt}</p>
+              <span class="blog-featured-readmore">Read Article →</span>
+            </div>
+          </a>
+        </article>
+      ) : (
+        <div class="blog-empty-state">
+          <h2>No posts yet.</h2>
+          <p>Check back soon.</p>
+        </div>
+      )}
+
+      {rest.length > 0 && (
+        <div class="blog-posts-grid">
+          {rest.map((post) => (
+            <article class="blog-post-card" data-category={post.data.category}>
+              <a href={`/blog/${post.id}`} class="blog-post-card-link">
+                <div class="blog-post-card-image">
+                  <img src={post.data.image} alt="" loading="lazy" width="800" height="500" />
+                </div>
+                <div class="blog-post-card-body">
+                  <div class="blog-post-card-meta">
+                    <span class="blog-post-card-category">{post.data.category}</span>
+                    <span class="blog-post-card-sep" aria-hidden="true">·</span>
+                    <span>{post.data.publishedAt}</span>
+                  </div>
+                  <h3 class="blog-post-card-title">{post.data.title}</h3>
+                  <p class="blog-post-card-excerpt">{post.data.excerpt}</p>
+                  <div class="blog-post-card-footer">
+                    <span>{post.data.readingTime}</span>
+                    <span class="blog-post-card-readmore">Read →</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+
+    </div>
+  </main>
+
+  <Fragment slot="scripts">
+    <script is:inline src="/scripts/blog-filter.js" defer></script>
+  </Fragment>
+</MainLayout>

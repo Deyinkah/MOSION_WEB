@@ -1,0 +1,45 @@
+---
+interface Props {
+  logoOnly?: boolean;
+}
+const { logoOnly = false } = Astro.props;
+---
+
+{logoOnly ? (
+  <nav class="site-nav site-nav-logo-only" aria-label="Primary">
+    <a href="/" class="logo">
+      <img src="/logo-wordmark.png" alt="MOSION" class="logo-wordmark" width="168" height="20" />
+    </a>
+  </nav>
+) : (
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/" class="logo">
+      <img src="/logo-wordmark.png" alt="MOSION" class="logo-wordmark" width="168" height="20" />
+    </a>
+    <div class="nav-r">
+      <div class="nav-menu" id="navMenu">
+        <button
+          class="nav-btn nav-menu-toggle"
+          id="navMenuToggle"
+          type="button"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="navDropdown"
+          aria-label="Open navigation menu"
+        >
+          <svg class="icon-menu" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M1 2h16M1 7h16M1 12h16" />
+          </svg>
+          <svg class="icon-close" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M2 2l14 10M16 2 2 12" />
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="navDropdown" hidden>
+          <a href="/#how">How it Works</a>
+          <a href="https://studio.mosion.app" target="_blank" rel="noopener noreferrer">Studio Platform</a>
+          <a href="/#download" class="nav-link-cta">Join Waitlist</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+)}

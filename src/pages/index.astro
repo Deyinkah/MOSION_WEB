@@ -1,0 +1,386 @@
+---
+export const prerender = true;
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="MOSION — Watch African Cinema Premieres directly on your phone."
+  description="MOSION is mobile cinema for African film. Watch Nollywood and Ghallywood premieres on your phone. Pay-per-view — stream or download with a 7-day access window."
+  canonical="https://mosion.app/"
+  ogTitle="MOSION — Cinema in Your Pocket"
+  ogDescription="Watch Nollywood and Ghallywood premieres on your phone. Pay only for what you watch — stream or download with a 7-day access window. No subscription."
+  css={["/home.css"]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json">{JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MobileApplication",
+          "@id": "https://mosion.app/#app",
+          "name": "MOSION",
+          "description": "Mobile cinema for African film. Watch Nollywood and Ghallywood premieres on your phone. Pay-per-view with stream or download access. No subscription required.",
+          "url": "https://mosion.app/",
+          "applicationCategory": "EntertainmentApplication",
+          "operatingSystem": "Android, iOS",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free to download. Pay per film."
+          },
+          "featureList": [
+            "Pay-per-view cinema model",
+            "Stream or offline download access",
+            "7-day viewing window",
+            "DRM-protected content",
+            "No subscription required",
+            "Nollywood and Ghallywood films"
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://mosion.app/#organization",
+            "name": "MOSION",
+            "url": "https://mosion.app/",
+            "logo": { "@type": "ImageObject", "url": "https://mosion.app/logo.jpeg" },
+            "sameAs": []
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mosion.app/#website",
+          "name": "MOSION",
+          "url": "https://mosion.app/",
+          "publisher": { "@id": "https://mosion.app/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://mosion.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does MOSION work?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Download the MOSION app, create a free account, choose a film, purchase stream or download access, and watch within the 7-day window. No subscription required." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is MOSION a subscription service?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. MOSION uses a pay-per-view model. You pay only for the individual film you want to watch, with no recurring subscription." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I download films to watch offline?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. When purchasing a title you can choose download access, which lets you watch the film offline within the 7-day access window." }
+            },
+            {
+              "@type": "Question",
+              "name": "What films are on MOSION?",
+              "acceptedAnswer": { "@type": "Answer", "text": "MOSION focuses on African cinema including Nollywood (Nigerian) and Ghallywood (Ghanaian) films — dramas, comedies, thrillers, and more." }
+            }
+          ]
+        }
+      ]
+    })}</script>
+  </Fragment>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-frame">
+    <div class="hero-frame-inner">
+      <img class="hero-frame-image" src="/trending/banner-31.png" alt="" />
+      <div class="frame-grid">
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+    <div class="filmstrip">
+      <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
+      <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
+      <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
+      <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
+      <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
+    </div>
+    <div class="banner-disclaimer" aria-label="Catalog preview notice">
+      <div class="banner-disclaimer-title">Catalog preview shown</div>
+      <p>Banner artwork and sample film titles shown are for interface demonstration only. Final catalog will reflect licensed partner content.</p>
+    </div>
+    <div class="frame-label">
+      <div class="frame-label-title">Everybody Loves Jenifa</div>
+      <div class="frame-label-meta">
+        <span>Comedy</span> &middot; 2024 &middot; Now Playing
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">4K</div>
+      <div class="stat-l">Cinema Quality</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">PPV</div>
+      <div class="stat-l">Pay Per View</div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" aria-hidden="true"></div>
+    <h1 class="hero-h1">
+      Cinema,<br />
+      <em class="line2">in your pocket.</em>
+    </h1>
+    <p class="hero-sub">
+      Watch Nollywood and African cinema premieres the moment they drop. No schedules, no theatre queues, no monthly subscriptions. Pay for the film you want - and press play.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-a">
+        Join Waitlist
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="films-section" id="films">
+  <h2 class="films-h r">Stories worth<br /><em>watching.</em></h2>
+
+  <div class="featured-film r">
+    <div class="ff-visual">
+      <img class="ff-visual-image" src="/banners/oversabi-aunty.jpeg" alt="Oversabi Aunty — Nigerian comedy film, 2025" />
+      <div class="ff-badge">Featured - Coming Soon</div>
+    </div>
+    <div class="ff-info">
+      <div>
+        <div class="ff-meta">Comedy &middot; Nigeria &middot; 2025</div>
+        <div class="ff-name">Oversabi <em>Aunty</em></div>
+        <p class="ff-desc">She knows everything about everyone - and she's ready to tell it. A laugh-out-loud comedy about family, gossip, and the aunt who never stays in her lane.</p>
+      </div>
+      <div class="ff-actions">
+        <a href="#download" class="btn-a">Pre-Order Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg></a>
+        <div class="ff-price">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="film-grid">
+    <div class="film-card r">
+      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-01.jpeg" alt="Onobiren — Nigerian drama film, 2024" /></div>
+      <div class="film-card-overlay"></div>
+      <div class="film-card-info">
+        <div class="fc-name">Onobiren</div>
+        <div class="fc-subline"><span class="fc-genre">Drama</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
+        <p class="fc-desc">A grounded Nigerian drama about loyalty, sacrifice, and the cost of survival.</p>
+      </div>
+    </div>
+    <div class="film-card r rd1">
+      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-03.jpeg" alt="A Country Called Ghana — Ghanaian adventure film, 2024" /></div>
+      <div class="film-card-overlay"></div>
+      <div class="film-card-info">
+        <div class="fc-name">A Country Called Ghana</div>
+        <div class="fc-subline"><span class="fc-genre">Adventure</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
+        <p class="fc-desc">A sweeping Ghanaian adventure shaped by pursuit, myth, and national pride.</p>
+      </div>
+    </div>
+    <div class="film-card r rd2">
+      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-06.jpeg" alt="The Housemaid — African thriller film, 2025" /></div>
+      <div class="film-card-overlay"></div>
+      <div class="film-card-info">
+        <div class="fc-name">The Housemaid</div>
+        <div class="fc-subline"><span class="fc-genre">Thriller</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2025</span></div>
+        <p class="fc-desc">A tense thriller where domestic intimacy becomes a dangerous trap.</p>
+      </div>
+    </div>
+    <div class="film-card r rd3">
+      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-23.jpeg" alt="Silence — African drama film, 2024" /></div>
+      <div class="film-card-overlay"></div>
+      <div class="film-card-info">
+        <div class="fc-name">Silence</div>
+        <div class="fc-subline"><span class="fc-genre">Drama</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
+        <p class="fc-desc">A restrained drama about grief, pressure, and truths left unspoken.</p>
+      </div>
+    </div>
+    <div class="film-card r rd4">
+      <div class="film-card-bg"><img class="film-card-image" src="/trending/miss-pj.jpg" alt="Miss PJ — Nigerian comedy film, 2025" /></div>
+      <div class="film-card-overlay"></div>
+      <div class="film-card-info">
+        <div class="fc-name">Miss PJ</div>
+        <div class="fc-subline"><span class="fc-genre">Comedy</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2025</span></div>
+        <p class="fc-desc">A sharp comedy driven by chaos, charm, and impossible situations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="how-top r">
+      <div>
+        <div class="s-label section-label-spacer">How It Works</div>
+        <h2 class="how-h">Five steps to<br /><em>showtime.</em></h2>
+      </div>
+      <p class="how-p">No complicated setup. No subscription to sign up for. Just download, find something you love, and press play - all within minutes.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step r">
+        <div class="hs-num">01</div>
+        <div class="hs-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <rect x="3" y="1" width="12" height="16" rx="2" />
+            <circle cx="9" cy="14" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </div>
+        <div class="hs-title">Download</div>
+        <div class="hs-desc">Install the MOSION app via PlayStore or Appstore in under a minute.</div>
+      </div>
+      <div class="how-step r rd1">
+        <div class="hs-num">02</div>
+        <div class="hs-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <circle cx="9" cy="7" r="3.5" />
+            <path d="M2 16c0-3.9 3.1-7 7-7s7 3.1 7 7" />
+          </svg>
+        </div>
+        <div class="hs-title">Create Account</div>
+        <div class="hs-desc">Create an account for free in seconds. No subscription needed.</div>
+      </div>
+      <div class="how-step r rd2">
+        <div class="hs-num">03</div>
+        <div class="hs-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <rect x="1" y="4" width="16" height="11" rx="2" />
+            <path d="M6 1h6M9 4v3" />
+            <path d="M6 10l2 2 4-4" />
+          </svg>
+        </div>
+        <div class="hs-title">Choose Your Film</div>
+        <div class="hs-desc">Browse catalogs and pick the title you want to watch.</div>
+      </div>
+      <div class="how-step r rd3">
+        <div class="hs-num">04</div>
+        <div class="hs-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <rect x="2" y="4" width="14" height="10" rx="2" />
+            <path d="M5.5 8h7" />
+            <path d="M5.5 11h3.5" />
+          </svg>
+        </div>
+        <div class="hs-title">Purchase a movie</div>
+        <div class="hs-desc">Choose stream or download access and confirm your purchase.</div>
+      </div>
+      <div class="how-step r rd4">
+        <div class="hs-num">05</div>
+        <div class="hs-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <circle cx="9" cy="9" r="7.5" />
+            <path d="M6 5l7 4-7 4z" fill="currentColor" stroke="none" />
+          </svg>
+        </div>
+        <div class="hs-title">Watch Anytime</div>
+        <div class="hs-desc">Watch your film anytime within the 7-day access window.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="why-inner">
+    <div class="why-top r">
+      <div class="s-label section-label-spacer">Why MOSION</div>
+      <h2 class="why-h">Built like cinema.<br /><em>Built for mobile.</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card r">
+        <div class="wc-num">01</div>
+        <div class="wc-title">Cinema-Style Pricing, Not Streaming</div>
+        <div class="wc-desc">Pay only for the film you want. No monthly subscription and no bundled catalogue.</div>
+      </div>
+      <div class="why-card r rd1">
+        <div class="wc-num">02</div>
+        <div class="wc-title">Two Ways to Watch</div>
+        <div class="wc-desc">Choose one-time streaming or offline download access for the title you selected.</div>
+      </div>
+      <div class="why-card r rd2">
+        <div class="wc-num">03</div>
+        <div class="wc-title">Built for Where Africa Watches</div>
+        <div class="wc-desc">Built for the phone-first way Africa watches, not as a desktop platform squeezed smaller.</div>
+      </div>
+      <div class="why-card r rd3">
+        <div class="wc-num">04</div>
+        <div class="wc-title">Access Without Infrastructure</div>
+        <div class="wc-desc">Watch from anywhere your phone reaches, without needing a cinema building or commute.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="download-section">
+  <div class="cta-inner">
+    <div class="cta-left r">
+      <div class="s-label section-label-spacer">Get the App</div>
+      <h2 class="cta-h">Cinema without<br /><em>the commute.</em></h2>
+      <p class="cta-p">Download MOSION and watch African cinema on your phone tonight. No commitments. No subscriptions. Pay for what you love, and press play.</p>
+      <div class="store-cta-stack">
+        <div class="store-btns">
+          <button
+            type="button"
+            class="store-btn"
+            data-coming-soon-title="Application coming soon"
+            data-coming-soon-copy="MOSION for Android is almost ready. We are wrapping up the Google Play release and will announce it as soon as it is live."
+          >
+            <div class="store-btn-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.76c.3.17.65.2.97.08l11.65-6.73-2.54-2.54-10.08 9.19zm-1.85-20.5C1.12 3.6 1 4 1 4.5v15c0 .5.12.9.33 1.24L13.6 8.5 1.33 3.26zM20.73 10.3l-2.79-1.61-2.85 2.85 2.85 2.85 2.81-1.63c.8-.46.8-1.99-.02-2.46zM4.15.16L15.8 6.89l-2.54 2.54L3.18.24C3.5.1 3.86.14 4.15.3z" /></svg>
+            </div>
+            <div class="store-btn-text">
+              <span class="store-btn-sub">Get it on</span>
+              <span class="store-btn-name">Google Play</span>
+            </div>
+          </button>
+          <button
+            type="button"
+            class="store-btn"
+            data-coming-soon-title="Application coming soon"
+            data-coming-soon-copy="MOSION for iPhone is in preparation. We will share the App Store launch the moment the application is available."
+          >
+            <div class="store-btn-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" /></svg>
+            </div>
+            <div class="store-btn-text">
+              <span class="store-btn-sub">Download on the</span>
+              <span class="store-btn-name">App Store</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="cta-right r rd2">
+      <div class="waitlist-box" id="download">
+        <form id="wlForm" novalidate>
+          <div class="wl-title">Get Beta Access</div>
+          <p class="wl-sub">Join the waitlist and we'll email you the beta APK directly, plus notify you the moment we launch publicly.</p>
+          <input type="email" class="wl-input" id="wlEmail" name="email" autocomplete="email" inputmode="email" placeholder="your@email.com" required />
+          <button class="wl-btn" id="wlSubmit" type="submit">
+            Secure Your Spot
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg>
+          </button>
+          <p class="waitlist-joined">Join <span data-waitlist-count>0</span><span data-waitlist-count-suffix></span> early users already on the waitlist</p>
+        </form>
+        <div class="wl-success" id="wlSuccess">
+          <div class="wl-success-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l5 5L19 6" /></svg>
+          </div>
+          <div class="wl-success-title">You're on the list.</div>
+          <p class="wl-success-sub" id="wlSuccessCopy">Check your inbox, your beta APK link is on its way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <Fragment slot="scripts">
+    <script is:inline src="/scripts/home.js" defer></script>
+  </Fragment>
+</MainLayout>

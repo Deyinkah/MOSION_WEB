@@ -1,5 +1,313 @@
 {
-  "blogPosts": [],
+  "blogPosts": [
+    {
+      "slug": "introducing-mosion-mobile-cinema",
+      "title": "Introducing MOSION: Cinema in Your Pocket",
+      "excerpt": "We built MOSION because African cinema deserves a stage that isn't limited by geography. Here's what we're launching and why it matters.",
+      "image": "/trending/banner-01.jpeg",
+      "category": "Product Updates",
+      "publishedAt": "May 2025",
+      "readingTime": "4 min read",
+      "author": "The MOSION Team",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "African cinema is one of the fastest-growing film industries in the world. Yet most of its best work never reaches the audiences who want to see it. Not because the films aren't good — because the infrastructure to distribute them hasn't caught up."
+        },
+        {
+          "type": "paragraph",
+          "text": "MOSION is our answer to that gap. A mobile-first cinema platform built from the ground up for African films — premieres, originals, and festival titles — delivered directly to your phone, on your schedule."
+        },
+        {
+          "type": "heading",
+          "text": "What makes it cinema, not streaming"
+        },
+        {
+          "type": "paragraph",
+          "text": "We use the word cinema deliberately. MOSION titles come with a 7-day access window from the moment you purchase — the same scarcity and intention that makes going to the cinema feel special. You get two ways to watch."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "icon": "▶",
+              "title": "Stream",
+              "text": "Start watching immediately. Your access window is 7 days, and the film expires after one full watch."
+            },
+            {
+              "icon": "⬇",
+              "title": "Download",
+              "text": "Save the film to your device. Watch offline, on a flight, wherever you are — within your 7-day window."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "No subscription. No library of content you scroll past. Just the film you chose, when you want it."
+        },
+        {
+          "type": "cta",
+          "title": "Get early access",
+          "text": "Join the waitlist and we'll send you the beta APK the moment it's ready.",
+          "buttonText": "Join the Waitlist",
+          "buttonLink": "/#download"
+        }
+      ]
+    },
+    {
+      "slug": "oversabi-aunty-premiere",
+      "title": "Oversabi Aunty Premieres on MOSION This June",
+      "excerpt": "The comedy everyone has been talking about is coming to MOSION for an exclusive mobile premiere. Here's what to know before you watch.",
+      "image": "/banners/oversabi-aunty.jpeg",
+      "category": "Film Premieres",
+      "publishedAt": "May 2025",
+      "readingTime": "3 min read",
+      "author": "The MOSION Team",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Oversabi Aunty has been making rounds at festival screenings for months, earning standing ovations and packed rooms everywhere it's shown. Starting this June, MOSION users will be the first to watch it at home — or anywhere."
+        },
+        {
+          "type": "heading",
+          "text": "About the film"
+        },
+        {
+          "type": "paragraph",
+          "text": "Directed by an emerging voice in Nollywood, Oversabi Aunty is a sharp, warm comedy about a family reunion that goes spectacularly off the rails. It's the kind of film that rewards watching with people, even if those people are hundreds of miles away."
+        },
+        {
+          "type": "heading",
+          "text": "How to watch on MOSION"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Download the MOSION beta app (join the waitlist below to get early access)",
+            "Purchase your ticket once the film goes live in June",
+            "Stream instantly or download to watch offline — your choice",
+            "Your 7-day access window starts the moment you purchase"
+          ]
+        },
+        {
+          "type": "cta",
+          "title": "Don't miss the premiere",
+          "text": "Get on the waitlist now and we'll notify you the moment Oversabi Aunty goes live.",
+          "buttonText": "Join the Waitlist",
+          "buttonLink": "/#download"
+        }
+      ]
+    },
+    {
+      "slug": "filmmaker-on-mosion-distribution",
+      "title": "\"I Wanted My Film Seen, Not Buried\" — A Filmmaker's Story",
+      "excerpt": "One creator's journey from festival circuit frustration to finding an audience through MOSION's mobile premiere model.",
+      "image": "/trending/banner-06.jpeg",
+      "category": "Creator Stories",
+      "publishedAt": "April 2025",
+      "readingTime": "5 min read",
+      "author": "MOSION Editorial",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Chukwuemeka spent three years making his debut feature. He spent another year trying to figure out how to get it in front of people. Festival submissions, streaming platform pitches, distribution meetings that went nowhere — a story that will be familiar to any independent filmmaker working in African cinema today."
+        },
+        {
+          "type": "quote",
+          "text": "I didn't make this film for it to sit on a hard drive. I made it to be seen. MOSION gave me a real premiere, not a playlist slot.",
+          "author": "Chukwuemeka O., Filmmaker"
+        },
+        {
+          "type": "heading",
+          "text": "The distribution problem nobody talks about"
+        },
+        {
+          "type": "paragraph",
+          "text": "Major streaming platforms need a volume of content to justify the licensing overhead. A one-hour debut feature from a new filmmaker doesn't fit their model — even if the film is exceptional. The traditional cinema route requires physical infrastructure that simply doesn't exist in most of the markets where African audiences live."
+        },
+        {
+          "type": "paragraph",
+          "text": "MOSION was designed around this reality. A mobile premiere reaches audiences where they actually are — on their phones, in cities with no cinema nearby, in diaspora communities that still want to connect with African stories."
+        },
+        {
+          "type": "cta",
+          "title": "Are you a filmmaker?",
+          "text": "Learn how MOSION works for creators and how to premiere your film on the platform.",
+          "buttonText": "Visit MOSION Studio",
+          "buttonLink": "/studio"
+        }
+      ]
+    },
+    {
+      "slug": "why-african-cinema-is-having-a-moment",
+      "title": "Why African Cinema Is Having Its Biggest Moment Yet",
+      "excerpt": "Audiences worldwide are discovering African films in record numbers. We look at why this is happening and what it means for the industry.",
+      "image": "/trending/banner-03.jpeg",
+      "category": "African Cinema Insights",
+      "publishedAt": "April 2025",
+      "readingTime": "6 min read",
+      "author": "MOSION Editorial",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Something shifted in the last five years. African films started winning at international festivals. Nollywood became the third-largest film industry by volume. Streaming platforms began investing in African originals. And audiences — in Africa and across the diaspora — started demanding more."
+        },
+        {
+          "type": "heading",
+          "text": "Numbers that tell the story"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Nigeria's film industry generates over $660 million annually",
+            "African diaspora audiences represent one of the fastest-growing consumer segments globally",
+            "Festival entries from sub-Saharan Africa have grown 40% over five years",
+            "Mobile internet penetration in Africa surpassed 50% in 2024"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "The infrastructure gap"
+        },
+        {
+          "type": "paragraph",
+          "text": "The demand is real. The infrastructure to meet it is still catching up. Physical cinema screens remain concentrated in a handful of major cities. Traditional streaming platforms prioritise volume and subscription models that don't always work for event-style releases."
+        },
+        {
+          "type": "paragraph",
+          "text": "Mobile-first platforms like MOSION exist precisely to close this gap — bringing the cinema experience to the device that 80% of African internet users rely on."
+        },
+        {
+          "type": "quote",
+          "text": "African storytelling has always been world-class. What was missing was the delivery mechanism. That's changing now.",
+          "author": "MOSION Co-founder"
+        }
+      ]
+    },
+    {
+      "slug": "how-to-watch-your-first-mosion-film",
+      "title": "How to Watch Your First Film on MOSION",
+      "excerpt": "A quick walkthrough for new users — from joining the waitlist to pressing play on your first mobile cinema ticket.",
+      "image": "/trending/banner-23.jpeg",
+      "category": "How to Watch",
+      "publishedAt": "March 2025",
+      "readingTime": "3 min read",
+      "author": "The MOSION Team",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "MOSION works differently from subscription services. You buy a ticket to a specific film, get a 7-day window to watch it, and then it's gone — just like cinema. Here's exactly how to get started."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "icon": "1",
+              "title": "Join the waitlist",
+              "text": "We're in beta. Join the waitlist and we'll email you the APK directly when your spot is ready."
+            },
+            {
+              "icon": "2",
+              "title": "Install the app",
+              "text": "Install the MOSION APK on your Android phone. Full iOS support is coming at public launch."
+            },
+            {
+              "icon": "3",
+              "title": "Browse and buy",
+              "text": "Find a film you want to watch. Purchase your ticket — no subscription required."
+            },
+            {
+              "icon": "4",
+              "title": "Stream or download",
+              "text": "Watch online immediately, or download to your device and watch offline. Your 7-day window starts at purchase."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Frequently asked questions"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Can I share my ticket? No — each ticket is tied to one account, same as a cinema seat.",
+            "What happens after 7 days? Your access expires, same as a cinema screening ending.",
+            "Can I watch on multiple devices? Yes, on any device logged into your MOSION account.",
+            "Is there a subscription option? Not yet — MOSION is per-film for now."
+          ]
+        },
+        {
+          "type": "cta",
+          "title": "Ready to watch?",
+          "text": "Get on the waitlist and be among the first to experience MOSION.",
+          "buttonText": "Join the Waitlist",
+          "buttonLink": "/#download"
+        }
+      ]
+    },
+    {
+      "slug": "beta-community-update-may-2025",
+      "title": "Beta Update: What We've Shipped and What's Next",
+      "excerpt": "A transparent look at what MOSION beta users have helped us build, fix, and improve over the past month.",
+      "image": "/trending/banner-31.png",
+      "category": "Community Updates",
+      "publishedAt": "May 2025",
+      "readingTime": "4 min read",
+      "author": "The MOSION Team",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Every person on the MOSION beta waitlist is helping us build something real. This post is our way of being transparent about what that looks like — what we've shipped, what feedback shaped our decisions, and what's coming next."
+        },
+        {
+          "type": "heading",
+          "text": "What we shipped in April"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Offline download — beta users can now download films for offline viewing",
+            "Improved playback quality on slower connections",
+            "A redesigned ticket purchase flow that removes three unnecessary steps",
+            "Push notifications for upcoming premieres you've bookmarked"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "What you told us"
+        },
+        {
+          "type": "quote",
+          "text": "The download feature is everything. I travel a lot and this is the first time I've been able to watch a Nigerian film on a flight.",
+          "author": "Beta user, London"
+        },
+        {
+          "type": "paragraph",
+          "text": "The most common request we heard was better discovery — easier ways to find films by genre, region, or director. That's our focus for May and June."
+        },
+        {
+          "type": "heading",
+          "text": "What's coming"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Genre and region filters across the browse screen",
+            "Director and cast pages",
+            "Early access to a Ghanaian film festival partner programme",
+            "iOS beta (limited — sign up below to be considered)"
+          ]
+        },
+        {
+          "type": "cta",
+          "title": "Join the beta",
+          "text": "Not on the waitlist yet? Join now and help shape what MOSION becomes.",
+          "buttonText": "Join the Waitlist",
+          "buttonLink": "/#download"
+        }
+      ]
+    }
+  ],
   "categories": [
     "All",
     "Product Updates",

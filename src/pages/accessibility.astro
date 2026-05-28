@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<script src="./desktop-mode.js?v=20260418-desktopmode4"></script>
-<meta name="theme-color" content="#080808" />
-<title>Accessibility</title>
-<meta name="description" content="Accessibility information for MOSION and MOSION Studio, including our current approach, support channels, and how to report an issue." />
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<link rel="canonical" href="https://mosion.app/accessibility" />
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20260329h" />
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=20260329h" />
-<link rel="shortcut icon" href="./favicon.ico?v=20260329h" />
-<link rel="manifest" href="./site.webmanifest?v=20260329h" />
-<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260329h" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./layout.css?v=20260509-root-nav-refresh1" />
-<link rel="stylesheet" href="./privacy.css?v=20260418-policy-layout2" />
-</head>
-<body class="policy-page">
-  <div id="site-nav"></div>
+---
+export const prerender = true;
+import MainLayout from "../layouts/MainLayout.astro";
+---
 
+<MainLayout
+  title="Accessibility — MOSION"
+  description="Accessibility information for MOSION and MOSION Studio, including our current approach, support channels, and how to report an issue."
+  canonical="https://mosion.app/accessibility"
+  logoOnly={true}
+  bodyClass="policy-page"
+  css={["/privacy.css"]}
+>
   <main class="policy-page-shell">
     <article class="policy-article" aria-labelledby="accessibilityTitle">
       <header class="policy-intro">
@@ -50,20 +38,14 @@
       <section class="policy-section" id="scope" aria-labelledby="scopeHeading">
         <div class="policy-section-label">01 Scope</div>
         <h2 id="scopeHeading">What this page covers</h2>
-        <p>
-          This page covers the public MOSION website, the public waitlist flow, the MOSION Studio landing page, and the Studio application flow. It does not guarantee that every future release is fully conformant with any specific accessibility standard, but it does state the direction and support path we are actively maintaining.
-        </p>
+        <p>This page covers the public MOSION website, the public waitlist flow, the MOSION Studio landing page, and the Studio application flow. It does not guarantee that every future release is fully conformant with any specific accessibility standard, but it does state the direction and support path we are actively maintaining.</p>
       </section>
 
       <section class="policy-section" id="approach" aria-labelledby="approachHeading">
         <div class="policy-section-label">02 Approach</div>
         <h2 id="approachHeading">How we approach accessibility</h2>
-        <p>
-          We aim to keep navigation predictable, content readable, forms understandable, and core tasks operable across modern browsers and current mobile devices. Accessibility work is handled as part of ongoing design and implementation review, especially around structure, focus flow, interaction states, and mobile responsiveness.
-        </p>
-        <p>
-          Our target direction is practical alignment with modern accessibility expectations, including WCAG-style concerns such as contrast, keyboard access, zoom and reflow behaviour, semantic structure, and clear link and form labelling.
-        </p>
+        <p>We aim to keep navigation predictable, content readable, forms understandable, and core tasks operable across modern browsers and current mobile devices. Accessibility work is handled as part of ongoing design and implementation review, especially around structure, focus flow, interaction states, and mobile responsiveness.</p>
+        <p>Our target direction is practical alignment with modern accessibility expectations, including WCAG-style concerns such as contrast, keyboard access, zoom and reflow behaviour, semantic structure, and clear link and form labelling.</p>
       </section>
 
       <section class="policy-section" id="current-support" aria-labelledby="supportHeading">
@@ -80,20 +62,14 @@
       <section class="policy-section" id="limitations" aria-labelledby="limitationsHeading">
         <div class="policy-section-label">04 Known Limitations</div>
         <h2 id="limitationsHeading">Where issues may still exist</h2>
-        <p>
-          MOSION is still evolving, and some interface areas may not yet meet the standard we want. Prototype previews, promotional media treatments, and newly released flows may require additional refinement for assistive-technology compatibility, focus order, motion tolerance, or descriptive labelling.
-        </p>
-        <p>
-          If you encounter an issue, we would rather hear about the exact blocker than hide behind a generic statement. Reports with device, browser, and task details are the fastest way to get a meaningful fix.
-        </p>
+        <p>MOSION is still evolving, and some interface areas may not yet meet the standard we want. Prototype previews, promotional media treatments, and newly released flows may require additional refinement for assistive-technology compatibility, focus order, motion tolerance, or descriptive labelling.</p>
+        <p>If you encounter an issue, we would rather hear about the exact blocker than hide behind a generic statement. Reports with device, browser, and task details are the fastest way to get a meaningful fix.</p>
       </section>
 
       <section class="policy-section" id="assistance" aria-labelledby="assistanceHeading">
         <div class="policy-section-label">05 Need Assistance</div>
         <h2 id="assistanceHeading">If you need help or another route</h2>
-        <p>
-          If a page, form, or control is difficult to use, contact us and describe what you were trying to do. We can review the issue and, where appropriate, help you complete the task through an alternative support path.
-        </p>
+        <p>If a page, form, or control is difficult to use, contact us and describe what you were trying to do. We can review the issue and, where appropriate, help you complete the task through an alternative support path.</p>
       </section>
 
       <section class="policy-section" id="reporting" aria-labelledby="reportingHeading">
@@ -110,19 +86,9 @@
       <section class="policy-section" id="contact" aria-labelledby="contactHeading">
         <div class="policy-section-label">07 Contact</div>
         <h2 id="contactHeading">Accessibility contact points</h2>
-        <p>
-          For public-site accessibility questions, contact <a class="contact-link" href="mailto:support@mosion.app?subject=MOSION%20Accessibility">support@mosion.app</a>.
-        </p>
-        <p>
-          For Studio accessibility questions, contact <a class="contact-link" href="mailto:partners@mosion.app?subject=Studio%20Accessibility">partners@mosion.app</a>.
-        </p>
+        <p>For public-site accessibility questions, contact <a class="contact-link" href="mailto:support@mosion.app?subject=MOSION%20Accessibility">support@mosion.app</a>.</p>
+        <p>For Studio accessibility questions, contact <a class="contact-link" href="mailto:partners@mosion.app?subject=Studio%20Accessibility">partners@mosion.app</a>.</p>
       </section>
     </article>
   </main>
-
-  <div id="site-footer"></div>
-
-  <script src="./site-core.js?v=20260405-notice1" defer></script>
-  <script src="./layout.js?v=20260418-root-logoonly1" defer></script>
-</body>
-</html>
+</MainLayout>

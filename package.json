@@ -3,11 +3,15 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "start": "node server.js",
-    "check": "node --check server.js",
     "preview:email": "node render-email-preview.js"
   },
   "dependencies": {
+    "@astrojs/vercel": "^10.0.7",
+    "astro": "^6.3.8",
     "resend": "^6.9.4"
   }
 }

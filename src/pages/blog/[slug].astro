@@ -1,0 +1,109 @@
+---
+export const prerender = true;
+import { getCollection, render } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<MainLayout
+  title={`${post.data.title} — MOSION Blog`}
+  description={post.data.excerpt}
+  canonical={`https://mosion.app/blog/${post.id}`}
+  ogTitle={post.data.title}
+  ogDescription={post.data.excerpt}
+  ogImage={`https://mosion.app${post.data.image}`}
+  logoOnly={true}
+  bodyClass="blog-page"
+  css={["/blog.css"]}
+>
+  <main class="blog-shell blog-article-page">
+    <section
+      class="blog-article-hero"
+      style={`background-image: url('${post.data.image}')`}
+    >
+      <div class="blog-article-hero__overlay">
+        <div class="blog-article-hero__content">
+          <a href="/blog" class="blog-breadcrumb-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M13 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back to All
+          </a>
+          <p class="blog-eyebrow">{post.data.category}</p>
+          <h1>{post.data.title}</h1>
+          <div class="blog-article-meta">
+            <span>{post.data.author}</span>
+            <span>{post.data.publishedAt}</span>
+            <span>{post.data.readingTime}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="blog-article-body-wrap">
+      <div class="blog-article-body">
+        <Content />
+      </div>
+
+      <div class="blog-article-cta">
+        <div>
+          <h3>Join Waitlist</h3>
+          <p>Drop your email and you'll be among the first through the door when we open.</p>
+        </div>
+        <form class="blog-waitlist-form" id="blogWaitlistForm" novalidate>
+          <input type="email" name="email" placeholder="Enter your email" class="blog-waitlist-input" required />
+          <button type="submit" class="blog-primary-button">Join Waitlist</button>
+          <p class="blog-waitlist-msg" id="blogWaitlistMsg" hidden></p>
+        </form>
+      </div>
+
+      <script is:inline>
+        (function () {
+          var form = document.getElementById("blogWaitlistForm");
+          var msg = document.getElementById("blogWaitlistMsg");
+          if (!form) return;
+          form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            var email = form.email.value.trim();
+            var btn = form.querySelector("button[type='submit']");
+            btn.disabled = true;
+            btn.textContent = "Joining…";
+            msg.hidden = true;
+            try {
+              var res = await fetch("/api/waitlist", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email, source: "blog" }),
+              });
+              var data = await res.json().catch(function () { return {}; });
+              if (res.ok) {
+                form.reset();
+                msg.textContent = "You're on the list! Check your inbox.";
+                msg.className = "blog-waitlist-msg blog-waitlist-msg--success";
+                btn.textContent = "Joined!";
+              } else {
+                throw new Error(data.message || "Something went wrong.");
+              }
+            } catch (err) {
+              msg.textContent = err.message || "Something went wrong. Try again.";
+              msg.className = "blog-waitlist-msg blog-waitlist-msg--error";
+              btn.disabled = false;
+              btn.textContent = "Join Waitlist";
+            }
+            msg.hidden = false;
+          });
+        })();
+      </script>
+    </div>
+  </main>
+</MainLayout>
