@@ -56,4 +56,4 @@ And if you just love these films — if you grew up on them, if you share them, 
 
 ![A confident young African female filmmaker stands in golden hour light, holding a camera, a film set being prepared behind her — in control of her story and her business](https://res.cloudinary.com/drubuvjbu/image/upload/v1779904411/Picsart_26-05-27_16-46-46-703_u9cy5j.png)
 
-Filmmakers can get started at [studio.mosion.app](https://studio.mosion.app). Movie lovers, your cinema is at [mosion.app](https://mosion.app).
+Filmmakers can get started at [studio.mosion.app](https://studio.mosion.app). Movie lovers, your cinema is at [mosion.app](https://www.mosion.app).

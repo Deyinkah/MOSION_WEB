@@ -10,6 +10,7 @@
     "preview:email": "node render-email-preview.js"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^10.0.7",
     "astro": "^6.3.8",
     "resend": "^6.9.4"

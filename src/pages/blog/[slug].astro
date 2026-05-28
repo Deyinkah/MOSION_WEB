@@ -13,19 +13,41 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.excerpt,
+  image: post.data.image,
+  author: {
+    "@type": "Person",
+    name: post.data.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "MOSION",
+    url: "https://www.mosion.app",
+  },
+  datePublished: post.data.publishedAt,
+  url: `https://www.mosion.app/blog/${post.id}`,
+};
 ---
 
 <MainLayout
   title={`${post.data.title} — MOSION Blog`}
   description={post.data.excerpt}
-  canonical={`https://mosion.app/blog/${post.id}`}
+  canonical={`https://www.mosion.app/blog/${post.id}`}
   ogTitle={post.data.title}
   ogDescription={post.data.excerpt}
-  ogImage={`https://mosion.app${post.data.image}`}
+  ogImage={`https://www.mosion.app${post.data.image}`}
   logoOnly={true}
   bodyClass="blog-page"
   css={["/blog.css"]}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
   <main class="blog-shell blog-article-page">
     <section
       class="blog-article-hero"

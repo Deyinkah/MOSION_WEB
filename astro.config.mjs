@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
+import sitemap from "@astrojs/sitemap";
 
 const STUDIO_HOST = "studio.mosion.app";
 const STUDIO_APP_PATHS = [
@@ -27,11 +28,12 @@ function studioRewrites() {
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  site: "https://mosion.app",
+  integrations: [sitemap()],
+  site: "https://www.mosion.app",
   trailingSlash: "never",
   vite: {
     ssr: {
-      noExternal: [],
+      noExternal: commit[],
     },
   },
   server: {
