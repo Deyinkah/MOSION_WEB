@@ -33,7 +33,7 @@ export default defineConfig({
   trailingSlash: "never",
   vite: {
     ssr: {
-      noExternal: commit[],
+      noExternal: [],
     },
   },
   server: {
