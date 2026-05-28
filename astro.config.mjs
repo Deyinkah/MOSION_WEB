@@ -43,7 +43,7 @@ function studioRewrites() {
 
 export default defineConfig({
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({ edgeMiddleware: true }),
   integrations: [sitemap()],
   site: "https://www.mosion.app",
   trailingSlash: "never",
