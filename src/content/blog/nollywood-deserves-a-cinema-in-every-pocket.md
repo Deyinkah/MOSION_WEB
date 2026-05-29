@@ -1,7 +1,7 @@
 ---
 title: "Nollywood Deserves a Cinema in Every Pocket"
 excerpt: "Nollywood is the second-largest film industry on earth. And yet, the average Nigerian filmmaker has no idea how many people watched their film last night. That contradiction is why I built Mosion."
-image: https://res.cloudinary.com/drubuvjbu/image/upload/v1779904407/Picsart_26-05-27_16-43-17-251_chrfzw.jpg
+image: https://res.cloudinary.com/drubuvjbu/image/upload/v1780040607/Blog1-1_bf2aai.jpg
 category: Industry
 publishedAt: 27 May 2026
 readingTime: 7 min read
@@ -12,7 +12,7 @@ Nollywood is the second-largest film industry in the world — not second on the
 
 But here's what's strange about all of this: the average Nigerian filmmaker genuinely has no idea how many people watched their film last night. And that, more than anything else, is what led me to build Mosion.
 
-![A packed Nigerian cinema auditorium, audience fully absorbed in a film, faces lit by the warm glow of the screen](https://res.cloudinary.com/drubuvjbu/image/upload/v1779904410/Picsart_26-05-27_16-46-34-937_diqitc.png)
+![A packed Nigerian cinema auditorium, audience fully absorbed in a film, faces lit by the warm glow of the screen](https://res.cloudinary.com/drubuvjbu/image/upload/v1780040607/Blog1-2_u6zeba.jpg)
 
 The way distribution actually works for most Nollywood filmmakers is something I spent a long time trying to understand. You make a film — which takes months, usually over a year once you factor in funding — and then you start knocking on doors. If a streaming platform picks you up, you're looking at somewhere between $10,000 and $90,000 from Netflix for a one-time licensing deal. You sign over the rights, they control the audience relationship, and you never see a single piece of data about who actually watched it. Most filmmakers take the money, move on, and hope the next deal is better.
 
@@ -20,7 +20,7 @@ For the many who don't land that deal, the options narrow quickly. YouTube can g
 
 And underneath all of this is piracy, which is eating the industry alive. UNESCO estimates that 50 to 70% of Nigeria's film revenue is lost to piracy, and the World Bank found that for every legitimate copy of a Nigerian film sold, nine others are pirated. The Nigerian Copyright Commission puts the annual digital piracy losses at over ₦150 billion. What used to be pirated DVDs is now Telegram channels and WhatsApp forwards — the format changed, but the problem didn't go anywhere.
 
-![A young African filmmaker sits alone in a dark editing room, staring at a monitor showing a completed film — quiet frustration, wondering if anyone will see it](https://res.cloudinary.com/drubuvjbu/image/upload/v1779904410/Picsart_26-05-27_16-46-20-539_yoyue9.png)
+![A young African filmmaker sits alone in a dark editing room, staring at a monitor showing a completed film — quiet frustration, wondering if anyone will see it](https://res.cloudinary.com/drubuvjbu/image/upload/v1780040608/Blog1-3_qscahm.jpg)
 
 The result is genuinely frustrating: an industry growing at 60% a year, with individual filmmakers who often can't recoup what they spent making their last film before they need to start funding the next one.
 
@@ -40,7 +40,7 @@ Mosion is a pay-per-view platform built for African film. On the viewer side it'
 
 We're in public beta right now with over 100 testers actively using the product. It's been a genuinely useful process — some things we were confident about turned out to need more work, and some things we were uncertain about landed well. The product we're building toward the full launch is meaningfully better than where we started.
 
-![Mosion consumer app and Studio dashboard — real product, real data, direct earnings for filmmakers](https://res.cloudinary.com/drubuvjbu/image/upload/v1779904410/Picsart_26-05-27_16-48-26-455_q2lhgv.jpg)
+![Mosion consumer app and Studio dashboard — real product, real data, direct earnings for filmmakers](https://res.cloudinary.com/drubuvjbu/image/upload/v1780040610/Blog1-4_fz0sbj.jpg)
 
 The content quality in Nollywood right now is as high as it's ever been. The 2024 box office didn't break records by accident — the storytelling, the production, and the ambition are all at a different level than they were five years ago. The gap has never been about the films.
 
@@ -54,6 +54,7 @@ If you're an investor or a media operator thinking seriously about where African
 
 And if you just love these films — if you grew up on them, if you share them, if you've ever felt like the stories that look and sound like your life are somehow harder to find and harder to support than they should be — this is what we're building for you.
 
-![A confident young African female filmmaker stands in golden hour light, holding a camera, a film set being prepared behind her — in control of her story and her business](https://res.cloudinary.com/drubuvjbu/image/upload/v1779904411/Picsart_26-05-27_16-46-46-703_u9cy5j.png)
+![A confident young African female filmmaker stands in golden hour light, holding a camera, a film set being prepared behind her — in control of her story and her business](https://res.cloudinary.com/drubuvjbu/image/upload/v1780040607/Blog1-5_mefjcl.jpg)
 
 Filmmakers can get started at [studio.mosion.app](https://studio.mosion.app). Movie lovers, your cinema is at [mosion.app](https://www.mosion.app).
+
