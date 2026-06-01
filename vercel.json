@@ -1,0 +1,40 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/catalogue", "destination": "https://app.mosion.app/catalogue" },
+    { "source": "/catalogue/:path*", "destination": "https://app.mosion.app/catalogue/:path*" },
+    { "source": "/movie", "destination": "https://app.mosion.app/movie" },
+    { "source": "/movie/:path*", "destination": "https://app.mosion.app/movie/:path*" },
+    { "source": "/account", "destination": "https://app.mosion.app/account" },
+    { "source": "/account/:path*", "destination": "https://app.mosion.app/account/:path*" },
+    { "source": "/purchases", "destination": "https://app.mosion.app/purchases" },
+    { "source": "/purchases/:path*", "destination": "https://app.mosion.app/purchases/:path*" },
+    { "source": "/checkout", "destination": "https://app.mosion.app/checkout" },
+    { "source": "/checkout/:path*", "destination": "https://app.mosion.app/checkout/:path*" },
+    { "source": "/success", "destination": "https://app.mosion.app/success" },
+    { "source": "/success/:path*", "destination": "https://app.mosion.app/success/:path*" },
+    { "source": "/receipt", "destination": "https://app.mosion.app/receipt" },
+    { "source": "/receipt/:path*", "destination": "https://app.mosion.app/receipt/:path*" },
+    { "source": "/signin", "destination": "https://app.mosion.app/signin" },
+    { "source": "/signin/:path*", "destination": "https://app.mosion.app/signin/:path*" },
+    { "source": "/signup", "destination": "https://app.mosion.app/signup" },
+    { "source": "/signup/:path*", "destination": "https://app.mosion.app/signup/:path*" },
+    { "source": "/help", "destination": "https://app.mosion.app/help" },
+    { "source": "/help/:path*", "destination": "https://app.mosion.app/help/:path*" },
+    { "source": "/coming-soon", "destination": "https://app.mosion.app/coming-soon" },
+    { "source": "/coming-soon/:path*", "destination": "https://app.mosion.app/coming-soon/:path*" },
+    { "source": "/payment", "destination": "https://app.mosion.app/payment" },
+    { "source": "/payment/:path*", "destination": "https://app.mosion.app/payment/:path*" },
+
+    { "source": "/_next/:path*", "destination": "https://app.mosion.app/_next/:path*" },
+
+    { "source": "/api/movies", "destination": "https://app.mosion.app/api/movies" },
+    { "source": "/api/movies/:path*", "destination": "https://app.mosion.app/api/movies/:path*" },
+    { "source": "/api/orders", "destination": "https://app.mosion.app/api/orders" },
+    { "source": "/api/orders/:path*", "destination": "https://app.mosion.app/api/orders/:path*" },
+    { "source": "/api/payment", "destination": "https://app.mosion.app/api/payment" },
+    { "source": "/api/payment/:path*", "destination": "https://app.mosion.app/api/payment/:path*" },
+    { "source": "/api/auth", "destination": "https://app.mosion.app/api/auth" },
+    { "source": "/api/auth/:path*", "destination": "https://app.mosion.app/api/auth/:path*" }
+  ]
+}

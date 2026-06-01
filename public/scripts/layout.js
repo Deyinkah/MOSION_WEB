@@ -123,29 +123,7 @@
     <img src="${ASSETS.wordmark}" alt="MOSION" class="logo-wordmark" width="168" height="20" />
   </a>
   <div class="nav-r">
-    <div class="nav-menu" id="navMenu">
-      <button
-        class="nav-btn nav-menu-toggle"
-        id="navMenuToggle"
-        type="button"
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-controls="navDropdown"
-        aria-label="Open navigation menu"
-      >
-        <svg class="icon-menu" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-          <path d="M1 2h16M1 7h16M1 12h16" />
-        </svg>
-        <svg class="icon-close" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-          <path d="M2 2l14 10M16 2 2 12" />
-        </svg>
-      </button>
-      <div class="nav-dropdown" id="navDropdown" hidden>
-        <a href="/#how" data-home-hash="#how">How it Works</a>
-        <a href="${ROUTES.studio}" data-studio-link data-local-href="${ROUTES.localStudio}" target="_blank" rel="noopener noreferrer">Studio Platform</a>
-        <a href="${ROUTES.home}#download" class="nav-link-cta" data-home-hash="#download">Join Waitlist</a>
-      </div>
-    </div>
+    <a href="https://app.mosion.app" class="nav-btn nav-signin-btn" target="_blank" rel="noopener noreferrer">Sign In</a>
   </div>
 </nav>`;
   }
@@ -199,11 +177,11 @@
   </div>
   <nav class="footer-nav" aria-label="Footer">
     <div class="footer-group">
-      <div class="footer-heading">Platform</div>
+      <div class="footer-heading">Products</div>
       <ul class="footer-list">
-        <li><a href="/#how" data-home-hash="#how">How it works</a></li>
-        <li><a href="/#download" data-home-hash="#download">Get the app</a></li>
-        <li><a href="${ROUTES.studio}" data-footer-studio-link target="_blank" rel="noopener noreferrer">Studio</a></li>
+        <li><a href="https://app.mosion.app" target="_blank" rel="noopener noreferrer">Browse Movies</a></li>
+        <li><a href="${ROUTES.studio}" data-footer-studio-link target="_blank" rel="noopener noreferrer">Mosion Studio</a></li>
+        <li><a href="https://app.mosion.app" target="_blank" rel="noopener noreferrer">Film Portal</a></li>
       </ul>
     </div>
     <div class="footer-group">
