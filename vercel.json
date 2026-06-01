@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
+    { "source": "/browse", "destination": "https://app.mosion.app/browse" },
     { "source": "/catalogue", "destination": "https://app.mosion.app/catalogue" },
     { "source": "/catalogue/:path*", "destination": "https://app.mosion.app/catalogue/:path*" },
     { "source": "/movie", "destination": "https://app.mosion.app/movie" },
