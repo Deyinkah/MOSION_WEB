@@ -27,7 +27,16 @@ function studioRewrites() {
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      customPages: [
+        "https://www.mosion.app/auth",
+        "https://www.mosion.app/browse",
+        "https://www.mosion.app/catalogue",
+        "https://www.mosion.app/coming-soon",
+      ],
+    }),
+  ],
   site: "https://www.mosion.app",
   trailingSlash: "never",
   vite: {
