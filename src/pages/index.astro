@@ -1,6 +1,18 @@
 ---
-export const prerender = true;
+// SSR (not prerendered) so we can read the session cookie at the edge and route logged-in
+// visitors to the app. Logged-out visitors get the static-feeling marketing landing below.
+export const prerender = false;
 import MainLayout from "../layouts/MainLayout.astro";
+
+// Returning logged-in users should never see the marketing landing at www.mosion.app —
+// send them straight to the app home. The consumer app sets a non-secret presence cookie
+// (`mosion_session=1`, scoped to .mosion.app) on login and clears it on logout, so its mere
+// presence is a reliable "someone is logged in" signal at the edge. `/browse` is rewritten
+// (vercel.json) to app.mosion.app/browse, the app's home. 302 = temporary, never cached.
+const isLoggedIn = (Astro.cookies.get("mosion_session")?.value ?? "").trim() !== "";
+if (isLoggedIn) {
+  return Astro.redirect("/browse", 302);
+}
 ---
 
 <MainLayout
