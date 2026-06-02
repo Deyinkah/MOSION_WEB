@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     { "source": "/browse", "destination": "https://app.mosion.app/browse" },
-    { "source": "/catalogue", "destination": "https://app.mosion.app/catalogue" },
-    { "source": "/catalogue/:path*", "destination": "https://app.mosion.app/catalogue/:path*" },
+    { "source": "/catalog", "destination": "https://app.mosion.app/catalog" },
+    { "source": "/catalog/:path*", "destination": "https://app.mosion.app/catalog/:path*" },
     { "source": "/movie", "destination": "https://app.mosion.app/movie" },
     { "source": "/movie/:path*", "destination": "https://app.mosion.app/movie/:path*" },
     { "source": "/account", "destination": "https://app.mosion.app/account" },

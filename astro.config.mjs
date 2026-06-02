@@ -32,7 +32,7 @@ export default defineConfig({
       customPages: [
         "https://www.mosion.app/auth",
         "https://www.mosion.app/browse",
-        "https://www.mosion.app/catalogue",
+        "https://www.mosion.app/catalog",
         "https://www.mosion.app/coming-soon",
       ],
     }),
