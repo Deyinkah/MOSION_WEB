@@ -42,6 +42,8 @@
     { "source": "/api/payment", "destination": "https://app.mosion.app/api/payment" },
     { "source": "/api/payment/:path*", "destination": "https://app.mosion.app/api/payment/:path*" },
     { "source": "/api/auth", "destination": "https://app.mosion.app/api/auth" },
-    { "source": "/api/auth/:path*", "destination": "https://app.mosion.app/api/auth/:path*" }
+    { "source": "/api/auth/:path*", "destination": "https://app.mosion.app/api/auth/:path*" },
+    { "source": "/api/me", "destination": "https://app.mosion.app/api/me" },
+    { "source": "/api/me/:path*", "destination": "https://app.mosion.app/api/me/:path*" }
   ]
 }
