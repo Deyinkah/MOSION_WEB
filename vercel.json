@@ -33,17 +33,7 @@
 
     { "source": "/_next/:path*", "destination": "https://app.mosion.app/_next/:path*" },
 
-    { "source": "/api/movies", "destination": "https://app.mosion.app/api/movies" },
-    { "source": "/api/movies/:path*", "destination": "https://app.mosion.app/api/movies/:path*" },
-    { "source": "/api/orders", "destination": "https://app.mosion.app/api/orders" },
-    { "source": "/api/orders/:path*", "destination": "https://app.mosion.app/api/orders/:path*" },
-    { "source": "/api/payments", "destination": "https://app.mosion.app/api/payments" },
-    { "source": "/api/payments/:path*", "destination": "https://app.mosion.app/api/payments/:path*" },
-    { "source": "/api/payment", "destination": "https://app.mosion.app/api/payment" },
-    { "source": "/api/payment/:path*", "destination": "https://app.mosion.app/api/payment/:path*" },
-    { "source": "/api/auth", "destination": "https://app.mosion.app/api/auth" },
-    { "source": "/api/auth/:path*", "destination": "https://app.mosion.app/api/auth/:path*" },
-    { "source": "/api/me", "destination": "https://app.mosion.app/api/me" },
-    { "source": "/api/me/:path*", "destination": "https://app.mosion.app/api/me/:path*" }
+    { "source": "/api", "destination": "https://app.mosion.app/api" },
+    { "source": "/api/:path*", "destination": "https://app.mosion.app/api/:path*" }
   ]
 }
