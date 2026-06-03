@@ -33,6 +33,8 @@
 
     { "source": "/_next/:path*", "destination": "https://app.mosion.app/_next/:path*" },
 
+    { "source": "/wordmark.png", "destination": "https://app.mosion.app/wordmark.png" },
+
     { "source": "/api", "destination": "https://app.mosion.app/api" },
     { "source": "/api/:path*", "destination": "https://app.mosion.app/api/:path*" }
   ]
