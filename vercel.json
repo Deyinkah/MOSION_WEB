@@ -8,8 +8,6 @@
     { "source": "/movie/:path*", "destination": "https://app.mosion.app/movie/:path*" },
     { "source": "/account", "destination": "https://app.mosion.app/account" },
     { "source": "/account/:path*", "destination": "https://app.mosion.app/account/:path*" },
-    { "source": "/purchases", "destination": "https://app.mosion.app/purchases" },
-    { "source": "/purchases/:path*", "destination": "https://app.mosion.app/purchases/:path*" },
     { "source": "/checkout", "destination": "https://app.mosion.app/checkout" },
     { "source": "/checkout/:path*", "destination": "https://app.mosion.app/checkout/:path*" },
     { "source": "/success", "destination": "https://app.mosion.app/success" },
