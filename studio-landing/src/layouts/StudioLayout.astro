@@ -27,7 +27,10 @@ const {
   <script is:inline src="/scripts/studio-auth-redirect.js"></script>
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <!-- Studio is a partner portal/landing, not the public brand page. Keep it out of
+       search so studio.mosion.app stops competing with mosion.app for the "mosion"
+       brand query (which was fragmenting the consolidated brand result). -->
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href={canonical} />
   <!-- PWA -->
   <meta name="theme-color" content="#080808" />

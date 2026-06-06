@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- studio.mosion.app is intentionally noindex (partner portal, not the public
+     brand page), so no URLs are advertised here. The public catalog/brand sitemap
+     lives on the apex domain (mosion.app). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://studio.mosion.app/</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://studio.mosion.app/privacy</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://studio.mosion.app/accessibility</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
 </urlset>
