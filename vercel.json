@@ -18,6 +18,8 @@
     { "source": "/auth/:path*", "destination": "https://app.mosion.app/auth/:path*" },
     { "source": "/reset-password", "destination": "https://app.mosion.app/reset-password" },
     { "source": "/reset-password/:path*", "destination": "https://app.mosion.app/reset-password/:path*" },
+    { "source": "/delete-account", "destination": "https://app.mosion.app/delete-account" },
+    { "source": "/delete-account/:path*", "destination": "https://app.mosion.app/delete-account/:path*" },
     { "source": "/signin", "destination": "https://app.mosion.app/signin" },
     { "source": "/signin/:path*", "destination": "https://app.mosion.app/signin/:path*" },
     { "source": "/signup", "destination": "https://app.mosion.app/signup" },
