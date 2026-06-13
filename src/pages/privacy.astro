@@ -5,7 +5,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 <MainLayout
   title="Privacy — MOSION"
-  description="Privacy policy for mosion.app covering the public site and waitlist."
+  description="Privacy policy for MOSION covering the public site, the web app, and the MOSION mobile app — how we collect, use, share, and protect your personal information."
   canonical="https://www.mosion.app/privacy"
   logoOnly={true}
   bodyClass="policy-page"
@@ -15,119 +15,206 @@ import MainLayout from "../layouts/MainLayout.astro";
     <article class="policy-article" aria-labelledby="privacyTitle">
       <header class="policy-intro">
         <h1 class="hero-title" id="privacyTitle">Privacy</h1>
-        <div class="policy-meta">Updated April 5, 2026</div>
+        <div class="policy-meta">Updated June 13, 2026</div>
         <p class="hero-copy">
-          This Privacy Policy explains how MOSION handles personal information collected through the public <span class="inline-code">mosion.app</span> website and waitlist. For Studio privacy, see <a class="contact-link" href="https://studio.mosion.app/privacy">studio.mosion.app/privacy</a>.
+          This Privacy Policy explains how MOSION collects, uses, shares, and protects personal information when you use the MOSION service — including the public <span class="inline-code">mosion.app</span> website, the MOSION web app, and the MOSION mobile app for Android and iOS. It applies wherever you watch, buy, or download films through MOSION. For MOSION Studio (our partner platform), see <a class="contact-link" href="https://studio.mosion.app/privacy">studio.mosion.app/privacy</a>.
         </p>
+        <ul class="policy-summary" aria-label="Privacy at a glance">
+          <li>We collect what we need to let you sign in, buy films, stream and download them, and get support.</li>
+          <li>We do not sell your personal information.</li>
+          <li>Payments are handled by Flutterwave and Google Play; MOSION never sees or stores your full card or banking details.</li>
+          <li>You can access, correct, export, or delete your information by contacting us.</li>
+        </ul>
         <ul class="policy-toc" aria-label="Privacy policy contents">
           <li><a href="#scope">01 Scope</a></li>
           <li><a href="#information">02 Information We Collect</a></li>
           <li><a href="#use">03 How We Use Information</a></li>
           <li><a href="#lawful-basis">04 Legal Bases</a></li>
-          <li><a href="#sharing">05 Sharing</a></li>
-          <li><a href="#retention">06 Retention</a></li>
-          <li><a href="#transfers">07 International Transfers</a></li>
-          <li><a href="#security">08 Security</a></li>
-          <li><a href="#rights">09 Your Choices And Rights</a></li>
-          <li><a href="#children">10 Children</a></li>
-          <li><a href="#changes">11 Changes</a></li>
-          <li><a href="#contact">12 Contact</a></li>
+          <li><a href="#sharing">05 How We Share</a></li>
+          <li><a href="#payments">06 Payments</a></li>
+          <li><a href="#drm">07 Playback, Downloads And DRM</a></li>
+          <li><a href="#notifications">08 Notifications</a></li>
+          <li><a href="#device">09 Cookies, Storage And Device Permissions</a></li>
+          <li><a href="#retention">10 Retention</a></li>
+          <li><a href="#transfers">11 International Transfers</a></li>
+          <li><a href="#security">12 Security</a></li>
+          <li><a href="#rights">13 Your Choices And Rights</a></li>
+          <li><a href="#children">14 Children</a></li>
+          <li><a href="#changes">15 Changes</a></li>
+          <li><a href="#contact">16 Contact</a></li>
         </ul>
       </header>
 
       <section class="policy-section" id="scope" aria-labelledby="scopeHeading">
         <div class="policy-section-label">01 Scope</div>
         <h2 id="scopeHeading">What this page covers</h2>
-        <p>This policy covers personal information processed through the public <span class="inline-code">mosion.app</span> marketing site and waitlist. It does not cover MOSION Studio — for Studio privacy, see <a class="contact-link" href="https://studio.mosion.app/privacy">studio.mosion.app/privacy</a>.</p>
+        <p>This policy covers personal information processed when you use the MOSION consumer service: the public marketing site at <span class="inline-code">mosion.app</span>, the MOSION web app, and the MOSION mobile app for Android and iOS. These share one MOSION account and one backend, so this single policy applies across all of them.</p>
+        <p>It does not cover MOSION Studio, our separate platform for filmmakers, distributors, and rights holders — for Studio privacy, see <a class="contact-link" href="https://studio.mosion.app/privacy">studio.mosion.app/privacy</a>. It also does not cover third parties whose services you reach through MOSION (such as payment providers or app stores), which operate under their own privacy policies.</p>
       </section>
 
       <section class="policy-section" id="information" aria-labelledby="informationHeading">
         <div class="policy-section-label">02 Information We Collect</div>
         <h2 id="informationHeading">Information we collect</h2>
-        <div class="policy-subhead">Waitlist and contact information</div>
-        <p>On the public MOSION site, you may submit your email address to join the waitlist or request updates about launch access, beta access, or product announcements tied to the MOSION service.</p>
-        <div class="policy-subhead">Technical and usage information</div>
-        <p>Hosting, infrastructure, and security systems may process technical information such as browser or device details, IP-related request data, timestamps, page requests, error events, and abuse-prevention data associated with use of the site.</p>
+        <p>What we collect depends on how you use MOSION. Some information you give us directly, some is created as you use the service, and some technical information is processed automatically to operate, secure, and improve MOSION.</p>
+
+        <div class="policy-subhead">Account and profile information</div>
+        <p>When you create an account or sign in, we process your email address, your password (stored only as a salted hash — never in readable form), and your authentication and session status. You may also add profile details such as your first name or display name. Some account features rely on a sign-in identity provided through your device or app store.</p>
+
+        <div class="policy-subhead">Purchase and entitlement information</div>
+        <p>When you buy access to a film, we record the order — the title, the access type (for example, single stream or a download window), the amount and currency, the time of purchase, the payment method used, and a payment reference or transaction identifier returned by the payment provider. We use this to grant and confirm your access, show your purchase history, and handle receipts, refunds, and support.</p>
+
+        <div class="policy-subhead">Viewing and activity information</div>
+        <p>As you use MOSION we may process your watch progress (so you can resume where you left off), the films in your library, reactions you give to titles, download activity, support messages you send us, and in-app notification interactions.</p>
+
+        <div class="policy-subhead">Device and technical information</div>
+        <p>Our app, hosting, and security systems may process technical information such as device and browser type and operating system, app version, language and region settings, a playback device identifier we generate to manage your streams and offline access, a push notification token if you enable notifications, IP-related request data, timestamps, page or screen requests, diagnostic and crash data, and abuse- and fraud-prevention signals associated with your use of the service.</p>
+
+        <div class="policy-subhead">Communications and support information</div>
+        <p>When you contact us, join the public waitlist, or respond to a message, we process the contents of your communication, your contact details, and related metadata so we can respond and keep records of support and service requests.</p>
+
+        <div class="policy-subhead">Information from third parties</div>
+        <p>We may receive limited information from the services that support MOSION — for example, a payment confirmation and reference from a payment provider, or a delivery or registration result from an app store or push-notification service. This is described further under "How we share."</p>
       </section>
 
       <section class="policy-section" id="use" aria-labelledby="usageHeading">
         <div class="policy-section-label">03 How We Use Information</div>
         <h2 id="usageHeading">How we use information</h2>
         <ul>
-          <li>To operate and improve the public <span class="inline-code">mosion.app</span> site.</li>
-          <li>To manage the public waitlist and send launch, beta, or service-related updates connected to your request.</li>
-          <li>To monitor, troubleshoot, secure, and maintain the reliability of the site.</li>
-          <li>To protect MOSION and our users against abuse, fraud, or unauthorised access.</li>
-          <li>To comply with applicable legal, regulatory, and enforcement obligations.</li>
+          <li>To create, authenticate, maintain, and secure your MOSION account and sessions across the web and mobile apps.</li>
+          <li>To process purchases, grant and confirm access to films, and maintain your purchase history and receipts.</li>
+          <li>To deliver streaming and downloads, including resolving signed video links and authorising digital-rights-management (DRM) playback on your devices.</li>
+          <li>To provide product features such as resume-playback, your library, reactions, and downloads for offline viewing.</li>
+          <li>To send service and transactional messages (sign-in, password resets, purchase confirmations, support replies) and — if you opt in — launch and "now showing" notifications.</li>
+          <li>To provide customer support and respond to your questions and requests.</li>
+          <li>To monitor, troubleshoot, and maintain the reliability and performance of the service, including diagnostics and crash reporting.</li>
+          <li>To protect MOSION, our users, and our partners against fraud, abuse, unauthorised access, piracy, and other security or legal risks, including rate limiting and content protection.</li>
+          <li>To comply with applicable legal, tax, accounting, regulatory, and enforcement obligations.</li>
         </ul>
       </section>
 
       <section class="policy-section" id="lawful-basis" aria-labelledby="basisHeading">
         <div class="policy-section-label">04 Legal Bases</div>
         <h2 id="basisHeading">Legal bases and equivalent grounds for processing</h2>
-        <p>Where data protection law requires a legal basis, MOSION may rely on one or more of the following depending on context: taking steps at your request before entering into a relationship, performing a contract or service relationship, complying with legal obligations, pursuing legitimate interests in operating and securing the service, or consent where a specific activity is presented on that basis.</p>
+        <p>Where data protection law requires a legal basis, MOSION may rely on one or more of the following depending on the activity: performing our contract with you to deliver the service you purchase or request; taking steps at your request before entering into that relationship; our legitimate interests in operating, securing, improving, and protecting the service against fraud and abuse; complying with legal obligations such as tax and accounting; and your consent where a specific activity — such as push notifications — is offered on that basis. Where we rely on consent, you can withdraw it at any time without affecting processing already carried out.</p>
         <p>If local law gives you additional rights tied to a particular lawful basis, those rights may be available depending on your location and the nature of the processing involved.</p>
       </section>
 
       <section class="policy-section" id="sharing" aria-labelledby="sharingHeading">
-        <div class="policy-section-label">05 Sharing</div>
+        <div class="policy-section-label">05 How We Share</div>
         <h2 id="sharingHeading">How information may be shared</h2>
-        <p>We may share personal information with service providers and infrastructure partners that help us host, secure, deliver, support, or maintain MOSION and MOSION Studio.</p>
-        <p>We may also disclose information where reasonably necessary to comply with law, respond to lawful requests, enforce agreements, protect rights or safety, investigate abuse or security incidents, or support a financing, restructuring, merger, acquisition, or asset transfer involving the service.</p>
+        <p><strong>We do not sell your personal information.</strong> We share it only as described below.</p>
+        <div class="policy-subhead">Service providers who help us run MOSION</div>
+        <p>We share personal information with vendors that process it on our behalf to operate the service, under contracts that limit how they may use it. Depending on the feature, these include:</p>
+        <ul>
+          <li><span class="inline-code">Flutterwave</span> and <span class="inline-code">Google Play Billing</span> — payment processing (see "Payments").</li>
+          <li><span class="inline-code">Axinom</span> — digital-rights-management (DRM) licensing for protected playback.</li>
+          <li>Content delivery network and storage providers — secure, signed delivery of video and assets.</li>
+          <li><span class="inline-code">Expo</span> and the Apple and Google push-notification services — delivering notifications you have enabled.</li>
+          <li>Hosting, database, error-monitoring, and security providers — running, monitoring, and protecting the backend and apps.</li>
+          <li>Email and communications providers — sending account, transactional, and support messages.</li>
+        </ul>
+        <div class="policy-subhead">Legal, safety, and business transfers</div>
+        <p>We may disclose information where reasonably necessary to comply with law, respond to lawful requests, enforce our terms or agreements, protect the rights, property, or safety of MOSION, our users, or others, investigate abuse or security incidents, or support a financing, restructuring, merger, acquisition, or asset transfer involving the service.</p>
+      </section>
+
+      <section class="policy-section" id="payments" aria-labelledby="paymentsHeading">
+        <div class="policy-section-label">06 Payments</div>
+        <h2 id="paymentsHeading">Payments</h2>
+        <p>MOSION uses third-party payment providers to process purchases. On the web app and on iOS, payments are handled by <span class="inline-code">Flutterwave</span>; on Android, in-app purchases are handled through <span class="inline-code">Google Play Billing</span>. Your full card numbers, bank details, and equivalent payment credentials are collected and processed by those providers under their own privacy policies and security standards — <strong>MOSION does not receive or store your full payment credentials.</strong></p>
+        <p>What MOSION does receive and store is the result of a transaction: a confirmation, a payment reference or transaction identifier, the amount and currency, and the access you purchased. We use this to grant your film access, prevent duplicate charges, maintain your order history, and handle receipts, refunds, and disputes. Please review the privacy policies of <a class="contact-link" href="https://flutterwave.com/privacy-policy">Flutterwave</a> and <a class="contact-link" href="https://policies.google.com/privacy">Google</a> for how they handle your payment information.</p>
+      </section>
+
+      <section class="policy-section" id="drm" aria-labelledby="drmHeading">
+        <div class="policy-section-label">07 Playback, Downloads And DRM</div>
+        <h2 id="drmHeading">Playback, downloads, and content protection</h2>
+        <p>Films on MOSION are protected by digital rights management (DRM) so that only people who have purchased access can watch them. To make protected playback work, MOSION generates a playback device identifier for your device, issues short-lived signed links to video, and requests playback licences from our DRM provider. These mechanisms tie your access to your account and device, help us enforce your purchase and any download window, and protect films against unauthorised copying.</p>
+        <p>When you download a film for offline viewing, the film and a protected offline licence are stored on your device for the access period you purchased. On Android, certain device permissions and on-screen protections may be used to safeguard protected playback (see "Cookies, storage and device permissions"). We do not use these protections to record your screen, microphone, or camera; they exist to prevent unauthorised capture of licensed content.</p>
+      </section>
+
+      <section class="policy-section" id="notifications" aria-labelledby="notificationsHeading">
+        <div class="policy-section-label">08 Notifications</div>
+        <h2 id="notificationsHeading">Notifications</h2>
+        <p>If you allow notifications on the mobile app, we register a push notification token with the relevant push service (Expo, and through it the Apple or Google push systems) and associate it with your account so we can send you notifications such as new releases and "now showing" alerts. We also send transactional messages — for example, sign-in, password reset, and purchase confirmations — which are part of providing the service.</p>
+        <p>You can turn push notifications off at any time in your device or app settings. Turning them off does not affect essential service or transactional communications.</p>
+      </section>
+
+      <section class="policy-section" id="device" aria-labelledby="deviceHeading">
+        <div class="policy-section-label">09 Cookies, Storage And Device Permissions</div>
+        <h2 id="deviceHeading">Cookies, local storage, and device permissions</h2>
+        <p>The web app and site use cookies and similar browser storage (such as local storage) to keep you signed in, remember your preferences, operate core features, and support security and performance. The mobile app uses on-device storage to keep you signed in and to cache data such as your library, watch progress, downloaded films and offline licences, and pending actions so the app works reliably and offline. We do not use cookies or device storage to sell your information or to build cross-site advertising profiles.</p>
+        <div class="storage-list">
+          <div class="storage-item">
+            <div class="storage-item-title">Essential</div>
+            <p>Authentication, sessions, security, fraud prevention, and core app function. These cannot be turned off without breaking the service.</p>
+          </div>
+          <div class="storage-item">
+            <div class="storage-item-title">Functional</div>
+            <p>Preferences, language and region, resume-playback, library, and download state.</p>
+          </div>
+          <div class="storage-item">
+            <div class="storage-item-title">Diagnostics</div>
+            <p>Crash and error reporting and basic performance signals used to keep the service stable.</p>
+          </div>
+        </div>
+        <p>On Android, the mobile app may request device permissions used only to deliver and protect features — for example, internet access and billing for purchases, a foreground service and storage access for downloads, vibration for notifications, and audio and overlay permissions used by protected playback and content-protection safeguards. We do not use these permissions to record you. You can manage browser storage through your browser settings and device permissions through your device settings.</p>
       </section>
 
       <section class="policy-section" id="retention" aria-labelledby="retentionHeading">
-        <div class="policy-section-label">06 Retention</div>
+        <div class="policy-section-label">10 Retention</div>
         <h2 id="retentionHeading">Retention and user control</h2>
-        <p>We keep personal information for as long as reasonably necessary for the purposes described in this policy, including waitlist operations, application review, account administration, service delivery, security, dispute management, record-keeping, and legal or compliance obligations.</p>
+        <p>We keep personal information for as long as reasonably necessary for the purposes described in this policy, then delete or anonymise it. Retention varies by data type:</p>
         <ul>
-          <li>Public waitlist records may be retained for launch communications, service administration, and related operational needs.</li>
-          <li>Studio application records may be retained for review, relationship management, support, and compliance purposes.</li>
-          <li>Account and profile information may be retained while the account is active and for a reasonable period after closure where needed for support, security, or legal obligations.</li>
-          <li>Cookies and local-storage entries may remain in the browser for the periods stated in the storage section above, unless removed earlier by sign-out or browser controls.</li>
+          <li>Account and profile information is kept while your account is active and for a reasonable period after closure where needed for support, security, or legal obligations.</li>
+          <li>Purchase, order, and receipt records are kept for the periods required by tax, accounting, and legal obligations, even after individual access expires.</li>
+          <li>Watch progress, library, reactions, and download state are kept while relevant to your account or until removed by you.</li>
+          <li>Downloaded films and offline licences remain on your device for the access period you purchased and can be removed by deleting the download or signing out.</li>
+          <li>Diagnostic, security, and abuse-prevention data is kept for limited periods appropriate to those purposes.</li>
+          <li>Cookies and local-storage entries persist for the periods set by the relevant store unless cleared earlier by sign-out or your browser or device controls.</li>
         </ul>
       </section>
 
       <section class="policy-section" id="transfers" aria-labelledby="transferHeading">
-        <div class="policy-section-label">07 International Transfers</div>
+        <div class="policy-section-label">11 International Transfers</div>
         <h2 id="transferHeading">International transfers</h2>
-        <p>MOSION and the providers that support it may process information in more than one country. When information is transferred across borders, we aim to use reasonable contractual, organisational, and technical safeguards appropriate to the service and transfer involved.</p>
+        <p>MOSION and the providers that support it may process information in more than one country, which may have different data protection laws than your own. When information is transferred across borders, we aim to use reasonable contractual, organisational, and technical safeguards appropriate to the service and transfer involved to protect it in line with this policy.</p>
       </section>
 
       <section class="policy-section" id="security" aria-labelledby="securityHeading">
-        <div class="policy-section-label">08 Security</div>
+        <div class="policy-section-label">12 Security</div>
         <h2 id="securityHeading">Security</h2>
-        <p>We use technical, administrative, and organisational measures designed to protect personal information and account access. No online service, storage environment, or transmission method can be guaranteed to be completely secure, so users should also take reasonable care with their own credentials and devices.</p>
+        <p>We use technical, administrative, and organisational measures designed to protect personal information and account access — including encrypted transport, hashed passwords, access controls, signed and short-lived media links, DRM-protected playback, and rate limiting and monitoring against abuse. No online service, storage environment, or transmission method can be guaranteed to be completely secure, so you should also take reasonable care with your own credentials and devices, and contact us if you believe your account has been compromised.</p>
       </section>
 
       <section class="policy-section" id="rights" aria-labelledby="rightsHeading">
-        <div class="policy-section-label">09 Your Choices And Rights</div>
+        <div class="policy-section-label">13 Your Choices And Rights</div>
         <h2 id="rightsHeading">Your choices and rights</h2>
-        <p>Depending on the law that applies to you, you may have rights to request access to personal information, correction of inaccurate information, deletion, restriction, objection, portability, or withdrawal of consent where processing is based on consent.</p>
+        <p>Depending on the law that applies to you, you may have rights to request access to your personal information, correction of inaccurate information, deletion, restriction, objection, portability, or withdrawal of consent where processing is based on consent. You can exercise these rights, or ask questions about them, by contacting us — we may need to verify your identity before acting on a request.</p>
         <ul>
-          <li>You can update some Studio profile information directly inside the Studio web app.</li>
-          <li>You can clear browser cookies and local storage using your browser or device controls.</li>
-          <li>You can ask us to review privacy-related questions or requests tied to your MOSION or Studio information.</li>
-          <li>You may also have the right to complain to a relevant privacy or data protection regulator in your jurisdiction.</li>
+          <li>You can update some profile information directly inside the app.</li>
+          <li>You can manage push notifications in your device or app settings.</li>
+          <li>You can clear browser cookies and local storage, or app data and downloads, using your browser or device controls.</li>
+          <li>You can request deletion of your account and associated personal information, subject to records we must keep for legal, tax, or fraud-prevention reasons.</li>
+          <li>You may also have the right to lodge a complaint with a relevant privacy or data protection regulator in your jurisdiction.</li>
         </ul>
+        <p>MOSION does not sell personal information and does not use it for cross-context behavioural advertising.</p>
       </section>
 
       <section class="policy-section" id="children" aria-labelledby="childrenHeading">
-        <div class="policy-section-label">10 Children</div>
+        <div class="policy-section-label">14 Children</div>
         <h2 id="childrenHeading">Children's privacy</h2>
-        <p>MOSION Studio is intended for professional partner use and is not designed for children. The public MOSION site is also not intended to knowingly collect personal information from children without appropriate authorisation. If you believe a child has submitted personal information to the service inappropriately, contact us so the situation can be reviewed.</p>
+        <p>MOSION is intended for a general audience and is not directed to children under the age required to form a binding agreement in your jurisdiction (and in any case not under 13). We do not knowingly collect personal information from children without appropriate parental or guardian consent. If you believe a child has provided personal information to MOSION, contact us and we will take reasonable steps to review and remove it where required.</p>
       </section>
 
       <section class="policy-section" id="changes" aria-labelledby="changesHeading">
-        <div class="policy-section-label">11 Changes</div>
+        <div class="policy-section-label">15 Changes</div>
         <h2 id="changesHeading">Changes to this policy</h2>
-        <p>We may update this Privacy Policy from time to time to reflect changes in product features, data practices, legal requirements, or operational needs. When we do, we may update the effective date on this page and publish the revised version here.</p>
+        <p>We may update this Privacy Policy from time to time to reflect changes in product features, data practices, legal requirements, or operational needs. When we do, we will update the date at the top of this page and publish the revised version here. For significant changes, we may provide additional notice through the service. Your continued use of MOSION after an update takes effect means you accept the revised policy.</p>
       </section>
 
       <section class="policy-section" id="contact" aria-labelledby="contactHeading">
-        <div class="policy-section-label">12 Contact</div>
+        <div class="policy-section-label">16 Contact</div>
         <h2 id="contactHeading">Questions</h2>
-        <p>For privacy questions about <span class="inline-code">mosion.app</span>, contact <a class="contact-link" href="mailto:support@mosion.app">support@mosion.app</a>.</p>
+        <p>For privacy questions about MOSION, or to exercise your rights, contact <a class="contact-link" href="mailto:support@mosion.app">support@mosion.app</a>. For MOSION Studio privacy, see <a class="contact-link" href="https://studio.mosion.app/privacy">studio.mosion.app/privacy</a>.</p>
       </section>
     </article>
   </main>
