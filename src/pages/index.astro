@@ -10,7 +10,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 // presence is a reliable "someone is logged in" signal at the edge. `/browse` is rewritten
 // (vercel.json) to app.mosion.app/browse, the app's home. 302 = temporary, never cached.
 const isLoggedIn = (Astro.cookies.get("mosion_session")?.value ?? "").trim() !== "";
-if (isLoggedIn) {
+if (isLoggedIn && process.env.VERCEL) {
   return Astro.redirect("/browse", 302);
 }
 ---
