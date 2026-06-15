@@ -35,6 +35,9 @@
 
     { "source": "/wordmark.png", "destination": "https://app.mosion.app/wordmark.png" },
 
+    { "source": "/api/waitlist", "destination": "/api/waitlist" },
+    { "source": "/api/download-apk", "destination": "/api/download-apk" },
+
     { "source": "/api", "destination": "https://app.mosion.app/api" },
     { "source": "/api/:path*", "destination": "https://app.mosion.app/api/:path*" }
   ]
