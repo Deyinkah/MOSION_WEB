@@ -30,6 +30,8 @@
     { "source": "/coming-soon/:path*", "destination": "https://app.mosion.app/coming-soon/:path*" },
     { "source": "/payment", "destination": "https://app.mosion.app/payment" },
     { "source": "/payment/:path*", "destination": "https://app.mosion.app/payment/:path*" },
+    { "source": "/tv", "destination": "https://app.mosion.app/tv" },
+    { "source": "/tv/:path*", "destination": "https://app.mosion.app/tv/:path*" },
 
     { "source": "/_next/:path*", "destination": "https://app.mosion.app/_next/:path*" },
 
