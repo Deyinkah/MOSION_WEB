@@ -618,6 +618,20 @@ html.force-desktop-mode .hero{
 .wc-title{font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
 .wc-desc{font-size:14px;line-height:1.8;color:var(--muted);font-weight:300}
 
+/* Section eyebrow label (get-the-app) — amber mono with a leading rule */
+.eyebrow-label{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.35em;text-transform:uppercase;color:var(--amber);
+  display:flex;align-items:center;gap:12px;
+}
+.eyebrow-label::before{content:'';width:28px;height:1px;background:var(--amber)}
+
+/* Caption beneath the store buttons */
+.store-note{
+  margin-top:18px;font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);
+}
+
 .cta-section{
   background:var(--deep);
   border-top:1px solid var(--border);

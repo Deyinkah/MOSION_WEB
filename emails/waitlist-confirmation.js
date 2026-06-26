@@ -1,5 +1,6 @@
 const DEFAULT_LOGO_URL = "https://mosion.app/logo-wordmark.png";
-const DEFAULT_WAITLIST_BETA_URL = "https://www.mosion.app/api/download-apk";
+const DEFAULT_WAITLIST_BETA_URL =
+  "https://play.google.com/store/apps/details?id=app.mosion.mobile";
 
 function escapeHtml(value) {
   return String(value || "")
@@ -13,14 +14,14 @@ function escapeHtml(value) {
 function getWaitlistVariant(environment = process.env) {
   return {
     source: "website",
-    preheader: "Your Mosion waitlist registration is confirmed.",
-    subject: "You're on the Mosion waitlist",
+    preheader: "Your Mosion early access is ready.",
+    subject: "You're in — Mosion early access",
     bodyCopy:
-      "Your Mosion waitlist registration is confirmed. You're now one of the early users to have access to the <strong>Mosion app</strong> before the wider rollout.",
+      "You're in. <strong>Mosion</strong> for Android is ready for you — get it on Google Play below.",
     bodyCopy2:
-      "We're excited to have you as one of the first to experience Nollywood and African cinema — on demand, before the world catches on.",
-    ctaLabel: "Download the Beta App",
-    textDownloadLead: "Download the Beta App",
+      "During early access you can explore the app freely: preview titles with trailers, and try checkout with test purchases at no charge. Reply any time with feedback — we read every message.",
+    ctaLabel: "Get it on Google Play",
+    textDownloadLead: "Get it on Google Play",
     signature: "Mosion",
     logoUrl: DEFAULT_LOGO_URL,
     betaUrl: environment.WAITLIST_BETA_URL || DEFAULT_WAITLIST_BETA_URL,

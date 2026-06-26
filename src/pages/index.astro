@@ -13,14 +13,131 @@ const isLoggedIn = (Astro.cookies.get("mosion_session")?.value ?? "").trim() !==
 if (isLoggedIn && process.env.VERCEL) {
   return Astro.redirect("/browse", 302);
 }
+
+// Don't let the browser or Vercel's CDN cache this rendered page — it embeds the live
+// catalogue (poster/hero image URLs), so a cached copy would show stale artwork.
+Astro.response.headers.set("Cache-Control", "no-store, must-revalidate");
+
+// --- Live catalogue (server-side fetch; no CORS, no client latency) ----------
+// The homepage pulls real titles + artwork from the public backend catalogue so it
+// stays in sync with what's actually in the app. We fetch server-side here (SSR),
+// fall back gracefully if the backend is slow/unreachable, and never let a catalogue
+// problem break the page render.
+const CATALOG_API_BASE = (
+  import.meta.env.PUBLIC_CATALOG_API_BASE_URL || "https://api.mosion.app"
+).replace(/\/+$/, "");
+
+function firstSentence(text) {
+  const value = String(text || "").trim();
+  if (!value) return "";
+  const match = value.match(/^.*?[.!?](\s|$)/);
+  return (match ? match[0] : value).trim();
+}
+
+function primaryGenre(category) {
+  return String(category || "").split(/[•·|,]/)[0].trim();
+}
+
+function publishMs(raw) {
+  // "Recently published" = publishedAt, falling back to createdAt, then launchDate.
+  const candidates = [raw?.publishedAt, raw?.createdAt, raw?.launchDate];
+  for (const value of candidates) {
+    const ms = Date.parse(value);
+    if (Number.isFinite(ms)) return ms;
+  }
+  return 0;
+}
+
+function normalizeMovie(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const launchMs = Date.parse(raw.launchDate);
+  return {
+    id: String(raw.id ?? raw.title ?? ""),
+    title: String(raw.title ?? "").trim(),
+    genre: primaryGenre(raw.category),
+    year: raw.year ?? "",
+    description: firstSentence(raw.description),
+    coverUrl: typeof raw.coverUrl === "string" ? raw.coverUrl : "",
+    backdropUrl: typeof raw.backdropUrl === "string" ? raw.backdropUrl : "",
+    heroUrl:
+      (typeof raw.webHeroUrl === "string" && raw.webHeroUrl) ||
+      (typeof raw.webHeroMobileUrl === "string" && raw.webHeroMobileUrl) ||
+      "",
+    comingSoon: Number.isFinite(launchMs) ? launchMs > Date.now() : false,
+    publishedMs: publishMs(raw),
+  };
+}
+
+// Two DISTINCT concepts (do not conflate):
+//  • featured   = whatever the backend marks as catalog.featured (may be coming-soon
+//                 OR an older title). Drives the hero image at the top of the page.
+//  • comingSoon = the most recently published title whose launch is still in the future.
+//                 Drives the "Coming Soon" block in the films section. Hidden if none.
+let featured = null;
+let comingSoon = null;
+let gridFilms = [];
+
+try {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4000);
+  // `no-store` so neither Vercel's data cache nor the platform fetch cache can serve a
+  // stale catalogue — the homepage always reflects the current backend on every request.
+  const response = await fetch(`${CATALOG_API_BASE}/movies`, {
+    headers: { Accept: "application/json" },
+    cache: "no-store",
+    signal: controller.signal,
+  });
+  clearTimeout(timeout);
+
+  if (response.ok) {
+    const catalog = await response.json();
+
+    // Featured = the backend's own featured pick, taken as-is.
+    featured = normalizeMovie(catalog?.featured);
+
+    // Flatten the whole catalogue and dedupe by id.
+    const all = [];
+    const seen = new Set();
+    const collect = (raw) => {
+      const movie = normalizeMovie(raw);
+      if (!movie || !movie.id || seen.has(movie.id)) return;
+      seen.add(movie.id);
+      all.push(movie);
+    };
+    if (featured?.id) seen.add(featured.id);
+    for (const row of Array.isArray(catalog?.rows) ? catalog.rows : []) {
+      for (const item of Array.isArray(row?.items) ? row.items : []) collect(item);
+    }
+
+    // Coming Soon = the most recently published title with a future launch date.
+    const comingSoonPool = all.filter((m) => m.comingSoon);
+    if (featured?.comingSoon) comingSoonPool.push(featured);
+    comingSoon =
+      comingSoonPool.sort((a, b) => b.publishedMs - a.publishedMs)[0] || null;
+
+    // Grid = the first 5 other titles (excludes featured + the coming-soon pick).
+    gridFilms = all
+      .filter((m) => m.coverUrl && m.id !== featured?.id && m.id !== comingSoon?.id)
+      .slice(0, 5);
+  }
+} catch {
+  // Network error / timeout — leave everything null/empty; the markup below hides the
+  // films section and falls back to the static hero.
+  featured = null;
+  comingSoon = null;
+  gridFilms = [];
+}
+
+const hasFilms = Boolean(comingSoon) || gridFilms.length > 0;
+const rowDelays = ["", "rd1", "rd2", "rd3", "rd4"];
 ---
 
 <MainLayout
   title="MOSION — Watch African Cinema Premieres directly on your phone."
-  description="MOSION is mobile cinema for African film. Watch Nollywood and African premieres on your phone. Pay-per-view — stream or download with a 7-day access window."
+  description="MOSION is mobile cinema for African film, now in early access. Watch Nollywood and African premieres pay-per-view — stream or download with a 7-day access window. No subscription."
   canonical="https://www.mosion.app/"
   ogTitle="MOSION — Cinema in Your Pocket"
-  ogDescription="Watch Nollywood and African premieres on your phone. Pay only for what you watch — stream or download with a 7-day access window. No subscription."
+  ogDescription="Now in early access. Watch Nollywood and African premieres on your phone. Pay only for what you watch — stream or download with a 7-day access window. No subscription."
   css={["/home.css"]}
 >
   <Fragment slot="head">
@@ -31,7 +148,7 @@ if (isLoggedIn && process.env.VERCEL) {
           "@type": "MobileApplication",
           "@id": "https://www.mosion.app/#app",
           "name": "MOSION",
-          "description": "Mobile cinema for African film. Watch Nollywood and African premieres on your phone. Pay-per-view with stream or download access. No subscription required.",
+          "description": "Mobile cinema for African film, now in early access. Watch Nollywood and African premieres on your phone. Pay-per-view with stream or download access. No subscription required.",
           "url": "https://www.mosion.app/",
           "applicationCategory": "EntertainmentApplication",
           "operatingSystem": "Android, iOS",
@@ -104,7 +221,11 @@ if (isLoggedIn && process.env.VERCEL) {
 
   <div class="hero-frame">
     <div class="hero-frame-inner">
-      <img class="hero-frame-image" src="/trending/banner-31.png" alt="" />
+      <img
+        class="hero-frame-image"
+        src={featured?.heroUrl || featured?.coverUrl || "/trending/banner-31.png"}
+        alt={featured ? `${featured.title} — featured on MOSION` : ""}
+      />
       <div class="frame-grid">
         <div></div><div></div><div></div>
         <div></div><div></div><div></div>
@@ -120,26 +241,20 @@ if (isLoggedIn && process.env.VERCEL) {
       <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
       <div class="fhole"></div><div class="fhole"></div><div class="fhole"></div>
     </div>
-    <div class="banner-disclaimer" aria-label="Catalog preview notice">
-      <div class="banner-disclaimer-title">Catalog preview shown</div>
-      <p>Banner artwork and sample film titles shown are for interface demonstration only. Final catalog will reflect licensed partner content.</p>
-    </div>
     <div class="frame-label">
-      <div class="frame-label-title">Everybody Loves Jenifa</div>
+      <div class="frame-label-title">{featured?.title || "Everybody Loves Jenifa"}</div>
       <div class="frame-label-meta">
-        <span>Comedy</span> &middot; 2024 &middot; Now Playing
+        {featured ? (
+          <Fragment>
+            {featured.genre && <span>{featured.genre}</span>}
+            {featured.genre && featured.year ? <Fragment> &middot; </Fragment> : null}
+            {featured.year}
+            <Fragment> &middot; {featured.comingSoon ? "Coming Soon" : "Now Showing"}</Fragment>
+          </Fragment>
+        ) : (
+          <Fragment><span>Comedy</span> &middot; 2024 &middot; Now Playing</Fragment>
+        )}
       </div>
-    </div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-n">4K</div>
-      <div class="stat-l">Cinema Quality</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">PPV</div>
-      <div class="stat-l">Pay Per View</div>
     </div>
   </div>
 
@@ -150,86 +265,63 @@ if (isLoggedIn && process.env.VERCEL) {
       <em class="line2">in your pocket.</em>
     </h1>
     <p class="hero-sub">
-      Watch Nollywood and African cinema premieres the moment they drop. No schedules, no theatre queues, no monthly subscriptions. Pay for the film you want - and press play.
+      Watch Nollywood and African premieres the moment they drop. Pay for the film you want and press play. No subscription.
     </p>
     <div class="hero-actions">
       <a href="#download" class="btn-a">
-        Join Waitlist
+        Request Early Access
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg>
       </a>
     </div>
   </div>
 </section>
 
+{hasFilms && (
 <section class="films-section" id="films">
   <h2 class="films-h r">Stories worth<br /><em>watching.</em></h2>
 
+  {comingSoon && (
   <div class="featured-film r">
     <div class="ff-visual">
-      <img class="ff-visual-image" src="/banners/oversabi-aunty.jpeg" alt="Oversabi Aunty — Nigerian comedy film, 2025" />
-      <div class="ff-badge">Featured - Coming Soon</div>
+      <img class="ff-visual-image" src={comingSoon.backdropUrl || comingSoon.coverUrl} alt={`${comingSoon.title} on MOSION`} />
+      <div class="ff-badge">Coming Soon</div>
     </div>
     <div class="ff-info">
       <div>
-        <div class="ff-meta">Comedy &middot; Nigeria &middot; 2025</div>
-        <div class="ff-name">Oversabi <em>Aunty</em></div>
-        <p class="ff-desc">She knows everything about everyone - and she's ready to tell it. A laugh-out-loud comedy about family, gossip, and the aunt who never stays in her lane.</p>
+        <div class="ff-meta">
+          {comingSoon.genre}{comingSoon.genre && comingSoon.year ? " · " : ""}{comingSoon.year}
+        </div>
+        <div class="ff-name">{comingSoon.title}</div>
+        {comingSoon.description && <p class="ff-desc">{comingSoon.description}</p>}
       </div>
       <div class="ff-actions">
         <a href="#download" class="btn-a">Pre-Order Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg></a>
-        <div class="ff-price">Coming Soon</div>
       </div>
     </div>
   </div>
+  )}
 
+  {gridFilms.length > 0 && (
   <div class="film-grid">
-    <div class="film-card r">
-      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-01.jpeg" alt="Onobiren — Nigerian drama film, 2024" /></div>
+    {gridFilms.map((film, i) => (
+    <div class={`film-card r ${rowDelays[i] ?? ""}`.trim()}>
+      <div class="film-card-bg"><img class="film-card-image" src={film.coverUrl} alt={`${film.title} on MOSION`} /></div>
       <div class="film-card-overlay"></div>
       <div class="film-card-info">
-        <div class="fc-name">Onobiren</div>
-        <div class="fc-subline"><span class="fc-genre">Drama</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
-        <p class="fc-desc">A grounded Nigerian drama about loyalty, sacrifice, and the cost of survival.</p>
+        <div class="fc-name">{film.title}</div>
+        <div class="fc-subline">
+          {film.genre && <span class="fc-genre">{film.genre}</span>}
+          {film.genre && film.year ? <span class="fc-dot" aria-hidden="true"></span> : null}
+          {film.year && <span class="fc-year">{film.year}</span>}
+        </div>
+        {film.description && <p class="fc-desc">{film.description}</p>}
       </div>
     </div>
-    <div class="film-card r rd1">
-      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-03.jpeg" alt="A Country Called Ghana — Ghanaian adventure film, 2024" /></div>
-      <div class="film-card-overlay"></div>
-      <div class="film-card-info">
-        <div class="fc-name">A Country Called Ghana</div>
-        <div class="fc-subline"><span class="fc-genre">Adventure</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
-        <p class="fc-desc">A sweeping Ghanaian adventure shaped by pursuit, myth, and national pride.</p>
-      </div>
-    </div>
-    <div class="film-card r rd2">
-      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-06.jpeg" alt="The Housemaid — African thriller film, 2025" /></div>
-      <div class="film-card-overlay"></div>
-      <div class="film-card-info">
-        <div class="fc-name">The Housemaid</div>
-        <div class="fc-subline"><span class="fc-genre">Thriller</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2025</span></div>
-        <p class="fc-desc">A tense thriller where domestic intimacy becomes a dangerous trap.</p>
-      </div>
-    </div>
-    <div class="film-card r rd3">
-      <div class="film-card-bg"><img class="film-card-image" src="/trending/banner-23.jpeg" alt="Silence — African drama film, 2024" /></div>
-      <div class="film-card-overlay"></div>
-      <div class="film-card-info">
-        <div class="fc-name">Silence</div>
-        <div class="fc-subline"><span class="fc-genre">Drama</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2024</span></div>
-        <p class="fc-desc">A restrained drama about grief, pressure, and truths left unspoken.</p>
-      </div>
-    </div>
-    <div class="film-card r rd4">
-      <div class="film-card-bg"><img class="film-card-image" src="/trending/miss-pj.jpg" alt="Miss PJ — Nigerian comedy film, 2025" /></div>
-      <div class="film-card-overlay"></div>
-      <div class="film-card-info">
-        <div class="fc-name">Miss PJ</div>
-        <div class="fc-subline"><span class="fc-genre">Comedy</span><span class="fc-dot" aria-hidden="true"></span><span class="fc-year">2025</span></div>
-        <p class="fc-desc">A sharp comedy driven by chaos, charm, and impossible situations.</p>
-      </div>
-    </div>
+    ))}
   </div>
+  )}
 </section>
+)}
 
 <section class="how" id="how">
   <div class="how-inner">
@@ -336,16 +428,16 @@ if (isLoggedIn && process.env.VERCEL) {
 <section class="cta-section" id="download-section">
   <div class="cta-inner">
     <div class="cta-left r">
-      <div class="s-label section-label-spacer">Get the App</div>
+      <div class="s-label section-label-spacer">Get Early Access</div>
       <h2 class="cta-h">Cinema without<br /><em>the commute.</em></h2>
-      <p class="cta-p">Download MOSION and watch African cinema on your phone tonight. No commitments. No subscriptions. Pay for what you love, and press play.</p>
+      <p class="cta-p">Request early access and we'll send your Android link. Pay for what you love, and press play.</p>
       <div class="store-cta-stack">
         <div class="store-btns">
           <button
             type="button"
             class="store-btn"
-            data-coming-soon-title="Application coming soon"
-            data-coming-soon-copy="MOSION for Android is almost ready. We are wrapping up the Google Play release and will announce it as soon as it is live."
+            data-coming-soon-title="Android early access"
+            data-coming-soon-copy="Mosion for Android is in early access (Google Play closed testing). Request an invite using the form and we'll send your access link straight to your inbox."
           >
             <div class="store-btn-icon">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.76c.3.17.65.2.97.08l11.65-6.73-2.54-2.54-10.08 9.19zm-1.85-20.5C1.12 3.6 1 4 1 4.5v15c0 .5.12.9.33 1.24L13.6 8.5 1.33 3.26zM20.73 10.3l-2.79-1.61-2.85 2.85 2.85 2.85 2.81-1.63c.8-.46.8-1.99-.02-2.46zM4.15.16L15.8 6.89l-2.54 2.54L3.18.24C3.5.1 3.86.14 4.15.3z" /></svg>
@@ -358,8 +450,8 @@ if (isLoggedIn && process.env.VERCEL) {
           <button
             type="button"
             class="store-btn"
-            data-coming-soon-title="Application coming soon"
-            data-coming-soon-copy="MOSION for iPhone is in preparation. We will share the App Store launch the moment the application is available."
+            data-coming-soon-title="iPhone coming next"
+            data-coming-soon-copy="MOSION for iPhone is coming next. Join the early-access list and we'll tell you the moment it's ready."
           >
             <div class="store-btn-icon">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" /></svg>
@@ -375,21 +467,21 @@ if (isLoggedIn && process.env.VERCEL) {
     <div class="cta-right r rd2">
       <div class="waitlist-box" id="download">
         <form id="wlForm" novalidate>
-          <div class="wl-title">Get Beta Access</div>
-          <p class="wl-sub">Join the waitlist and we'll email you the beta APK directly, plus notify you the moment we launch publicly.</p>
+          <div class="wl-title">Request Early Access</div>
+          <p class="wl-sub">Get your Android access link by email. We'll tell you the moment iPhone is ready.</p>
           <input type="email" class="wl-input" id="wlEmail" name="email" autocomplete="email" inputmode="email" placeholder="your@email.com" required />
           <button class="wl-btn" id="wlSubmit" type="submit">
             Secure Your Spot
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg>
           </button>
-          <p class="waitlist-joined">Join <span data-waitlist-count>0</span><span data-waitlist-count-suffix></span> early users already on the waitlist</p>
+          <p class="waitlist-joined">Join <span data-waitlist-count>0</span><span data-waitlist-count-suffix></span> early users already on board</p>
         </form>
         <div class="wl-success" id="wlSuccess">
           <div class="wl-success-icon">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l5 5L19 6" /></svg>
           </div>
           <div class="wl-success-title">You're on the list.</div>
-          <p class="wl-success-sub" id="wlSuccessCopy">Check your inbox, your beta APK link is on its way.</p>
+          <p class="wl-success-sub" id="wlSuccessCopy">Check your inbox, your early-access link is on its way.</p>
         </div>
       </div>
     </div>
