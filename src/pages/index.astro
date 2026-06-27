@@ -95,7 +95,8 @@ try {
     // Featured = the backend's own featured pick, taken as-is.
     featured = normalizeMovie(catalog?.featured);
 
-    // Flatten the whole catalogue and dedupe by id.
+    // Flatten the whole catalogue and dedupe by id. Used for the Coming Soon pick,
+    // which can come from any row.
     const all = [];
     const seen = new Set();
     const collect = (raw) => {
@@ -105,7 +106,8 @@ try {
       all.push(movie);
     };
     if (featured?.id) seen.add(featured.id);
-    for (const row of Array.isArray(catalog?.rows) ? catalog.rows : []) {
+    const rows = Array.isArray(catalog?.rows) ? catalog.rows : [];
+    for (const row of rows) {
       for (const item of Array.isArray(row?.items) ? row.items : []) collect(item);
     }
 
@@ -115,8 +117,18 @@ try {
     comingSoon =
       comingSoonPool.sort((a, b) => b.publishedMs - a.publishedMs)[0] || null;
 
-    // Grid = the first 5 other titles (excludes featured + the coming-soon pick).
-    gridFilms = all
+    // Grid = the top 5 titles from the backend's "Trending" row (its order is
+    // backend-driven, so we keep it as-is). Fall back to the flattened catalogue if
+    // there's no Trending row. Excludes the featured + coming-soon picks.
+    const trendingRow = rows.find(
+      (row) => String(row?.title ?? "").trim().toLowerCase() === "trending",
+    );
+    const trendingPool = trendingRow
+      ? (Array.isArray(trendingRow.items) ? trendingRow.items : [])
+          .map(normalizeMovie)
+          .filter(Boolean)
+      : all;
+    gridFilms = trendingPool
       .filter((m) => m.coverUrl && m.id !== featured?.id && m.id !== comingSoon?.id)
       .slice(0, 5);
   }
@@ -474,6 +486,7 @@ const rowDelays = ["", "rd1", "rd2", "rd3", "rd4"];
             Secure Your Spot
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" /></svg>
           </button>
+          <div class="wl-note" id="wlNote">No spam. Your Android access link, nothing else.</div>
           <p class="waitlist-joined">Join <span data-waitlist-count>0</span><span data-waitlist-count-suffix></span> early users already on board</p>
         </form>
         <div class="wl-success" id="wlSuccess">
