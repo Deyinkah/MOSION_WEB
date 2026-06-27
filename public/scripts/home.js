@@ -73,18 +73,19 @@
     const successState = document.getElementById("wlSuccess");
     const successCopy = document.getElementById("wlSuccessCopy");
 
+    // `note` is optional — the form works without an on-screen note element. When it's
+    // absent, errors are surfaced via the input's `is-error` style (and its title).
     if (
       !form ||
       !input ||
       !submitButton ||
-      !note ||
       !successState ||
       !successCopy
     ) {
       return;
     }
 
-    const defaultNote = note.textContent;
+    const defaultNote = note ? note.textContent : "";
     const defaultLabel = submitButton.textContent;
     let errorTimer = null;
 
@@ -95,15 +96,23 @@
       }
 
       input.classList.remove("is-error");
-      note.classList.remove("is-error");
-      note.textContent = defaultNote;
+      input.removeAttribute("title");
+      if (note) {
+        note.classList.remove("is-error");
+        note.textContent = defaultNote;
+      }
     };
 
     const showError = (message) => {
       clearErrorState();
       input.classList.add("is-error");
-      note.classList.add("is-error");
-      note.textContent = message;
+      if (note) {
+        note.classList.add("is-error");
+        note.textContent = message;
+      } else {
+        // No note element — surface the error on the input itself.
+        input.setAttribute("title", message);
+      }
 
       errorTimer = window.setTimeout(() => {
         clearErrorState();
